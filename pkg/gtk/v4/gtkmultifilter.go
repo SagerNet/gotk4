@@ -32,7 +32,7 @@ type AnyFilter struct {
 	MultiFilter
 }
 
-func wrapAnyFilter(obj *externglib.Object) *AnyFilter {
+func WrapAnyFilter(obj *externglib.Object) *AnyFilter {
 	return &AnyFilter{
 		MultiFilter: MultiFilter{
 			Filter: Filter{
@@ -52,7 +52,7 @@ func wrapAnyFilter(obj *externglib.Object) *AnyFilter {
 func marshalAnyFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAnyFilter(obj), nil
+	return WrapAnyFilter(obj), nil
 }
 
 // NewAnyFilter creates a new empty "any" filter.
@@ -69,7 +69,7 @@ func NewAnyFilter() *AnyFilter {
 
 	var _anyFilter *AnyFilter // out
 
-	_anyFilter = wrapAnyFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_anyFilter = WrapAnyFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _anyFilter
 }
@@ -83,7 +83,7 @@ type EveryFilter struct {
 	MultiFilter
 }
 
-func wrapEveryFilter(obj *externglib.Object) *EveryFilter {
+func WrapEveryFilter(obj *externglib.Object) *EveryFilter {
 	return &EveryFilter{
 		MultiFilter: MultiFilter{
 			Filter: Filter{
@@ -103,7 +103,7 @@ func wrapEveryFilter(obj *externglib.Object) *EveryFilter {
 func marshalEveryFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEveryFilter(obj), nil
+	return WrapEveryFilter(obj), nil
 }
 
 // NewEveryFilter creates a new empty "every" filter.
@@ -120,7 +120,7 @@ func NewEveryFilter() *EveryFilter {
 
 	var _everyFilter *EveryFilter // out
 
-	_everyFilter = wrapEveryFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_everyFilter = WrapEveryFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _everyFilter
 }
@@ -150,7 +150,7 @@ type MultiFilterer interface {
 
 var _ MultiFilterer = (*MultiFilter)(nil)
 
-func wrapMultiFilter(obj *externglib.Object) *MultiFilter {
+func WrapMultiFilter(obj *externglib.Object) *MultiFilter {
 	return &MultiFilter{
 		Filter: Filter{
 			Object: obj,
@@ -168,7 +168,7 @@ func wrapMultiFilter(obj *externglib.Object) *MultiFilter {
 func marshalMultiFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMultiFilter(obj), nil
+	return WrapMultiFilter(obj), nil
 }
 
 // Append adds a filter to self to use for matching.

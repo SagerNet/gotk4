@@ -83,7 +83,7 @@ type ColorChooserer interface {
 
 var _ ColorChooserer = (*ColorChooser)(nil)
 
-func wrapColorChooser(obj *externglib.Object) *ColorChooser {
+func WrapColorChooser(obj *externglib.Object) *ColorChooser {
 	return &ColorChooser{
 		Object: obj,
 	}
@@ -92,7 +92,7 @@ func wrapColorChooser(obj *externglib.Object) *ColorChooser {
 func marshalColorChooserer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColorChooser(obj), nil
+	return WrapColorChooser(obj), nil
 }
 
 // AddPalette adds a palette to the color chooser. If orientation is horizontal,

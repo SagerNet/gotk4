@@ -79,7 +79,7 @@ type StatusIcon struct {
 	*externglib.Object
 }
 
-func wrapStatusIcon(obj *externglib.Object) *StatusIcon {
+func WrapStatusIcon(obj *externglib.Object) *StatusIcon {
 	return &StatusIcon{
 		Object: obj,
 	}
@@ -88,7 +88,7 @@ func wrapStatusIcon(obj *externglib.Object) *StatusIcon {
 func marshalStatusIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStatusIcon(obj), nil
+	return WrapStatusIcon(obj), nil
 }
 
 // NewStatusIcon creates an empty status icon object.
@@ -102,7 +102,7 @@ func NewStatusIcon() *StatusIcon {
 
 	var _statusIcon *StatusIcon // out
 
-	_statusIcon = wrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_statusIcon = WrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _statusIcon
 }
@@ -126,7 +126,7 @@ func NewStatusIconFromFile(filename string) *StatusIcon {
 
 	var _statusIcon *StatusIcon // out
 
-	_statusIcon = wrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_statusIcon = WrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _statusIcon
 }
@@ -147,7 +147,7 @@ func NewStatusIconFromGIcon(icon gio.Iconner) *StatusIcon {
 
 	var _statusIcon *StatusIcon // out
 
-	_statusIcon = wrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_statusIcon = WrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _statusIcon
 }
@@ -170,7 +170,7 @@ func NewStatusIconFromIconName(iconName string) *StatusIcon {
 
 	var _statusIcon *StatusIcon // out
 
-	_statusIcon = wrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_statusIcon = WrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _statusIcon
 }
@@ -193,7 +193,7 @@ func NewStatusIconFromPixbuf(pixbuf *gdkpixbuf.Pixbuf) *StatusIcon {
 
 	var _statusIcon *StatusIcon // out
 
-	_statusIcon = wrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_statusIcon = WrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _statusIcon
 }
@@ -217,7 +217,7 @@ func NewStatusIconFromStock(stockId string) *StatusIcon {
 
 	var _statusIcon *StatusIcon // out
 
-	_statusIcon = wrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_statusIcon = WrapStatusIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _statusIcon
 }

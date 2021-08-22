@@ -48,7 +48,7 @@ type StackSwitcher struct {
 	Box
 }
 
-func wrapStackSwitcher(obj *externglib.Object) *StackSwitcher {
+func WrapStackSwitcher(obj *externglib.Object) *StackSwitcher {
 	return &StackSwitcher{
 		Box: Box{
 			Container: Container{
@@ -76,7 +76,7 @@ func wrapStackSwitcher(obj *externglib.Object) *StackSwitcher {
 func marshalStackSwitcherer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStackSwitcher(obj), nil
+	return WrapStackSwitcher(obj), nil
 }
 
 // NewStackSwitcher: create a new StackSwitcher.
@@ -87,7 +87,7 @@ func NewStackSwitcher() *StackSwitcher {
 
 	var _stackSwitcher *StackSwitcher // out
 
-	_stackSwitcher = wrapStackSwitcher(externglib.Take(unsafe.Pointer(_cret)))
+	_stackSwitcher = WrapStackSwitcher(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stackSwitcher
 }
@@ -105,7 +105,7 @@ func (switcher *StackSwitcher) Stack() *Stack {
 	var _stack *Stack // out
 
 	if _cret != nil {
-		_stack = wrapStack(externglib.Take(unsafe.Pointer(_cret)))
+		_stack = WrapStack(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _stack

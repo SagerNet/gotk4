@@ -31,7 +31,7 @@ type LabelAccessible struct {
 	*externglib.Object
 }
 
-func wrapLabelAccessible(obj *externglib.Object) *LabelAccessible {
+func WrapLabelAccessible(obj *externglib.Object) *LabelAccessible {
 	return &LabelAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -56,7 +56,7 @@ func wrapLabelAccessible(obj *externglib.Object) *LabelAccessible {
 func marshalLabelAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLabelAccessible(obj), nil
+	return WrapLabelAccessible(obj), nil
 }
 
 func (*LabelAccessible) privateLabelAccessible() {}

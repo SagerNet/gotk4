@@ -49,7 +49,7 @@ type TLSPassword struct {
 	*externglib.Object
 }
 
-func wrapTLSPassword(obj *externglib.Object) *TLSPassword {
+func WrapTLSPassword(obj *externglib.Object) *TLSPassword {
 	return &TLSPassword{
 		Object: obj,
 	}
@@ -58,7 +58,7 @@ func wrapTLSPassword(obj *externglib.Object) *TLSPassword {
 func marshalTLSPassworder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSPassword(obj), nil
+	return WrapTLSPassword(obj), nil
 }
 
 // NewTLSPassword: create a new Password object.
@@ -77,7 +77,7 @@ func NewTLSPassword(flags TLSPasswordFlags, description string) *TLSPassword {
 
 	var _tlsPassword *TLSPassword // out
 
-	_tlsPassword = wrapTLSPassword(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_tlsPassword = WrapTLSPassword(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _tlsPassword
 }

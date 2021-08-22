@@ -85,7 +85,7 @@ type AccelMap struct {
 	*externglib.Object
 }
 
-func wrapAccelMap(obj *externglib.Object) *AccelMap {
+func WrapAccelMap(obj *externglib.Object) *AccelMap {
 	return &AccelMap{
 		Object: obj,
 	}
@@ -94,7 +94,7 @@ func wrapAccelMap(obj *externglib.Object) *AccelMap {
 func marshalAccelMapper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAccelMap(obj), nil
+	return WrapAccelMap(obj), nil
 }
 
 func (*AccelMap) privateAccelMap() {}
@@ -192,7 +192,7 @@ func AccelMapGet() *AccelMap {
 
 	var _accelMap *AccelMap // out
 
-	_accelMap = wrapAccelMap(externglib.Take(unsafe.Pointer(_cret)))
+	_accelMap = WrapAccelMap(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _accelMap
 }

@@ -27,7 +27,7 @@ type ContainerAccessible struct {
 	WidgetAccessible
 }
 
-func wrapContainerAccessible(obj *externglib.Object) *ContainerAccessible {
+func WrapContainerAccessible(obj *externglib.Object) *ContainerAccessible {
 	return &ContainerAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -45,7 +45,7 @@ func wrapContainerAccessible(obj *externglib.Object) *ContainerAccessible {
 func marshalContainerAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapContainerAccessible(obj), nil
+	return WrapContainerAccessible(obj), nil
 }
 
 func (*ContainerAccessible) privateContainerAccessible() {}

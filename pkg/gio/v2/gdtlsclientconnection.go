@@ -58,7 +58,7 @@ type DTLSClientConnectioner interface {
 
 var _ DTLSClientConnectioner = (*DTLSClientConnection)(nil)
 
-func wrapDTLSClientConnection(obj *externglib.Object) *DTLSClientConnection {
+func WrapDTLSClientConnection(obj *externglib.Object) *DTLSClientConnection {
 	return &DTLSClientConnection{
 		DTLSConnection: DTLSConnection{
 			DatagramBased: DatagramBased{
@@ -71,7 +71,7 @@ func wrapDTLSClientConnection(obj *externglib.Object) *DTLSClientConnection {
 func marshalDTLSClientConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDTLSClientConnection(obj), nil
+	return WrapDTLSClientConnection(obj), nil
 }
 
 // ServerIdentity gets conn's expected server identity

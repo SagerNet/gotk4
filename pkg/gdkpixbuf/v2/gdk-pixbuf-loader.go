@@ -84,7 +84,7 @@ type PixbufLoader struct {
 	*externglib.Object
 }
 
-func wrapPixbufLoader(obj *externglib.Object) *PixbufLoader {
+func WrapPixbufLoader(obj *externglib.Object) *PixbufLoader {
 	return &PixbufLoader{
 		Object: obj,
 	}
@@ -93,7 +93,7 @@ func wrapPixbufLoader(obj *externglib.Object) *PixbufLoader {
 func marshalPixbufLoaderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPixbufLoader(obj), nil
+	return WrapPixbufLoader(obj), nil
 }
 
 // NewPixbufLoader creates a new pixbuf loader object.
@@ -104,7 +104,7 @@ func NewPixbufLoader() *PixbufLoader {
 
 	var _pixbufLoader *PixbufLoader // out
 
-	_pixbufLoader = wrapPixbufLoader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbufLoader = WrapPixbufLoader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pixbufLoader
 }
@@ -136,7 +136,7 @@ func NewPixbufLoaderWithMIMEType(mimeType string) (*PixbufLoader, error) {
 	var _pixbufLoader *PixbufLoader // out
 	var _goerr error                // out
 
-	_pixbufLoader = wrapPixbufLoader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbufLoader = WrapPixbufLoader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -171,7 +171,7 @@ func NewPixbufLoaderWithType(imageType string) (*PixbufLoader, error) {
 	var _pixbufLoader *PixbufLoader // out
 	var _goerr error                // out
 
-	_pixbufLoader = wrapPixbufLoader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbufLoader = WrapPixbufLoader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -232,7 +232,7 @@ func (loader *PixbufLoader) Animation() *PixbufAnimation {
 	var _pixbufAnimation *PixbufAnimation // out
 
 	if _cret != nil {
-		_pixbufAnimation = wrapPixbufAnimation(externglib.Take(unsafe.Pointer(_cret)))
+		_pixbufAnimation = WrapPixbufAnimation(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbufAnimation
@@ -285,7 +285,7 @@ func (loader *PixbufLoader) Pixbuf() *Pixbuf {
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.Take(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf

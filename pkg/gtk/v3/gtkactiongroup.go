@@ -93,7 +93,7 @@ type ActionGroup struct {
 	Buildable
 }
 
-func wrapActionGroup(obj *externglib.Object) *ActionGroup {
+func WrapActionGroup(obj *externglib.Object) *ActionGroup {
 	return &ActionGroup{
 		Object: obj,
 		Buildable: Buildable{
@@ -105,7 +105,7 @@ func wrapActionGroup(obj *externglib.Object) *ActionGroup {
 func marshalActionGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActionGroup(obj), nil
+	return WrapActionGroup(obj), nil
 }
 
 // NewActionGroup creates a new ActionGroup object. The name of the action group
@@ -124,7 +124,7 @@ func NewActionGroup(name string) *ActionGroup {
 
 	var _actionGroup *ActionGroup // out
 
-	_actionGroup = wrapActionGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_actionGroup = WrapActionGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _actionGroup
 }
@@ -190,7 +190,7 @@ func (actionGroup *ActionGroup) AccelGroup() *AccelGroup {
 
 	var _accelGroup *AccelGroup // out
 
-	_accelGroup = wrapAccelGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_accelGroup = WrapAccelGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _accelGroup
 }
@@ -213,7 +213,7 @@ func (actionGroup *ActionGroup) Action(actionName string) *Action {
 
 	var _action *Action // out
 
-	_action = wrapAction(externglib.Take(unsafe.Pointer(_cret)))
+	_action = WrapAction(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _action
 }
@@ -301,7 +301,7 @@ func (actionGroup *ActionGroup) ListActions() []Action {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkAction)(v)
 		var dst Action // out
-		dst = *wrapAction(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapAction(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

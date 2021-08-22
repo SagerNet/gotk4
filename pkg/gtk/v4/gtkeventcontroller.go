@@ -77,7 +77,7 @@ type EventControllerer interface {
 
 var _ EventControllerer = (*EventController)(nil)
 
-func wrapEventController(obj *externglib.Object) *EventController {
+func WrapEventController(obj *externglib.Object) *EventController {
 	return &EventController{
 		Object: obj,
 	}
@@ -86,7 +86,7 @@ func wrapEventController(obj *externglib.Object) *EventController {
 func marshalEventControllerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventController(obj), nil
+	return WrapEventController(obj), nil
 }
 
 // CurrentEvent returns the event that is currently being handled by the

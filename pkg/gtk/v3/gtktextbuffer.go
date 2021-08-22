@@ -131,7 +131,7 @@ type TextBuffer struct {
 	*externglib.Object
 }
 
-func wrapTextBuffer(obj *externglib.Object) *TextBuffer {
+func WrapTextBuffer(obj *externglib.Object) *TextBuffer {
 	return &TextBuffer{
 		Object: obj,
 	}
@@ -140,7 +140,7 @@ func wrapTextBuffer(obj *externglib.Object) *TextBuffer {
 func marshalTextBufferer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextBuffer(obj), nil
+	return WrapTextBuffer(obj), nil
 }
 
 // NewTextBuffer creates a new text buffer.
@@ -157,7 +157,7 @@ func NewTextBuffer(table *TextTagTable) *TextBuffer {
 
 	var _textBuffer *TextBuffer // out
 
-	_textBuffer = wrapTextBuffer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_textBuffer = WrapTextBuffer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _textBuffer
 }
@@ -336,7 +336,7 @@ func (buffer *TextBuffer) CreateChildAnchor(iter *TextIter) *TextChildAnchor {
 
 	var _textChildAnchor *TextChildAnchor // out
 
-	_textChildAnchor = wrapTextChildAnchor(externglib.Take(unsafe.Pointer(_cret)))
+	_textChildAnchor = WrapTextChildAnchor(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textChildAnchor
 }
@@ -381,7 +381,7 @@ func (buffer *TextBuffer) CreateMark(markName string, where *TextIter, leftGravi
 
 	var _textMark *TextMark // out
 
-	_textMark = wrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
+	_textMark = WrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textMark
 }
@@ -662,7 +662,7 @@ func (buffer *TextBuffer) GetInsert() *TextMark {
 
 	var _textMark *TextMark // out
 
-	_textMark = wrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
+	_textMark = WrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textMark
 }
@@ -849,7 +849,7 @@ func (buffer *TextBuffer) Mark(name string) *TextMark {
 	var _textMark *TextMark // out
 
 	if _cret != nil {
-		_textMark = wrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
+		_textMark = WrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _textMark
@@ -926,7 +926,7 @@ func (buffer *TextBuffer) SelectionBound() *TextMark {
 
 	var _textMark *TextMark // out
 
-	_textMark = wrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
+	_textMark = WrapTextMark(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textMark
 }
@@ -1027,7 +1027,7 @@ func (buffer *TextBuffer) TagTable() *TextTagTable {
 
 	var _textTagTable *TextTagTable // out
 
-	_textTagTable = wrapTextTagTable(externglib.Take(unsafe.Pointer(_cret)))
+	_textTagTable = WrapTextTagTable(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textTagTable
 }

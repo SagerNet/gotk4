@@ -41,7 +41,7 @@ type AppChooserDialog struct {
 	*externglib.Object
 }
 
-func wrapAppChooserDialog(obj *externglib.Object) *AppChooserDialog {
+func WrapAppChooserDialog(obj *externglib.Object) *AppChooserDialog {
 	return &AppChooserDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -84,7 +84,7 @@ func wrapAppChooserDialog(obj *externglib.Object) *AppChooserDialog {
 func marshalAppChooserDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppChooserDialog(obj), nil
+	return WrapAppChooserDialog(obj), nil
 }
 
 // NewAppChooserDialog creates a new AppChooserDialog for the provided #GFile,
@@ -108,7 +108,7 @@ func NewAppChooserDialog(parent *Window, flags DialogFlags, file gio.Filer) *App
 
 	var _appChooserDialog *AppChooserDialog // out
 
-	_appChooserDialog = wrapAppChooserDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_appChooserDialog = WrapAppChooserDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _appChooserDialog
 }
@@ -135,7 +135,7 @@ func NewAppChooserDialogForContentType(parent *Window, flags DialogFlags, conten
 
 	var _appChooserDialog *AppChooserDialog // out
 
-	_appChooserDialog = wrapAppChooserDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_appChooserDialog = WrapAppChooserDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _appChooserDialog
 }

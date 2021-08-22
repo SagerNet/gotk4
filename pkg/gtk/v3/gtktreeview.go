@@ -86,7 +86,7 @@ func _gotk4_gtk3_TreeDestroyCountFunc(arg0 *C.GtkTreeView, arg1 *C.GtkTreePath, 
 	var path *TreePath     // out
 	var children int       // out
 
-	treeView = wrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
+	treeView = WrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
 	path = (*TreePath)(gextras.NewStructNative(unsafe.Pointer(arg1)))
 	runtime.SetFinalizer(
 		gextras.StructIntern(unsafe.Pointer(path)),
@@ -122,10 +122,10 @@ func _gotk4_gtk3_TreeViewColumnDropFunc(arg0 *C.GtkTreeView, arg1 *C.GtkTreeView
 	var prevColumn *TreeViewColumn // out
 	var nextColumn *TreeViewColumn // out
 
-	treeView = wrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
-	column = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg1)))
-	prevColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg2)))
-	nextColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg3)))
+	treeView = WrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
+	column = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg1)))
+	prevColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg2)))
+	nextColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg3)))
 
 	fn := v.(TreeViewColumnDropFunc)
 	ok := fn(treeView, column, prevColumn, nextColumn)
@@ -150,7 +150,7 @@ func _gotk4_gtk3_TreeViewMappingFunc(arg0 *C.GtkTreeView, arg1 *C.GtkTreePath, a
 	var treeView *TreeView // out
 	var path *TreePath     // out
 
-	treeView = wrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
+	treeView = WrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
 	path = (*TreePath)(gextras.NewStructNative(unsafe.Pointer(arg1)))
 	runtime.SetFinalizer(
 		gextras.StructIntern(unsafe.Pointer(path)),
@@ -250,7 +250,7 @@ func _gotk4_gtk3_TreeViewSearchPositionFunc(arg0 *C.GtkTreeView, arg1 *C.GtkWidg
 	var treeView *TreeView     // out
 	var searchDialog Widgetter // out
 
-	treeView = wrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
+	treeView = WrapTreeView(externglib.Take(unsafe.Pointer(arg0)))
 	searchDialog = (externglib.CastObject(externglib.Take(unsafe.Pointer(arg1)))).(Widgetter)
 
 	fn := v.(TreeViewSearchPositionFunc)
@@ -360,7 +360,7 @@ type TreeView struct {
 	*externglib.Object
 }
 
-func wrapTreeView(obj *externglib.Object) *TreeView {
+func WrapTreeView(obj *externglib.Object) *TreeView {
 	return &TreeView{
 		Container: Container{
 			Widget: Widget{
@@ -386,7 +386,7 @@ func wrapTreeView(obj *externglib.Object) *TreeView {
 func marshalTreeViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeView(obj), nil
+	return WrapTreeView(obj), nil
 }
 
 // NewTreeView creates a new TreeView widget.
@@ -397,7 +397,7 @@ func NewTreeView() *TreeView {
 
 	var _treeView *TreeView // out
 
-	_treeView = wrapTreeView(externglib.Take(unsafe.Pointer(_cret)))
+	_treeView = WrapTreeView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeView
 }
@@ -415,7 +415,7 @@ func NewTreeViewWithModel(model TreeModeller) *TreeView {
 
 	var _treeView *TreeView // out
 
-	_treeView = wrapTreeView(externglib.Take(unsafe.Pointer(_cret)))
+	_treeView = WrapTreeView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeView
 }
@@ -904,7 +904,7 @@ func (treeView *TreeView) Column(n int) *TreeViewColumn {
 	var _treeViewColumn *TreeViewColumn // out
 
 	if _cret != nil {
-		_treeViewColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
+		_treeViewColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _treeViewColumn
@@ -927,7 +927,7 @@ func (treeView *TreeView) Columns() []TreeViewColumn {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkTreeViewColumn)(v)
 		var dst TreeViewColumn // out
-		dst = *wrapTreeViewColumn(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapTreeViewColumn(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 
@@ -963,7 +963,7 @@ func (treeView *TreeView) Cursor() (*TreePath, *TreeViewColumn) {
 		)
 	}
 	if _arg2 != nil {
-		_focusColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_arg2)))
+		_focusColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_arg2)))
 	}
 
 	return _path, _focusColumn
@@ -1091,7 +1091,7 @@ func (treeView *TreeView) ExpanderColumn() *TreeViewColumn {
 
 	var _treeViewColumn *TreeViewColumn // out
 
-	_treeViewColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
+	_treeViewColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeViewColumn
 }
@@ -1147,7 +1147,7 @@ func (treeView *TreeView) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -1335,7 +1335,7 @@ func (treeView *TreeView) PathAtPos(x int, y int) (path *TreePath, column *TreeV
 		)
 	}
 	if _arg4 != nil {
-		_column = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_arg4)))
+		_column = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_arg4)))
 	}
 	_cellX = int(_arg5)
 	_cellY = int(_arg6)
@@ -1439,7 +1439,7 @@ func (treeView *TreeView) SearchEntry() *Entry {
 
 	var _entry *Entry // out
 
-	_entry = wrapEntry(externglib.Take(unsafe.Pointer(_cret)))
+	_entry = WrapEntry(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _entry
 }
@@ -1456,7 +1456,7 @@ func (treeView *TreeView) Selection() *TreeSelection {
 
 	var _treeSelection *TreeSelection // out
 
-	_treeSelection = wrapTreeSelection(externglib.Take(unsafe.Pointer(_cret)))
+	_treeSelection = WrapTreeSelection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeSelection
 }
@@ -1512,7 +1512,7 @@ func (treeView *TreeView) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -1698,7 +1698,7 @@ func (treeView *TreeView) IsBlankAtPos(x int, y int) (path *TreePath, column *Tr
 		)
 	}
 	if _arg4 != nil {
-		_column = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_arg4)))
+		_column = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_arg4)))
 	}
 	_cellX = int(_arg5)
 	_cellY = int(_arg6)

@@ -45,7 +45,7 @@ type ListStore struct {
 	ListModel
 }
 
-func wrapListStore(obj *externglib.Object) *ListStore {
+func WrapListStore(obj *externglib.Object) *ListStore {
 	return &ListStore{
 		Object: obj,
 		ListModel: ListModel{
@@ -57,7 +57,7 @@ func wrapListStore(obj *externglib.Object) *ListStore {
 func marshalListStorer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListStore(obj), nil
+	return WrapListStore(obj), nil
 }
 
 // NewListStore creates a new Store with items of type item_type. item_type must
@@ -73,7 +73,7 @@ func NewListStore(itemType externglib.Type) *ListStore {
 
 	var _listStore *ListStore // out
 
-	_listStore = wrapListStore(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_listStore = WrapListStore(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _listStore
 }

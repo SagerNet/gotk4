@@ -36,7 +36,7 @@ type DrawingContext struct {
 	*externglib.Object
 }
 
-func wrapDrawingContext(obj *externglib.Object) *DrawingContext {
+func WrapDrawingContext(obj *externglib.Object) *DrawingContext {
 	return &DrawingContext{
 		Object: obj,
 	}
@@ -45,7 +45,7 @@ func wrapDrawingContext(obj *externglib.Object) *DrawingContext {
 func marshalDrawingContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDrawingContext(obj), nil
+	return WrapDrawingContext(obj), nil
 }
 
 // CairoContext retrieves a Cairo context to be used to draw on the Window that

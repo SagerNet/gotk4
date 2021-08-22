@@ -110,7 +110,7 @@ type NetworkMonitorrer interface {
 
 var _ NetworkMonitorrer = (*NetworkMonitor)(nil)
 
-func wrapNetworkMonitor(obj *externglib.Object) *NetworkMonitor {
+func WrapNetworkMonitor(obj *externglib.Object) *NetworkMonitor {
 	return &NetworkMonitor{
 		Initable: Initable{
 			Object: obj,
@@ -121,7 +121,7 @@ func wrapNetworkMonitor(obj *externglib.Object) *NetworkMonitor {
 func marshalNetworkMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNetworkMonitor(obj), nil
+	return WrapNetworkMonitor(obj), nil
 }
 
 // CanReach attempts to determine whether or not the host pointed to by

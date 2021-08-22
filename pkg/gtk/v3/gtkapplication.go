@@ -177,7 +177,7 @@ type Application struct {
 	gio.Application
 }
 
-func wrapApplication(obj *externglib.Object) *Application {
+func WrapApplication(obj *externglib.Object) *Application {
 	return &Application{
 		Application: gio.Application{
 			Object: obj,
@@ -194,7 +194,7 @@ func wrapApplication(obj *externglib.Object) *Application {
 func marshalApplicationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapApplication(obj), nil
+	return WrapApplication(obj), nil
 }
 
 // NewApplication creates a new Application instance.
@@ -236,7 +236,7 @@ func NewApplication(applicationId string, flags gio.ApplicationFlags) *Applicati
 
 	var _application *Application // out
 
-	_application = wrapApplication(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_application = WrapApplication(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _application
 }
@@ -407,7 +407,7 @@ func (application *Application) ActiveWindow() *Window {
 	var _window *Window // out
 
 	if _cret != nil {
-		_window = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+		_window = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _window
@@ -499,7 +499,7 @@ func (application *Application) WindowByID(id uint) *Window {
 	var _window *Window // out
 
 	if _cret != nil {
-		_window = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+		_window = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _window
@@ -528,7 +528,7 @@ func (application *Application) Windows() []Window {
 	gextras.MoveList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkWindow)(v)
 		var dst Window // out
-		dst = *wrapWindow(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapWindow(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

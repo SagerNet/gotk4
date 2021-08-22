@@ -30,7 +30,7 @@ type LinkButtonAccessible struct {
 	*externglib.Object
 }
 
-func wrapLinkButtonAccessible(obj *externglib.Object) *LinkButtonAccessible {
+func WrapLinkButtonAccessible(obj *externglib.Object) *LinkButtonAccessible {
 	return &LinkButtonAccessible{
 		ButtonAccessible: ButtonAccessible{
 			ContainerAccessible: ContainerAccessible{
@@ -63,7 +63,7 @@ func wrapLinkButtonAccessible(obj *externglib.Object) *LinkButtonAccessible {
 func marshalLinkButtonAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLinkButtonAccessible(obj), nil
+	return WrapLinkButtonAccessible(obj), nil
 }
 
 func (*LinkButtonAccessible) privateLinkButtonAccessible() {}

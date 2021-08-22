@@ -49,7 +49,7 @@ type EmojiChooser struct {
 	Popover
 }
 
-func wrapEmojiChooser(obj *externglib.Object) *EmojiChooser {
+func WrapEmojiChooser(obj *externglib.Object) *EmojiChooser {
 	return &EmojiChooser{
 		Popover: Popover{
 			Widget: Widget{
@@ -95,7 +95,7 @@ func wrapEmojiChooser(obj *externglib.Object) *EmojiChooser {
 func marshalEmojiChooserer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEmojiChooser(obj), nil
+	return WrapEmojiChooser(obj), nil
 }
 
 // NewEmojiChooser creates a new GtkEmojiChooser.
@@ -106,7 +106,7 @@ func NewEmojiChooser() *EmojiChooser {
 
 	var _emojiChooser *EmojiChooser // out
 
-	_emojiChooser = wrapEmojiChooser(externglib.Take(unsafe.Pointer(_cret)))
+	_emojiChooser = WrapEmojiChooser(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _emojiChooser
 }

@@ -88,7 +88,7 @@ type ContentProvider struct {
 	*externglib.Object
 }
 
-func wrapContentProvider(obj *externglib.Object) *ContentProvider {
+func WrapContentProvider(obj *externglib.Object) *ContentProvider {
 	return &ContentProvider{
 		Object: obj,
 	}
@@ -97,7 +97,7 @@ func wrapContentProvider(obj *externglib.Object) *ContentProvider {
 func marshalContentProviderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapContentProvider(obj), nil
+	return WrapContentProvider(obj), nil
 }
 
 // NewContentProviderForBytes: create a content provider that provides the given
@@ -117,7 +117,7 @@ func NewContentProviderForBytes(mimeType string, bytes *glib.Bytes) *ContentProv
 
 	var _contentProvider *ContentProvider // out
 
-	_contentProvider = wrapContentProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_contentProvider = WrapContentProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _contentProvider
 }
@@ -135,7 +135,7 @@ func NewContentProviderForValue(value *externglib.Value) *ContentProvider {
 
 	var _contentProvider *ContentProvider // out
 
-	_contentProvider = wrapContentProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_contentProvider = WrapContentProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _contentProvider
 }
@@ -177,7 +177,7 @@ func NewContentProviderUnion(providers []*ContentProvider) *ContentProvider {
 
 	var _contentProvider *ContentProvider // out
 
-	_contentProvider = wrapContentProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_contentProvider = WrapContentProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _contentProvider
 }

@@ -746,7 +746,7 @@ type StyleContext struct {
 	*externglib.Object
 }
 
-func wrapStyleContext(obj *externglib.Object) *StyleContext {
+func WrapStyleContext(obj *externglib.Object) *StyleContext {
 	return &StyleContext{
 		Object: obj,
 	}
@@ -755,7 +755,7 @@ func wrapStyleContext(obj *externglib.Object) *StyleContext {
 func marshalStyleContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStyleContext(obj), nil
+	return WrapStyleContext(obj), nil
 }
 
 // NewStyleContext creates a standalone StyleContext, this style context won’t
@@ -773,7 +773,7 @@ func NewStyleContext() *StyleContext {
 
 	var _styleContext *StyleContext // out
 
-	_styleContext = wrapStyleContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_styleContext = WrapStyleContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _styleContext
 }
@@ -1116,7 +1116,7 @@ func (context *StyleContext) Parent() *StyleContext {
 	var _styleContext *StyleContext // out
 
 	if _cret != nil {
-		_styleContext = wrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
+		_styleContext = WrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _styleContext

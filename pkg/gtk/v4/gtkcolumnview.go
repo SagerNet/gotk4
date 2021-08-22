@@ -93,7 +93,7 @@ type ColumnView struct {
 	*externglib.Object
 }
 
-func wrapColumnView(obj *externglib.Object) *ColumnView {
+func WrapColumnView(obj *externglib.Object) *ColumnView {
 	return &ColumnView{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -120,7 +120,7 @@ func wrapColumnView(obj *externglib.Object) *ColumnView {
 func marshalColumnViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColumnView(obj), nil
+	return WrapColumnView(obj), nil
 }
 
 // NewColumnView creates a new GtkColumnView.
@@ -141,7 +141,7 @@ func NewColumnView(model SelectionModeller) *ColumnView {
 
 	var _columnView *ColumnView // out
 
-	_columnView = wrapColumnView(externglib.Take(unsafe.Pointer(_cret)))
+	_columnView = WrapColumnView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _columnView
 }
@@ -326,7 +326,7 @@ func (self *ColumnView) Sorter() *Sorter {
 	var _sorter *Sorter // out
 
 	if _cret != nil {
-		_sorter = wrapSorter(externglib.Take(unsafe.Pointer(_cret)))
+		_sorter = WrapSorter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _sorter

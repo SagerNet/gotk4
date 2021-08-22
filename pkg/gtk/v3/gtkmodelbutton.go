@@ -128,7 +128,7 @@ type ModelButton struct {
 	Button
 }
 
-func wrapModelButton(obj *externglib.Object) *ModelButton {
+func WrapModelButton(obj *externglib.Object) *ModelButton {
 	return &ModelButton{
 		Button: Button{
 			Bin: Bin{
@@ -172,7 +172,7 @@ func wrapModelButton(obj *externglib.Object) *ModelButton {
 func marshalModelButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapModelButton(obj), nil
+	return WrapModelButton(obj), nil
 }
 
 // NewModelButton creates a new GtkModelButton.
@@ -183,7 +183,7 @@ func NewModelButton() *ModelButton {
 
 	var _modelButton *ModelButton // out
 
-	_modelButton = wrapModelButton(externglib.Take(unsafe.Pointer(_cret)))
+	_modelButton = WrapModelButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _modelButton
 }

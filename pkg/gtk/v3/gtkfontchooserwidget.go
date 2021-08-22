@@ -47,7 +47,7 @@ type FontChooserWidget struct {
 	*externglib.Object
 }
 
-func wrapFontChooserWidget(obj *externglib.Object) *FontChooserWidget {
+func WrapFontChooserWidget(obj *externglib.Object) *FontChooserWidget {
 	return &FontChooserWidget{
 		Box: Box{
 			Container: Container{
@@ -79,7 +79,7 @@ func wrapFontChooserWidget(obj *externglib.Object) *FontChooserWidget {
 func marshalFontChooserWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontChooserWidget(obj), nil
+	return WrapFontChooserWidget(obj), nil
 }
 
 // NewFontChooserWidget creates a new FontChooserWidget.
@@ -90,7 +90,7 @@ func NewFontChooserWidget() *FontChooserWidget {
 
 	var _fontChooserWidget *FontChooserWidget // out
 
-	_fontChooserWidget = wrapFontChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
+	_fontChooserWidget = WrapFontChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fontChooserWidget
 }

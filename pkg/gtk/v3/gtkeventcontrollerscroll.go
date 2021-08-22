@@ -128,7 +128,7 @@ type EventControllerScroll struct {
 	EventController
 }
 
-func wrapEventControllerScroll(obj *externglib.Object) *EventControllerScroll {
+func WrapEventControllerScroll(obj *externglib.Object) *EventControllerScroll {
 	return &EventControllerScroll{
 		EventController: EventController{
 			Object: obj,
@@ -139,7 +139,7 @@ func wrapEventControllerScroll(obj *externglib.Object) *EventControllerScroll {
 func marshalEventControllerScroller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventControllerScroll(obj), nil
+	return WrapEventControllerScroll(obj), nil
 }
 
 // NewEventControllerScroll creates a new event controller that will handle
@@ -158,7 +158,7 @@ func NewEventControllerScroll(widget Widgetter, flags EventControllerScrollFlags
 
 	var _eventControllerScroll *EventControllerScroll // out
 
-	_eventControllerScroll = wrapEventControllerScroll(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_eventControllerScroll = WrapEventControllerScroll(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _eventControllerScroll
 }

@@ -82,7 +82,7 @@ type ActionMapper interface {
 
 var _ ActionMapper = (*ActionMap)(nil)
 
-func wrapActionMap(obj *externglib.Object) *ActionMap {
+func WrapActionMap(obj *externglib.Object) *ActionMap {
 	return &ActionMap{
 		Object: obj,
 	}
@@ -91,7 +91,7 @@ func wrapActionMap(obj *externglib.Object) *ActionMap {
 func marshalActionMapper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActionMap(obj), nil
+	return WrapActionMap(obj), nil
 }
 
 // AddAction adds an action to the action_map.

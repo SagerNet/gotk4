@@ -78,7 +78,7 @@ type ComboBoxText struct {
 	ComboBox
 }
 
-func wrapComboBoxText(obj *externglib.Object) *ComboBoxText {
+func WrapComboBoxText(obj *externglib.Object) *ComboBoxText {
 	return &ComboBoxText{
 		ComboBox: ComboBox{
 			Widget: Widget{
@@ -124,7 +124,7 @@ func wrapComboBoxText(obj *externglib.Object) *ComboBoxText {
 func marshalComboBoxTexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapComboBoxText(obj), nil
+	return WrapComboBoxText(obj), nil
 }
 
 // NewComboBoxText creates a new GtkComboBoxText.
@@ -135,7 +135,7 @@ func NewComboBoxText() *ComboBoxText {
 
 	var _comboBoxText *ComboBoxText // out
 
-	_comboBoxText = wrapComboBoxText(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBoxText = WrapComboBoxText(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBoxText
 }
@@ -148,7 +148,7 @@ func NewComboBoxTextWithEntry() *ComboBoxText {
 
 	var _comboBoxText *ComboBoxText // out
 
-	_comboBoxText = wrapComboBoxText(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBoxText = WrapComboBoxText(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBoxText
 }

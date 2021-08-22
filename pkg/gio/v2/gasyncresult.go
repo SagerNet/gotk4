@@ -149,7 +149,7 @@ type AsyncResulter interface {
 
 var _ AsyncResulter = (*AsyncResult)(nil)
 
-func wrapAsyncResult(obj *externglib.Object) *AsyncResult {
+func WrapAsyncResult(obj *externglib.Object) *AsyncResult {
 	return &AsyncResult{
 		Object: obj,
 	}
@@ -158,7 +158,7 @@ func wrapAsyncResult(obj *externglib.Object) *AsyncResult {
 func marshalAsyncResulter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAsyncResult(obj), nil
+	return WrapAsyncResult(obj), nil
 }
 
 // SourceObject gets the source object from a Result.

@@ -34,7 +34,7 @@ type AspectFrame struct {
 	Widget
 }
 
-func wrapAspectFrame(obj *externglib.Object) *AspectFrame {
+func WrapAspectFrame(obj *externglib.Object) *AspectFrame {
 	return &AspectFrame{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -57,7 +57,7 @@ func wrapAspectFrame(obj *externglib.Object) *AspectFrame {
 func marshalAspectFramer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAspectFrame(obj), nil
+	return WrapAspectFrame(obj), nil
 }
 
 // NewAspectFrame: create a new GtkAspectFrame.
@@ -83,7 +83,7 @@ func NewAspectFrame(xalign float32, yalign float32, ratio float32, obeyChild boo
 
 	var _aspectFrame *AspectFrame // out
 
-	_aspectFrame = wrapAspectFrame(externglib.Take(unsafe.Pointer(_cret)))
+	_aspectFrame = WrapAspectFrame(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _aspectFrame
 }

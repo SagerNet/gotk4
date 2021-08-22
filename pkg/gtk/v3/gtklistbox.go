@@ -75,7 +75,7 @@ func _gotk4_gtk3_ListBoxFilterFunc(arg0 *C.GtkListBoxRow, arg1 C.gpointer) (cret
 
 	var row *ListBoxRow // out
 
-	row = wrapListBoxRow(externglib.Take(unsafe.Pointer(arg0)))
+	row = WrapListBoxRow(externglib.Take(unsafe.Pointer(arg0)))
 
 	fn := v.(ListBoxFilterFunc)
 	ok := fn(row)
@@ -101,8 +101,8 @@ func _gotk4_gtk3_ListBoxForeachFunc(arg0 *C.GtkListBox, arg1 *C.GtkListBoxRow, a
 	var box *ListBox    // out
 	var row *ListBoxRow // out
 
-	box = wrapListBox(externglib.Take(unsafe.Pointer(arg0)))
-	row = wrapListBoxRow(externglib.Take(unsafe.Pointer(arg1)))
+	box = WrapListBox(externglib.Take(unsafe.Pointer(arg0)))
+	row = WrapListBoxRow(externglib.Take(unsafe.Pointer(arg1)))
 
 	fn := v.(ListBoxForeachFunc)
 	fn(box, row)
@@ -121,8 +121,8 @@ func _gotk4_gtk3_ListBoxSortFunc(arg0 *C.GtkListBoxRow, arg1 *C.GtkListBoxRow, a
 	var row1 *ListBoxRow // out
 	var row2 *ListBoxRow // out
 
-	row1 = wrapListBoxRow(externglib.Take(unsafe.Pointer(arg0)))
-	row2 = wrapListBoxRow(externglib.Take(unsafe.Pointer(arg1)))
+	row1 = WrapListBoxRow(externglib.Take(unsafe.Pointer(arg0)))
+	row2 = WrapListBoxRow(externglib.Take(unsafe.Pointer(arg1)))
 
 	fn := v.(ListBoxSortFunc)
 	gint := fn(row1, row2)
@@ -148,9 +148,9 @@ func _gotk4_gtk3_ListBoxUpdateHeaderFunc(arg0 *C.GtkListBoxRow, arg1 *C.GtkListB
 	var row *ListBoxRow    // out
 	var before *ListBoxRow // out
 
-	row = wrapListBoxRow(externglib.Take(unsafe.Pointer(arg0)))
+	row = WrapListBoxRow(externglib.Take(unsafe.Pointer(arg0)))
 	if arg1 != nil {
-		before = wrapListBoxRow(externglib.Take(unsafe.Pointer(arg1)))
+		before = WrapListBoxRow(externglib.Take(unsafe.Pointer(arg1)))
 	}
 
 	fn := v.(ListBoxUpdateHeaderFunc)
@@ -214,7 +214,7 @@ type ListBox struct {
 	Container
 }
 
-func wrapListBox(obj *externglib.Object) *ListBox {
+func WrapListBox(obj *externglib.Object) *ListBox {
 	return &ListBox{
 		Container: Container{
 			Widget: Widget{
@@ -236,7 +236,7 @@ func wrapListBox(obj *externglib.Object) *ListBox {
 func marshalListBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListBox(obj), nil
+	return WrapListBox(obj), nil
 }
 
 // NewListBox creates a new ListBox container.
@@ -247,7 +247,7 @@ func NewListBox() *ListBox {
 
 	var _listBox *ListBox // out
 
-	_listBox = wrapListBox(externglib.Take(unsafe.Pointer(_cret)))
+	_listBox = WrapListBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _listBox
 }
@@ -349,7 +349,7 @@ func (box *ListBox) Adjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -371,7 +371,7 @@ func (box *ListBox) RowAtIndex(index_ int) *ListBoxRow {
 	var _listBoxRow *ListBoxRow // out
 
 	if _cret != nil {
-		_listBoxRow = wrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
+		_listBoxRow = WrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listBoxRow
@@ -393,7 +393,7 @@ func (box *ListBox) RowAtY(y int) *ListBoxRow {
 	var _listBoxRow *ListBoxRow // out
 
 	if _cret != nil {
-		_listBoxRow = wrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
+		_listBoxRow = WrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listBoxRow
@@ -414,7 +414,7 @@ func (box *ListBox) SelectedRow() *ListBoxRow {
 
 	var _listBoxRow *ListBoxRow // out
 
-	_listBoxRow = wrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
+	_listBoxRow = WrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _listBoxRow
 }
@@ -435,7 +435,7 @@ func (box *ListBox) SelectedRows() []ListBoxRow {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkListBoxRow)(v)
 		var dst ListBoxRow // out
-		dst = *wrapListBoxRow(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapListBoxRow(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 
@@ -774,7 +774,7 @@ type ListBoxRow struct {
 	*externglib.Object
 }
 
-func wrapListBoxRow(obj *externglib.Object) *ListBoxRow {
+func WrapListBoxRow(obj *externglib.Object) *ListBoxRow {
 	return &ListBoxRow{
 		Bin: Bin{
 			Container: Container{
@@ -813,7 +813,7 @@ func wrapListBoxRow(obj *externglib.Object) *ListBoxRow {
 func marshalListBoxRower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListBoxRow(obj), nil
+	return WrapListBoxRow(obj), nil
 }
 
 // NewListBoxRow creates a new ListBoxRow, to be used as a child of a ListBox.
@@ -824,7 +824,7 @@ func NewListBoxRow() *ListBoxRow {
 
 	var _listBoxRow *ListBoxRow // out
 
-	_listBoxRow = wrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
+	_listBoxRow = WrapListBoxRow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _listBoxRow
 }

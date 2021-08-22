@@ -92,7 +92,7 @@ type Socket struct {
 	Initable
 }
 
-func wrapSocket(obj *externglib.Object) *Socket {
+func WrapSocket(obj *externglib.Object) *Socket {
 	return &Socket{
 		Object: obj,
 		DatagramBased: DatagramBased{
@@ -107,7 +107,7 @@ func wrapSocket(obj *externglib.Object) *Socket {
 func marshalSocketter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocket(obj), nil
+	return WrapSocket(obj), nil
 }
 
 // NewSocket creates a new #GSocket with the defined family, type and protocol.
@@ -140,7 +140,7 @@ func NewSocket(family SocketFamily, typ SocketType, protocol SocketProtocol) (*S
 	var _socket *Socket // out
 	var _goerr error    // out
 
-	_socket = wrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socket = WrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -173,7 +173,7 @@ func NewSocketFromFd(fd int) (*Socket, error) {
 	var _socket *Socket // out
 	var _goerr error    // out
 
-	_socket = wrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socket = WrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -211,7 +211,7 @@ func (socket *Socket) Accept(ctx context.Context) (*Socket, error) {
 	var _ret *Socket // out
 	var _goerr error // out
 
-	_ret = wrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_ret = WrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -505,7 +505,7 @@ func (socket *Socket) ConnectionFactoryCreateConnection() *SocketConnection {
 
 	var _socketConnection *SocketConnection // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _socketConnection
 }
@@ -612,7 +612,7 @@ func (socket *Socket) Credentials() (*Credentials, error) {
 	var _credentials *Credentials // out
 	var _goerr error              // out
 
-	_credentials = wrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_credentials = WrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

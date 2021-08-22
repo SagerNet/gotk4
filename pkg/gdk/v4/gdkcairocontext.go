@@ -43,7 +43,7 @@ type CairoContexter interface {
 
 var _ CairoContexter = (*CairoContext)(nil)
 
-func wrapCairoContext(obj *externglib.Object) *CairoContext {
+func WrapCairoContext(obj *externglib.Object) *CairoContext {
 	return &CairoContext{
 		DrawContext: DrawContext{
 			Object: obj,
@@ -54,7 +54,7 @@ func wrapCairoContext(obj *externglib.Object) *CairoContext {
 func marshalCairoContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCairoContext(obj), nil
+	return WrapCairoContext(obj), nil
 }
 
 // CairoCreate retrieves a Cairo context to be used to draw on the GdkSurface of

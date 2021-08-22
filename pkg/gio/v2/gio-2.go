@@ -143,7 +143,7 @@ type AppInfoMonitor struct {
 	*externglib.Object
 }
 
-func wrapAppInfoMonitor(obj *externglib.Object) *AppInfoMonitor {
+func WrapAppInfoMonitor(obj *externglib.Object) *AppInfoMonitor {
 	return &AppInfoMonitor{
 		Object: obj,
 	}
@@ -152,7 +152,7 @@ func wrapAppInfoMonitor(obj *externglib.Object) *AppInfoMonitor {
 func marshalAppInfoMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppInfoMonitor(obj), nil
+	return WrapAppInfoMonitor(obj), nil
 }
 
 func (*AppInfoMonitor) privateAppInfoMonitor() {}
@@ -165,7 +165,7 @@ type BytesIcon struct {
 	LoadableIcon
 }
 
-func wrapBytesIcon(obj *externglib.Object) *BytesIcon {
+func WrapBytesIcon(obj *externglib.Object) *BytesIcon {
 	return &BytesIcon{
 		Object: obj,
 		LoadableIcon: LoadableIcon{
@@ -179,7 +179,7 @@ func wrapBytesIcon(obj *externglib.Object) *BytesIcon {
 func marshalBytesIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBytesIcon(obj), nil
+	return WrapBytesIcon(obj), nil
 }
 
 // NewBytesIcon creates a new icon for a bytes.
@@ -197,7 +197,7 @@ func NewBytesIcon(bytes *glib.Bytes) *BytesIcon {
 
 	var _bytesIcon *BytesIcon // out
 
-	_bytesIcon = wrapBytesIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_bytesIcon = WrapBytesIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _bytesIcon
 }
@@ -235,7 +235,7 @@ type DBusActionGroup struct {
 	RemoteActionGroup
 }
 
-func wrapDBusActionGroup(obj *externglib.Object) *DBusActionGroup {
+func WrapDBusActionGroup(obj *externglib.Object) *DBusActionGroup {
 	return &DBusActionGroup{
 		Object: obj,
 		RemoteActionGroup: RemoteActionGroup{
@@ -249,7 +249,7 @@ func wrapDBusActionGroup(obj *externglib.Object) *DBusActionGroup {
 func marshalDBusActionGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusActionGroup(obj), nil
+	return WrapDBusActionGroup(obj), nil
 }
 
 func (*DBusActionGroup) privateDBusActionGroup() {}
@@ -292,7 +292,7 @@ type DBusAuthObserver struct {
 	*externglib.Object
 }
 
-func wrapDBusAuthObserver(obj *externglib.Object) *DBusAuthObserver {
+func WrapDBusAuthObserver(obj *externglib.Object) *DBusAuthObserver {
 	return &DBusAuthObserver{
 		Object: obj,
 	}
@@ -301,7 +301,7 @@ func wrapDBusAuthObserver(obj *externglib.Object) *DBusAuthObserver {
 func marshalDBusAuthObserverer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusAuthObserver(obj), nil
+	return WrapDBusAuthObserver(obj), nil
 }
 
 // NewDBusAuthObserver creates a new BusAuthObserver object.
@@ -312,7 +312,7 @@ func NewDBusAuthObserver() *DBusAuthObserver {
 
 	var _dBusAuthObserver *DBusAuthObserver // out
 
-	_dBusAuthObserver = wrapDBusAuthObserver(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusAuthObserver = WrapDBusAuthObserver(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusAuthObserver
 }
@@ -426,7 +426,7 @@ type DBusConnection struct {
 	Initable
 }
 
-func wrapDBusConnection(obj *externglib.Object) *DBusConnection {
+func WrapDBusConnection(obj *externglib.Object) *DBusConnection {
 	return &DBusConnection{
 		Object: obj,
 		AsyncInitable: AsyncInitable{
@@ -441,7 +441,7 @@ func wrapDBusConnection(obj *externglib.Object) *DBusConnection {
 func marshalDBusConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusConnection(obj), nil
+	return WrapDBusConnection(obj), nil
 }
 
 // NewDBusConnectionFinish finishes an operation started with
@@ -459,7 +459,7 @@ func NewDBusConnectionFinish(res AsyncResulter) (*DBusConnection, error) {
 	var _dBusConnection *DBusConnection // out
 	var _goerr error                    // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -482,7 +482,7 @@ func NewDBusConnectionForAddressFinish(res AsyncResulter) (*DBusConnection, erro
 	var _dBusConnection *DBusConnection // out
 	var _goerr error                    // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -534,7 +534,7 @@ func NewDBusConnectionForAddressSync(ctx context.Context, address string, flags 
 	var _dBusConnection *DBusConnection // out
 	var _goerr error                    // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -590,7 +590,7 @@ func NewDBusConnectionSync(ctx context.Context, stream IOStreamer, guid string, 
 	var _dBusConnection *DBusConnection // out
 	var _goerr error                    // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -983,7 +983,7 @@ func (connection *DBusConnection) CallWithUnixFdListFinish(res AsyncResulter) (*
 	var _goerr error           // out
 
 	if _arg1 != nil {
-		_outFdList = wrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg1)))
+		_outFdList = WrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg1)))
 	}
 	_variant = (*glib.Variant)(gextras.NewStructNative(unsafe.Pointer(_cret)))
 	runtime.SetFinalizer(
@@ -1066,7 +1066,7 @@ func (connection *DBusConnection) CallWithUnixFdListSync(ctx context.Context, bu
 	var _goerr error           // out
 
 	if _arg10 != nil {
-		_outFdList = wrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg10)))
+		_outFdList = WrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg10)))
 	}
 	_variant = (*glib.Variant)(gextras.NewStructNative(unsafe.Pointer(_cret)))
 	runtime.SetFinalizer(
@@ -1510,7 +1510,7 @@ func (connection *DBusConnection) PeerCredentials() *Credentials {
 	var _credentials *Credentials // out
 
 	if _cret != nil {
-		_credentials = wrapCredentials(externglib.Take(unsafe.Pointer(_cret)))
+		_credentials = WrapCredentials(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _credentials
@@ -1738,7 +1738,7 @@ func (connection *DBusConnection) SendMessageWithReplyFinish(res AsyncResulter) 
 	var _dBusMessage *DBusMessage // out
 	var _goerr error              // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -1806,7 +1806,7 @@ func (connection *DBusConnection) SendMessageWithReplySync(ctx context.Context, 
 	var _goerr error              // out
 
 	_outSerial = uint32(_arg4)
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -2059,7 +2059,7 @@ type DBusMenuModel struct {
 	MenuModel
 }
 
-func wrapDBusMenuModel(obj *externglib.Object) *DBusMenuModel {
+func WrapDBusMenuModel(obj *externglib.Object) *DBusMenuModel {
 	return &DBusMenuModel{
 		MenuModel: MenuModel{
 			Object: obj,
@@ -2070,7 +2070,7 @@ func wrapDBusMenuModel(obj *externglib.Object) *DBusMenuModel {
 func marshalDBusMenuModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusMenuModel(obj), nil
+	return WrapDBusMenuModel(obj), nil
 }
 
 func (*DBusMenuModel) privateDBusMenuModel() {}
@@ -2081,7 +2081,7 @@ type DBusMessage struct {
 	*externglib.Object
 }
 
-func wrapDBusMessage(obj *externglib.Object) *DBusMessage {
+func WrapDBusMessage(obj *externglib.Object) *DBusMessage {
 	return &DBusMessage{
 		Object: obj,
 	}
@@ -2090,7 +2090,7 @@ func wrapDBusMessage(obj *externglib.Object) *DBusMessage {
 func marshalDBusMessager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusMessage(obj), nil
+	return WrapDBusMessage(obj), nil
 }
 
 // NewDBusMessage creates a new empty BusMessage.
@@ -2101,7 +2101,7 @@ func NewDBusMessage() *DBusMessage {
 
 	var _dBusMessage *DBusMessage // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusMessage
 }
@@ -2132,7 +2132,7 @@ func NewDBusMessageFromBlob(blob []byte, capabilities DBusCapabilityFlags) (*DBu
 	var _dBusMessage *DBusMessage // out
 	var _goerr error              // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -2169,7 +2169,7 @@ func NewDBusMessageMethodCall(name string, path string, interface_ string, metho
 
 	var _dBusMessage *DBusMessage // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusMessage
 }
@@ -2195,7 +2195,7 @@ func NewDBusMessageSignal(path string, interface_ string, signal string) *DBusMe
 
 	var _dBusMessage *DBusMessage // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusMessage
 }
@@ -2218,7 +2218,7 @@ func (message *DBusMessage) Copy() (*DBusMessage, error) {
 	var _dBusMessage *DBusMessage // out
 	var _goerr error              // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -2615,7 +2615,7 @@ func (message *DBusMessage) UnixFdList() *UnixFDList {
 	var _unixFDList *UnixFDList // out
 
 	if _cret != nil {
-		_unixFDList = wrapUnixFDList(externglib.Take(unsafe.Pointer(_cret)))
+		_unixFDList = WrapUnixFDList(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _unixFDList
@@ -2652,7 +2652,7 @@ func (methodCallMessage *DBusMessage) NewMethodErrorLiteral(errorName string, er
 
 	var _dBusMessage *DBusMessage // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusMessage
 }
@@ -2670,7 +2670,7 @@ func (methodCallMessage *DBusMessage) NewMethodReply() *DBusMessage {
 
 	var _dBusMessage *DBusMessage // out
 
-	_dBusMessage = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusMessage
 }
@@ -3051,7 +3051,7 @@ type DBusMethodInvocation struct {
 	*externglib.Object
 }
 
-func wrapDBusMethodInvocation(obj *externglib.Object) *DBusMethodInvocation {
+func WrapDBusMethodInvocation(obj *externglib.Object) *DBusMethodInvocation {
 	return &DBusMethodInvocation{
 		Object: obj,
 	}
@@ -3060,7 +3060,7 @@ func wrapDBusMethodInvocation(obj *externglib.Object) *DBusMethodInvocation {
 func marshalDBusMethodInvocationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusMethodInvocation(obj), nil
+	return WrapDBusMethodInvocation(obj), nil
 }
 
 // Connection gets the BusConnection the method was invoked on.
@@ -3075,7 +3075,7 @@ func (invocation *DBusMethodInvocation) Connection() *DBusConnection {
 
 	var _dBusConnection *DBusConnection // out
 
-	_dBusConnection = wrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dBusConnection
 }
@@ -3119,7 +3119,7 @@ func (invocation *DBusMethodInvocation) Message() *DBusMessage {
 
 	var _dBusMessage *DBusMessage // out
 
-	_dBusMessage = wrapDBusMessage(externglib.Take(unsafe.Pointer(_cret)))
+	_dBusMessage = WrapDBusMessage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dBusMessage
 }
@@ -3428,7 +3428,7 @@ type DBusServer struct {
 	Initable
 }
 
-func wrapDBusServer(obj *externglib.Object) *DBusServer {
+func WrapDBusServer(obj *externglib.Object) *DBusServer {
 	return &DBusServer{
 		Object: obj,
 		Initable: Initable{
@@ -3440,7 +3440,7 @@ func wrapDBusServer(obj *externglib.Object) *DBusServer {
 func marshalDBusServerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusServer(obj), nil
+	return WrapDBusServer(obj), nil
 }
 
 // NewDBusServerSync creates a new D-Bus server that listens on the first
@@ -3496,7 +3496,7 @@ func NewDBusServerSync(ctx context.Context, address string, flags DBusServerFlag
 	var _dBusServer *DBusServer // out
 	var _goerr error            // out
 
-	_dBusServer = wrapDBusServer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusServer = WrapDBusServer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -3607,7 +3607,7 @@ type Menu struct {
 	MenuModel
 }
 
-func wrapMenu(obj *externglib.Object) *Menu {
+func WrapMenu(obj *externglib.Object) *Menu {
 	return &Menu{
 		MenuModel: MenuModel{
 			Object: obj,
@@ -3618,7 +3618,7 @@ func wrapMenu(obj *externglib.Object) *Menu {
 func marshalMenuer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenu(obj), nil
+	return WrapMenu(obj), nil
 }
 
 // NewMenu creates a new #GMenu.
@@ -3631,7 +3631,7 @@ func NewMenu() *Menu {
 
 	var _menu *Menu // out
 
-	_menu = wrapMenu(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_menu = WrapMenu(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _menu
 }
@@ -3958,7 +3958,7 @@ type MenuItem struct {
 	*externglib.Object
 }
 
-func wrapMenuItem(obj *externglib.Object) *MenuItem {
+func WrapMenuItem(obj *externglib.Object) *MenuItem {
 	return &MenuItem{
 		Object: obj,
 	}
@@ -3967,7 +3967,7 @@ func wrapMenuItem(obj *externglib.Object) *MenuItem {
 func marshalMenuItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuItem(obj), nil
+	return WrapMenuItem(obj), nil
 }
 
 // NewMenuItem creates a new Item.
@@ -3997,7 +3997,7 @@ func NewMenuItem(label string, detailedAction string) *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }
@@ -4021,7 +4021,7 @@ func NewMenuItemFromModel(model MenuModeller, itemIndex int) *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }
@@ -4100,7 +4100,7 @@ func NewMenuItemSection(label string, section MenuModeller) *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }
@@ -4126,7 +4126,7 @@ func NewMenuItemSubmenu(label string, submenu MenuModeller) *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }
@@ -4440,7 +4440,7 @@ type Notification struct {
 	*externglib.Object
 }
 
-func wrapNotification(obj *externglib.Object) *Notification {
+func WrapNotification(obj *externglib.Object) *Notification {
 	return &Notification{
 		Object: obj,
 	}
@@ -4449,7 +4449,7 @@ func wrapNotification(obj *externglib.Object) *Notification {
 func marshalNotificationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNotification(obj), nil
+	return WrapNotification(obj), nil
 }
 
 // NewNotification creates a new #GNotification with title as its title.
@@ -4469,7 +4469,7 @@ func NewNotification(title string) *Notification {
 
 	var _notification *Notification // out
 
-	_notification = wrapNotification(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_notification = WrapNotification(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _notification
 }
@@ -4704,7 +4704,7 @@ type PropertyAction struct {
 	Action
 }
 
-func wrapPropertyAction(obj *externglib.Object) *PropertyAction {
+func WrapPropertyAction(obj *externglib.Object) *PropertyAction {
 	return &PropertyAction{
 		Object: obj,
 		Action: Action{
@@ -4716,7 +4716,7 @@ func wrapPropertyAction(obj *externglib.Object) *PropertyAction {
 func marshalPropertyActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPropertyAction(obj), nil
+	return WrapPropertyAction(obj), nil
 }
 
 // NewPropertyAction creates a #GAction corresponding to the value of property
@@ -4746,7 +4746,7 @@ func NewPropertyAction(name string, object *externglib.Object, propertyName stri
 
 	var _propertyAction *PropertyAction // out
 
-	_propertyAction = wrapPropertyAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_propertyAction = WrapPropertyAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _propertyAction
 }
@@ -4764,7 +4764,7 @@ type SimpleAction struct {
 	Action
 }
 
-func wrapSimpleAction(obj *externglib.Object) *SimpleAction {
+func WrapSimpleAction(obj *externglib.Object) *SimpleAction {
 	return &SimpleAction{
 		Object: obj,
 		Action: Action{
@@ -4776,7 +4776,7 @@ func wrapSimpleAction(obj *externglib.Object) *SimpleAction {
 func marshalSimpleActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSimpleAction(obj), nil
+	return WrapSimpleAction(obj), nil
 }
 
 // NewSimpleAction creates a new action.
@@ -4800,7 +4800,7 @@ func NewSimpleAction(name string, parameterType *glib.VariantType) *SimpleAction
 
 	var _simpleAction *SimpleAction // out
 
-	_simpleAction = wrapSimpleAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simpleAction = WrapSimpleAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simpleAction
 }
@@ -4830,7 +4830,7 @@ func NewSimpleActionStateful(name string, parameterType *glib.VariantType, state
 
 	var _simpleAction *SimpleAction // out
 
-	_simpleAction = wrapSimpleAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simpleAction = WrapSimpleAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simpleAction
 }
@@ -4905,7 +4905,7 @@ type SimpleIOStream struct {
 	IOStream
 }
 
-func wrapSimpleIOStream(obj *externglib.Object) *SimpleIOStream {
+func WrapSimpleIOStream(obj *externglib.Object) *SimpleIOStream {
 	return &SimpleIOStream{
 		IOStream: IOStream{
 			Object: obj,
@@ -4916,7 +4916,7 @@ func wrapSimpleIOStream(obj *externglib.Object) *SimpleIOStream {
 func marshalSimpleIOStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSimpleIOStream(obj), nil
+	return WrapSimpleIOStream(obj), nil
 }
 
 // NewSimpleIOStream creates a new IOStream wrapping input_stream and
@@ -4935,7 +4935,7 @@ func NewSimpleIOStream(inputStream InputStreamer, outputStream OutputStreamer) *
 
 	var _simpleIOStream *SimpleIOStream // out
 
-	_simpleIOStream = wrapSimpleIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simpleIOStream = WrapSimpleIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simpleIOStream
 }
@@ -4951,7 +4951,7 @@ type SimplePermission struct {
 	Permission
 }
 
-func wrapSimplePermission(obj *externglib.Object) *SimplePermission {
+func WrapSimplePermission(obj *externglib.Object) *SimplePermission {
 	return &SimplePermission{
 		Permission: Permission{
 			Object: obj,
@@ -4962,7 +4962,7 @@ func wrapSimplePermission(obj *externglib.Object) *SimplePermission {
 func marshalSimplePermissioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSimplePermission(obj), nil
+	return WrapSimplePermission(obj), nil
 }
 
 // NewSimplePermission creates a new #GPermission instance that represents an
@@ -4980,7 +4980,7 @@ func NewSimplePermission(allowed bool) *SimplePermission {
 
 	var _simplePermission *SimplePermission // out
 
-	_simplePermission = wrapSimplePermission(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simplePermission = WrapSimplePermission(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simplePermission
 }
@@ -5041,7 +5041,7 @@ type Subprocess struct {
 	Initable
 }
 
-func wrapSubprocess(obj *externglib.Object) *Subprocess {
+func WrapSubprocess(obj *externglib.Object) *Subprocess {
 	return &Subprocess{
 		Object: obj,
 		Initable: Initable{
@@ -5053,7 +5053,7 @@ func wrapSubprocess(obj *externglib.Object) *Subprocess {
 func marshalSubprocesser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSubprocess(obj), nil
+	return WrapSubprocess(obj), nil
 }
 
 // NewSubprocess: create a new process with the given flags and argument list.
@@ -5087,7 +5087,7 @@ func NewSubprocess(argv []string, flags SubprocessFlags) (*Subprocess, error) {
 	var _subprocess *Subprocess // out
 	var _goerr error            // out
 
-	_subprocess = wrapSubprocess(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_subprocess = WrapSubprocess(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -5814,7 +5814,7 @@ type SubprocessLauncher struct {
 	*externglib.Object
 }
 
-func wrapSubprocessLauncher(obj *externglib.Object) *SubprocessLauncher {
+func WrapSubprocessLauncher(obj *externglib.Object) *SubprocessLauncher {
 	return &SubprocessLauncher{
 		Object: obj,
 	}
@@ -5823,7 +5823,7 @@ func wrapSubprocessLauncher(obj *externglib.Object) *SubprocessLauncher {
 func marshalSubprocessLauncherer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSubprocessLauncher(obj), nil
+	return WrapSubprocessLauncher(obj), nil
 }
 
 // NewSubprocessLauncher creates a new Launcher.
@@ -5842,7 +5842,7 @@ func NewSubprocessLauncher(flags SubprocessFlags) *SubprocessLauncher {
 
 	var _subprocessLauncher *SubprocessLauncher // out
 
-	_subprocessLauncher = wrapSubprocessLauncher(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_subprocessLauncher = WrapSubprocessLauncher(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _subprocessLauncher
 }
@@ -6115,7 +6115,7 @@ func (self *SubprocessLauncher) Spawnv(argv []string) (*Subprocess, error) {
 	var _subprocess *Subprocess // out
 	var _goerr error            // out
 
-	_subprocess = wrapSubprocess(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_subprocess = WrapSubprocess(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -6329,7 +6329,7 @@ type TestDBus struct {
 	*externglib.Object
 }
 
-func wrapTestDBus(obj *externglib.Object) *TestDBus {
+func WrapTestDBus(obj *externglib.Object) *TestDBus {
 	return &TestDBus{
 		Object: obj,
 	}
@@ -6338,7 +6338,7 @@ func wrapTestDBus(obj *externglib.Object) *TestDBus {
 func marshalTestDBusser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTestDBus(obj), nil
+	return WrapTestDBus(obj), nil
 }
 
 // NewTestDBus: create a new DBus object.
@@ -6353,7 +6353,7 @@ func NewTestDBus(flags TestDBusFlags) *TestDBus {
 
 	var _testDBus *TestDBus // out
 
-	_testDBus = wrapTestDBus(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_testDBus = WrapTestDBus(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _testDBus
 }

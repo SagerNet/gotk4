@@ -304,7 +304,7 @@ type Activatabler interface {
 
 var _ Activatabler = (*Activatable)(nil)
 
-func wrapActivatable(obj *externglib.Object) *Activatable {
+func WrapActivatable(obj *externglib.Object) *Activatable {
 	return &Activatable{
 		Object: obj,
 	}
@@ -313,7 +313,7 @@ func wrapActivatable(obj *externglib.Object) *Activatable {
 func marshalActivatabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActivatable(obj), nil
+	return WrapActivatable(obj), nil
 }
 
 // DoSetRelatedAction: this is a utility function for Activatable implementors.
@@ -357,7 +357,7 @@ func (activatable *Activatable) RelatedAction() *Action {
 
 	var _action *Action // out
 
-	_action = wrapAction(externglib.Take(unsafe.Pointer(_cret)))
+	_action = WrapAction(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _action
 }

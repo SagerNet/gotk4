@@ -52,7 +52,7 @@ type SearchBar struct {
 	Bin
 }
 
-func wrapSearchBar(obj *externglib.Object) *SearchBar {
+func WrapSearchBar(obj *externglib.Object) *SearchBar {
 	return &SearchBar{
 		Bin: Bin{
 			Container: Container{
@@ -76,7 +76,7 @@ func wrapSearchBar(obj *externglib.Object) *SearchBar {
 func marshalSearchBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSearchBar(obj), nil
+	return WrapSearchBar(obj), nil
 }
 
 // NewSearchBar creates a SearchBar. You will need to tell it about which widget
@@ -88,7 +88,7 @@ func NewSearchBar() *SearchBar {
 
 	var _searchBar *SearchBar // out
 
-	_searchBar = wrapSearchBar(externglib.Take(unsafe.Pointer(_cret)))
+	_searchBar = WrapSearchBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _searchBar
 }

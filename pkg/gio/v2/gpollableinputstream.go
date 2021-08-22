@@ -104,7 +104,7 @@ type PollableInputStreamer interface {
 
 var _ PollableInputStreamer = (*PollableInputStream)(nil)
 
-func wrapPollableInputStream(obj *externglib.Object) *PollableInputStream {
+func WrapPollableInputStream(obj *externglib.Object) *PollableInputStream {
 	return &PollableInputStream{
 		InputStream: InputStream{
 			Object: obj,
@@ -115,7 +115,7 @@ func wrapPollableInputStream(obj *externglib.Object) *PollableInputStream {
 func marshalPollableInputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPollableInputStream(obj), nil
+	return WrapPollableInputStream(obj), nil
 }
 
 // CanPoll checks if stream is actually pollable. Some classes may implement

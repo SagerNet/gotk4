@@ -45,7 +45,7 @@ type MemoryInputStream struct {
 	*externglib.Object
 }
 
-func wrapMemoryInputStream(obj *externglib.Object) *MemoryInputStream {
+func WrapMemoryInputStream(obj *externglib.Object) *MemoryInputStream {
 	return &MemoryInputStream{
 		InputStream: InputStream{
 			Object: obj,
@@ -65,7 +65,7 @@ func wrapMemoryInputStream(obj *externglib.Object) *MemoryInputStream {
 func marshalMemoryInputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMemoryInputStream(obj), nil
+	return WrapMemoryInputStream(obj), nil
 }
 
 // NewMemoryInputStream creates a new empty InputStream.
@@ -76,7 +76,7 @@ func NewMemoryInputStream() *MemoryInputStream {
 
 	var _memoryInputStream *MemoryInputStream // out
 
-	_memoryInputStream = wrapMemoryInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_memoryInputStream = WrapMemoryInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _memoryInputStream
 }
@@ -94,7 +94,7 @@ func NewMemoryInputStreamFromBytes(bytes *glib.Bytes) *MemoryInputStream {
 
 	var _memoryInputStream *MemoryInputStream // out
 
-	_memoryInputStream = wrapMemoryInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_memoryInputStream = WrapMemoryInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _memoryInputStream
 }

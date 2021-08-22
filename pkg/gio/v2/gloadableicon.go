@@ -74,7 +74,7 @@ type LoadableIconner interface {
 
 var _ LoadableIconner = (*LoadableIcon)(nil)
 
-func wrapLoadableIcon(obj *externglib.Object) *LoadableIcon {
+func WrapLoadableIcon(obj *externglib.Object) *LoadableIcon {
 	return &LoadableIcon{
 		Icon: Icon{
 			Object: obj,
@@ -85,7 +85,7 @@ func wrapLoadableIcon(obj *externglib.Object) *LoadableIcon {
 func marshalLoadableIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLoadableIcon(obj), nil
+	return WrapLoadableIcon(obj), nil
 }
 
 // Load loads a loadable icon. For the asynchronous version of this function,

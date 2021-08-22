@@ -44,7 +44,7 @@ type ATContexter interface {
 
 var _ ATContexter = (*ATContext)(nil)
 
-func wrapATContext(obj *externglib.Object) *ATContext {
+func WrapATContext(obj *externglib.Object) *ATContext {
 	return &ATContext{
 		Object: obj,
 	}
@@ -53,7 +53,7 @@ func wrapATContext(obj *externglib.Object) *ATContext {
 func marshalATContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapATContext(obj), nil
+	return WrapATContext(obj), nil
 }
 
 // NewATContextCreate creates a new GtkATContext instance for the given
@@ -79,7 +79,7 @@ func NewATContextCreate(accessibleRole AccessibleRole, accessible Accessibler, d
 	var _atContext *ATContext // out
 
 	if _cret != nil {
-		_atContext = wrapATContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_atContext = WrapATContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _atContext

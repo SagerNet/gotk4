@@ -307,7 +307,7 @@ type Dialog struct {
 	Window
 }
 
-func wrapDialog(obj *externglib.Object) *Dialog {
+func WrapDialog(obj *externglib.Object) *Dialog {
 	return &Dialog{
 		Window: Window{
 			Bin: Bin{
@@ -333,7 +333,7 @@ func wrapDialog(obj *externglib.Object) *Dialog {
 func marshalDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDialog(obj), nil
+	return WrapDialog(obj), nil
 }
 
 // NewDialog creates a new dialog box.
@@ -347,7 +347,7 @@ func NewDialog() *Dialog {
 
 	var _dialog *Dialog // out
 
-	_dialog = wrapDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_dialog = WrapDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dialog
 }
@@ -414,7 +414,7 @@ func (dialog *Dialog) ActionArea() *Box {
 
 	var _box *Box // out
 
-	_box = wrapBox(externglib.Take(unsafe.Pointer(_cret)))
+	_box = WrapBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _box
 }
@@ -431,7 +431,7 @@ func (dialog *Dialog) ContentArea() *Box {
 
 	var _box *Box // out
 
-	_box = wrapBox(externglib.Take(unsafe.Pointer(_cret)))
+	_box = WrapBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _box
 }
@@ -449,7 +449,7 @@ func (dialog *Dialog) HeaderBar() *HeaderBar {
 
 	var _headerBar *HeaderBar // out
 
-	_headerBar = wrapHeaderBar(externglib.Take(unsafe.Pointer(_cret)))
+	_headerBar = WrapHeaderBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _headerBar
 }

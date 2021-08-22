@@ -80,7 +80,7 @@ type DBusObjectManagerer interface {
 
 var _ DBusObjectManagerer = (*DBusObjectManager)(nil)
 
-func wrapDBusObjectManager(obj *externglib.Object) *DBusObjectManager {
+func WrapDBusObjectManager(obj *externglib.Object) *DBusObjectManager {
 	return &DBusObjectManager{
 		Object: obj,
 	}
@@ -89,7 +89,7 @@ func wrapDBusObjectManager(obj *externglib.Object) *DBusObjectManager {
 func marshalDBusObjectManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusObjectManager(obj), nil
+	return WrapDBusObjectManager(obj), nil
 }
 
 // Interface gets the interface proxy for interface_name at object_path, if any.

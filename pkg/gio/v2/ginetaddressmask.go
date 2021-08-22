@@ -42,7 +42,7 @@ type InetAddressMask struct {
 	Initable
 }
 
-func wrapInetAddressMask(obj *externglib.Object) *InetAddressMask {
+func WrapInetAddressMask(obj *externglib.Object) *InetAddressMask {
 	return &InetAddressMask{
 		Object: obj,
 		Initable: Initable{
@@ -54,7 +54,7 @@ func wrapInetAddressMask(obj *externglib.Object) *InetAddressMask {
 func marshalInetAddressMasker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInetAddressMask(obj), nil
+	return WrapInetAddressMask(obj), nil
 }
 
 // NewInetAddressMask creates a new AddressMask representing all addresses whose
@@ -75,7 +75,7 @@ func NewInetAddressMask(addr *InetAddress, length uint) (*InetAddressMask, error
 	var _inetAddressMask *InetAddressMask // out
 	var _goerr error                      // out
 
-	_inetAddressMask = wrapInetAddressMask(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_inetAddressMask = WrapInetAddressMask(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -101,7 +101,7 @@ func NewInetAddressMaskFromString(maskString string) (*InetAddressMask, error) {
 	var _inetAddressMask *InetAddressMask // out
 	var _goerr error                      // out
 
-	_inetAddressMask = wrapInetAddressMask(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_inetAddressMask = WrapInetAddressMask(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -143,7 +143,7 @@ func (mask *InetAddressMask) Address() *InetAddress {
 
 	var _inetAddress *InetAddress // out
 
-	_inetAddress = wrapInetAddress(externglib.Take(unsafe.Pointer(_cret)))
+	_inetAddress = WrapInetAddress(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _inetAddress
 }

@@ -29,7 +29,7 @@ type ImageAccessible struct {
 	atk.Image
 }
 
-func wrapImageAccessible(obj *externglib.Object) *ImageAccessible {
+func WrapImageAccessible(obj *externglib.Object) *ImageAccessible {
 	return &ImageAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapImageAccessible(obj *externglib.Object) *ImageAccessible {
 func marshalImageAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImageAccessible(obj), nil
+	return WrapImageAccessible(obj), nil
 }
 
 func (*ImageAccessible) privateImageAccessible() {}

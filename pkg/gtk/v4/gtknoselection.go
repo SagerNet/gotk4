@@ -33,7 +33,7 @@ type NoSelection struct {
 	SelectionModel
 }
 
-func wrapNoSelection(obj *externglib.Object) *NoSelection {
+func WrapNoSelection(obj *externglib.Object) *NoSelection {
 	return &NoSelection{
 		Object: obj,
 		SelectionModel: SelectionModel{
@@ -47,7 +47,7 @@ func wrapNoSelection(obj *externglib.Object) *NoSelection {
 func marshalNoSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNoSelection(obj), nil
+	return WrapNoSelection(obj), nil
 }
 
 // NewNoSelection creates a new selection to handle model.
@@ -65,7 +65,7 @@ func NewNoSelection(model gio.ListModeller) *NoSelection {
 
 	var _noSelection *NoSelection // out
 
-	_noSelection = wrapNoSelection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_noSelection = WrapNoSelection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _noSelection
 }

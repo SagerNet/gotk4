@@ -68,7 +68,7 @@ type FileFilter struct {
 	*externglib.Object
 }
 
-func wrapFileFilter(obj *externglib.Object) *FileFilter {
+func WrapFileFilter(obj *externglib.Object) *FileFilter {
 	return &FileFilter{
 		Filter: Filter{
 			Object: obj,
@@ -83,7 +83,7 @@ func wrapFileFilter(obj *externglib.Object) *FileFilter {
 func marshalFileFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileFilter(obj), nil
+	return WrapFileFilter(obj), nil
 }
 
 // NewFileFilter creates a new GtkFileFilter with no rules added to it.
@@ -103,7 +103,7 @@ func NewFileFilter() *FileFilter {
 
 	var _fileFilter *FileFilter // out
 
-	_fileFilter = wrapFileFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileFilter = WrapFileFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fileFilter
 }
@@ -122,7 +122,7 @@ func NewFileFilterFromGVariant(variant *glib.Variant) *FileFilter {
 
 	var _fileFilter *FileFilter // out
 
-	_fileFilter = wrapFileFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileFilter = WrapFileFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fileFilter
 }

@@ -460,7 +460,7 @@ type Fonter interface {
 
 var _ Fonter = (*Font)(nil)
 
-func wrapFont(obj *externglib.Object) *Font {
+func WrapFont(obj *externglib.Object) *Font {
 	return &Font{
 		Font: pango.Font{
 			Object: obj,
@@ -471,7 +471,7 @@ func wrapFont(obj *externglib.Object) *Font {
 func marshalFonter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFont(obj), nil
+	return WrapFont(obj), nil
 }
 
 func (*Font) privateFont() {}
@@ -499,7 +499,7 @@ type FontMapper interface {
 
 var _ FontMapper = (*FontMap)(nil)
 
-func wrapFontMap(obj *externglib.Object) *FontMap {
+func WrapFontMap(obj *externglib.Object) *FontMap {
 	return &FontMap{
 		FontMap: pango.FontMap{
 			Object: obj,
@@ -510,7 +510,7 @@ func wrapFontMap(obj *externglib.Object) *FontMap {
 func marshalFontMapper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontMap(obj), nil
+	return WrapFontMap(obj), nil
 }
 
 // Resolution gets the resolution for the fontmap.

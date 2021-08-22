@@ -32,7 +32,7 @@ type StringSorter struct {
 	Sorter
 }
 
-func wrapStringSorter(obj *externglib.Object) *StringSorter {
+func WrapStringSorter(obj *externglib.Object) *StringSorter {
 	return &StringSorter{
 		Sorter: Sorter{
 			Object: obj,
@@ -43,7 +43,7 @@ func wrapStringSorter(obj *externglib.Object) *StringSorter {
 func marshalStringSorterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStringSorter(obj), nil
+	return WrapStringSorter(obj), nil
 }
 
 // NewStringSorter creates a new string sorter that compares items using the
@@ -65,7 +65,7 @@ func NewStringSorter(expression Expressioner) *StringSorter {
 
 	var _stringSorter *StringSorter // out
 
-	_stringSorter = wrapStringSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_stringSorter = WrapStringSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _stringSorter
 }

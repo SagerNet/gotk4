@@ -83,7 +83,7 @@ type StreamableContenter interface {
 
 var _ StreamableContenter = (*StreamableContent)(nil)
 
-func wrapStreamableContent(obj *externglib.Object) *StreamableContent {
+func WrapStreamableContent(obj *externglib.Object) *StreamableContent {
 	return &StreamableContent{
 		Object: obj,
 	}
@@ -92,7 +92,7 @@ func wrapStreamableContent(obj *externglib.Object) *StreamableContent {
 func marshalStreamableContenter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStreamableContent(obj), nil
+	return WrapStreamableContent(obj), nil
 }
 
 // MIMEType gets the character string of the specified mime type. The first mime

@@ -91,7 +91,7 @@ type TLSBackender interface {
 
 var _ TLSBackender = (*TLSBackend)(nil)
 
-func wrapTLSBackend(obj *externglib.Object) *TLSBackend {
+func WrapTLSBackend(obj *externglib.Object) *TLSBackend {
 	return &TLSBackend{
 		Object: obj,
 	}
@@ -100,7 +100,7 @@ func wrapTLSBackend(obj *externglib.Object) *TLSBackend {
 func marshalTLSBackender(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSBackend(obj), nil
+	return WrapTLSBackend(obj), nil
 }
 
 // CertificateType gets the #GType of backend's Certificate implementation.

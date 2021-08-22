@@ -94,7 +94,7 @@ type GLArea struct {
 	Widget
 }
 
-func wrapGLArea(obj *externglib.Object) *GLArea {
+func WrapGLArea(obj *externglib.Object) *GLArea {
 	return &GLArea{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -114,7 +114,7 @@ func wrapGLArea(obj *externglib.Object) *GLArea {
 func marshalGLAreaer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGLArea(obj), nil
+	return WrapGLArea(obj), nil
 }
 
 // NewGLArea creates a new GLArea widget.
@@ -125,7 +125,7 @@ func NewGLArea() *GLArea {
 
 	var _glArea *GLArea // out
 
-	_glArea = wrapGLArea(externglib.Take(unsafe.Pointer(_cret)))
+	_glArea = WrapGLArea(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _glArea
 }

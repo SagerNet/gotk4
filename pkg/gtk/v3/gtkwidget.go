@@ -1213,7 +1213,7 @@ type Widgetter interface {
 
 var _ Widgetter = (*Widget)(nil)
 
-func wrapWidget(obj *externglib.Object) *Widget {
+func WrapWidget(obj *externglib.Object) *Widget {
 	return &Widget{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -1231,7 +1231,7 @@ func wrapWidget(obj *externglib.Object) *Widget {
 func marshalWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWidget(obj), nil
+	return WrapWidget(obj), nil
 }
 
 // Activate: for widgets that can be “activated” (buttons, menu items, etc.)
@@ -3072,7 +3072,7 @@ func (widget *Widget) ModifierStyle() *RCStyle {
 
 	var _rcStyle *RCStyle // out
 
-	_rcStyle = wrapRCStyle(externglib.Take(unsafe.Pointer(_cret)))
+	_rcStyle = WrapRCStyle(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _rcStyle
 }
@@ -3639,7 +3639,7 @@ func (widget *Widget) Settings() *Settings {
 
 	var _settings *Settings // out
 
-	_settings = wrapSettings(externglib.Take(unsafe.Pointer(_cret)))
+	_settings = WrapSettings(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _settings
 }
@@ -3724,7 +3724,7 @@ func (widget *Widget) Style() *Style {
 
 	var _style *Style // out
 
-	_style = wrapStyle(externglib.Take(unsafe.Pointer(_cret)))
+	_style = WrapStyle(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _style
 }
@@ -3742,7 +3742,7 @@ func (widget *Widget) StyleContext() *StyleContext {
 
 	var _styleContext *StyleContext // out
 
-	_styleContext = wrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
+	_styleContext = WrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _styleContext
 }
@@ -3853,7 +3853,7 @@ func (widget *Widget) TooltipWindow() *Window {
 
 	var _window *Window // out
 
-	_window = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+	_window = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _window
 }

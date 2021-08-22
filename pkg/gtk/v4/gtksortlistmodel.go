@@ -38,7 +38,7 @@ type SortListModel struct {
 	gio.ListModel
 }
 
-func wrapSortListModel(obj *externglib.Object) *SortListModel {
+func WrapSortListModel(obj *externglib.Object) *SortListModel {
 	return &SortListModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -50,7 +50,7 @@ func wrapSortListModel(obj *externglib.Object) *SortListModel {
 func marshalSortListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSortListModel(obj), nil
+	return WrapSortListModel(obj), nil
 }
 
 // NewSortListModel creates a new sort list model that uses the sorter to sort
@@ -75,7 +75,7 @@ func NewSortListModel(model gio.ListModeller, sorter *Sorter) *SortListModel {
 
 	var _sortListModel *SortListModel // out
 
-	_sortListModel = wrapSortListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_sortListModel = WrapSortListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _sortListModel
 }
@@ -164,7 +164,7 @@ func (self *SortListModel) Sorter() *Sorter {
 	var _sorter *Sorter // out
 
 	if _cret != nil {
-		_sorter = wrapSorter(externglib.Take(unsafe.Pointer(_cret)))
+		_sorter = WrapSorter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _sorter

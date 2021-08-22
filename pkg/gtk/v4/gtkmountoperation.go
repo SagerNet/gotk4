@@ -39,7 +39,7 @@ type MountOperation struct {
 	gio.MountOperation
 }
 
-func wrapMountOperation(obj *externglib.Object) *MountOperation {
+func WrapMountOperation(obj *externglib.Object) *MountOperation {
 	return &MountOperation{
 		MountOperation: gio.MountOperation{
 			Object: obj,
@@ -50,7 +50,7 @@ func wrapMountOperation(obj *externglib.Object) *MountOperation {
 func marshalMountOperationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMountOperation(obj), nil
+	return WrapMountOperation(obj), nil
 }
 
 // NewMountOperation creates a new GtkMountOperation.
@@ -67,7 +67,7 @@ func NewMountOperation(parent *Window) *MountOperation {
 
 	var _mountOperation *MountOperation // out
 
-	_mountOperation = wrapMountOperation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mountOperation = WrapMountOperation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mountOperation
 }
@@ -107,7 +107,7 @@ func (op *MountOperation) Parent() *Window {
 
 	var _window *Window // out
 
-	_window = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+	_window = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _window
 }

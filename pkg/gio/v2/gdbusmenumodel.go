@@ -53,7 +53,7 @@ func DBusMenuModelGet(connection *DBusConnection, busName string, objectPath str
 
 	var _dBusMenuModel *DBusMenuModel // out
 
-	_dBusMenuModel = wrapDBusMenuModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusMenuModel = WrapDBusMenuModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusMenuModel
 }

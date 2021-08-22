@@ -48,7 +48,7 @@ type Cancellable struct {
 	*externglib.Object
 }
 
-func wrapCancellable(obj *externglib.Object) *Cancellable {
+func WrapCancellable(obj *externglib.Object) *Cancellable {
 	return &Cancellable{
 		Object: obj,
 	}
@@ -57,7 +57,7 @@ func wrapCancellable(obj *externglib.Object) *Cancellable {
 func marshalCancellabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCancellable(obj), nil
+	return WrapCancellable(obj), nil
 }
 
 // NewCancellable creates a new #GCancellable object.
@@ -74,7 +74,7 @@ func NewCancellable() *Cancellable {
 
 	var _cancellable *Cancellable // out
 
-	_cancellable = wrapCancellable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cancellable = WrapCancellable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cancellable
 }
@@ -360,7 +360,7 @@ func CancellableGetCurrent() *Cancellable {
 	var _cancellable *Cancellable // out
 
 	if _cret != nil {
-		_cancellable = wrapCancellable(externglib.Take(unsafe.Pointer(_cret)))
+		_cancellable = WrapCancellable(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _cancellable

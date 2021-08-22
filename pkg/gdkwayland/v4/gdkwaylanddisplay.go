@@ -35,7 +35,7 @@ type WaylandDisplay struct {
 	gdk.Display
 }
 
-func wrapWaylandDisplay(obj *externglib.Object) *WaylandDisplay {
+func WrapWaylandDisplay(obj *externglib.Object) *WaylandDisplay {
 	return &WaylandDisplay{
 		Display: gdk.Display{
 			Object: obj,
@@ -46,7 +46,7 @@ func wrapWaylandDisplay(obj *externglib.Object) *WaylandDisplay {
 func marshalWaylandDisplayer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWaylandDisplay(obj), nil
+	return WrapWaylandDisplay(obj), nil
 }
 
 // StartupNotificationID gets the startup notification ID for a Wayland display,

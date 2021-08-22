@@ -93,7 +93,7 @@ type RemoteActionGrouper interface {
 
 var _ RemoteActionGrouper = (*RemoteActionGroup)(nil)
 
-func wrapRemoteActionGroup(obj *externglib.Object) *RemoteActionGroup {
+func WrapRemoteActionGroup(obj *externglib.Object) *RemoteActionGroup {
 	return &RemoteActionGroup{
 		ActionGroup: ActionGroup{
 			Object: obj,
@@ -104,7 +104,7 @@ func wrapRemoteActionGroup(obj *externglib.Object) *RemoteActionGroup {
 func marshalRemoteActionGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRemoteActionGroup(obj), nil
+	return WrapRemoteActionGroup(obj), nil
 }
 
 // ActivateActionFull activates the remote action.

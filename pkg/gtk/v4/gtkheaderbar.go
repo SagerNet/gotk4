@@ -95,7 +95,7 @@ type HeaderBar struct {
 	Widget
 }
 
-func wrapHeaderBar(obj *externglib.Object) *HeaderBar {
+func WrapHeaderBar(obj *externglib.Object) *HeaderBar {
 	return &HeaderBar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -118,7 +118,7 @@ func wrapHeaderBar(obj *externglib.Object) *HeaderBar {
 func marshalHeaderBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHeaderBar(obj), nil
+	return WrapHeaderBar(obj), nil
 }
 
 // NewHeaderBar creates a new GtkHeaderBar widget.
@@ -129,7 +129,7 @@ func NewHeaderBar() *HeaderBar {
 
 	var _headerBar *HeaderBar // out
 
-	_headerBar = wrapHeaderBar(externglib.Take(unsafe.Pointer(_cret)))
+	_headerBar = WrapHeaderBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _headerBar
 }

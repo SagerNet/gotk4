@@ -200,7 +200,7 @@ type TextView struct {
 	*externglib.Object
 }
 
-func wrapTextView(obj *externglib.Object) *TextView {
+func WrapTextView(obj *externglib.Object) *TextView {
 	return &TextView{
 		Container: Container{
 			Widget: Widget{
@@ -226,7 +226,7 @@ func wrapTextView(obj *externglib.Object) *TextView {
 func marshalTextViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextView(obj), nil
+	return WrapTextView(obj), nil
 }
 
 // NewTextView creates a new TextView. If you don’t call
@@ -241,7 +241,7 @@ func NewTextView() *TextView {
 
 	var _textView *TextView // out
 
-	_textView = wrapTextView(externglib.Take(unsafe.Pointer(_cret)))
+	_textView = WrapTextView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textView
 }
@@ -262,7 +262,7 @@ func NewTextViewWithBuffer(buffer *TextBuffer) *TextView {
 
 	var _textView *TextView // out
 
-	_textView = wrapTextView(externglib.Take(unsafe.Pointer(_cret)))
+	_textView = WrapTextView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textView
 }
@@ -530,7 +530,7 @@ func (textView *TextView) Buffer() *TextBuffer {
 
 	var _textBuffer *TextBuffer // out
 
-	_textBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(_cret)))
+	_textBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textBuffer
 }
@@ -659,7 +659,7 @@ func (textView *TextView) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -1068,7 +1068,7 @@ func (textView *TextView) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

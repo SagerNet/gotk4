@@ -42,7 +42,7 @@ type ProxyAddressEnumerator struct {
 	SocketAddressEnumerator
 }
 
-func wrapProxyAddressEnumerator(obj *externglib.Object) *ProxyAddressEnumerator {
+func WrapProxyAddressEnumerator(obj *externglib.Object) *ProxyAddressEnumerator {
 	return &ProxyAddressEnumerator{
 		SocketAddressEnumerator: SocketAddressEnumerator{
 			Object: obj,
@@ -53,7 +53,7 @@ func wrapProxyAddressEnumerator(obj *externglib.Object) *ProxyAddressEnumerator 
 func marshalProxyAddressEnumeratorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapProxyAddressEnumerator(obj), nil
+	return WrapProxyAddressEnumerator(obj), nil
 }
 
 func (*ProxyAddressEnumerator) privateProxyAddressEnumerator() {}

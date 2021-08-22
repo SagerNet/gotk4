@@ -36,7 +36,7 @@ type Snapshotter interface {
 
 var _ Snapshotter = (*Snapshot)(nil)
 
-func wrapSnapshot(obj *externglib.Object) *Snapshot {
+func WrapSnapshot(obj *externglib.Object) *Snapshot {
 	return &Snapshot{
 		Object: obj,
 	}
@@ -45,7 +45,7 @@ func wrapSnapshot(obj *externglib.Object) *Snapshot {
 func marshalSnapshotter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSnapshot(obj), nil
+	return WrapSnapshot(obj), nil
 }
 
 func (*Snapshot) privateSnapshot() {}

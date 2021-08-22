@@ -193,7 +193,7 @@ type FileChooserDialog struct {
 	*externglib.Object
 }
 
-func wrapFileChooserDialog(obj *externglib.Object) *FileChooserDialog {
+func WrapFileChooserDialog(obj *externglib.Object) *FileChooserDialog {
 	return &FileChooserDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -247,7 +247,7 @@ func wrapFileChooserDialog(obj *externglib.Object) *FileChooserDialog {
 func marshalFileChooserDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileChooserDialog(obj), nil
+	return WrapFileChooserDialog(obj), nil
 }
 
 func (*FileChooserDialog) privateFileChooserDialog() {}

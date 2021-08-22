@@ -44,7 +44,7 @@ type Snapshot struct {
 	gdk.Snapshot
 }
 
-func wrapSnapshot(obj *externglib.Object) *Snapshot {
+func WrapSnapshot(obj *externglib.Object) *Snapshot {
 	return &Snapshot{
 		Snapshot: gdk.Snapshot{
 			Object: obj,
@@ -55,7 +55,7 @@ func wrapSnapshot(obj *externglib.Object) *Snapshot {
 func marshalSnapshotter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSnapshot(obj), nil
+	return WrapSnapshot(obj), nil
 }
 
 // NewSnapshot creates a new GtkSnapshot.
@@ -66,7 +66,7 @@ func NewSnapshot() *Snapshot {
 
 	var _snapshot *Snapshot // out
 
-	_snapshot = wrapSnapshot(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_snapshot = WrapSnapshot(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _snapshot
 }

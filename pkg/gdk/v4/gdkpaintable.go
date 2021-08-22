@@ -224,7 +224,7 @@ type Paintabler interface {
 
 var _ Paintabler = (*Paintable)(nil)
 
-func wrapPaintable(obj *externglib.Object) *Paintable {
+func WrapPaintable(obj *externglib.Object) *Paintable {
 	return &Paintable{
 		Object: obj,
 	}
@@ -233,7 +233,7 @@ func wrapPaintable(obj *externglib.Object) *Paintable {
 func marshalPaintabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPaintable(obj), nil
+	return WrapPaintable(obj), nil
 }
 
 // ComputeConcreteSize: compute a concrete size for the GdkPaintable.

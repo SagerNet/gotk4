@@ -96,7 +96,7 @@ type DropTarget struct {
 	EventController
 }
 
-func wrapDropTarget(obj *externglib.Object) *DropTarget {
+func WrapDropTarget(obj *externglib.Object) *DropTarget {
 	return &DropTarget{
 		EventController: EventController{
 			Object: obj,
@@ -107,7 +107,7 @@ func wrapDropTarget(obj *externglib.Object) *DropTarget {
 func marshalDropTargetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDropTarget(obj), nil
+	return WrapDropTarget(obj), nil
 }
 
 // NewDropTarget creates a new GtkDropTarget object.
@@ -128,7 +128,7 @@ func NewDropTarget(typ externglib.Type, actions gdk.DragAction) *DropTarget {
 
 	var _dropTarget *DropTarget // out
 
-	_dropTarget = wrapDropTarget(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dropTarget = WrapDropTarget(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dropTarget
 }

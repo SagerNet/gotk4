@@ -83,7 +83,7 @@ type Dropper interface {
 
 var _ Dropper = (*Drop)(nil)
 
-func wrapDrop(obj *externglib.Object) *Drop {
+func WrapDrop(obj *externglib.Object) *Drop {
 	return &Drop{
 		Object: obj,
 	}
@@ -92,7 +92,7 @@ func wrapDrop(obj *externglib.Object) *Drop {
 func marshalDropper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDrop(obj), nil
+	return WrapDrop(obj), nil
 }
 
 // Finish ends the drag operation after a drop.
@@ -169,7 +169,7 @@ func (self *Drop) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

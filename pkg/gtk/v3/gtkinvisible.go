@@ -34,7 +34,7 @@ type Invisible struct {
 	Widget
 }
 
-func wrapInvisible(obj *externglib.Object) *Invisible {
+func WrapInvisible(obj *externglib.Object) *Invisible {
 	return &Invisible{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -54,7 +54,7 @@ func wrapInvisible(obj *externglib.Object) *Invisible {
 func marshalInvisibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInvisible(obj), nil
+	return WrapInvisible(obj), nil
 }
 
 // NewInvisible creates a new Invisible.
@@ -65,7 +65,7 @@ func NewInvisible() *Invisible {
 
 	var _invisible *Invisible // out
 
-	_invisible = wrapInvisible(externglib.Take(unsafe.Pointer(_cret)))
+	_invisible = WrapInvisible(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _invisible
 }
@@ -82,7 +82,7 @@ func NewInvisibleForScreen(screen *gdk.Screen) *Invisible {
 
 	var _invisible *Invisible // out
 
-	_invisible = wrapInvisible(externglib.Take(unsafe.Pointer(_cret)))
+	_invisible = WrapInvisible(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _invisible
 }

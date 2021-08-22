@@ -134,7 +134,7 @@ type RecentManager struct {
 	*externglib.Object
 }
 
-func wrapRecentManager(obj *externglib.Object) *RecentManager {
+func WrapRecentManager(obj *externglib.Object) *RecentManager {
 	return &RecentManager{
 		Object: obj,
 	}
@@ -143,7 +143,7 @@ func wrapRecentManager(obj *externglib.Object) *RecentManager {
 func marshalRecentManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentManager(obj), nil
+	return WrapRecentManager(obj), nil
 }
 
 // NewRecentManager creates a new recent manager object. Recent manager objects
@@ -160,7 +160,7 @@ func NewRecentManager() *RecentManager {
 
 	var _recentManager *RecentManager // out
 
-	_recentManager = wrapRecentManager(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_recentManager = WrapRecentManager(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _recentManager
 }
@@ -414,7 +414,7 @@ func RecentManagerGetDefault() *RecentManager {
 
 	var _recentManager *RecentManager // out
 
-	_recentManager = wrapRecentManager(externglib.Take(unsafe.Pointer(_cret)))
+	_recentManager = WrapRecentManager(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentManager
 }

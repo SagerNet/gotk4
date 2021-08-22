@@ -454,7 +454,7 @@ type TreeModeller interface {
 
 var _ TreeModeller = (*TreeModel)(nil)
 
-func wrapTreeModel(obj *externglib.Object) *TreeModel {
+func WrapTreeModel(obj *externglib.Object) *TreeModel {
 	return &TreeModel{
 		Object: obj,
 	}
@@ -463,7 +463,7 @@ func wrapTreeModel(obj *externglib.Object) *TreeModel {
 func marshalTreeModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeModel(obj), nil
+	return WrapTreeModel(obj), nil
 }
 
 // NewFilter creates a new TreeModel, with child_model as the child_model and

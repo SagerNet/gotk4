@@ -27,7 +27,7 @@ type BooleanCellAccessible struct {
 	RendererCellAccessible
 }
 
-func wrapBooleanCellAccessible(obj *externglib.Object) *BooleanCellAccessible {
+func WrapBooleanCellAccessible(obj *externglib.Object) *BooleanCellAccessible {
 	return &BooleanCellAccessible{
 		RendererCellAccessible: RendererCellAccessible{
 			CellAccessible: CellAccessible{
@@ -56,7 +56,7 @@ func wrapBooleanCellAccessible(obj *externglib.Object) *BooleanCellAccessible {
 func marshalBooleanCellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBooleanCellAccessible(obj), nil
+	return WrapBooleanCellAccessible(obj), nil
 }
 
 func (*BooleanCellAccessible) privateBooleanCellAccessible() {}

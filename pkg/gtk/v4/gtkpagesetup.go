@@ -68,7 +68,7 @@ type PageSetup struct {
 	*externglib.Object
 }
 
-func wrapPageSetup(obj *externglib.Object) *PageSetup {
+func WrapPageSetup(obj *externglib.Object) *PageSetup {
 	return &PageSetup{
 		Object: obj,
 	}
@@ -77,7 +77,7 @@ func wrapPageSetup(obj *externglib.Object) *PageSetup {
 func marshalPageSetupper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPageSetup(obj), nil
+	return WrapPageSetup(obj), nil
 }
 
 // NewPageSetup creates a new GtkPageSetup.
@@ -88,7 +88,7 @@ func NewPageSetup() *PageSetup {
 
 	var _pageSetup *PageSetup // out
 
-	_pageSetup = wrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pageSetup
 }
@@ -111,7 +111,7 @@ func NewPageSetupFromFile(fileName string) (*PageSetup, error) {
 	var _pageSetup *PageSetup // out
 	var _goerr error          // out
 
-	_pageSetup = wrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -133,7 +133,7 @@ func NewPageSetupFromGVariant(variant *glib.Variant) *PageSetup {
 
 	var _pageSetup *PageSetup // out
 
-	_pageSetup = wrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pageSetup
 }
@@ -162,7 +162,7 @@ func NewPageSetupFromKeyFile(keyFile *glib.KeyFile, groupName string) (*PageSetu
 	var _pageSetup *PageSetup // out
 	var _goerr error          // out
 
-	_pageSetup = wrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -182,7 +182,7 @@ func (other *PageSetup) Copy() *PageSetup {
 
 	var _pageSetup *PageSetup // out
 
-	_pageSetup = wrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pageSetup
 }

@@ -204,7 +204,7 @@ type Task struct {
 	AsyncResult
 }
 
-func wrapTask(obj *externglib.Object) *Task {
+func WrapTask(obj *externglib.Object) *Task {
 	return &Task{
 		Object: obj,
 		AsyncResult: AsyncResult{
@@ -216,7 +216,7 @@ func wrapTask(obj *externglib.Object) *Task {
 func marshalTasker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTask(obj), nil
+	return WrapTask(obj), nil
 }
 
 // NewTask creates a #GTask acting on source_object, which will eventually be
@@ -259,7 +259,7 @@ func NewTask(ctx context.Context, sourceObject *externglib.Object, callback Asyn
 
 	var _task *Task // out
 
-	_task = wrapTask(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_task = WrapTask(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _task
 }
@@ -276,7 +276,7 @@ func (task *Task) Cancellable() *Cancellable {
 
 	var _cancellable *Cancellable // out
 
-	_cancellable = wrapCancellable(externglib.Take(unsafe.Pointer(_cret)))
+	_cancellable = WrapCancellable(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cancellable
 }

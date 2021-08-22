@@ -43,7 +43,7 @@ type AppLaunchContext struct {
 	gio.AppLaunchContext
 }
 
-func wrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
+func WrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
 	return &AppLaunchContext{
 		AppLaunchContext: gio.AppLaunchContext{
 			Object: obj,
@@ -54,7 +54,7 @@ func wrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
 func marshalAppLaunchContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppLaunchContext(obj), nil
+	return WrapAppLaunchContext(obj), nil
 }
 
 // NewAppLaunchContext creates a new AppLaunchContext.
@@ -67,7 +67,7 @@ func NewAppLaunchContext() *AppLaunchContext {
 
 	var _appLaunchContext *AppLaunchContext // out
 
-	_appLaunchContext = wrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_appLaunchContext = WrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _appLaunchContext
 }

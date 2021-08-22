@@ -32,7 +32,7 @@ type ShortcutsGroup struct {
 	Box
 }
 
-func wrapShortcutsGroup(obj *externglib.Object) *ShortcutsGroup {
+func WrapShortcutsGroup(obj *externglib.Object) *ShortcutsGroup {
 	return &ShortcutsGroup{
 		Box: Box{
 			Widget: Widget{
@@ -61,7 +61,7 @@ func wrapShortcutsGroup(obj *externglib.Object) *ShortcutsGroup {
 func marshalShortcutsGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutsGroup(obj), nil
+	return WrapShortcutsGroup(obj), nil
 }
 
 func (*ShortcutsGroup) privateShortcutsGroup() {}

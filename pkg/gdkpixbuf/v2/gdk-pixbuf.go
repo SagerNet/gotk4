@@ -166,7 +166,7 @@ type Pixbuf struct {
 	gio.LoadableIcon
 }
 
-func wrapPixbuf(obj *externglib.Object) *Pixbuf {
+func WrapPixbuf(obj *externglib.Object) *Pixbuf {
 	return &Pixbuf{
 		Object: obj,
 		LoadableIcon: gio.LoadableIcon{
@@ -180,7 +180,7 @@ func wrapPixbuf(obj *externglib.Object) *Pixbuf {
 func marshalPixbuffer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPixbuf(obj), nil
+	return WrapPixbuf(obj), nil
 }
 
 // NewPixbuf creates a new GdkPixbuf structure and allocates a buffer for it.
@@ -215,7 +215,7 @@ func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width in
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf
@@ -258,7 +258,7 @@ func NewPixbufFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, 
 
 	var _pixbuf *Pixbuf // out
 
-	_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pixbuf
 }
@@ -290,7 +290,7 @@ func NewPixbufFromFile(filename string) (*Pixbuf, error) {
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -347,7 +347,7 @@ func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAs
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -394,7 +394,7 @@ func NewPixbufFromFileAtSize(filename string, width int, height int) (*Pixbuf, e
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -457,7 +457,7 @@ func NewPixbufFromInline(data []byte, copyPixels bool) (*Pixbuf, error) {
 	var _pixbuf *Pixbuf // out
 	var _goerr error    // out
 
-	_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -485,7 +485,7 @@ func NewPixbufFromResource(resourcePath string) (*Pixbuf, error) {
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -534,7 +534,7 @@ func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, pr
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -576,7 +576,7 @@ func NewPixbufFromStream(ctx context.Context, stream gio.InputStreamer) (*Pixbuf
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -638,7 +638,7 @@ func NewPixbufFromStreamAtScale(ctx context.Context, stream gio.InputStreamer, w
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -663,7 +663,7 @@ func NewPixbufFromStreamFinish(asyncResult gio.AsyncResulter) (*Pixbuf, error) {
 	var _goerr error    // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -699,7 +699,7 @@ func NewPixbufFromXPMData(data []string) *Pixbuf {
 
 	var _pixbuf *Pixbuf // out
 
-	_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pixbuf
 }
@@ -740,7 +740,7 @@ func (pixbuf *Pixbuf) AddAlpha(substituteColor bool, r byte, g byte, b byte) *Pi
 
 	var _ret *Pixbuf // out
 
-	_ret = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_ret = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _ret
 }
@@ -766,7 +766,7 @@ func (src *Pixbuf) ApplyEmbeddedOrientation() *Pixbuf {
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf
@@ -929,7 +929,7 @@ func (src *Pixbuf) CompositeColorSimple(destWidth int, destHeight int, interpTyp
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf
@@ -952,7 +952,7 @@ func (pixbuf *Pixbuf) Copy() *Pixbuf {
 	var _ret *Pixbuf // out
 
 	if _cret != nil {
-		_ret = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_ret = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _ret
@@ -1058,7 +1058,7 @@ func (src *Pixbuf) Flip(horizontal bool) *Pixbuf {
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf
@@ -1324,7 +1324,7 @@ func (srcPixbuf *Pixbuf) NewSubpixbuf(srcX int, srcY int, width int, height int)
 
 	var _pixbuf *Pixbuf // out
 
-	_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pixbuf
 }
@@ -1418,7 +1418,7 @@ func (src *Pixbuf) RotateSimple(angle PixbufRotation) *Pixbuf {
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf
@@ -1878,7 +1878,7 @@ func (src *Pixbuf) ScaleSimple(destWidth int, destHeight int, interpType InterpT
 	var _pixbuf *Pixbuf // out
 
 	if _cret != nil {
-		_pixbuf = wrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_pixbuf = WrapPixbuf(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _pixbuf

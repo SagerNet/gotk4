@@ -35,7 +35,7 @@ type HScale struct {
 	Scale
 }
 
-func wrapHScale(obj *externglib.Object) *HScale {
+func WrapHScale(obj *externglib.Object) *HScale {
 	return &HScale{
 		Scale: Scale{
 			Range: Range{
@@ -63,7 +63,7 @@ func wrapHScale(obj *externglib.Object) *HScale {
 func marshalHScaler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHScale(obj), nil
+	return WrapHScale(obj), nil
 }
 
 // NewHScale creates a new HScale.
@@ -82,7 +82,7 @@ func NewHScale(adjustment *Adjustment) *HScale {
 
 	var _hScale *HScale // out
 
-	_hScale = wrapHScale(externglib.Take(unsafe.Pointer(_cret)))
+	_hScale = WrapHScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hScale
 }
@@ -115,7 +115,7 @@ func NewHScaleWithRange(min float64, max float64, step float64) *HScale {
 
 	var _hScale *HScale // out
 
-	_hScale = wrapHScale(externglib.Take(unsafe.Pointer(_cret)))
+	_hScale = WrapHScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hScale
 }

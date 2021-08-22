@@ -53,7 +53,7 @@ type EditableLabel struct {
 	*externglib.Object
 }
 
-func wrapEditableLabel(obj *externglib.Object) *EditableLabel {
+func WrapEditableLabel(obj *externglib.Object) *EditableLabel {
 	return &EditableLabel{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -94,7 +94,7 @@ func wrapEditableLabel(obj *externglib.Object) *EditableLabel {
 func marshalEditableLabeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEditableLabel(obj), nil
+	return WrapEditableLabel(obj), nil
 }
 
 // NewEditableLabel creates a new GtkEditableLabel widget.
@@ -110,7 +110,7 @@ func NewEditableLabel(str string) *EditableLabel {
 
 	var _editableLabel *EditableLabel // out
 
-	_editableLabel = wrapEditableLabel(externglib.Take(unsafe.Pointer(_cret)))
+	_editableLabel = WrapEditableLabel(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _editableLabel
 }

@@ -30,7 +30,7 @@ type FontSelection struct {
 	Box
 }
 
-func wrapFontSelection(obj *externglib.Object) *FontSelection {
+func WrapFontSelection(obj *externglib.Object) *FontSelection {
 	return &FontSelection{
 		Box: Box{
 			Container: Container{
@@ -58,7 +58,7 @@ func wrapFontSelection(obj *externglib.Object) *FontSelection {
 func marshalFontSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontSelection(obj), nil
+	return WrapFontSelection(obj), nil
 }
 
 // NewFontSelection creates a new FontSelection.
@@ -71,7 +71,7 @@ func NewFontSelection() *FontSelection {
 
 	var _fontSelection *FontSelection // out
 
-	_fontSelection = wrapFontSelection(externglib.Take(unsafe.Pointer(_cret)))
+	_fontSelection = WrapFontSelection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fontSelection
 }
@@ -328,7 +328,7 @@ type FontSelectionDialog struct {
 	Dialog
 }
 
-func wrapFontSelectionDialog(obj *externglib.Object) *FontSelectionDialog {
+func WrapFontSelectionDialog(obj *externglib.Object) *FontSelectionDialog {
 	return &FontSelectionDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -356,7 +356,7 @@ func wrapFontSelectionDialog(obj *externglib.Object) *FontSelectionDialog {
 func marshalFontSelectionDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontSelectionDialog(obj), nil
+	return WrapFontSelectionDialog(obj), nil
 }
 
 // NewFontSelectionDialog creates a new FontSelectionDialog.
@@ -374,7 +374,7 @@ func NewFontSelectionDialog(title string) *FontSelectionDialog {
 
 	var _fontSelectionDialog *FontSelectionDialog // out
 
-	_fontSelectionDialog = wrapFontSelectionDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_fontSelectionDialog = WrapFontSelectionDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fontSelectionDialog
 }

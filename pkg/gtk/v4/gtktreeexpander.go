@@ -64,7 +64,7 @@ type TreeExpander struct {
 	Widget
 }
 
-func wrapTreeExpander(obj *externglib.Object) *TreeExpander {
+func WrapTreeExpander(obj *externglib.Object) *TreeExpander {
 	return &TreeExpander{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -87,7 +87,7 @@ func wrapTreeExpander(obj *externglib.Object) *TreeExpander {
 func marshalTreeExpanderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeExpander(obj), nil
+	return WrapTreeExpander(obj), nil
 }
 
 // NewTreeExpander creates a new GtkTreeExpander
@@ -98,7 +98,7 @@ func NewTreeExpander() *TreeExpander {
 
 	var _treeExpander *TreeExpander // out
 
-	_treeExpander = wrapTreeExpander(externglib.Take(unsafe.Pointer(_cret)))
+	_treeExpander = WrapTreeExpander(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeExpander
 }
@@ -156,7 +156,7 @@ func (self *TreeExpander) ListRow() *TreeListRow {
 	var _treeListRow *TreeListRow // out
 
 	if _cret != nil {
-		_treeListRow = wrapTreeListRow(externglib.Take(unsafe.Pointer(_cret)))
+		_treeListRow = WrapTreeListRow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _treeListRow

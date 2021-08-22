@@ -56,7 +56,7 @@ type TreeStore struct {
 	TreeSortable
 }
 
-func wrapTreeStore(obj *externglib.Object) *TreeStore {
+func WrapTreeStore(obj *externglib.Object) *TreeStore {
 	return &TreeStore{
 		Object: obj,
 		Buildable: Buildable{
@@ -79,7 +79,7 @@ func wrapTreeStore(obj *externglib.Object) *TreeStore {
 func marshalTreeStorer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeStore(obj), nil
+	return WrapTreeStore(obj), nil
 }
 
 // NewTreeStore: non vararg creation function. Used primarily by language
@@ -104,7 +104,7 @@ func NewTreeStore(types []externglib.Type) *TreeStore {
 
 	var _treeStore *TreeStore // out
 
-	_treeStore = wrapTreeStore(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_treeStore = WrapTreeStore(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _treeStore
 }

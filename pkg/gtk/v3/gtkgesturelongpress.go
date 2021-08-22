@@ -33,7 +33,7 @@ type GestureLongPress struct {
 	GestureSingle
 }
 
-func wrapGestureLongPress(obj *externglib.Object) *GestureLongPress {
+func WrapGestureLongPress(obj *externglib.Object) *GestureLongPress {
 	return &GestureLongPress{
 		GestureSingle: GestureSingle{
 			Gesture: Gesture{
@@ -48,7 +48,7 @@ func wrapGestureLongPress(obj *externglib.Object) *GestureLongPress {
 func marshalGestureLongPresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureLongPress(obj), nil
+	return WrapGestureLongPress(obj), nil
 }
 
 // NewGestureLongPress returns a newly created Gesture that recognizes long
@@ -64,7 +64,7 @@ func NewGestureLongPress(widget Widgetter) *GestureLongPress {
 
 	var _gestureLongPress *GestureLongPress // out
 
-	_gestureLongPress = wrapGestureLongPress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureLongPress = WrapGestureLongPress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureLongPress
 }

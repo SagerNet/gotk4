@@ -44,7 +44,7 @@ type FontButton struct {
 	*externglib.Object
 }
 
-func wrapFontButton(obj *externglib.Object) *FontButton {
+func WrapFontButton(obj *externglib.Object) *FontButton {
 	return &FontButton{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -71,7 +71,7 @@ func wrapFontButton(obj *externglib.Object) *FontButton {
 func marshalFontButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontButton(obj), nil
+	return WrapFontButton(obj), nil
 }
 
 // NewFontButton creates a new font picker widget.
@@ -82,7 +82,7 @@ func NewFontButton() *FontButton {
 
 	var _fontButton *FontButton // out
 
-	_fontButton = wrapFontButton(externglib.Take(unsafe.Pointer(_cret)))
+	_fontButton = WrapFontButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fontButton
 }
@@ -101,7 +101,7 @@ func NewFontButtonWithFont(fontname string) *FontButton {
 
 	var _fontButton *FontButton // out
 
-	_fontButton = wrapFontButton(externglib.Take(unsafe.Pointer(_cret)))
+	_fontButton = WrapFontButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fontButton
 }

@@ -49,7 +49,7 @@ type AppChooserWidget struct {
 	*externglib.Object
 }
 
-func wrapAppChooserWidget(obj *externglib.Object) *AppChooserWidget {
+func WrapAppChooserWidget(obj *externglib.Object) *AppChooserWidget {
 	return &AppChooserWidget{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -90,7 +90,7 @@ func wrapAppChooserWidget(obj *externglib.Object) *AppChooserWidget {
 func marshalAppChooserWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppChooserWidget(obj), nil
+	return WrapAppChooserWidget(obj), nil
 }
 
 // NewAppChooserWidget creates a new GtkAppChooserWidget for applications that
@@ -107,7 +107,7 @@ func NewAppChooserWidget(contentType string) *AppChooserWidget {
 
 	var _appChooserWidget *AppChooserWidget // out
 
-	_appChooserWidget = wrapAppChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
+	_appChooserWidget = WrapAppChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _appChooserWidget
 }

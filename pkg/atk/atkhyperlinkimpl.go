@@ -68,7 +68,7 @@ type HyperlinkImpler interface {
 
 var _ HyperlinkImpler = (*HyperlinkImpl)(nil)
 
-func wrapHyperlinkImpl(obj *externglib.Object) *HyperlinkImpl {
+func WrapHyperlinkImpl(obj *externglib.Object) *HyperlinkImpl {
 	return &HyperlinkImpl{
 		Object: obj,
 	}
@@ -77,7 +77,7 @@ func wrapHyperlinkImpl(obj *externglib.Object) *HyperlinkImpl {
 func marshalHyperlinkImpler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHyperlinkImpl(obj), nil
+	return WrapHyperlinkImpl(obj), nil
 }
 
 // Hyperlink gets the hyperlink associated with this object.
@@ -92,7 +92,7 @@ func (impl *HyperlinkImpl) Hyperlink() *Hyperlink {
 
 	var _hyperlink *Hyperlink // out
 
-	_hyperlink = wrapHyperlink(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_hyperlink = WrapHyperlink(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _hyperlink
 }

@@ -48,7 +48,7 @@ type UnixSocketAddress struct {
 	SocketAddress
 }
 
-func wrapUnixSocketAddress(obj *externglib.Object) *UnixSocketAddress {
+func WrapUnixSocketAddress(obj *externglib.Object) *UnixSocketAddress {
 	return &UnixSocketAddress{
 		SocketAddress: SocketAddress{
 			Object: obj,
@@ -62,7 +62,7 @@ func wrapUnixSocketAddress(obj *externglib.Object) *UnixSocketAddress {
 func marshalUnixSocketAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixSocketAddress(obj), nil
+	return WrapUnixSocketAddress(obj), nil
 }
 
 // NewUnixSocketAddress creates a new SocketAddress for path.
@@ -81,7 +81,7 @@ func NewUnixSocketAddress(path string) *UnixSocketAddress {
 
 	var _unixSocketAddress *UnixSocketAddress // out
 
-	_unixSocketAddress = wrapUnixSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixSocketAddress = WrapUnixSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixSocketAddress
 }
@@ -105,7 +105,7 @@ func NewUnixSocketAddressAbstract(path []byte) *UnixSocketAddress {
 
 	var _unixSocketAddress *UnixSocketAddress // out
 
-	_unixSocketAddress = wrapUnixSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixSocketAddress = WrapUnixSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixSocketAddress
 }
@@ -158,7 +158,7 @@ func NewUnixSocketAddressWithType(path []byte, typ UnixSocketAddressType) *UnixS
 
 	var _unixSocketAddress *UnixSocketAddress // out
 
-	_unixSocketAddress = wrapUnixSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixSocketAddress = WrapUnixSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixSocketAddress
 }

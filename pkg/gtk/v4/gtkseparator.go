@@ -45,7 +45,7 @@ type Separator struct {
 	*externglib.Object
 }
 
-func wrapSeparator(obj *externglib.Object) *Separator {
+func WrapSeparator(obj *externglib.Object) *Separator {
 	return &Separator{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -72,7 +72,7 @@ func wrapSeparator(obj *externglib.Object) *Separator {
 func marshalSeparatorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSeparator(obj), nil
+	return WrapSeparator(obj), nil
 }
 
 // NewSeparator creates a new GtkSeparator with the given orientation.
@@ -87,7 +87,7 @@ func NewSeparator(orientation Orientation) *Separator {
 
 	var _separator *Separator // out
 
-	_separator = wrapSeparator(externglib.Take(unsafe.Pointer(_cret)))
+	_separator = WrapSeparator(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _separator
 }

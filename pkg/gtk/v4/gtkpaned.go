@@ -90,7 +90,7 @@ type Paned struct {
 	*externglib.Object
 }
 
-func wrapPaned(obj *externglib.Object) *Paned {
+func WrapPaned(obj *externglib.Object) *Paned {
 	return &Paned{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -117,7 +117,7 @@ func wrapPaned(obj *externglib.Object) *Paned {
 func marshalPanedder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPaned(obj), nil
+	return WrapPaned(obj), nil
 }
 
 // NewPaned creates a new GtkPaned widget.
@@ -132,7 +132,7 @@ func NewPaned(orientation Orientation) *Paned {
 
 	var _paned *Paned // out
 
-	_paned = wrapPaned(externglib.Take(unsafe.Pointer(_cret)))
+	_paned = WrapPaned(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _paned
 }

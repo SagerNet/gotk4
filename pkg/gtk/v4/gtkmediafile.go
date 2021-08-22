@@ -68,7 +68,7 @@ type MediaFiler interface {
 
 var _ MediaFiler = (*MediaFile)(nil)
 
-func wrapMediaFile(obj *externglib.Object) *MediaFile {
+func WrapMediaFile(obj *externglib.Object) *MediaFile {
 	return &MediaFile{
 		MediaStream: MediaStream{
 			Object: obj,
@@ -82,7 +82,7 @@ func wrapMediaFile(obj *externglib.Object) *MediaFile {
 func marshalMediaFiler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMediaFile(obj), nil
+	return WrapMediaFile(obj), nil
 }
 
 // NewMediaFile creates a new empty media file.
@@ -93,7 +93,7 @@ func NewMediaFile() *MediaFile {
 
 	var _mediaFile *MediaFile // out
 
-	_mediaFile = wrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mediaFile = WrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mediaFile
 }
@@ -110,7 +110,7 @@ func NewMediaFileForFile(file gio.Filer) *MediaFile {
 
 	var _mediaFile *MediaFile // out
 
-	_mediaFile = wrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mediaFile = WrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mediaFile
 }
@@ -131,7 +131,7 @@ func NewMediaFileForFilename(filename string) *MediaFile {
 
 	var _mediaFile *MediaFile // out
 
-	_mediaFile = wrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mediaFile = WrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mediaFile
 }
@@ -151,7 +151,7 @@ func NewMediaFileForInputStream(stream gio.InputStreamer) *MediaFile {
 
 	var _mediaFile *MediaFile // out
 
-	_mediaFile = wrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mediaFile = WrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mediaFile
 }
@@ -172,7 +172,7 @@ func NewMediaFileForResource(resourcePath string) *MediaFile {
 
 	var _mediaFile *MediaFile // out
 
-	_mediaFile = wrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mediaFile = WrapMediaFile(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mediaFile
 }

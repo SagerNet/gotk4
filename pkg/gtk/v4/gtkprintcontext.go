@@ -91,7 +91,7 @@ type PrintContext struct {
 	*externglib.Object
 }
 
-func wrapPrintContext(obj *externglib.Object) *PrintContext {
+func WrapPrintContext(obj *externglib.Object) *PrintContext {
 	return &PrintContext{
 		Object: obj,
 	}
@@ -100,7 +100,7 @@ func wrapPrintContext(obj *externglib.Object) *PrintContext {
 func marshalPrintContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPrintContext(obj), nil
+	return WrapPrintContext(obj), nil
 }
 
 // CreatePangoContext creates a new PangoContext that can be used with the
@@ -269,7 +269,7 @@ func (context *PrintContext) PageSetup() *PageSetup {
 
 	var _pageSetup *PageSetup // out
 
-	_pageSetup = wrapPageSetup(externglib.Take(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _pageSetup
 }

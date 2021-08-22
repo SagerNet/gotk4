@@ -146,7 +146,7 @@ type DeviceManagerer interface {
 
 var _ DeviceManagerer = (*DeviceManager)(nil)
 
-func wrapDeviceManager(obj *externglib.Object) *DeviceManager {
+func WrapDeviceManager(obj *externglib.Object) *DeviceManager {
 	return &DeviceManager{
 		Object: obj,
 	}
@@ -155,7 +155,7 @@ func wrapDeviceManager(obj *externglib.Object) *DeviceManager {
 func marshalDeviceManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDeviceManager(obj), nil
+	return WrapDeviceManager(obj), nil
 }
 
 // ClientPointer returns the client pointer, that is, the master pointer that
@@ -196,7 +196,7 @@ func (deviceManager *DeviceManager) Display() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display

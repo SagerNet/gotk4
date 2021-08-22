@@ -35,7 +35,7 @@ type BookmarkList struct {
 	gio.ListModel
 }
 
-func wrapBookmarkList(obj *externglib.Object) *BookmarkList {
+func WrapBookmarkList(obj *externglib.Object) *BookmarkList {
 	return &BookmarkList{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -47,7 +47,7 @@ func wrapBookmarkList(obj *externglib.Object) *BookmarkList {
 func marshalBookmarkLister(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBookmarkList(obj), nil
+	return WrapBookmarkList(obj), nil
 }
 
 // NewBookmarkList creates a new GtkBookmarkList with the given attributes.
@@ -71,7 +71,7 @@ func NewBookmarkList(filename string, attributes string) *BookmarkList {
 
 	var _bookmarkList *BookmarkList // out
 
-	_bookmarkList = wrapBookmarkList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_bookmarkList = WrapBookmarkList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _bookmarkList
 }

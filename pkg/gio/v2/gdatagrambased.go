@@ -270,7 +270,7 @@ type DatagramBasedder interface {
 
 var _ DatagramBasedder = (*DatagramBased)(nil)
 
-func wrapDatagramBased(obj *externglib.Object) *DatagramBased {
+func WrapDatagramBased(obj *externglib.Object) *DatagramBased {
 	return &DatagramBased{
 		Object: obj,
 	}
@@ -279,7 +279,7 @@ func wrapDatagramBased(obj *externglib.Object) *DatagramBased {
 func marshalDatagramBasedder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDatagramBased(obj), nil
+	return WrapDatagramBased(obj), nil
 }
 
 // ConditionCheck checks on the readiness of datagram_based to perform

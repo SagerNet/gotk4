@@ -31,7 +31,7 @@ type RelationSet struct {
 	*externglib.Object
 }
 
-func wrapRelationSet(obj *externglib.Object) *RelationSet {
+func WrapRelationSet(obj *externglib.Object) *RelationSet {
 	return &RelationSet{
 		Object: obj,
 	}
@@ -40,7 +40,7 @@ func wrapRelationSet(obj *externglib.Object) *RelationSet {
 func marshalRelationSetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRelationSet(obj), nil
+	return WrapRelationSet(obj), nil
 }
 
 // NewRelationSet creates a new empty relation set.
@@ -51,7 +51,7 @@ func NewRelationSet() *RelationSet {
 
 	var _relationSet *RelationSet // out
 
-	_relationSet = wrapRelationSet(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_relationSet = WrapRelationSet(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _relationSet
 }
@@ -173,7 +173,7 @@ func (set *RelationSet) Relation(i int) *Relation {
 
 	var _relation *Relation // out
 
-	_relation = wrapRelation(externglib.Take(unsafe.Pointer(_cret)))
+	_relation = WrapRelation(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _relation
 }
@@ -193,7 +193,7 @@ func (set *RelationSet) RelationByType(relationship RelationType) *Relation {
 
 	var _relation *Relation // out
 
-	_relation = wrapRelation(externglib.Take(unsafe.Pointer(_cret)))
+	_relation = WrapRelation(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _relation
 }

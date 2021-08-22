@@ -70,7 +70,7 @@ type StyleProviderer interface {
 
 var _ StyleProviderer = (*StyleProvider)(nil)
 
-func wrapStyleProvider(obj *externglib.Object) *StyleProvider {
+func WrapStyleProvider(obj *externglib.Object) *StyleProvider {
 	return &StyleProvider{
 		Object: obj,
 	}
@@ -79,7 +79,7 @@ func wrapStyleProvider(obj *externglib.Object) *StyleProvider {
 func marshalStyleProviderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStyleProvider(obj), nil
+	return WrapStyleProvider(obj), nil
 }
 
 func (*StyleProvider) privateStyleProvider() {}

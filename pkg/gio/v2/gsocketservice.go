@@ -65,7 +65,7 @@ type SocketService struct {
 	SocketListener
 }
 
-func wrapSocketService(obj *externglib.Object) *SocketService {
+func WrapSocketService(obj *externglib.Object) *SocketService {
 	return &SocketService{
 		SocketListener: SocketListener{
 			Object: obj,
@@ -76,7 +76,7 @@ func wrapSocketService(obj *externglib.Object) *SocketService {
 func marshalSocketServicer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketService(obj), nil
+	return WrapSocketService(obj), nil
 }
 
 // NewSocketService creates a new Service with no sockets to listen for. New
@@ -93,7 +93,7 @@ func NewSocketService() *SocketService {
 
 	var _socketService *SocketService // out
 
-	_socketService = wrapSocketService(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketService = WrapSocketService(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _socketService
 }

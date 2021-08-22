@@ -86,7 +86,7 @@ type MapListModel struct {
 	gio.ListModel
 }
 
-func wrapMapListModel(obj *externglib.Object) *MapListModel {
+func WrapMapListModel(obj *externglib.Object) *MapListModel {
 	return &MapListModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -98,7 +98,7 @@ func wrapMapListModel(obj *externglib.Object) *MapListModel {
 func marshalMapListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMapListModel(obj), nil
+	return WrapMapListModel(obj), nil
 }
 
 // NewMapListModel creates a new GtkMapListModel for the given arguments.
@@ -125,7 +125,7 @@ func NewMapListModel(model gio.ListModeller, mapFunc MapListModelMapFunc) *MapLi
 
 	var _mapListModel *MapListModel // out
 
-	_mapListModel = wrapMapListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mapListModel = WrapMapListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mapListModel
 }

@@ -31,7 +31,7 @@ type ComboBoxAccessible struct {
 	*externglib.Object
 }
 
-func wrapComboBoxAccessible(obj *externglib.Object) *ComboBoxAccessible {
+func WrapComboBoxAccessible(obj *externglib.Object) *ComboBoxAccessible {
 	return &ComboBoxAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -58,7 +58,7 @@ func wrapComboBoxAccessible(obj *externglib.Object) *ComboBoxAccessible {
 func marshalComboBoxAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapComboBoxAccessible(obj), nil
+	return WrapComboBoxAccessible(obj), nil
 }
 
 func (*ComboBoxAccessible) privateComboBoxAccessible() {}

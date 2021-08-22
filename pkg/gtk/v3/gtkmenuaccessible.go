@@ -27,7 +27,7 @@ type MenuAccessible struct {
 	MenuShellAccessible
 }
 
-func wrapMenuAccessible(obj *externglib.Object) *MenuAccessible {
+func WrapMenuAccessible(obj *externglib.Object) *MenuAccessible {
 	return &MenuAccessible{
 		MenuShellAccessible: MenuShellAccessible{
 			ContainerAccessible: ContainerAccessible{
@@ -52,7 +52,7 @@ func wrapMenuAccessible(obj *externglib.Object) *MenuAccessible {
 func marshalMenuAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuAccessible(obj), nil
+	return WrapMenuAccessible(obj), nil
 }
 
 func (*MenuAccessible) privateMenuAccessible() {}

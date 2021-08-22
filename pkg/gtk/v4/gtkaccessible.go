@@ -101,7 +101,7 @@ type Accessibler interface {
 
 var _ Accessibler = (*Accessible)(nil)
 
-func wrapAccessible(obj *externglib.Object) *Accessible {
+func WrapAccessible(obj *externglib.Object) *Accessible {
 	return &Accessible{
 		Object: obj,
 	}
@@ -110,7 +110,7 @@ func wrapAccessible(obj *externglib.Object) *Accessible {
 func marshalAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAccessible(obj), nil
+	return WrapAccessible(obj), nil
 }
 
 // AccessibleRole retrieves the GtkAccessibleRole for the given GtkAccessible.

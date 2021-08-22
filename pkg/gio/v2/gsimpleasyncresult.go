@@ -226,7 +226,7 @@ type SimpleAsyncResult struct {
 	AsyncResult
 }
 
-func wrapSimpleAsyncResult(obj *externglib.Object) *SimpleAsyncResult {
+func WrapSimpleAsyncResult(obj *externglib.Object) *SimpleAsyncResult {
 	return &SimpleAsyncResult{
 		Object: obj,
 		AsyncResult: AsyncResult{
@@ -238,7 +238,7 @@ func wrapSimpleAsyncResult(obj *externglib.Object) *SimpleAsyncResult {
 func marshalSimpleAsyncResulter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSimpleAsyncResult(obj), nil
+	return WrapSimpleAsyncResult(obj), nil
 }
 
 // NewSimpleAsyncResult creates a AsyncResult.
@@ -276,7 +276,7 @@ func NewSimpleAsyncResult(sourceObject *externglib.Object, callback AsyncReadyCa
 
 	var _simpleAsyncResult *SimpleAsyncResult // out
 
-	_simpleAsyncResult = wrapSimpleAsyncResult(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simpleAsyncResult = WrapSimpleAsyncResult(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simpleAsyncResult
 }
@@ -307,7 +307,7 @@ func NewSimpleAsyncResultFromError(sourceObject *externglib.Object, callback Asy
 
 	var _simpleAsyncResult *SimpleAsyncResult // out
 
-	_simpleAsyncResult = wrapSimpleAsyncResult(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simpleAsyncResult = WrapSimpleAsyncResult(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simpleAsyncResult
 }

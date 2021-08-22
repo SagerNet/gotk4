@@ -70,7 +70,7 @@ type RecentChooserDialog struct {
 	*externglib.Object
 }
 
-func wrapRecentChooserDialog(obj *externglib.Object) *RecentChooserDialog {
+func WrapRecentChooserDialog(obj *externglib.Object) *RecentChooserDialog {
 	return &RecentChooserDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -102,7 +102,7 @@ func wrapRecentChooserDialog(obj *externglib.Object) *RecentChooserDialog {
 func marshalRecentChooserDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentChooserDialog(obj), nil
+	return WrapRecentChooserDialog(obj), nil
 }
 
 func (*RecentChooserDialog) privateRecentChooserDialog() {}

@@ -28,7 +28,7 @@ type VolumeButton struct {
 	ScaleButton
 }
 
-func wrapVolumeButton(obj *externglib.Object) *VolumeButton {
+func WrapVolumeButton(obj *externglib.Object) *VolumeButton {
 	return &VolumeButton{
 		ScaleButton: ScaleButton{
 			Widget: Widget{
@@ -57,7 +57,7 @@ func wrapVolumeButton(obj *externglib.Object) *VolumeButton {
 func marshalVolumeButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVolumeButton(obj), nil
+	return WrapVolumeButton(obj), nil
 }
 
 // NewVolumeButton creates a GtkVolumeButton.
@@ -71,7 +71,7 @@ func NewVolumeButton() *VolumeButton {
 
 	var _volumeButton *VolumeButton // out
 
-	_volumeButton = wrapVolumeButton(externglib.Take(unsafe.Pointer(_cret)))
+	_volumeButton = WrapVolumeButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _volumeButton
 }

@@ -29,7 +29,7 @@ type WaylandMonitor struct {
 	gdk.Monitor
 }
 
-func wrapWaylandMonitor(obj *externglib.Object) *WaylandMonitor {
+func WrapWaylandMonitor(obj *externglib.Object) *WaylandMonitor {
 	return &WaylandMonitor{
 		Monitor: gdk.Monitor{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapWaylandMonitor(obj *externglib.Object) *WaylandMonitor {
 func marshalWaylandMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWaylandMonitor(obj), nil
+	return WrapWaylandMonitor(obj), nil
 }
 
 func (*WaylandMonitor) privateWaylandMonitor() {}

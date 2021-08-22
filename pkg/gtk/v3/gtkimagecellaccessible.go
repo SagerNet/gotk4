@@ -30,7 +30,7 @@ type ImageCellAccessible struct {
 	*externglib.Object
 }
 
-func wrapImageCellAccessible(obj *externglib.Object) *ImageCellAccessible {
+func WrapImageCellAccessible(obj *externglib.Object) *ImageCellAccessible {
 	return &ImageCellAccessible{
 		RendererCellAccessible: RendererCellAccessible{
 			CellAccessible: CellAccessible{
@@ -63,7 +63,7 @@ func wrapImageCellAccessible(obj *externglib.Object) *ImageCellAccessible {
 func marshalImageCellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImageCellAccessible(obj), nil
+	return WrapImageCellAccessible(obj), nil
 }
 
 func (*ImageCellAccessible) privateImageCellAccessible() {}

@@ -375,7 +375,7 @@ type UIManager struct {
 	Buildable
 }
 
-func wrapUIManager(obj *externglib.Object) *UIManager {
+func WrapUIManager(obj *externglib.Object) *UIManager {
 	return &UIManager{
 		Object: obj,
 		Buildable: Buildable{
@@ -387,7 +387,7 @@ func wrapUIManager(obj *externglib.Object) *UIManager {
 func marshalUIManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUIManager(obj), nil
+	return WrapUIManager(obj), nil
 }
 
 // NewUIManager creates a new ui manager object.
@@ -400,7 +400,7 @@ func NewUIManager() *UIManager {
 
 	var _uiManager *UIManager // out
 
-	_uiManager = wrapUIManager(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_uiManager = WrapUIManager(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _uiManager
 }
@@ -580,7 +580,7 @@ func (manager *UIManager) AccelGroup() *AccelGroup {
 
 	var _accelGroup *AccelGroup // out
 
-	_accelGroup = wrapAccelGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_accelGroup = WrapAccelGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _accelGroup
 }
@@ -604,7 +604,7 @@ func (manager *UIManager) Action(path string) *Action {
 
 	var _action *Action // out
 
-	_action = wrapAction(externglib.Take(unsafe.Pointer(_cret)))
+	_action = WrapAction(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _action
 }
@@ -627,7 +627,7 @@ func (manager *UIManager) ActionGroups() []ActionGroup {
 	gextras.MoveList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkActionGroup)(v)
 		var dst ActionGroup // out
-		dst = *wrapActionGroup(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapActionGroup(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

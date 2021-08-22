@@ -28,7 +28,7 @@ type NumericSorter struct {
 	Sorter
 }
 
-func wrapNumericSorter(obj *externglib.Object) *NumericSorter {
+func WrapNumericSorter(obj *externglib.Object) *NumericSorter {
 	return &NumericSorter{
 		Sorter: Sorter{
 			Object: obj,
@@ -39,7 +39,7 @@ func wrapNumericSorter(obj *externglib.Object) *NumericSorter {
 func marshalNumericSorterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNumericSorter(obj), nil
+	return WrapNumericSorter(obj), nil
 }
 
 // NewNumericSorter creates a new numeric sorter using the given expression.
@@ -60,7 +60,7 @@ func NewNumericSorter(expression Expressioner) *NumericSorter {
 
 	var _numericSorter *NumericSorter // out
 
-	_numericSorter = wrapNumericSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_numericSorter = WrapNumericSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _numericSorter
 }

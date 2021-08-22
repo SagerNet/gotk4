@@ -92,7 +92,7 @@ type Text struct {
 	*externglib.Object
 }
 
-func wrapText(obj *externglib.Object) *Text {
+func WrapText(obj *externglib.Object) *Text {
 	return &Text{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -133,7 +133,7 @@ func wrapText(obj *externglib.Object) *Text {
 func marshalTexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapText(obj), nil
+	return WrapText(obj), nil
 }
 
 // NewText creates a new GtkText.
@@ -144,7 +144,7 @@ func NewText() *Text {
 
 	var _text *Text // out
 
-	_text = wrapText(externglib.Take(unsafe.Pointer(_cret)))
+	_text = WrapText(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _text
 }
@@ -161,7 +161,7 @@ func NewTextWithBuffer(buffer *EntryBuffer) *Text {
 
 	var _text *Text // out
 
-	_text = wrapText(externglib.Take(unsafe.Pointer(_cret)))
+	_text = WrapText(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _text
 }
@@ -224,7 +224,7 @@ func (self *Text) Buffer() *EntryBuffer {
 
 	var _entryBuffer *EntryBuffer // out
 
-	_entryBuffer = wrapEntryBuffer(externglib.Take(unsafe.Pointer(_cret)))
+	_entryBuffer = WrapEntryBuffer(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _entryBuffer
 }

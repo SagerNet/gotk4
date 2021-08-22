@@ -891,7 +891,7 @@ type ImplementorIfacer interface {
 
 var _ ImplementorIfacer = (*ImplementorIface)(nil)
 
-func wrapImplementorIface(obj *externglib.Object) *ImplementorIface {
+func WrapImplementorIface(obj *externglib.Object) *ImplementorIface {
 	return &ImplementorIface{
 		Object: obj,
 	}
@@ -900,7 +900,7 @@ func wrapImplementorIface(obj *externglib.Object) *ImplementorIface {
 func marshalImplementorIfacer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImplementorIface(obj), nil
+	return WrapImplementorIface(obj), nil
 }
 
 func (*ImplementorIface) privateImplementorIface() {}
@@ -998,7 +998,7 @@ type ObjectClass struct {
 	*externglib.Object
 }
 
-func wrapObject(obj *externglib.Object) *ObjectClass {
+func WrapObject(obj *externglib.Object) *ObjectClass {
 	return &ObjectClass{
 		Object: obj,
 	}
@@ -1007,7 +1007,7 @@ func wrapObject(obj *externglib.Object) *ObjectClass {
 func marshalObjectClasser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapObject(obj), nil
+	return WrapObject(obj), nil
 }
 
 // AddRelationship adds a relationship of the specified type with the specified
@@ -1198,7 +1198,7 @@ func (accessible *ObjectClass) Parent() *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _object
 }
@@ -1275,7 +1275,7 @@ func (accessible *ObjectClass) PeekParent() *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _object
 }
@@ -1297,7 +1297,7 @@ func (accessible *ObjectClass) RefAccessibleChild(i int) *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _object
 }
@@ -1314,7 +1314,7 @@ func (accessible *ObjectClass) RefRelationSet() *RelationSet {
 
 	var _relationSet *RelationSet // out
 
-	_relationSet = wrapRelationSet(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_relationSet = WrapRelationSet(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _relationSet
 }
@@ -1332,7 +1332,7 @@ func (accessible *ObjectClass) RefStateSet() *StateSet {
 
 	var _stateSet *StateSet // out
 
-	_stateSet = wrapStateSet(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_stateSet = WrapStateSet(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _stateSet
 }

@@ -257,7 +257,7 @@ type Editabler interface {
 
 var _ Editabler = (*Editable)(nil)
 
-func wrapEditable(obj *externglib.Object) *Editable {
+func WrapEditable(obj *externglib.Object) *Editable {
 	return &Editable{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -280,7 +280,7 @@ func wrapEditable(obj *externglib.Object) *Editable {
 func marshalEditabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEditable(obj), nil
+	return WrapEditable(obj), nil
 }
 
 // DeleteSelection deletes the currently selected text of the editable.

@@ -32,7 +32,7 @@ type TextViewAccessible struct {
 	*externglib.Object
 }
 
-func wrapTextViewAccessible(obj *externglib.Object) *TextViewAccessible {
+func WrapTextViewAccessible(obj *externglib.Object) *TextViewAccessible {
 	return &TextViewAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -62,7 +62,7 @@ func wrapTextViewAccessible(obj *externglib.Object) *TextViewAccessible {
 func marshalTextViewAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextViewAccessible(obj), nil
+	return WrapTextViewAccessible(obj), nil
 }
 
 func (*TextViewAccessible) privateTextViewAccessible() {}

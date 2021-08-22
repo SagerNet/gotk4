@@ -96,7 +96,7 @@ type Toolbar struct {
 	*externglib.Object
 }
 
-func wrapToolbar(obj *externglib.Object) *Toolbar {
+func WrapToolbar(obj *externglib.Object) *Toolbar {
 	return &Toolbar{
 		Container: Container{
 			Widget: Widget{
@@ -136,7 +136,7 @@ func wrapToolbar(obj *externglib.Object) *Toolbar {
 func marshalToolbarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToolbar(obj), nil
+	return WrapToolbar(obj), nil
 }
 
 // NewToolbar creates a new toolbar.
@@ -147,7 +147,7 @@ func NewToolbar() *Toolbar {
 
 	var _toolbar *Toolbar // out
 
-	_toolbar = wrapToolbar(externglib.Take(unsafe.Pointer(_cret)))
+	_toolbar = WrapToolbar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolbar
 }
@@ -252,7 +252,7 @@ func (toolbar *Toolbar) NthItem(n int) *ToolItem {
 	var _toolItem *ToolItem // out
 
 	if _cret != nil {
-		_toolItem = wrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
+		_toolItem = WrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _toolItem

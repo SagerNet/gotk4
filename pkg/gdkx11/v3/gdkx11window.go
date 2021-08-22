@@ -43,7 +43,7 @@ type X11Window struct {
 	gdk.Window
 }
 
-func wrapX11Window(obj *externglib.Object) *X11Window {
+func WrapX11Window(obj *externglib.Object) *X11Window {
 	return &X11Window{
 		Window: gdk.Window{
 			Object: obj,
@@ -54,7 +54,7 @@ func wrapX11Window(obj *externglib.Object) *X11Window {
 func marshalX11Windower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Window(obj), nil
+	return WrapX11Window(obj), nil
 }
 
 // Desktop gets the number of the workspace window is on.

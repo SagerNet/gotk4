@@ -32,7 +32,7 @@ type EntryAccessible struct {
 	*externglib.Object
 }
 
-func wrapEntryAccessible(obj *externglib.Object) *EntryAccessible {
+func WrapEntryAccessible(obj *externglib.Object) *EntryAccessible {
 	return &EntryAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -60,7 +60,7 @@ func wrapEntryAccessible(obj *externglib.Object) *EntryAccessible {
 func marshalEntryAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEntryAccessible(obj), nil
+	return WrapEntryAccessible(obj), nil
 }
 
 func (*EntryAccessible) privateEntryAccessible() {}

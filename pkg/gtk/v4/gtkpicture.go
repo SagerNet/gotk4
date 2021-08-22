@@ -75,7 +75,7 @@ type Picture struct {
 	Widget
 }
 
-func wrapPicture(obj *externglib.Object) *Picture {
+func WrapPicture(obj *externglib.Object) *Picture {
 	return &Picture{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -98,7 +98,7 @@ func wrapPicture(obj *externglib.Object) *Picture {
 func marshalPicturer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPicture(obj), nil
+	return WrapPicture(obj), nil
 }
 
 // NewPicture creates a new empty GtkPicture widget.
@@ -109,7 +109,7 @@ func NewPicture() *Picture {
 
 	var _picture *Picture // out
 
-	_picture = wrapPicture(externglib.Take(unsafe.Pointer(_cret)))
+	_picture = WrapPicture(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _picture
 }
@@ -134,7 +134,7 @@ func NewPictureForFile(file gio.Filer) *Picture {
 
 	var _picture *Picture // out
 
-	_picture = wrapPicture(externglib.Take(unsafe.Pointer(_cret)))
+	_picture = WrapPicture(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _picture
 }
@@ -157,7 +157,7 @@ func NewPictureForFilename(filename string) *Picture {
 
 	var _picture *Picture // out
 
-	_picture = wrapPicture(externglib.Take(unsafe.Pointer(_cret)))
+	_picture = WrapPicture(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _picture
 }
@@ -179,7 +179,7 @@ func NewPictureForPaintable(paintable gdk.Paintabler) *Picture {
 
 	var _picture *Picture // out
 
-	_picture = wrapPicture(externglib.Take(unsafe.Pointer(_cret)))
+	_picture = WrapPicture(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _picture
 }
@@ -203,7 +203,7 @@ func NewPictureForPixbuf(pixbuf *gdkpixbuf.Pixbuf) *Picture {
 
 	var _picture *Picture // out
 
-	_picture = wrapPicture(externglib.Take(unsafe.Pointer(_cret)))
+	_picture = WrapPicture(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _picture
 }
@@ -227,7 +227,7 @@ func NewPictureForResource(resourcePath string) *Picture {
 
 	var _picture *Picture // out
 
-	_picture = wrapPicture(externglib.Take(unsafe.Pointer(_cret)))
+	_picture = WrapPicture(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _picture
 }

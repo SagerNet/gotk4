@@ -39,7 +39,7 @@ type ColumnViewColumn struct {
 	*externglib.Object
 }
 
-func wrapColumnViewColumn(obj *externglib.Object) *ColumnViewColumn {
+func WrapColumnViewColumn(obj *externglib.Object) *ColumnViewColumn {
 	return &ColumnViewColumn{
 		Object: obj,
 	}
@@ -48,7 +48,7 @@ func wrapColumnViewColumn(obj *externglib.Object) *ColumnViewColumn {
 func marshalColumnViewColumner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColumnViewColumn(obj), nil
+	return WrapColumnViewColumn(obj), nil
 }
 
 // NewColumnViewColumn creates a new GtkColumnViewColumn that uses the given
@@ -80,7 +80,7 @@ func NewColumnViewColumn(title string, factory *ListItemFactory) *ColumnViewColu
 
 	var _columnViewColumn *ColumnViewColumn // out
 
-	_columnViewColumn = wrapColumnViewColumn(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_columnViewColumn = WrapColumnViewColumn(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _columnViewColumn
 }
@@ -100,7 +100,7 @@ func (self *ColumnViewColumn) ColumnView() *ColumnView {
 	var _columnView *ColumnView // out
 
 	if _cret != nil {
-		_columnView = wrapColumnView(externglib.Take(unsafe.Pointer(_cret)))
+		_columnView = WrapColumnView(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _columnView
@@ -139,7 +139,7 @@ func (self *ColumnViewColumn) Factory() *ListItemFactory {
 	var _listItemFactory *ListItemFactory // out
 
 	if _cret != nil {
-		_listItemFactory = wrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
+		_listItemFactory = WrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listItemFactory
@@ -214,7 +214,7 @@ func (self *ColumnViewColumn) Sorter() *Sorter {
 	var _sorter *Sorter // out
 
 	if _cret != nil {
-		_sorter = wrapSorter(externglib.Take(unsafe.Pointer(_cret)))
+		_sorter = WrapSorter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _sorter

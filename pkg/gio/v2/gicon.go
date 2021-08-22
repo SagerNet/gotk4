@@ -98,7 +98,7 @@ type Iconner interface {
 
 var _ Iconner = (*Icon)(nil)
 
-func wrapIcon(obj *externglib.Object) *Icon {
+func WrapIcon(obj *externglib.Object) *Icon {
 	return &Icon{
 		Object: obj,
 	}
@@ -107,7 +107,7 @@ func wrapIcon(obj *externglib.Object) *Icon {
 func marshalIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIcon(obj), nil
+	return WrapIcon(obj), nil
 }
 
 // Equal checks if two icons are equal.

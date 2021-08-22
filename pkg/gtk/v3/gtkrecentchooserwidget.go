@@ -40,7 +40,7 @@ type RecentChooserWidget struct {
 	*externglib.Object
 }
 
-func wrapRecentChooserWidget(obj *externglib.Object) *RecentChooserWidget {
+func WrapRecentChooserWidget(obj *externglib.Object) *RecentChooserWidget {
 	return &RecentChooserWidget{
 		Box: Box{
 			Container: Container{
@@ -72,7 +72,7 @@ func wrapRecentChooserWidget(obj *externglib.Object) *RecentChooserWidget {
 func marshalRecentChooserWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentChooserWidget(obj), nil
+	return WrapRecentChooserWidget(obj), nil
 }
 
 // NewRecentChooserWidget creates a new RecentChooserWidget object. This is an
@@ -84,7 +84,7 @@ func NewRecentChooserWidget() *RecentChooserWidget {
 
 	var _recentChooserWidget *RecentChooserWidget // out
 
-	_recentChooserWidget = wrapRecentChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
+	_recentChooserWidget = WrapRecentChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentChooserWidget
 }
@@ -105,7 +105,7 @@ func NewRecentChooserWidgetForManager(manager *RecentManager) *RecentChooserWidg
 
 	var _recentChooserWidget *RecentChooserWidget // out
 
-	_recentChooserWidget = wrapRecentChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
+	_recentChooserWidget = WrapRecentChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentChooserWidget
 }

@@ -62,7 +62,7 @@ type Rendererer interface {
 
 var _ Rendererer = (*Renderer)(nil)
 
-func wrapRenderer(obj *externglib.Object) *Renderer {
+func WrapRenderer(obj *externglib.Object) *Renderer {
 	return &Renderer{
 		Object: obj,
 	}
@@ -71,7 +71,7 @@ func wrapRenderer(obj *externglib.Object) *Renderer {
 func marshalRendererer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRenderer(obj), nil
+	return WrapRenderer(obj), nil
 }
 
 // NewRendererForSurface creates an appropriate GskRenderer instance for the
@@ -94,7 +94,7 @@ func NewRendererForSurface(surface gdk.Surfacer) *Renderer {
 	var _renderer *Renderer // out
 
 	if _cret != nil {
-		_renderer = wrapRenderer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_renderer = WrapRenderer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _renderer

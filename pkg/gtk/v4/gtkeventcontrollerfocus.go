@@ -33,7 +33,7 @@ type EventControllerFocus struct {
 	EventController
 }
 
-func wrapEventControllerFocus(obj *externglib.Object) *EventControllerFocus {
+func WrapEventControllerFocus(obj *externglib.Object) *EventControllerFocus {
 	return &EventControllerFocus{
 		EventController: EventController{
 			Object: obj,
@@ -44,7 +44,7 @@ func wrapEventControllerFocus(obj *externglib.Object) *EventControllerFocus {
 func marshalEventControllerFocusser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventControllerFocus(obj), nil
+	return WrapEventControllerFocus(obj), nil
 }
 
 // NewEventControllerFocus creates a new event controller that will handle focus
@@ -56,7 +56,7 @@ func NewEventControllerFocus() *EventControllerFocus {
 
 	var _eventControllerFocus *EventControllerFocus // out
 
-	_eventControllerFocus = wrapEventControllerFocus(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_eventControllerFocus = WrapEventControllerFocus(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _eventControllerFocus
 }

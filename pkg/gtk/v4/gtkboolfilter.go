@@ -27,7 +27,7 @@ type BoolFilter struct {
 	Filter
 }
 
-func wrapBoolFilter(obj *externglib.Object) *BoolFilter {
+func WrapBoolFilter(obj *externglib.Object) *BoolFilter {
 	return &BoolFilter{
 		Filter: Filter{
 			Object: obj,
@@ -38,7 +38,7 @@ func wrapBoolFilter(obj *externglib.Object) *BoolFilter {
 func marshalBoolFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBoolFilter(obj), nil
+	return WrapBoolFilter(obj), nil
 }
 
 // NewBoolFilter creates a new bool filter.
@@ -56,7 +56,7 @@ func NewBoolFilter(expression Expressioner) *BoolFilter {
 
 	var _boolFilter *BoolFilter // out
 
-	_boolFilter = wrapBoolFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_boolFilter = WrapBoolFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _boolFilter
 }

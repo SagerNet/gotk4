@@ -89,7 +89,7 @@ type CheckButton struct {
 	*externglib.Object
 }
 
-func wrapCheckButton(obj *externglib.Object) *CheckButton {
+func WrapCheckButton(obj *externglib.Object) *CheckButton {
 	return &CheckButton{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -130,7 +130,7 @@ func wrapCheckButton(obj *externglib.Object) *CheckButton {
 func marshalCheckButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCheckButton(obj), nil
+	return WrapCheckButton(obj), nil
 }
 
 // NewCheckButton creates a new GtkCheckButton.
@@ -141,7 +141,7 @@ func NewCheckButton() *CheckButton {
 
 	var _checkButton *CheckButton // out
 
-	_checkButton = wrapCheckButton(externglib.Take(unsafe.Pointer(_cret)))
+	_checkButton = WrapCheckButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _checkButton
 }
@@ -161,7 +161,7 @@ func NewCheckButtonWithLabel(label string) *CheckButton {
 
 	var _checkButton *CheckButton // out
 
-	_checkButton = wrapCheckButton(externglib.Take(unsafe.Pointer(_cret)))
+	_checkButton = WrapCheckButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _checkButton
 }
@@ -182,7 +182,7 @@ func NewCheckButtonWithMnemonic(label string) *CheckButton {
 
 	var _checkButton *CheckButton // out
 
-	_checkButton = wrapCheckButton(externglib.Take(unsafe.Pointer(_cret)))
+	_checkButton = WrapCheckButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _checkButton
 }

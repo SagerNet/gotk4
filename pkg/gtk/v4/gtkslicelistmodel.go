@@ -34,7 +34,7 @@ type SliceListModel struct {
 	gio.ListModel
 }
 
-func wrapSliceListModel(obj *externglib.Object) *SliceListModel {
+func WrapSliceListModel(obj *externglib.Object) *SliceListModel {
 	return &SliceListModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -46,7 +46,7 @@ func wrapSliceListModel(obj *externglib.Object) *SliceListModel {
 func marshalSliceListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSliceListModel(obj), nil
+	return WrapSliceListModel(obj), nil
 }
 
 // NewSliceListModel creates a new slice model.
@@ -72,7 +72,7 @@ func NewSliceListModel(model gio.ListModeller, offset uint, size uint) *SliceLis
 
 	var _sliceListModel *SliceListModel // out
 
-	_sliceListModel = wrapSliceListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_sliceListModel = WrapSliceListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _sliceListModel
 }

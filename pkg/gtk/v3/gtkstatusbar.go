@@ -69,7 +69,7 @@ type Statusbar struct {
 	Box
 }
 
-func wrapStatusbar(obj *externglib.Object) *Statusbar {
+func WrapStatusbar(obj *externglib.Object) *Statusbar {
 	return &Statusbar{
 		Box: Box{
 			Container: Container{
@@ -97,7 +97,7 @@ func wrapStatusbar(obj *externglib.Object) *Statusbar {
 func marshalStatusbarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStatusbar(obj), nil
+	return WrapStatusbar(obj), nil
 }
 
 // NewStatusbar creates a new Statusbar ready for messages.
@@ -108,7 +108,7 @@ func NewStatusbar() *Statusbar {
 
 	var _statusbar *Statusbar // out
 
-	_statusbar = wrapStatusbar(externglib.Take(unsafe.Pointer(_cret)))
+	_statusbar = WrapStatusbar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _statusbar
 }
@@ -147,7 +147,7 @@ func (statusbar *Statusbar) MessageArea() *Box {
 
 	var _box *Box // out
 
-	_box = wrapBox(externglib.Take(unsafe.Pointer(_cret)))
+	_box = WrapBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _box
 }

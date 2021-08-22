@@ -29,7 +29,7 @@ type GObjectAccessible struct {
 	ObjectClass
 }
 
-func wrapGObjectAccessible(obj *externglib.Object) *GObjectAccessible {
+func WrapGObjectAccessible(obj *externglib.Object) *GObjectAccessible {
 	return &GObjectAccessible{
 		ObjectClass: ObjectClass{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapGObjectAccessible(obj *externglib.Object) *GObjectAccessible {
 func marshalGObjectAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGObjectAccessible(obj), nil
+	return WrapGObjectAccessible(obj), nil
 }
 
 // Object gets the GObject for which obj is the accessible object.
@@ -72,7 +72,7 @@ func GObjectAccessibleForObject(obj *externglib.Object) *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _object
 }

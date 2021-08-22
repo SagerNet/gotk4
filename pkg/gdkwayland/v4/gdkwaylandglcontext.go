@@ -26,7 +26,7 @@ type WaylandGLContext struct {
 	gdk.GLContext
 }
 
-func wrapWaylandGLContext(obj *externglib.Object) *WaylandGLContext {
+func WrapWaylandGLContext(obj *externglib.Object) *WaylandGLContext {
 	return &WaylandGLContext{
 		GLContext: gdk.GLContext{
 			DrawContext: gdk.DrawContext{
@@ -39,7 +39,7 @@ func wrapWaylandGLContext(obj *externglib.Object) *WaylandGLContext {
 func marshalWaylandGLContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWaylandGLContext(obj), nil
+	return WrapWaylandGLContext(obj), nil
 }
 
 func (*WaylandGLContext) privateWaylandGLContext() {}

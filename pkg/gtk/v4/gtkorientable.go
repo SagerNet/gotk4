@@ -42,7 +42,7 @@ type Orientabler interface {
 
 var _ Orientabler = (*Orientable)(nil)
 
-func wrapOrientable(obj *externglib.Object) *Orientable {
+func WrapOrientable(obj *externglib.Object) *Orientable {
 	return &Orientable{
 		Object: obj,
 	}
@@ -51,7 +51,7 @@ func wrapOrientable(obj *externglib.Object) *Orientable {
 func marshalOrientabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapOrientable(obj), nil
+	return WrapOrientable(obj), nil
 }
 
 // Orientation retrieves the orientation of the orientable.

@@ -132,7 +132,7 @@ type GLShader struct {
 	*externglib.Object
 }
 
-func wrapGLShader(obj *externglib.Object) *GLShader {
+func WrapGLShader(obj *externglib.Object) *GLShader {
 	return &GLShader{
 		Object: obj,
 	}
@@ -141,7 +141,7 @@ func wrapGLShader(obj *externglib.Object) *GLShader {
 func marshalGLShaderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGLShader(obj), nil
+	return WrapGLShader(obj), nil
 }
 
 // NewGLShaderFromBytes creates a GskGLShader that will render pixels using the
@@ -157,7 +157,7 @@ func NewGLShaderFromBytes(sourcecode *glib.Bytes) *GLShader {
 
 	var _glShader *GLShader // out
 
-	_glShader = wrapGLShader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_glShader = WrapGLShader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _glShader
 }
@@ -176,7 +176,7 @@ func NewGLShaderFromResource(resourcePath string) *GLShader {
 
 	var _glShader *GLShader // out
 
-	_glShader = wrapGLShader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_glShader = WrapGLShader(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _glShader
 }

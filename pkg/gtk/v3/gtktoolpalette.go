@@ -132,7 +132,7 @@ type ToolPalette struct {
 	*externglib.Object
 }
 
-func wrapToolPalette(obj *externglib.Object) *ToolPalette {
+func WrapToolPalette(obj *externglib.Object) *ToolPalette {
 	return &ToolPalette{
 		Container: Container{
 			Widget: Widget{
@@ -161,7 +161,7 @@ func wrapToolPalette(obj *externglib.Object) *ToolPalette {
 func marshalToolPaletter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToolPalette(obj), nil
+	return WrapToolPalette(obj), nil
 }
 
 // NewToolPalette creates a new tool palette.
@@ -172,7 +172,7 @@ func NewToolPalette() *ToolPalette {
 
 	var _toolPalette *ToolPalette // out
 
-	_toolPalette = wrapToolPalette(externglib.Take(unsafe.Pointer(_cret)))
+	_toolPalette = WrapToolPalette(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolPalette
 }
@@ -241,7 +241,7 @@ func (palette *ToolPalette) DropGroup(x int, y int) *ToolItemGroup {
 	var _toolItemGroup *ToolItemGroup // out
 
 	if _cret != nil {
-		_toolItemGroup = wrapToolItemGroup(externglib.Take(unsafe.Pointer(_cret)))
+		_toolItemGroup = WrapToolItemGroup(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _toolItemGroup
@@ -267,7 +267,7 @@ func (palette *ToolPalette) DropItem(x int, y int) *ToolItem {
 	var _toolItem *ToolItem // out
 
 	if _cret != nil {
-		_toolItem = wrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
+		_toolItem = WrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _toolItem
@@ -354,7 +354,7 @@ func (palette *ToolPalette) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -408,7 +408,7 @@ func (palette *ToolPalette) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

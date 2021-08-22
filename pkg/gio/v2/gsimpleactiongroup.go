@@ -42,7 +42,7 @@ type SimpleActionGroup struct {
 	ActionMap
 }
 
-func wrapSimpleActionGroup(obj *externglib.Object) *SimpleActionGroup {
+func WrapSimpleActionGroup(obj *externglib.Object) *SimpleActionGroup {
 	return &SimpleActionGroup{
 		Object: obj,
 		ActionGroup: ActionGroup{
@@ -57,7 +57,7 @@ func wrapSimpleActionGroup(obj *externglib.Object) *SimpleActionGroup {
 func marshalSimpleActionGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSimpleActionGroup(obj), nil
+	return WrapSimpleActionGroup(obj), nil
 }
 
 // NewSimpleActionGroup creates a new, empty, ActionGroup.
@@ -68,7 +68,7 @@ func NewSimpleActionGroup() *SimpleActionGroup {
 
 	var _simpleActionGroup *SimpleActionGroup // out
 
-	_simpleActionGroup = wrapSimpleActionGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_simpleActionGroup = WrapSimpleActionGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _simpleActionGroup
 }

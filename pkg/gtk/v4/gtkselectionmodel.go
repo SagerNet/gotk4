@@ -156,7 +156,7 @@ type SelectionModeller interface {
 
 var _ SelectionModeller = (*SelectionModel)(nil)
 
-func wrapSelectionModel(obj *externglib.Object) *SelectionModel {
+func WrapSelectionModel(obj *externglib.Object) *SelectionModel {
 	return &SelectionModel{
 		ListModel: gio.ListModel{
 			Object: obj,
@@ -167,7 +167,7 @@ func wrapSelectionModel(obj *externglib.Object) *SelectionModel {
 func marshalSelectionModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSelectionModel(obj), nil
+	return WrapSelectionModel(obj), nil
 }
 
 // Selection gets the set containing all currently selected items in the model.

@@ -512,7 +512,7 @@ type Settings struct {
 	*externglib.Object
 }
 
-func wrapSettings(obj *externglib.Object) *Settings {
+func WrapSettings(obj *externglib.Object) *Settings {
 	return &Settings{
 		Object: obj,
 	}
@@ -521,7 +521,7 @@ func wrapSettings(obj *externglib.Object) *Settings {
 func marshalSettingser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSettings(obj), nil
+	return WrapSettings(obj), nil
 }
 
 // NewSettings creates a new #GSettings object with the schema specified by
@@ -549,7 +549,7 @@ func NewSettings(schemaId string) *Settings {
 
 	var _settings *Settings // out
 
-	_settings = wrapSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_settings = WrapSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _settings
 }
@@ -582,7 +582,7 @@ func NewSettingsWithPath(schemaId string, path string) *Settings {
 
 	var _settings *Settings // out
 
-	_settings = wrapSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_settings = WrapSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _settings
 }
@@ -772,7 +772,7 @@ func (settings *Settings) Child(name string) *Settings {
 
 	var _ret *Settings // out
 
-	_ret = wrapSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_ret = WrapSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _ret
 }

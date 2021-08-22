@@ -73,7 +73,7 @@ type TableCeller interface {
 
 var _ TableCeller = (*TableCell)(nil)
 
-func wrapTableCell(obj *externglib.Object) *TableCell {
+func WrapTableCell(obj *externglib.Object) *TableCell {
 	return &TableCell{
 		ObjectClass: ObjectClass{
 			Object: obj,
@@ -84,7 +84,7 @@ func wrapTableCell(obj *externglib.Object) *TableCell {
 func marshalTableCeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTableCell(obj), nil
+	return WrapTableCell(obj), nil
 }
 
 // ColumnSpan returns the number of columns occupied by this cell accessible.
@@ -194,7 +194,7 @@ func (cell *TableCell) Table() *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _object
 }

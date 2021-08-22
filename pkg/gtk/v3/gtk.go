@@ -353,7 +353,7 @@ type EntryIconAccessible struct {
 	*externglib.Object
 }
 
-func wrapEntryIconAccessible(obj *externglib.Object) *EntryIconAccessible {
+func WrapEntryIconAccessible(obj *externglib.Object) *EntryIconAccessible {
 	return &EntryIconAccessible{
 		ObjectClass: atk.ObjectClass{
 			Object: obj,
@@ -371,7 +371,7 @@ func wrapEntryIconAccessible(obj *externglib.Object) *EntryIconAccessible {
 func marshalEntryIconAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEntryIconAccessible(obj), nil
+	return WrapEntryIconAccessible(obj), nil
 }
 
 func (*EntryIconAccessible) privateEntryIconAccessible() {}

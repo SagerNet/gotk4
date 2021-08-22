@@ -54,7 +54,7 @@ type Switch struct {
 	*externglib.Object
 }
 
-func wrapSwitch(obj *externglib.Object) *Switch {
+func WrapSwitch(obj *externglib.Object) *Switch {
 	return &Switch{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -92,7 +92,7 @@ func wrapSwitch(obj *externglib.Object) *Switch {
 func marshalSwitcher(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSwitch(obj), nil
+	return WrapSwitch(obj), nil
 }
 
 // NewSwitch creates a new Switch widget.
@@ -103,7 +103,7 @@ func NewSwitch() *Switch {
 
 	var __switch *Switch // out
 
-	__switch = wrapSwitch(externglib.Take(unsafe.Pointer(_cret)))
+	__switch = WrapSwitch(externglib.Take(unsafe.Pointer(_cret)))
 
 	return __switch
 }

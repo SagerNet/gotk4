@@ -239,7 +239,7 @@ type Mounter interface {
 
 var _ Mounter = (*Mount)(nil)
 
-func wrapMount(obj *externglib.Object) *Mount {
+func WrapMount(obj *externglib.Object) *Mount {
 	return &Mount{
 		Object: obj,
 	}
@@ -248,7 +248,7 @@ func wrapMount(obj *externglib.Object) *Mount {
 func marshalMounter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMount(obj), nil
+	return WrapMount(obj), nil
 }
 
 // CanEject checks if mount can be ejected.

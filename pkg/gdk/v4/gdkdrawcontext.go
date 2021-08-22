@@ -58,7 +58,7 @@ type DrawContexter interface {
 
 var _ DrawContexter = (*DrawContext)(nil)
 
-func wrapDrawContext(obj *externglib.Object) *DrawContext {
+func WrapDrawContext(obj *externglib.Object) *DrawContext {
 	return &DrawContext{
 		Object: obj,
 	}
@@ -67,7 +67,7 @@ func wrapDrawContext(obj *externglib.Object) *DrawContext {
 func marshalDrawContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDrawContext(obj), nil
+	return WrapDrawContext(obj), nil
 }
 
 // BeginFrame indicates that you are beginning the process of redrawing region
@@ -135,7 +135,7 @@ func (context *DrawContext) Display() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display

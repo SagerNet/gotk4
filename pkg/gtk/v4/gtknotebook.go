@@ -145,7 +145,7 @@ type Notebook struct {
 	Widget
 }
 
-func wrapNotebook(obj *externglib.Object) *Notebook {
+func WrapNotebook(obj *externglib.Object) *Notebook {
 	return &Notebook{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -168,7 +168,7 @@ func wrapNotebook(obj *externglib.Object) *Notebook {
 func marshalNotebooker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNotebook(obj), nil
+	return WrapNotebook(obj), nil
 }
 
 // NewNotebook creates a new GtkNotebook widget with no pages.
@@ -179,7 +179,7 @@ func NewNotebook() *Notebook {
 
 	var _notebook *Notebook // out
 
-	_notebook = wrapNotebook(externglib.Take(unsafe.Pointer(_cret)))
+	_notebook = WrapNotebook(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _notebook
 }
@@ -416,7 +416,7 @@ func (notebook *Notebook) Page(child Widgetter) *NotebookPage {
 
 	var _notebookPage *NotebookPage // out
 
-	_notebookPage = wrapNotebookPage(externglib.Take(unsafe.Pointer(_cret)))
+	_notebookPage = WrapNotebookPage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _notebookPage
 }
@@ -1100,7 +1100,7 @@ type NotebookPage struct {
 	*externglib.Object
 }
 
-func wrapNotebookPage(obj *externglib.Object) *NotebookPage {
+func WrapNotebookPage(obj *externglib.Object) *NotebookPage {
 	return &NotebookPage{
 		Object: obj,
 	}
@@ -1109,7 +1109,7 @@ func wrapNotebookPage(obj *externglib.Object) *NotebookPage {
 func marshalNotebookPager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNotebookPage(obj), nil
+	return WrapNotebookPage(obj), nil
 }
 
 // Child returns the notebook child to which page belongs.

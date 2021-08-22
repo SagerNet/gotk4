@@ -156,7 +156,7 @@ type TLSConnectioner interface {
 
 var _ TLSConnectioner = (*TLSConnection)(nil)
 
-func wrapTLSConnection(obj *externglib.Object) *TLSConnection {
+func WrapTLSConnection(obj *externglib.Object) *TLSConnection {
 	return &TLSConnection{
 		IOStream: IOStream{
 			Object: obj,
@@ -167,7 +167,7 @@ func wrapTLSConnection(obj *externglib.Object) *TLSConnection {
 func marshalTLSConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSConnection(obj), nil
+	return WrapTLSConnection(obj), nil
 }
 
 // EmitAcceptCertificate: used by Connection implementations to emit the
@@ -289,7 +289,7 @@ func (conn *TLSConnection) Interaction() *TLSInteraction {
 	var _tlsInteraction *TLSInteraction // out
 
 	if _cret != nil {
-		_tlsInteraction = wrapTLSInteraction(externglib.Take(unsafe.Pointer(_cret)))
+		_tlsInteraction = WrapTLSInteraction(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _tlsInteraction

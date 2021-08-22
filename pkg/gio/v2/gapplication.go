@@ -192,7 +192,7 @@ type Application struct {
 	ActionMap
 }
 
-func wrapApplication(obj *externglib.Object) *Application {
+func WrapApplication(obj *externglib.Object) *Application {
 	return &Application{
 		Object: obj,
 		ActionGroup: ActionGroup{
@@ -207,7 +207,7 @@ func wrapApplication(obj *externglib.Object) *Application {
 func marshalApplicationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapApplication(obj), nil
+	return WrapApplication(obj), nil
 }
 
 // NewApplication creates a new #GApplication instance.
@@ -234,7 +234,7 @@ func NewApplication(applicationId string, flags ApplicationFlags) *Application {
 
 	var _application *Application // out
 
-	_application = wrapApplication(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_application = WrapApplication(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _application
 }
@@ -480,7 +480,7 @@ func (application *Application) DBusConnection() *DBusConnection {
 	var _dBusConnection *DBusConnection // out
 
 	if _cret != nil {
-		_dBusConnection = wrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
+		_dBusConnection = WrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _dBusConnection
@@ -1228,7 +1228,7 @@ func ApplicationGetDefault() *Application {
 	var _application *Application // out
 
 	if _cret != nil {
-		_application = wrapApplication(externglib.Take(unsafe.Pointer(_cret)))
+		_application = WrapApplication(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _application

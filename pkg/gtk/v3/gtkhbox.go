@@ -45,7 +45,7 @@ type HBox struct {
 	Box
 }
 
-func wrapHBox(obj *externglib.Object) *HBox {
+func WrapHBox(obj *externglib.Object) *HBox {
 	return &HBox{
 		Box: Box{
 			Container: Container{
@@ -73,7 +73,7 @@ func wrapHBox(obj *externglib.Object) *HBox {
 func marshalHBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHBox(obj), nil
+	return WrapHBox(obj), nil
 }
 
 // NewHBox creates a new HBox.
@@ -98,7 +98,7 @@ func NewHBox(homogeneous bool, spacing int) *HBox {
 
 	var _hBox *HBox // out
 
-	_hBox = wrapHBox(externglib.Take(unsafe.Pointer(_cret)))
+	_hBox = WrapHBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hBox
 }

@@ -38,7 +38,7 @@ type ColorSelection struct {
 	Box
 }
 
-func wrapColorSelection(obj *externglib.Object) *ColorSelection {
+func WrapColorSelection(obj *externglib.Object) *ColorSelection {
 	return &ColorSelection{
 		Box: Box{
 			Container: Container{
@@ -66,7 +66,7 @@ func wrapColorSelection(obj *externglib.Object) *ColorSelection {
 func marshalColorSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColorSelection(obj), nil
+	return WrapColorSelection(obj), nil
 }
 
 // NewColorSelection creates a new GtkColorSelection.
@@ -77,7 +77,7 @@ func NewColorSelection() *ColorSelection {
 
 	var _colorSelection *ColorSelection // out
 
-	_colorSelection = wrapColorSelection(externglib.Take(unsafe.Pointer(_cret)))
+	_colorSelection = WrapColorSelection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _colorSelection
 }

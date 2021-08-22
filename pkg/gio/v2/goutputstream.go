@@ -297,7 +297,7 @@ type OutputStreamer interface {
 
 var _ OutputStreamer = (*OutputStream)(nil)
 
-func wrapOutputStream(obj *externglib.Object) *OutputStream {
+func WrapOutputStream(obj *externglib.Object) *OutputStream {
 	return &OutputStream{
 		Object: obj,
 	}
@@ -306,7 +306,7 @@ func wrapOutputStream(obj *externglib.Object) *OutputStream {
 func marshalOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapOutputStream(obj), nil
+	return WrapOutputStream(obj), nil
 }
 
 // ClearPending clears the pending flag on stream.

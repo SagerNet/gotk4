@@ -53,7 +53,7 @@ type CheckMenuItem struct {
 	MenuItem
 }
 
-func wrapCheckMenuItem(obj *externglib.Object) *CheckMenuItem {
+func WrapCheckMenuItem(obj *externglib.Object) *CheckMenuItem {
 	return &CheckMenuItem{
 		MenuItem: MenuItem{
 			Bin: Bin{
@@ -97,7 +97,7 @@ func wrapCheckMenuItem(obj *externglib.Object) *CheckMenuItem {
 func marshalCheckMenuItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCheckMenuItem(obj), nil
+	return WrapCheckMenuItem(obj), nil
 }
 
 // NewCheckMenuItem creates a new CheckMenuItem.
@@ -108,7 +108,7 @@ func NewCheckMenuItem() *CheckMenuItem {
 
 	var _checkMenuItem *CheckMenuItem // out
 
-	_checkMenuItem = wrapCheckMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_checkMenuItem = WrapCheckMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _checkMenuItem
 }
@@ -126,7 +126,7 @@ func NewCheckMenuItemWithLabel(label string) *CheckMenuItem {
 
 	var _checkMenuItem *CheckMenuItem // out
 
-	_checkMenuItem = wrapCheckMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_checkMenuItem = WrapCheckMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _checkMenuItem
 }
@@ -146,7 +146,7 @@ func NewCheckMenuItemWithMnemonic(label string) *CheckMenuItem {
 
 	var _checkMenuItem *CheckMenuItem // out
 
-	_checkMenuItem = wrapCheckMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_checkMenuItem = WrapCheckMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _checkMenuItem
 }

@@ -232,7 +232,7 @@ func _gotk4_gtk4_PageSetupDoneFunc(arg0 *C.GtkPageSetup, arg1 C.gpointer) {
 
 	var pageSetup *PageSetup // out
 
-	pageSetup = wrapPageSetup(externglib.Take(unsafe.Pointer(arg0)))
+	pageSetup = WrapPageSetup(externglib.Take(unsafe.Pointer(arg0)))
 
 	fn := v.(PageSetupDoneFunc)
 	fn(pageSetup)
@@ -266,7 +266,7 @@ func PrintRunPageSetupDialog(parent *Window, pageSetup *PageSetup, settings *Pri
 
 	var _pageSetup *PageSetup // out
 
-	_pageSetup = wrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pageSetup
 }
@@ -383,7 +383,7 @@ type PrintOperation struct {
 	PrintOperationPreview
 }
 
-func wrapPrintOperation(obj *externglib.Object) *PrintOperation {
+func WrapPrintOperation(obj *externglib.Object) *PrintOperation {
 	return &PrintOperation{
 		Object: obj,
 		PrintOperationPreview: PrintOperationPreview{
@@ -395,7 +395,7 @@ func wrapPrintOperation(obj *externglib.Object) *PrintOperation {
 func marshalPrintOperationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPrintOperation(obj), nil
+	return WrapPrintOperation(obj), nil
 }
 
 // NewPrintOperation creates a new GtkPrintOperation.
@@ -406,7 +406,7 @@ func NewPrintOperation() *PrintOperation {
 
 	var _printOperation *PrintOperation // out
 
-	_printOperation = wrapPrintOperation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_printOperation = WrapPrintOperation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _printOperation
 }
@@ -452,7 +452,7 @@ func (op *PrintOperation) DefaultPageSetup() *PageSetup {
 
 	var _pageSetup *PageSetup // out
 
-	_pageSetup = wrapPageSetup(externglib.Take(unsafe.Pointer(_cret)))
+	_pageSetup = WrapPageSetup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _pageSetup
 }
@@ -562,7 +562,7 @@ func (op *PrintOperation) PrintSettings() *PrintSettings {
 
 	var _printSettings *PrintSettings // out
 
-	_printSettings = wrapPrintSettings(externglib.Take(unsafe.Pointer(_cret)))
+	_printSettings = WrapPrintSettings(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _printSettings
 }

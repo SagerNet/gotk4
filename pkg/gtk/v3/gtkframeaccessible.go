@@ -27,7 +27,7 @@ type FrameAccessible struct {
 	ContainerAccessible
 }
 
-func wrapFrameAccessible(obj *externglib.Object) *FrameAccessible {
+func WrapFrameAccessible(obj *externglib.Object) *FrameAccessible {
 	return &FrameAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -47,7 +47,7 @@ func wrapFrameAccessible(obj *externglib.Object) *FrameAccessible {
 func marshalFrameAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFrameAccessible(obj), nil
+	return WrapFrameAccessible(obj), nil
 }
 
 func (*FrameAccessible) privateFrameAccessible() {}

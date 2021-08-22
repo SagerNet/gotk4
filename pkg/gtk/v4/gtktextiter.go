@@ -1464,7 +1464,7 @@ func (iter *TextIter) Buffer() *TextBuffer {
 
 	var _textBuffer *TextBuffer // out
 
-	_textBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(_cret)))
+	_textBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textBuffer
 }
@@ -1544,7 +1544,7 @@ func (iter *TextIter) ChildAnchor() *TextChildAnchor {
 
 	var _textChildAnchor *TextChildAnchor // out
 
-	_textChildAnchor = wrapTextChildAnchor(externglib.Take(unsafe.Pointer(_cret)))
+	_textChildAnchor = WrapTextChildAnchor(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textChildAnchor
 }
@@ -1658,7 +1658,7 @@ func (iter *TextIter) Marks() []TextMark {
 	gextras.MoveSList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkTextMark)(v)
 		var dst TextMark // out
-		dst = *wrapTextMark(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapTextMark(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 
@@ -1755,7 +1755,7 @@ func (iter *TextIter) Tags() []TextTag {
 	gextras.MoveSList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkTextTag)(v)
 		var dst TextTag // out
-		dst = *wrapTextTag(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapTextTag(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 
@@ -1815,7 +1815,7 @@ func (iter *TextIter) ToggledTags(toggledOn bool) []TextTag {
 	gextras.MoveSList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkTextTag)(v)
 		var dst TextTag // out
-		dst = *wrapTextTag(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapTextTag(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 

@@ -48,7 +48,7 @@ type StyleProperties struct {
 	StyleProvider
 }
 
-func wrapStyleProperties(obj *externglib.Object) *StyleProperties {
+func WrapStyleProperties(obj *externglib.Object) *StyleProperties {
 	return &StyleProperties{
 		Object: obj,
 		StyleProvider: StyleProvider{
@@ -60,7 +60,7 @@ func wrapStyleProperties(obj *externglib.Object) *StyleProperties {
 func marshalStylePropertieser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStyleProperties(obj), nil
+	return WrapStyleProperties(obj), nil
 }
 
 // NewStyleProperties returns a newly created StyleProperties
@@ -73,7 +73,7 @@ func NewStyleProperties() *StyleProperties {
 
 	var _styleProperties *StyleProperties // out
 
-	_styleProperties = wrapStyleProperties(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_styleProperties = WrapStyleProperties(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _styleProperties
 }

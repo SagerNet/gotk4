@@ -34,7 +34,7 @@ type DropControllerMotion struct {
 	EventController
 }
 
-func wrapDropControllerMotion(obj *externglib.Object) *DropControllerMotion {
+func WrapDropControllerMotion(obj *externglib.Object) *DropControllerMotion {
 	return &DropControllerMotion{
 		EventController: EventController{
 			Object: obj,
@@ -45,7 +45,7 @@ func wrapDropControllerMotion(obj *externglib.Object) *DropControllerMotion {
 func marshalDropControllerMotioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDropControllerMotion(obj), nil
+	return WrapDropControllerMotion(obj), nil
 }
 
 // NewDropControllerMotion creates a new event controller that will handle
@@ -57,7 +57,7 @@ func NewDropControllerMotion() *DropControllerMotion {
 
 	var _dropControllerMotion *DropControllerMotion // out
 
-	_dropControllerMotion = wrapDropControllerMotion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dropControllerMotion = WrapDropControllerMotion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dropControllerMotion
 }

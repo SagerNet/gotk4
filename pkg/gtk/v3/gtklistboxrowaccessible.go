@@ -27,7 +27,7 @@ type ListBoxRowAccessible struct {
 	ContainerAccessible
 }
 
-func wrapListBoxRowAccessible(obj *externglib.Object) *ListBoxRowAccessible {
+func WrapListBoxRowAccessible(obj *externglib.Object) *ListBoxRowAccessible {
 	return &ListBoxRowAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -47,7 +47,7 @@ func wrapListBoxRowAccessible(obj *externglib.Object) *ListBoxRowAccessible {
 func marshalListBoxRowAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListBoxRowAccessible(obj), nil
+	return WrapListBoxRowAccessible(obj), nil
 }
 
 func (*ListBoxRowAccessible) privateListBoxRowAccessible() {}

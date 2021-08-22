@@ -96,7 +96,7 @@ type ApplicationWindow struct {
 	*externglib.Object
 }
 
-func wrapApplicationWindow(obj *externglib.Object) *ApplicationWindow {
+func WrapApplicationWindow(obj *externglib.Object) *ApplicationWindow {
 	return &ApplicationWindow{
 		Window: Window{
 			Widget: Widget{
@@ -151,7 +151,7 @@ func wrapApplicationWindow(obj *externglib.Object) *ApplicationWindow {
 func marshalApplicationWindower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapApplicationWindow(obj), nil
+	return WrapApplicationWindow(obj), nil
 }
 
 // NewApplicationWindow creates a new GtkApplicationWindow.
@@ -166,7 +166,7 @@ func NewApplicationWindow(application *Application) *ApplicationWindow {
 
 	var _applicationWindow *ApplicationWindow // out
 
-	_applicationWindow = wrapApplicationWindow(externglib.Take(unsafe.Pointer(_cret)))
+	_applicationWindow = WrapApplicationWindow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _applicationWindow
 }
@@ -186,7 +186,7 @@ func (window *ApplicationWindow) HelpOverlay() *ShortcutsWindow {
 	var _shortcutsWindow *ShortcutsWindow // out
 
 	if _cret != nil {
-		_shortcutsWindow = wrapShortcutsWindow(externglib.Take(unsafe.Pointer(_cret)))
+		_shortcutsWindow = WrapShortcutsWindow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _shortcutsWindow

@@ -98,7 +98,7 @@ type InfoBar struct {
 	Widget
 }
 
-func wrapInfoBar(obj *externglib.Object) *InfoBar {
+func WrapInfoBar(obj *externglib.Object) *InfoBar {
 	return &InfoBar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -121,7 +121,7 @@ func wrapInfoBar(obj *externglib.Object) *InfoBar {
 func marshalInfoBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInfoBar(obj), nil
+	return WrapInfoBar(obj), nil
 }
 
 // NewInfoBar creates a new GtkInfoBar object.
@@ -132,7 +132,7 @@ func NewInfoBar() *InfoBar {
 
 	var _infoBar *InfoBar // out
 
-	_infoBar = wrapInfoBar(externglib.Take(unsafe.Pointer(_cret)))
+	_infoBar = WrapInfoBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _infoBar
 }
@@ -181,7 +181,7 @@ func (infoBar *InfoBar) AddButton(buttonText string, responseId int) *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }

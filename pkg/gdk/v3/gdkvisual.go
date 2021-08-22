@@ -96,7 +96,7 @@ func ListVisuals() []Visual {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GdkVisual)(v)
 		var dst Visual // out
-		dst = *wrapVisual(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapVisual(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 
@@ -157,7 +157,7 @@ type Visual struct {
 	*externglib.Object
 }
 
-func wrapVisual(obj *externglib.Object) *Visual {
+func WrapVisual(obj *externglib.Object) *Visual {
 	return &Visual{
 		Object: obj,
 	}
@@ -166,7 +166,7 @@ func wrapVisual(obj *externglib.Object) *Visual {
 func marshalVisualer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVisual(obj), nil
+	return WrapVisual(obj), nil
 }
 
 // BitsPerRGB returns the number of significant bits per red, green and blue
@@ -348,7 +348,7 @@ func (visual *Visual) Screen() *Screen {
 
 	var _screen *Screen // out
 
-	_screen = wrapScreen(externglib.Take(unsafe.Pointer(_cret)))
+	_screen = WrapScreen(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _screen
 }
@@ -382,7 +382,7 @@ func VisualGetBest() *Visual {
 
 	var _visual *Visual // out
 
-	_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+	_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _visual
 }
@@ -442,7 +442,7 @@ func VisualGetBestWithBoth(depth int, visualType VisualType) *Visual {
 	var _visual *Visual // out
 
 	if _cret != nil {
-		_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+		_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _visual
@@ -466,7 +466,7 @@ func VisualGetBestWithDepth(depth int) *Visual {
 
 	var _visual *Visual // out
 
-	_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+	_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _visual
 }
@@ -489,7 +489,7 @@ func VisualGetBestWithType(visualType VisualType) *Visual {
 
 	var _visual *Visual // out
 
-	_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+	_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _visual
 }
@@ -506,7 +506,7 @@ func VisualGetSystem() *Visual {
 
 	var _visual *Visual // out
 
-	_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+	_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _visual
 }

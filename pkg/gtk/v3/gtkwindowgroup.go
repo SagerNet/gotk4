@@ -42,7 +42,7 @@ type WindowGroup struct {
 	*externglib.Object
 }
 
-func wrapWindowGroup(obj *externglib.Object) *WindowGroup {
+func WrapWindowGroup(obj *externglib.Object) *WindowGroup {
 	return &WindowGroup{
 		Object: obj,
 	}
@@ -51,7 +51,7 @@ func wrapWindowGroup(obj *externglib.Object) *WindowGroup {
 func marshalWindowGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWindowGroup(obj), nil
+	return WrapWindowGroup(obj), nil
 }
 
 // NewWindowGroup creates a new WindowGroup object. Grabs added with
@@ -63,7 +63,7 @@ func NewWindowGroup() *WindowGroup {
 
 	var _windowGroup *WindowGroup // out
 
-	_windowGroup = wrapWindowGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_windowGroup = WrapWindowGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _windowGroup
 }
@@ -138,7 +138,7 @@ func (windowGroup *WindowGroup) ListWindows() []Window {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkWindow)(v)
 		var dst Window // out
-		dst = *wrapWindow(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapWindow(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

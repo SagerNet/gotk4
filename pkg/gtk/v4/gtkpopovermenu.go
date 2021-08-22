@@ -182,7 +182,7 @@ type PopoverMenu struct {
 	Popover
 }
 
-func wrapPopoverMenu(obj *externglib.Object) *PopoverMenu {
+func WrapPopoverMenu(obj *externglib.Object) *PopoverMenu {
 	return &PopoverMenu{
 		Popover: Popover{
 			Widget: Widget{
@@ -228,7 +228,7 @@ func wrapPopoverMenu(obj *externglib.Object) *PopoverMenu {
 func marshalPopoverMenuer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPopoverMenu(obj), nil
+	return WrapPopoverMenu(obj), nil
 }
 
 // NewPopoverMenuFromModel creates a GtkPopoverMenu and populates it according
@@ -257,7 +257,7 @@ func NewPopoverMenuFromModel(model gio.MenuModeller) *PopoverMenu {
 
 	var _popoverMenu *PopoverMenu // out
 
-	_popoverMenu = wrapPopoverMenu(externglib.Take(unsafe.Pointer(_cret)))
+	_popoverMenu = WrapPopoverMenu(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _popoverMenu
 }
@@ -288,7 +288,7 @@ func NewPopoverMenuFromModelFull(model gio.MenuModeller, flags PopoverMenuFlags)
 
 	var _popoverMenu *PopoverMenu // out
 
-	_popoverMenu = wrapPopoverMenu(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_popoverMenu = WrapPopoverMenu(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _popoverMenu
 }

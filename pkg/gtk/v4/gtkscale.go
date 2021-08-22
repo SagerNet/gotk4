@@ -37,7 +37,7 @@ func _gotk4_gtk4_ScaleFormatValueFunc(arg0 *C.GtkScale, arg1 C.double, arg2 C.gp
 	var scale *Scale  // out
 	var value float64 // out
 
-	scale = wrapScale(externglib.Take(unsafe.Pointer(arg0)))
+	scale = WrapScale(externglib.Take(unsafe.Pointer(arg0)))
 	value = float64(arg1)
 
 	fn := v.(ScaleFormatValueFunc)
@@ -148,7 +148,7 @@ type Scale struct {
 	Range
 }
 
-func wrapScale(obj *externglib.Object) *Scale {
+func WrapScale(obj *externglib.Object) *Scale {
 	return &Scale{
 		Range: Range{
 			Widget: Widget{
@@ -177,7 +177,7 @@ func wrapScale(obj *externglib.Object) *Scale {
 func marshalScaler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScale(obj), nil
+	return WrapScale(obj), nil
 }
 
 // NewScale creates a new GtkScale.
@@ -197,7 +197,7 @@ func NewScale(orientation Orientation, adjustment *Adjustment) *Scale {
 
 	var _scale *Scale // out
 
-	_scale = wrapScale(externglib.Take(unsafe.Pointer(_cret)))
+	_scale = WrapScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scale
 }
@@ -232,7 +232,7 @@ func NewScaleWithRange(orientation Orientation, min float64, max float64, step f
 
 	var _scale *Scale // out
 
-	_scale = wrapScale(externglib.Take(unsafe.Pointer(_cret)))
+	_scale = WrapScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scale
 }

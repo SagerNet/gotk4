@@ -213,7 +213,7 @@ type DTLSConnectioner interface {
 
 var _ DTLSConnectioner = (*DTLSConnection)(nil)
 
-func wrapDTLSConnection(obj *externglib.Object) *DTLSConnection {
+func WrapDTLSConnection(obj *externglib.Object) *DTLSConnection {
 	return &DTLSConnection{
 		DatagramBased: DatagramBased{
 			Object: obj,
@@ -224,7 +224,7 @@ func wrapDTLSConnection(obj *externglib.Object) *DTLSConnection {
 func marshalDTLSConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDTLSConnection(obj), nil
+	return WrapDTLSConnection(obj), nil
 }
 
 // Close the DTLS connection. This is equivalent to calling
@@ -440,7 +440,7 @@ func (conn *DTLSConnection) Interaction() *TLSInteraction {
 	var _tlsInteraction *TLSInteraction // out
 
 	if _cret != nil {
-		_tlsInteraction = wrapTLSInteraction(externglib.Take(unsafe.Pointer(_cret)))
+		_tlsInteraction = WrapTLSInteraction(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _tlsInteraction

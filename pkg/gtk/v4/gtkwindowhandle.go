@@ -39,7 +39,7 @@ type WindowHandle struct {
 	Widget
 }
 
-func wrapWindowHandle(obj *externglib.Object) *WindowHandle {
+func WrapWindowHandle(obj *externglib.Object) *WindowHandle {
 	return &WindowHandle{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -62,7 +62,7 @@ func wrapWindowHandle(obj *externglib.Object) *WindowHandle {
 func marshalWindowHandler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWindowHandle(obj), nil
+	return WrapWindowHandle(obj), nil
 }
 
 // NewWindowHandle creates a new GtkWindowHandle.
@@ -73,7 +73,7 @@ func NewWindowHandle() *WindowHandle {
 
 	var _windowHandle *WindowHandle // out
 
-	_windowHandle = wrapWindowHandle(externglib.Take(unsafe.Pointer(_cret)))
+	_windowHandle = WrapWindowHandle(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _windowHandle
 }

@@ -96,8 +96,8 @@ func _gotk4_gdkpixbuf2_PixbufModulePreparedFunc(arg0 *C.GdkPixbuf, arg1 *C.GdkPi
 	var pixbuf *Pixbuf        // out
 	var anim *PixbufAnimation // out
 
-	pixbuf = wrapPixbuf(externglib.Take(unsafe.Pointer(arg0)))
-	anim = wrapPixbufAnimation(externglib.Take(unsafe.Pointer(arg1)))
+	pixbuf = WrapPixbuf(externglib.Take(unsafe.Pointer(arg0)))
+	anim = WrapPixbufAnimation(externglib.Take(unsafe.Pointer(arg1)))
 
 	fn := v.(PixbufModulePreparedFunc)
 	fn(pixbuf, anim)
@@ -155,7 +155,7 @@ func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(arg0 *C.GdkPixbuf, arg1 C.int, ar
 	var width int      // out
 	var height int     // out
 
-	pixbuf = wrapPixbuf(externglib.Take(unsafe.Pointer(arg0)))
+	pixbuf = WrapPixbuf(externglib.Take(unsafe.Pointer(arg0)))
 	x = int(arg1)
 	y = int(arg2)
 	width = int(arg3)

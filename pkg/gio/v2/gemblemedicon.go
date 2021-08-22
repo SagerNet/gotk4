@@ -44,7 +44,7 @@ type EmblemedIcon struct {
 	Icon
 }
 
-func wrapEmblemedIcon(obj *externglib.Object) *EmblemedIcon {
+func WrapEmblemedIcon(obj *externglib.Object) *EmblemedIcon {
 	return &EmblemedIcon{
 		Object: obj,
 		Icon: Icon{
@@ -56,7 +56,7 @@ func wrapEmblemedIcon(obj *externglib.Object) *EmblemedIcon {
 func marshalEmblemedIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEmblemedIcon(obj), nil
+	return WrapEmblemedIcon(obj), nil
 }
 
 // NewEmblemedIcon creates a new emblemed icon for icon with the emblem emblem.
@@ -76,7 +76,7 @@ func NewEmblemedIcon(icon Iconner, emblem *Emblem) *EmblemedIcon {
 
 	var _emblemedIcon *EmblemedIcon // out
 
-	_emblemedIcon = wrapEmblemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_emblemedIcon = WrapEmblemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _emblemedIcon
 }
@@ -120,7 +120,7 @@ func (emblemed *EmblemedIcon) Emblems() []Emblem {
 	gextras.MoveList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GEmblem)(v)
 		var dst Emblem // out
-		dst = *wrapEmblem(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapEmblem(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

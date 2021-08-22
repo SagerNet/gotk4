@@ -27,7 +27,7 @@ type CheckMenuItemAccessible struct {
 	MenuItemAccessible
 }
 
-func wrapCheckMenuItemAccessible(obj *externglib.Object) *CheckMenuItemAccessible {
+func WrapCheckMenuItemAccessible(obj *externglib.Object) *CheckMenuItemAccessible {
 	return &CheckMenuItemAccessible{
 		MenuItemAccessible: MenuItemAccessible{
 			ContainerAccessible: ContainerAccessible{
@@ -56,7 +56,7 @@ func wrapCheckMenuItemAccessible(obj *externglib.Object) *CheckMenuItemAccessibl
 func marshalCheckMenuItemAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCheckMenuItemAccessible(obj), nil
+	return WrapCheckMenuItemAccessible(obj), nil
 }
 
 func (*CheckMenuItemAccessible) privateCheckMenuItemAccessible() {}

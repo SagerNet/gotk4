@@ -41,7 +41,7 @@ type CellRendererText struct {
 	CellRenderer
 }
 
-func wrapCellRendererText(obj *externglib.Object) *CellRendererText {
+func WrapCellRendererText(obj *externglib.Object) *CellRendererText {
 	return &CellRendererText{
 		CellRenderer: CellRenderer{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -54,7 +54,7 @@ func wrapCellRendererText(obj *externglib.Object) *CellRendererText {
 func marshalCellRendererTexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererText(obj), nil
+	return WrapCellRendererText(obj), nil
 }
 
 // NewCellRendererText creates a new CellRendererText. Adjust how text is drawn
@@ -70,7 +70,7 @@ func NewCellRendererText() *CellRendererText {
 
 	var _cellRendererText *CellRendererText // out
 
-	_cellRendererText = wrapCellRendererText(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererText = WrapCellRendererText(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererText
 }

@@ -114,7 +114,7 @@ type Hyperlink struct {
 	Action
 }
 
-func wrapHyperlink(obj *externglib.Object) *Hyperlink {
+func WrapHyperlink(obj *externglib.Object) *Hyperlink {
 	return &Hyperlink{
 		Object: obj,
 		Action: Action{
@@ -126,7 +126,7 @@ func wrapHyperlink(obj *externglib.Object) *Hyperlink {
 func marshalHyperlinker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHyperlink(obj), nil
+	return WrapHyperlink(obj), nil
 }
 
 // EndIndex gets the index with the hypertext document at which this link ends.
@@ -182,7 +182,7 @@ func (link_ *Hyperlink) GetObject(i int) *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _object
 }

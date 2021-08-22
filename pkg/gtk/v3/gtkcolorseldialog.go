@@ -28,7 +28,7 @@ type ColorSelectionDialog struct {
 	Dialog
 }
 
-func wrapColorSelectionDialog(obj *externglib.Object) *ColorSelectionDialog {
+func WrapColorSelectionDialog(obj *externglib.Object) *ColorSelectionDialog {
 	return &ColorSelectionDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -56,7 +56,7 @@ func wrapColorSelectionDialog(obj *externglib.Object) *ColorSelectionDialog {
 func marshalColorSelectionDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColorSelectionDialog(obj), nil
+	return WrapColorSelectionDialog(obj), nil
 }
 
 // NewColorSelectionDialog creates a new ColorSelectionDialog.
@@ -72,7 +72,7 @@ func NewColorSelectionDialog(title string) *ColorSelectionDialog {
 
 	var _colorSelectionDialog *ColorSelectionDialog // out
 
-	_colorSelectionDialog = wrapColorSelectionDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_colorSelectionDialog = WrapColorSelectionDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _colorSelectionDialog
 }

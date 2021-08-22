@@ -72,7 +72,7 @@ type MountOperation struct {
 	*externglib.Object
 }
 
-func wrapMountOperation(obj *externglib.Object) *MountOperation {
+func WrapMountOperation(obj *externglib.Object) *MountOperation {
 	return &MountOperation{
 		Object: obj,
 	}
@@ -81,7 +81,7 @@ func wrapMountOperation(obj *externglib.Object) *MountOperation {
 func marshalMountOperationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMountOperation(obj), nil
+	return WrapMountOperation(obj), nil
 }
 
 // NewMountOperation creates a new mount operation.
@@ -92,7 +92,7 @@ func NewMountOperation() *MountOperation {
 
 	var _mountOperation *MountOperation // out
 
-	_mountOperation = wrapMountOperation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mountOperation = WrapMountOperation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mountOperation
 }

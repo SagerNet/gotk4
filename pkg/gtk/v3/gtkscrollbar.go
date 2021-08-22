@@ -66,7 +66,7 @@ type Scrollbar struct {
 	Range
 }
 
-func wrapScrollbar(obj *externglib.Object) *Scrollbar {
+func WrapScrollbar(obj *externglib.Object) *Scrollbar {
 	return &Scrollbar{
 		Range: Range{
 			Widget: Widget{
@@ -92,7 +92,7 @@ func wrapScrollbar(obj *externglib.Object) *Scrollbar {
 func marshalScrollbarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScrollbar(obj), nil
+	return WrapScrollbar(obj), nil
 }
 
 // NewScrollbar creates a new scrollbar with the given orientation.
@@ -112,7 +112,7 @@ func NewScrollbar(orientation Orientation, adjustment *Adjustment) *Scrollbar {
 
 	var _scrollbar *Scrollbar // out
 
-	_scrollbar = wrapScrollbar(externglib.Take(unsafe.Pointer(_cret)))
+	_scrollbar = WrapScrollbar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scrollbar
 }

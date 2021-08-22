@@ -40,7 +40,7 @@ type CellAccessible struct {
 	*externglib.Object
 }
 
-func wrapCellAccessible(obj *externglib.Object) *CellAccessible {
+func WrapCellAccessible(obj *externglib.Object) *CellAccessible {
 	return &CellAccessible{
 		Accessible: Accessible{
 			ObjectClass: atk.ObjectClass{
@@ -65,7 +65,7 @@ func wrapCellAccessible(obj *externglib.Object) *CellAccessible {
 func marshalCellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellAccessible(obj), nil
+	return WrapCellAccessible(obj), nil
 }
 
 func (*CellAccessible) privateCellAccessible() {}

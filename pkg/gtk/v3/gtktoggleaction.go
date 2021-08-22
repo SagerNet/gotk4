@@ -40,7 +40,7 @@ type ToggleAction struct {
 	Action
 }
 
-func wrapToggleAction(obj *externglib.Object) *ToggleAction {
+func WrapToggleAction(obj *externglib.Object) *ToggleAction {
 	return &ToggleAction{
 		Action: Action{
 			Object: obj,
@@ -54,7 +54,7 @@ func wrapToggleAction(obj *externglib.Object) *ToggleAction {
 func marshalToggleActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToggleAction(obj), nil
+	return WrapToggleAction(obj), nil
 }
 
 // NewToggleAction creates a new ToggleAction object. To add the action to a
@@ -92,7 +92,7 @@ func NewToggleAction(name string, label string, tooltip string, stockId string) 
 
 	var _toggleAction *ToggleAction // out
 
-	_toggleAction = wrapToggleAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_toggleAction = WrapToggleAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _toggleAction
 }

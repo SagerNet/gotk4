@@ -78,7 +78,7 @@ type ButtonBox struct {
 	Box
 }
 
-func wrapButtonBox(obj *externglib.Object) *ButtonBox {
+func WrapButtonBox(obj *externglib.Object) *ButtonBox {
 	return &ButtonBox{
 		Box: Box{
 			Container: Container{
@@ -106,7 +106,7 @@ func wrapButtonBox(obj *externglib.Object) *ButtonBox {
 func marshalButtonBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapButtonBox(obj), nil
+	return WrapButtonBox(obj), nil
 }
 
 // NewButtonBox creates a new ButtonBox.
@@ -121,7 +121,7 @@ func NewButtonBox(orientation Orientation) *ButtonBox {
 
 	var _buttonBox *ButtonBox // out
 
-	_buttonBox = wrapButtonBox(externglib.Take(unsafe.Pointer(_cret)))
+	_buttonBox = WrapButtonBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _buttonBox
 }

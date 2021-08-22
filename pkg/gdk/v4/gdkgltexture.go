@@ -26,7 +26,7 @@ type GLTexture struct {
 	Texture
 }
 
-func wrapGLTexture(obj *externglib.Object) *GLTexture {
+func WrapGLTexture(obj *externglib.Object) *GLTexture {
 	return &GLTexture{
 		Texture: Texture{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapGLTexture(obj *externglib.Object) *GLTexture {
 func marshalGLTexturer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGLTexture(obj), nil
+	return WrapGLTexture(obj), nil
 }
 
 // Release releases the GL resources held by a GdkGLTexture.

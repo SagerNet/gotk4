@@ -29,7 +29,7 @@ type ExpanderAccessible struct {
 	atk.Action
 }
 
-func wrapExpanderAccessible(obj *externglib.Object) *ExpanderAccessible {
+func WrapExpanderAccessible(obj *externglib.Object) *ExpanderAccessible {
 	return &ExpanderAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -52,7 +52,7 @@ func wrapExpanderAccessible(obj *externglib.Object) *ExpanderAccessible {
 func marshalExpanderAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapExpanderAccessible(obj), nil
+	return WrapExpanderAccessible(obj), nil
 }
 
 func (*ExpanderAccessible) privateExpanderAccessible() {}

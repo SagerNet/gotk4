@@ -148,7 +148,7 @@ type Image struct {
 	Misc
 }
 
-func wrapImage(obj *externglib.Object) *Image {
+func WrapImage(obj *externglib.Object) *Image {
 	return &Image{
 		Misc: Misc{
 			Widget: Widget{
@@ -170,7 +170,7 @@ func wrapImage(obj *externglib.Object) *Image {
 func marshalImager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImage(obj), nil
+	return WrapImage(obj), nil
 }
 
 // NewImage creates a new empty Image widget.
@@ -181,7 +181,7 @@ func NewImage() *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -206,7 +206,7 @@ func NewImageFromAnimation(animation *gdkpixbuf.PixbufAnimation) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -237,7 +237,7 @@ func NewImageFromFile(filename string) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -260,7 +260,7 @@ func NewImageFromGIcon(icon gio.Iconner, size int) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -286,7 +286,7 @@ func NewImageFromIconName(iconName string, size int) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -317,7 +317,7 @@ func NewImageFromIconSet(iconSet *IconSet, size int) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -342,7 +342,7 @@ func NewImageFromPixbuf(pixbuf *gdkpixbuf.Pixbuf) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -373,7 +373,7 @@ func NewImageFromResource(resourcePath string) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -400,7 +400,7 @@ func NewImageFromStock(stockId string, size int) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -421,7 +421,7 @@ func NewImageFromSurface(surface *cairo.Surface) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }

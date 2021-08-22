@@ -27,7 +27,7 @@ type FlowBoxChildAccessible struct {
 	ContainerAccessible
 }
 
-func wrapFlowBoxChildAccessible(obj *externglib.Object) *FlowBoxChildAccessible {
+func WrapFlowBoxChildAccessible(obj *externglib.Object) *FlowBoxChildAccessible {
 	return &FlowBoxChildAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -47,7 +47,7 @@ func wrapFlowBoxChildAccessible(obj *externglib.Object) *FlowBoxChildAccessible 
 func marshalFlowBoxChildAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFlowBoxChildAccessible(obj), nil
+	return WrapFlowBoxChildAccessible(obj), nil
 }
 
 func (*FlowBoxChildAccessible) privateFlowBoxChildAccessible() {}

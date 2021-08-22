@@ -139,7 +139,7 @@ type Filter struct {
 	*externglib.Object
 }
 
-func wrapFilter(obj *externglib.Object) *Filter {
+func WrapFilter(obj *externglib.Object) *Filter {
 	return &Filter{
 		Object: obj,
 	}
@@ -148,7 +148,7 @@ func wrapFilter(obj *externglib.Object) *Filter {
 func marshalFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFilter(obj), nil
+	return WrapFilter(obj), nil
 }
 
 // Changed emits the Filter::changed signal to notify all users of the filter

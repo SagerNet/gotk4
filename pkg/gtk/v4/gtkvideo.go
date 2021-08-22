@@ -39,7 +39,7 @@ type Video struct {
 	Widget
 }
 
-func wrapVideo(obj *externglib.Object) *Video {
+func WrapVideo(obj *externglib.Object) *Video {
 	return &Video{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -62,7 +62,7 @@ func wrapVideo(obj *externglib.Object) *Video {
 func marshalVideoer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVideo(obj), nil
+	return WrapVideo(obj), nil
 }
 
 // NewVideo creates a new empty GtkVideo.
@@ -73,7 +73,7 @@ func NewVideo() *Video {
 
 	var _video *Video // out
 
-	_video = wrapVideo(externglib.Take(unsafe.Pointer(_cret)))
+	_video = WrapVideo(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _video
 }
@@ -92,7 +92,7 @@ func NewVideoForFile(file gio.Filer) *Video {
 
 	var _video *Video // out
 
-	_video = wrapVideo(externglib.Take(unsafe.Pointer(_cret)))
+	_video = WrapVideo(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _video
 }
@@ -115,7 +115,7 @@ func NewVideoForFilename(filename string) *Video {
 
 	var _video *Video // out
 
-	_video = wrapVideo(externglib.Take(unsafe.Pointer(_cret)))
+	_video = WrapVideo(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _video
 }
@@ -134,7 +134,7 @@ func NewVideoForMediaStream(stream MediaStreamer) *Video {
 
 	var _video *Video // out
 
-	_video = wrapVideo(externglib.Take(unsafe.Pointer(_cret)))
+	_video = WrapVideo(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _video
 }
@@ -157,7 +157,7 @@ func NewVideoForResource(resourcePath string) *Video {
 
 	var _video *Video // out
 
-	_video = wrapVideo(externglib.Take(unsafe.Pointer(_cret)))
+	_video = WrapVideo(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _video
 }

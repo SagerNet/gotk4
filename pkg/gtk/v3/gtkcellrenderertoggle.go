@@ -38,7 +38,7 @@ type CellRendererToggle struct {
 	CellRenderer
 }
 
-func wrapCellRendererToggle(obj *externglib.Object) *CellRendererToggle {
+func WrapCellRendererToggle(obj *externglib.Object) *CellRendererToggle {
 	return &CellRendererToggle{
 		CellRenderer: CellRenderer{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -51,7 +51,7 @@ func wrapCellRendererToggle(obj *externglib.Object) *CellRendererToggle {
 func marshalCellRendererToggler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererToggle(obj), nil
+	return WrapCellRendererToggle(obj), nil
 }
 
 // NewCellRendererToggle creates a new CellRendererToggle. Adjust rendering
@@ -67,7 +67,7 @@ func NewCellRendererToggle() *CellRendererToggle {
 
 	var _cellRendererToggle *CellRendererToggle // out
 
-	_cellRendererToggle = wrapCellRendererToggle(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererToggle = WrapCellRendererToggle(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererToggle
 }

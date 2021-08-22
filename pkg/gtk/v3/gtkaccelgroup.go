@@ -123,7 +123,7 @@ func AccelGroupsFromObject(object *externglib.Object) []AccelGroup {
 	gextras.MoveSList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkAccelGroup)(v)
 		var dst AccelGroup // out
-		dst = *wrapAccelGroup(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapAccelGroup(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 
@@ -406,7 +406,7 @@ type AccelGroup struct {
 	*externglib.Object
 }
 
-func wrapAccelGroup(obj *externglib.Object) *AccelGroup {
+func WrapAccelGroup(obj *externglib.Object) *AccelGroup {
 	return &AccelGroup{
 		Object: obj,
 	}
@@ -415,7 +415,7 @@ func wrapAccelGroup(obj *externglib.Object) *AccelGroup {
 func marshalAccelGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAccelGroup(obj), nil
+	return WrapAccelGroup(obj), nil
 }
 
 // NewAccelGroup creates a new AccelGroup.
@@ -426,7 +426,7 @@ func NewAccelGroup() *AccelGroup {
 
 	var _accelGroup *AccelGroup // out
 
-	_accelGroup = wrapAccelGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_accelGroup = WrapAccelGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _accelGroup
 }

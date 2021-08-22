@@ -38,7 +38,7 @@ type PixbufSimpleAnimIter struct {
 	PixbufAnimationIter
 }
 
-func wrapPixbufSimpleAnimIter(obj *externglib.Object) *PixbufSimpleAnimIter {
+func WrapPixbufSimpleAnimIter(obj *externglib.Object) *PixbufSimpleAnimIter {
 	return &PixbufSimpleAnimIter{
 		PixbufAnimationIter: PixbufAnimationIter{
 			Object: obj,
@@ -49,7 +49,7 @@ func wrapPixbufSimpleAnimIter(obj *externglib.Object) *PixbufSimpleAnimIter {
 func marshalPixbufSimpleAnimIterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPixbufSimpleAnimIter(obj), nil
+	return WrapPixbufSimpleAnimIter(obj), nil
 }
 
 func (*PixbufSimpleAnimIter) privatePixbufSimpleAnimIter() {}

@@ -90,7 +90,7 @@ type ShortcutsShortcut struct {
 	Box
 }
 
-func wrapShortcutsShortcut(obj *externglib.Object) *ShortcutsShortcut {
+func WrapShortcutsShortcut(obj *externglib.Object) *ShortcutsShortcut {
 	return &ShortcutsShortcut{
 		Box: Box{
 			Container: Container{
@@ -118,7 +118,7 @@ func wrapShortcutsShortcut(obj *externglib.Object) *ShortcutsShortcut {
 func marshalShortcutsShortcutter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutsShortcut(obj), nil
+	return WrapShortcutsShortcut(obj), nil
 }
 
 func (*ShortcutsShortcut) privateShortcutsShortcut() {}

@@ -48,7 +48,7 @@ type X11DeviceXI2 struct {
 	gdk.Device
 }
 
-func wrapX11DeviceXI2(obj *externglib.Object) *X11DeviceXI2 {
+func WrapX11DeviceXI2(obj *externglib.Object) *X11DeviceXI2 {
 	return &X11DeviceXI2{
 		Device: gdk.Device{
 			Object: obj,
@@ -59,7 +59,7 @@ func wrapX11DeviceXI2(obj *externglib.Object) *X11DeviceXI2 {
 func marshalX11DeviceXI2er(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11DeviceXI2(obj), nil
+	return WrapX11DeviceXI2(obj), nil
 }
 
 func (*X11DeviceXI2) privateX11DeviceXI2() {}

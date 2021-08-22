@@ -46,7 +46,7 @@ type VulkanContexter interface {
 
 var _ VulkanContexter = (*VulkanContext)(nil)
 
-func wrapVulkanContext(obj *externglib.Object) *VulkanContext {
+func WrapVulkanContext(obj *externglib.Object) *VulkanContext {
 	return &VulkanContext{
 		DrawContext: DrawContext{
 			Object: obj,
@@ -61,7 +61,7 @@ func wrapVulkanContext(obj *externglib.Object) *VulkanContext {
 func marshalVulkanContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVulkanContext(obj), nil
+	return WrapVulkanContext(obj), nil
 }
 
 func (*VulkanContext) privateVulkanContext() {}

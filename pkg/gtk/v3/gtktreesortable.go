@@ -160,7 +160,7 @@ type TreeSortabler interface {
 
 var _ TreeSortabler = (*TreeSortable)(nil)
 
-func wrapTreeSortable(obj *externglib.Object) *TreeSortable {
+func WrapTreeSortable(obj *externglib.Object) *TreeSortable {
 	return &TreeSortable{
 		TreeModel: TreeModel{
 			Object: obj,
@@ -171,7 +171,7 @@ func wrapTreeSortable(obj *externglib.Object) *TreeSortable {
 func marshalTreeSortabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeSortable(obj), nil
+	return WrapTreeSortable(obj), nil
 }
 
 // SortColumnID fills in sort_column_id and order with the current sort column

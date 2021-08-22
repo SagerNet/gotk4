@@ -195,7 +195,7 @@ type ScrolledWindow struct {
 	Bin
 }
 
-func wrapScrolledWindow(obj *externglib.Object) *ScrolledWindow {
+func WrapScrolledWindow(obj *externglib.Object) *ScrolledWindow {
 	return &ScrolledWindow{
 		Bin: Bin{
 			Container: Container{
@@ -219,7 +219,7 @@ func wrapScrolledWindow(obj *externglib.Object) *ScrolledWindow {
 func marshalScrolledWindower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScrolledWindow(obj), nil
+	return WrapScrolledWindow(obj), nil
 }
 
 // NewScrolledWindow creates a new scrolled window.
@@ -246,7 +246,7 @@ func NewScrolledWindow(hadjustment *Adjustment, vadjustment *Adjustment) *Scroll
 
 	var _scrolledWindow *ScrolledWindow // out
 
-	_scrolledWindow = wrapScrolledWindow(externglib.Take(unsafe.Pointer(_cret)))
+	_scrolledWindow = WrapScrolledWindow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scrolledWindow
 }
@@ -315,7 +315,7 @@ func (scrolledWindow *ScrolledWindow) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -558,7 +558,7 @@ func (scrolledWindow *ScrolledWindow) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

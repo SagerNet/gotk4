@@ -116,7 +116,7 @@ type Initabler interface {
 
 var _ Initabler = (*Initable)(nil)
 
-func wrapInitable(obj *externglib.Object) *Initable {
+func WrapInitable(obj *externglib.Object) *Initable {
 	return &Initable{
 		Object: obj,
 	}
@@ -125,7 +125,7 @@ func wrapInitable(obj *externglib.Object) *Initable {
 func marshalInitabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInitable(obj), nil
+	return WrapInitable(obj), nil
 }
 
 // Init initializes the object implementing the interface.

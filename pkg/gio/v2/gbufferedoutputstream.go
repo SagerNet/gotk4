@@ -51,7 +51,7 @@ type BufferedOutputStream struct {
 	Seekable
 }
 
-func wrapBufferedOutputStream(obj *externglib.Object) *BufferedOutputStream {
+func WrapBufferedOutputStream(obj *externglib.Object) *BufferedOutputStream {
 	return &BufferedOutputStream{
 		FilterOutputStream: FilterOutputStream{
 			OutputStream: OutputStream{
@@ -67,7 +67,7 @@ func wrapBufferedOutputStream(obj *externglib.Object) *BufferedOutputStream {
 func marshalBufferedOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBufferedOutputStream(obj), nil
+	return WrapBufferedOutputStream(obj), nil
 }
 
 // NewBufferedOutputStream creates a new buffered output stream for a base
@@ -83,7 +83,7 @@ func NewBufferedOutputStream(baseStream OutputStreamer) *BufferedOutputStream {
 
 	var _bufferedOutputStream *BufferedOutputStream // out
 
-	_bufferedOutputStream = wrapBufferedOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_bufferedOutputStream = WrapBufferedOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _bufferedOutputStream
 }
@@ -104,7 +104,7 @@ func NewBufferedOutputStreamSized(baseStream OutputStreamer, size uint) *Buffere
 
 	var _bufferedOutputStream *BufferedOutputStream // out
 
-	_bufferedOutputStream = wrapBufferedOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_bufferedOutputStream = WrapBufferedOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _bufferedOutputStream
 }

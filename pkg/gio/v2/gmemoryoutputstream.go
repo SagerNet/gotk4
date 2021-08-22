@@ -47,7 +47,7 @@ type MemoryOutputStream struct {
 	*externglib.Object
 }
 
-func wrapMemoryOutputStream(obj *externglib.Object) *MemoryOutputStream {
+func WrapMemoryOutputStream(obj *externglib.Object) *MemoryOutputStream {
 	return &MemoryOutputStream{
 		OutputStream: OutputStream{
 			Object: obj,
@@ -67,7 +67,7 @@ func wrapMemoryOutputStream(obj *externglib.Object) *MemoryOutputStream {
 func marshalMemoryOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMemoryOutputStream(obj), nil
+	return WrapMemoryOutputStream(obj), nil
 }
 
 // NewMemoryOutputStreamResizable creates a new OutputStream, using g_realloc()
@@ -79,7 +79,7 @@ func NewMemoryOutputStreamResizable() *MemoryOutputStream {
 
 	var _memoryOutputStream *MemoryOutputStream // out
 
-	_memoryOutputStream = wrapMemoryOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_memoryOutputStream = WrapMemoryOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _memoryOutputStream
 }

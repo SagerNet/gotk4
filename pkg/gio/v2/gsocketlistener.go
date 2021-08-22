@@ -60,7 +60,7 @@ type SocketListener struct {
 	*externglib.Object
 }
 
-func wrapSocketListener(obj *externglib.Object) *SocketListener {
+func WrapSocketListener(obj *externglib.Object) *SocketListener {
 	return &SocketListener{
 		Object: obj,
 	}
@@ -69,7 +69,7 @@ func wrapSocketListener(obj *externglib.Object) *SocketListener {
 func marshalSocketListenerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketListener(obj), nil
+	return WrapSocketListener(obj), nil
 }
 
 // NewSocketListener creates a new Listener with no sockets to listen for. New
@@ -82,7 +82,7 @@ func NewSocketListener() *SocketListener {
 
 	var _socketListener *SocketListener // out
 
-	_socketListener = wrapSocketListener(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketListener = WrapSocketListener(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _socketListener
 }
@@ -121,7 +121,7 @@ func (listener *SocketListener) Accept(ctx context.Context) (*externglib.Object,
 	if _arg1 != nil {
 		_sourceObject = externglib.Take(unsafe.Pointer(_arg1))
 	}
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -179,7 +179,7 @@ func (listener *SocketListener) AcceptFinish(result AsyncResulter) (*externglib.
 	if _arg2 != nil {
 		_sourceObject = externglib.Take(unsafe.Pointer(_arg2))
 	}
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -224,7 +224,7 @@ func (listener *SocketListener) AcceptSocket(ctx context.Context) (*externglib.O
 	if _arg1 != nil {
 		_sourceObject = externglib.Take(unsafe.Pointer(_arg1))
 	}
-	_socket = wrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socket = WrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -283,7 +283,7 @@ func (listener *SocketListener) AcceptSocketFinish(result AsyncResulter) (*exter
 	if _arg2 != nil {
 		_sourceObject = externglib.Take(unsafe.Pointer(_arg2))
 	}
-	_socket = wrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socket = WrapSocket(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

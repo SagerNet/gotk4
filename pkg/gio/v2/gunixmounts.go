@@ -552,7 +552,7 @@ type UnixMountMonitor struct {
 	*externglib.Object
 }
 
-func wrapUnixMountMonitor(obj *externglib.Object) *UnixMountMonitor {
+func WrapUnixMountMonitor(obj *externglib.Object) *UnixMountMonitor {
 	return &UnixMountMonitor{
 		Object: obj,
 	}
@@ -561,7 +561,7 @@ func wrapUnixMountMonitor(obj *externglib.Object) *UnixMountMonitor {
 func marshalUnixMountMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixMountMonitor(obj), nil
+	return WrapUnixMountMonitor(obj), nil
 }
 
 // NewUnixMountMonitor: deprecated alias for g_unix_mount_monitor_get().
@@ -576,7 +576,7 @@ func NewUnixMountMonitor() *UnixMountMonitor {
 
 	var _unixMountMonitor *UnixMountMonitor // out
 
-	_unixMountMonitor = wrapUnixMountMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixMountMonitor = WrapUnixMountMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixMountMonitor
 }
@@ -616,7 +616,7 @@ func UnixMountMonitorGet() *UnixMountMonitor {
 
 	var _unixMountMonitor *UnixMountMonitor // out
 
-	_unixMountMonitor = wrapUnixMountMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixMountMonitor = WrapUnixMountMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixMountMonitor
 }

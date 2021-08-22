@@ -183,7 +183,7 @@ type Window struct {
 	Bin
 }
 
-func wrapWindow(obj *externglib.Object) *Window {
+func WrapWindow(obj *externglib.Object) *Window {
 	return &Window{
 		Bin: Bin{
 			Container: Container{
@@ -207,7 +207,7 @@ func wrapWindow(obj *externglib.Object) *Window {
 func marshalWindower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWindow(obj), nil
+	return WrapWindow(obj), nil
 }
 
 // NewWindow creates a new Window, which is a toplevel window that can contain
@@ -239,7 +239,7 @@ func NewWindow(typ WindowType) *Window {
 
 	var _window *Window // out
 
-	_window = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+	_window = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _window
 }
@@ -495,7 +495,7 @@ func (window *Window) Application() *Application {
 	var _application *Application // out
 
 	if _cret != nil {
-		_application = wrapApplication(externglib.Take(unsafe.Pointer(_cret)))
+		_application = WrapApplication(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _application
@@ -715,7 +715,7 @@ func (window *Window) Group() *WindowGroup {
 
 	var _windowGroup *WindowGroup // out
 
-	_windowGroup = wrapWindowGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_windowGroup = WrapWindowGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _windowGroup
 }
@@ -1212,7 +1212,7 @@ func (window *Window) TransientFor() *Window {
 	var _ret *Window // out
 
 	if _cret != nil {
-		_ret = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+		_ret = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _ret

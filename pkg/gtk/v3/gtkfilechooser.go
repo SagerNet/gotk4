@@ -417,7 +417,7 @@ type FileChooserer interface {
 
 var _ FileChooserer = (*FileChooser)(nil)
 
-func wrapFileChooser(obj *externglib.Object) *FileChooser {
+func WrapFileChooser(obj *externglib.Object) *FileChooser {
 	return &FileChooser{
 		Object: obj,
 	}
@@ -426,7 +426,7 @@ func wrapFileChooser(obj *externglib.Object) *FileChooser {
 func marshalFileChooserer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileChooser(obj), nil
+	return WrapFileChooser(obj), nil
 }
 
 // AddChoice adds a 'choice' to the file chooser. This is typically implemented
@@ -864,7 +864,7 @@ func (chooser *FileChooser) Filter() *FileFilter {
 	var _fileFilter *FileFilter // out
 
 	if _cret != nil {
-		_fileFilter = wrapFileFilter(externglib.Take(unsafe.Pointer(_cret)))
+		_fileFilter = WrapFileFilter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _fileFilter
@@ -1119,7 +1119,7 @@ func (chooser *FileChooser) ListFilters() []FileFilter {
 	gextras.MoveSList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkFileFilter)(v)
 		var dst FileFilter // out
-		dst = *wrapFileFilter(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapFileFilter(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 

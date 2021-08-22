@@ -125,7 +125,7 @@ type MenuAttributeIterer interface {
 
 var _ MenuAttributeIterer = (*MenuAttributeIter)(nil)
 
-func wrapMenuAttributeIter(obj *externglib.Object) *MenuAttributeIter {
+func WrapMenuAttributeIter(obj *externglib.Object) *MenuAttributeIter {
 	return &MenuAttributeIter{
 		Object: obj,
 	}
@@ -134,7 +134,7 @@ func wrapMenuAttributeIter(obj *externglib.Object) *MenuAttributeIter {
 func marshalMenuAttributeIterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuAttributeIter(obj), nil
+	return WrapMenuAttributeIter(obj), nil
 }
 
 // Name gets the name of the attribute at the current iterator position, as a
@@ -299,7 +299,7 @@ type MenuLinkIterer interface {
 
 var _ MenuLinkIterer = (*MenuLinkIter)(nil)
 
-func wrapMenuLinkIter(obj *externglib.Object) *MenuLinkIter {
+func WrapMenuLinkIter(obj *externglib.Object) *MenuLinkIter {
 	return &MenuLinkIter{
 		Object: obj,
 	}
@@ -308,7 +308,7 @@ func wrapMenuLinkIter(obj *externglib.Object) *MenuLinkIter {
 func marshalMenuLinkIterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuLinkIter(obj), nil
+	return WrapMenuLinkIter(obj), nil
 }
 
 // Name gets the name of the link at the current iterator position.
@@ -615,7 +615,7 @@ type MenuModeller interface {
 
 var _ MenuModeller = (*MenuModel)(nil)
 
-func wrapMenuModel(obj *externglib.Object) *MenuModel {
+func WrapMenuModel(obj *externglib.Object) *MenuModel {
 	return &MenuModel{
 		Object: obj,
 	}
@@ -624,7 +624,7 @@ func wrapMenuModel(obj *externglib.Object) *MenuModel {
 func marshalMenuModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuModel(obj), nil
+	return WrapMenuModel(obj), nil
 }
 
 // ItemAttributeValue queries the item at position item_index in model for the

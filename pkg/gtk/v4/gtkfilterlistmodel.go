@@ -37,7 +37,7 @@ type FilterListModel struct {
 	gio.ListModel
 }
 
-func wrapFilterListModel(obj *externglib.Object) *FilterListModel {
+func WrapFilterListModel(obj *externglib.Object) *FilterListModel {
 	return &FilterListModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -49,7 +49,7 @@ func wrapFilterListModel(obj *externglib.Object) *FilterListModel {
 func marshalFilterListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFilterListModel(obj), nil
+	return WrapFilterListModel(obj), nil
 }
 
 // NewFilterListModel creates a new GtkFilterListModel that will filter model
@@ -74,7 +74,7 @@ func NewFilterListModel(model gio.ListModeller, filter *Filter) *FilterListModel
 
 	var _filterListModel *FilterListModel // out
 
-	_filterListModel = wrapFilterListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_filterListModel = WrapFilterListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _filterListModel
 }
@@ -92,7 +92,7 @@ func (self *FilterListModel) Filter() *Filter {
 	var _filter *Filter // out
 
 	if _cret != nil {
-		_filter = wrapFilter(externglib.Take(unsafe.Pointer(_cret)))
+		_filter = WrapFilter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _filter

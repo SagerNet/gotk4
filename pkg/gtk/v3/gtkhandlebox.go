@@ -59,7 +59,7 @@ type HandleBox struct {
 	Bin
 }
 
-func wrapHandleBox(obj *externglib.Object) *HandleBox {
+func WrapHandleBox(obj *externglib.Object) *HandleBox {
 	return &HandleBox{
 		Bin: Bin{
 			Container: Container{
@@ -83,7 +83,7 @@ func wrapHandleBox(obj *externglib.Object) *HandleBox {
 func marshalHandleBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHandleBox(obj), nil
+	return WrapHandleBox(obj), nil
 }
 
 // NewHandleBox: create a new handle box.
@@ -96,7 +96,7 @@ func NewHandleBox() *HandleBox {
 
 	var _handleBox *HandleBox // out
 
-	_handleBox = wrapHandleBox(externglib.Take(unsafe.Pointer(_cret)))
+	_handleBox = WrapHandleBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _handleBox
 }

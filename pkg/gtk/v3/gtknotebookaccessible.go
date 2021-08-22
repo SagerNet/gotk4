@@ -29,7 +29,7 @@ type NotebookAccessible struct {
 	atk.Selection
 }
 
-func wrapNotebookAccessible(obj *externglib.Object) *NotebookAccessible {
+func WrapNotebookAccessible(obj *externglib.Object) *NotebookAccessible {
 	return &NotebookAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -52,7 +52,7 @@ func wrapNotebookAccessible(obj *externglib.Object) *NotebookAccessible {
 func marshalNotebookAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNotebookAccessible(obj), nil
+	return WrapNotebookAccessible(obj), nil
 }
 
 func (*NotebookAccessible) privateNotebookAccessible() {}

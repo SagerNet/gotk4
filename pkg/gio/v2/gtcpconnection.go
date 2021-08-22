@@ -37,7 +37,7 @@ type TCPConnection struct {
 	SocketConnection
 }
 
-func wrapTCPConnection(obj *externglib.Object) *TCPConnection {
+func WrapTCPConnection(obj *externglib.Object) *TCPConnection {
 	return &TCPConnection{
 		SocketConnection: SocketConnection{
 			IOStream: IOStream{
@@ -50,7 +50,7 @@ func wrapTCPConnection(obj *externglib.Object) *TCPConnection {
 func marshalTCPConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTCPConnection(obj), nil
+	return WrapTCPConnection(obj), nil
 }
 
 // GracefulDisconnect checks if graceful disconnects are used. See

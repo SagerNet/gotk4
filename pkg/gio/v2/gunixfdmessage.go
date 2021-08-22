@@ -47,7 +47,7 @@ type UnixFDMessage struct {
 	SocketControlMessage
 }
 
-func wrapUnixFDMessage(obj *externglib.Object) *UnixFDMessage {
+func WrapUnixFDMessage(obj *externglib.Object) *UnixFDMessage {
 	return &UnixFDMessage{
 		SocketControlMessage: SocketControlMessage{
 			Object: obj,
@@ -58,7 +58,7 @@ func wrapUnixFDMessage(obj *externglib.Object) *UnixFDMessage {
 func marshalUnixFDMessager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixFDMessage(obj), nil
+	return WrapUnixFDMessage(obj), nil
 }
 
 // NewUnixFDMessage creates a new FDMessage containing an empty file descriptor
@@ -70,7 +70,7 @@ func NewUnixFDMessage() *UnixFDMessage {
 
 	var _unixFDMessage *UnixFDMessage // out
 
-	_unixFDMessage = wrapUnixFDMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixFDMessage = WrapUnixFDMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixFDMessage
 }
@@ -87,7 +87,7 @@ func NewUnixFDMessageWithFdList(fdList *UnixFDList) *UnixFDMessage {
 
 	var _unixFDMessage *UnixFDMessage // out
 
-	_unixFDMessage = wrapUnixFDMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixFDMessage = WrapUnixFDMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixFDMessage
 }
@@ -135,7 +135,7 @@ func (message *UnixFDMessage) FdList() *UnixFDList {
 
 	var _unixFDList *UnixFDList // out
 
-	_unixFDList = wrapUnixFDList(externglib.Take(unsafe.Pointer(_cret)))
+	_unixFDList = WrapUnixFDList(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _unixFDList
 }

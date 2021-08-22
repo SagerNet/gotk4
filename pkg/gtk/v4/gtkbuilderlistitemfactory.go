@@ -49,7 +49,7 @@ type BuilderListItemFactory struct {
 	ListItemFactory
 }
 
-func wrapBuilderListItemFactory(obj *externglib.Object) *BuilderListItemFactory {
+func WrapBuilderListItemFactory(obj *externglib.Object) *BuilderListItemFactory {
 	return &BuilderListItemFactory{
 		ListItemFactory: ListItemFactory{
 			Object: obj,
@@ -60,7 +60,7 @@ func wrapBuilderListItemFactory(obj *externglib.Object) *BuilderListItemFactory 
 func marshalBuilderListItemFactorier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBuilderListItemFactory(obj), nil
+	return WrapBuilderListItemFactory(obj), nil
 }
 
 // NewBuilderListItemFactoryFromBytes creates a new GtkBuilderListItemFactory
@@ -81,7 +81,7 @@ func NewBuilderListItemFactoryFromBytes(scope BuilderScoper, bytes *glib.Bytes) 
 
 	var _builderListItemFactory *BuilderListItemFactory // out
 
-	_builderListItemFactory = wrapBuilderListItemFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builderListItemFactory = WrapBuilderListItemFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builderListItemFactory
 }
@@ -106,7 +106,7 @@ func NewBuilderListItemFactoryFromResource(scope BuilderScoper, resourcePath str
 
 	var _builderListItemFactory *BuilderListItemFactory // out
 
-	_builderListItemFactory = wrapBuilderListItemFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builderListItemFactory = WrapBuilderListItemFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builderListItemFactory
 }

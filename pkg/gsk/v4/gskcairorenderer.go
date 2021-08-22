@@ -27,7 +27,7 @@ type CairoRenderer struct {
 	Renderer
 }
 
-func wrapCairoRenderer(obj *externglib.Object) *CairoRenderer {
+func WrapCairoRenderer(obj *externglib.Object) *CairoRenderer {
 	return &CairoRenderer{
 		Renderer: Renderer{
 			Object: obj,
@@ -38,7 +38,7 @@ func wrapCairoRenderer(obj *externglib.Object) *CairoRenderer {
 func marshalCairoRendererer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCairoRenderer(obj), nil
+	return WrapCairoRenderer(obj), nil
 }
 
 // NewCairoRenderer creates a new Cairo renderer.
@@ -55,7 +55,7 @@ func NewCairoRenderer() *CairoRenderer {
 
 	var _cairoRenderer *CairoRenderer // out
 
-	_cairoRenderer = wrapCairoRenderer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cairoRenderer = WrapCairoRenderer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cairoRenderer
 }

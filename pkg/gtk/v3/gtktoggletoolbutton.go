@@ -44,7 +44,7 @@ type ToggleToolButton struct {
 	ToolButton
 }
 
-func wrapToggleToolButton(obj *externglib.Object) *ToggleToolButton {
+func WrapToggleToolButton(obj *externglib.Object) *ToggleToolButton {
 	return &ToggleToolButton{
 		ToolButton: ToolButton{
 			ToolItem: ToolItem{
@@ -91,7 +91,7 @@ func wrapToggleToolButton(obj *externglib.Object) *ToggleToolButton {
 func marshalToggleToolButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToggleToolButton(obj), nil
+	return WrapToggleToolButton(obj), nil
 }
 
 // NewToggleToolButton returns a new ToggleToolButton
@@ -102,7 +102,7 @@ func NewToggleToolButton() *ToggleToolButton {
 
 	var _toggleToolButton *ToggleToolButton // out
 
-	_toggleToolButton = wrapToggleToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toggleToolButton = WrapToggleToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toggleToolButton
 }
@@ -126,7 +126,7 @@ func NewToggleToolButtonFromStock(stockId string) *ToggleToolButton {
 
 	var _toggleToolButton *ToggleToolButton // out
 
-	_toggleToolButton = wrapToggleToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toggleToolButton = WrapToggleToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toggleToolButton
 }

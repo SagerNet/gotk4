@@ -95,7 +95,7 @@ type NativeDialogger interface {
 
 var _ NativeDialogger = (*NativeDialog)(nil)
 
-func wrapNativeDialog(obj *externglib.Object) *NativeDialog {
+func WrapNativeDialog(obj *externglib.Object) *NativeDialog {
 	return &NativeDialog{
 		Object: obj,
 	}
@@ -104,7 +104,7 @@ func wrapNativeDialog(obj *externglib.Object) *NativeDialog {
 func marshalNativeDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNativeDialog(obj), nil
+	return WrapNativeDialog(obj), nil
 }
 
 // Destroy destroys a dialog.
@@ -177,7 +177,7 @@ func (self *NativeDialog) TransientFor() *Window {
 	var _window *Window // out
 
 	if _cret != nil {
-		_window = wrapWindow(externglib.Take(unsafe.Pointer(_cret)))
+		_window = WrapWindow(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _window

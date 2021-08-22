@@ -156,7 +156,7 @@ type Assistant struct {
 	Window
 }
 
-func wrapAssistant(obj *externglib.Object) *Assistant {
+func WrapAssistant(obj *externglib.Object) *Assistant {
 	return &Assistant{
 		Window: Window{
 			Widget: Widget{
@@ -204,7 +204,7 @@ func wrapAssistant(obj *externglib.Object) *Assistant {
 func marshalAssistanter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAssistant(obj), nil
+	return WrapAssistant(obj), nil
 }
 
 // NewAssistant creates a new GtkAssistant.
@@ -215,7 +215,7 @@ func NewAssistant() *Assistant {
 
 	var _assistant *Assistant // out
 
-	_assistant = wrapAssistant(externglib.Take(unsafe.Pointer(_cret)))
+	_assistant = WrapAssistant(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _assistant
 }
@@ -342,7 +342,7 @@ func (assistant *Assistant) Page(child Widgetter) *AssistantPage {
 
 	var _assistantPage *AssistantPage // out
 
-	_assistantPage = wrapAssistantPage(externglib.Take(unsafe.Pointer(_cret)))
+	_assistantPage = WrapAssistantPage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _assistantPage
 }
@@ -648,7 +648,7 @@ type AssistantPage struct {
 	*externglib.Object
 }
 
-func wrapAssistantPage(obj *externglib.Object) *AssistantPage {
+func WrapAssistantPage(obj *externglib.Object) *AssistantPage {
 	return &AssistantPage{
 		Object: obj,
 	}
@@ -657,7 +657,7 @@ func wrapAssistantPage(obj *externglib.Object) *AssistantPage {
 func marshalAssistantPager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAssistantPage(obj), nil
+	return WrapAssistantPage(obj), nil
 }
 
 // Child returns the child to which page belongs.

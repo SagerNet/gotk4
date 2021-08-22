@@ -49,7 +49,7 @@ type UnixConnection struct {
 	SocketConnection
 }
 
-func wrapUnixConnection(obj *externglib.Object) *UnixConnection {
+func WrapUnixConnection(obj *externglib.Object) *UnixConnection {
 	return &UnixConnection{
 		SocketConnection: SocketConnection{
 			IOStream: IOStream{
@@ -62,7 +62,7 @@ func wrapUnixConnection(obj *externglib.Object) *UnixConnection {
 func marshalUnixConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixConnection(obj), nil
+	return WrapUnixConnection(obj), nil
 }
 
 // ReceiveCredentials receives credentials from the sending end of the
@@ -107,7 +107,7 @@ func (connection *UnixConnection) ReceiveCredentials(ctx context.Context) (*Cred
 	var _credentials *Credentials // out
 	var _goerr error              // out
 
-	_credentials = wrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_credentials = WrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -164,7 +164,7 @@ func (connection *UnixConnection) ReceiveCredentialsFinish(result AsyncResulter)
 	var _credentials *Credentials // out
 	var _goerr error              // out
 
-	_credentials = wrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_credentials = WrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

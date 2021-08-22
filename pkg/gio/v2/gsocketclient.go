@@ -60,7 +60,7 @@ type SocketClient struct {
 	*externglib.Object
 }
 
-func wrapSocketClient(obj *externglib.Object) *SocketClient {
+func WrapSocketClient(obj *externglib.Object) *SocketClient {
 	return &SocketClient{
 		Object: obj,
 	}
@@ -69,7 +69,7 @@ func wrapSocketClient(obj *externglib.Object) *SocketClient {
 func marshalSocketClienter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketClient(obj), nil
+	return WrapSocketClient(obj), nil
 }
 
 // NewSocketClient creates a new Client with the default options.
@@ -80,7 +80,7 @@ func NewSocketClient() *SocketClient {
 
 	var _socketClient *SocketClient // out
 
-	_socketClient = wrapSocketClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketClient = WrapSocketClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _socketClient
 }
@@ -157,7 +157,7 @@ func (client *SocketClient) ConnectSocketClient(ctx context.Context, connectable
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -221,7 +221,7 @@ func (client *SocketClient) ConnectFinish(result AsyncResulter) (*SocketConnecti
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -285,7 +285,7 @@ func (client *SocketClient) ConnectToHost(ctx context.Context, hostAndPort strin
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -346,7 +346,7 @@ func (client *SocketClient) ConnectToHostFinish(result AsyncResulter) (*SocketCo
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -395,7 +395,7 @@ func (client *SocketClient) ConnectToService(ctx context.Context, domain string,
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -454,7 +454,7 @@ func (client *SocketClient) ConnectToServiceFinish(result AsyncResulter) (*Socke
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -508,7 +508,7 @@ func (client *SocketClient) ConnectToURI(ctx context.Context, uri string, defaul
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -569,7 +569,7 @@ func (client *SocketClient) ConnectToURIFinish(result AsyncResulter) (*SocketCon
 	var _socketConnection *SocketConnection // out
 	var _goerr error                        // out
 
-	_socketConnection = wrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketConnection = WrapSocketConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

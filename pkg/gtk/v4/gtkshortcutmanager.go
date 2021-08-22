@@ -54,7 +54,7 @@ type ShortcutManagerer interface {
 
 var _ ShortcutManagerer = (*ShortcutManager)(nil)
 
-func wrapShortcutManager(obj *externglib.Object) *ShortcutManager {
+func WrapShortcutManager(obj *externglib.Object) *ShortcutManager {
 	return &ShortcutManager{
 		Object: obj,
 	}
@@ -63,7 +63,7 @@ func wrapShortcutManager(obj *externglib.Object) *ShortcutManager {
 func marshalShortcutManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutManager(obj), nil
+	return WrapShortcutManager(obj), nil
 }
 
 func (*ShortcutManager) privateShortcutManager() {}

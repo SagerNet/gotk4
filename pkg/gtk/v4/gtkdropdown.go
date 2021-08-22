@@ -55,7 +55,7 @@ type DropDown struct {
 	Widget
 }
 
-func wrapDropDown(obj *externglib.Object) *DropDown {
+func WrapDropDown(obj *externglib.Object) *DropDown {
 	return &DropDown{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -78,7 +78,7 @@ func wrapDropDown(obj *externglib.Object) *DropDown {
 func marshalDropDowner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDropDown(obj), nil
+	return WrapDropDown(obj), nil
 }
 
 // NewDropDown creates a new GtkDropDown.
@@ -105,7 +105,7 @@ func NewDropDown(model gio.ListModeller, expression Expressioner) *DropDown {
 
 	var _dropDown *DropDown // out
 
-	_dropDown = wrapDropDown(externglib.Take(unsafe.Pointer(_cret)))
+	_dropDown = WrapDropDown(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dropDown
 }
@@ -135,7 +135,7 @@ func NewDropDownFromStrings(strings []string) *DropDown {
 
 	var _dropDown *DropDown // out
 
-	_dropDown = wrapDropDown(externglib.Take(unsafe.Pointer(_cret)))
+	_dropDown = WrapDropDown(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dropDown
 }
@@ -197,7 +197,7 @@ func (self *DropDown) Factory() *ListItemFactory {
 	var _listItemFactory *ListItemFactory // out
 
 	if _cret != nil {
-		_listItemFactory = wrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
+		_listItemFactory = WrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listItemFactory
@@ -217,7 +217,7 @@ func (self *DropDown) ListFactory() *ListItemFactory {
 	var _listItemFactory *ListItemFactory // out
 
 	if _cret != nil {
-		_listItemFactory = wrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
+		_listItemFactory = WrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listItemFactory

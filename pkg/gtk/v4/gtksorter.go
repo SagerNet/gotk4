@@ -146,7 +146,7 @@ type Sorter struct {
 	*externglib.Object
 }
 
-func wrapSorter(obj *externglib.Object) *Sorter {
+func WrapSorter(obj *externglib.Object) *Sorter {
 	return &Sorter{
 		Object: obj,
 	}
@@ -155,7 +155,7 @@ func wrapSorter(obj *externglib.Object) *Sorter {
 func marshalSorterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSorter(obj), nil
+	return WrapSorter(obj), nil
 }
 
 // Changed emits the gtk.Sorter::changed signal to notify all users of the

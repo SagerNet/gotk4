@@ -283,7 +283,7 @@ type CellRendererer interface {
 
 var _ CellRendererer = (*CellRenderer)(nil)
 
-func wrapCellRenderer(obj *externglib.Object) *CellRenderer {
+func WrapCellRenderer(obj *externglib.Object) *CellRenderer {
 	return &CellRenderer{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -294,7 +294,7 @@ func wrapCellRenderer(obj *externglib.Object) *CellRenderer {
 func marshalCellRendererer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRenderer(obj), nil
+	return WrapCellRenderer(obj), nil
 }
 
 // Activate passes an activate event to the cell renderer for possible

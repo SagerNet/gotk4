@@ -29,7 +29,7 @@ type TextChildAnchor struct {
 	*externglib.Object
 }
 
-func wrapTextChildAnchor(obj *externglib.Object) *TextChildAnchor {
+func WrapTextChildAnchor(obj *externglib.Object) *TextChildAnchor {
 	return &TextChildAnchor{
 		Object: obj,
 	}
@@ -38,7 +38,7 @@ func wrapTextChildAnchor(obj *externglib.Object) *TextChildAnchor {
 func marshalTextChildAnchorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextChildAnchor(obj), nil
+	return WrapTextChildAnchor(obj), nil
 }
 
 // NewTextChildAnchor creates a new GtkTextChildAnchor.
@@ -53,7 +53,7 @@ func NewTextChildAnchor() *TextChildAnchor {
 
 	var _textChildAnchor *TextChildAnchor // out
 
-	_textChildAnchor = wrapTextChildAnchor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_textChildAnchor = WrapTextChildAnchor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _textChildAnchor
 }

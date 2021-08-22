@@ -85,7 +85,7 @@ func _gotk4_gtk4_IconViewForeachFunc(arg0 *C.GtkIconView, arg1 *C.GtkTreePath, a
 	var iconView *IconView // out
 	var path *TreePath     // out
 
-	iconView = wrapIconView(externglib.Take(unsafe.Pointer(arg0)))
+	iconView = WrapIconView(externglib.Take(unsafe.Pointer(arg0)))
 	path = (*TreePath)(gextras.NewStructNative(unsafe.Pointer(arg1)))
 	runtime.SetFinalizer(
 		gextras.StructIntern(unsafe.Pointer(path)),
@@ -127,7 +127,7 @@ type IconView struct {
 	*externglib.Object
 }
 
-func wrapIconView(obj *externglib.Object) *IconView {
+func WrapIconView(obj *externglib.Object) *IconView {
 	return &IconView{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -157,7 +157,7 @@ func wrapIconView(obj *externglib.Object) *IconView {
 func marshalIconViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconView(obj), nil
+	return WrapIconView(obj), nil
 }
 
 // NewIconView creates a new IconView widget
@@ -168,7 +168,7 @@ func NewIconView() *IconView {
 
 	var _iconView *IconView // out
 
-	_iconView = wrapIconView(externglib.Take(unsafe.Pointer(_cret)))
+	_iconView = WrapIconView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _iconView
 }
@@ -186,7 +186,7 @@ func NewIconViewWithArea(area CellAreaer) *IconView {
 
 	var _iconView *IconView // out
 
-	_iconView = wrapIconView(externglib.Take(unsafe.Pointer(_cret)))
+	_iconView = WrapIconView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _iconView
 }
@@ -203,7 +203,7 @@ func NewIconViewWithModel(model TreeModeller) *IconView {
 
 	var _iconView *IconView // out
 
-	_iconView = wrapIconView(externglib.Take(unsafe.Pointer(_cret)))
+	_iconView = WrapIconView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _iconView
 }

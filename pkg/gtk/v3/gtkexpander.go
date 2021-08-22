@@ -63,7 +63,7 @@ type Expander struct {
 	Bin
 }
 
-func wrapExpander(obj *externglib.Object) *Expander {
+func WrapExpander(obj *externglib.Object) *Expander {
 	return &Expander{
 		Bin: Bin{
 			Container: Container{
@@ -87,7 +87,7 @@ func wrapExpander(obj *externglib.Object) *Expander {
 func marshalExpanderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapExpander(obj), nil
+	return WrapExpander(obj), nil
 }
 
 // NewExpander creates a new expander using label as the text of the label.
@@ -105,7 +105,7 @@ func NewExpander(label string) *Expander {
 
 	var _expander *Expander // out
 
-	_expander = wrapExpander(externglib.Take(unsafe.Pointer(_cret)))
+	_expander = WrapExpander(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _expander
 }
@@ -130,7 +130,7 @@ func NewExpanderWithMnemonic(label string) *Expander {
 
 	var _expander *Expander // out
 
-	_expander = wrapExpander(externglib.Take(unsafe.Pointer(_cret)))
+	_expander = WrapExpander(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _expander
 }

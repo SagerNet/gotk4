@@ -138,7 +138,7 @@ func CairoGetDrawingContext(cr *cairo.Context) *DrawingContext {
 	var _drawingContext *DrawingContext // out
 
 	if _cret != nil {
-		_drawingContext = wrapDrawingContext(externglib.Take(unsafe.Pointer(_cret)))
+		_drawingContext = WrapDrawingContext(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _drawingContext

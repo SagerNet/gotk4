@@ -75,7 +75,7 @@ func _gotk4_gio2_CancellableSourceFunc(arg0 *C.GCancellable, arg1 C.gpointer) (c
 	var cancellable *Cancellable // out
 
 	if arg0 != nil {
-		cancellable = wrapCancellable(externglib.Take(unsafe.Pointer(arg0)))
+		cancellable = WrapCancellable(externglib.Take(unsafe.Pointer(arg0)))
 	}
 
 	fn := v.(CancellableSourceFunc)
@@ -107,7 +107,7 @@ func _gotk4_gio2_DBusProxyTypeFunc(arg0 *C.GDBusObjectManagerClient, arg1 *C.gch
 	var objectPath string                // out
 	var interfaceName string             // out
 
-	manager = wrapDBusObjectManagerClient(externglib.Take(unsafe.Pointer(arg0)))
+	manager = WrapDBusObjectManagerClient(externglib.Take(unsafe.Pointer(arg0)))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	if arg2 != nil {
@@ -295,7 +295,7 @@ func _gotk4_gio2_SocketSourceFunc(arg0 *C.GSocket, arg1 C.GIOCondition, arg2 C.g
 	var socket *Socket             // out
 	var condition glib.IOCondition // out
 
-	socket = wrapSocket(externglib.Take(unsafe.Pointer(arg0)))
+	socket = WrapSocket(externglib.Take(unsafe.Pointer(arg0)))
 	condition = glib.IOCondition(arg1)
 
 	fn := v.(SocketSourceFunc)

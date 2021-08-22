@@ -50,7 +50,7 @@ type ColorButton struct {
 	*externglib.Object
 }
 
-func wrapColorButton(obj *externglib.Object) *ColorButton {
+func WrapColorButton(obj *externglib.Object) *ColorButton {
 	return &ColorButton{
 		Button: Button{
 			Bin: Bin{
@@ -98,7 +98,7 @@ func wrapColorButton(obj *externglib.Object) *ColorButton {
 func marshalColorButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColorButton(obj), nil
+	return WrapColorButton(obj), nil
 }
 
 // NewColorButton creates a new color button.
@@ -114,7 +114,7 @@ func NewColorButton() *ColorButton {
 
 	var _colorButton *ColorButton // out
 
-	_colorButton = wrapColorButton(externglib.Take(unsafe.Pointer(_cret)))
+	_colorButton = WrapColorButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _colorButton
 }
@@ -133,7 +133,7 @@ func NewColorButtonWithColor(color *gdk.Color) *ColorButton {
 
 	var _colorButton *ColorButton // out
 
-	_colorButton = wrapColorButton(externglib.Take(unsafe.Pointer(_cret)))
+	_colorButton = WrapColorButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _colorButton
 }
@@ -150,7 +150,7 @@ func NewColorButtonWithRGBA(rgba *gdk.RGBA) *ColorButton {
 
 	var _colorButton *ColorButton // out
 
-	_colorButton = wrapColorButton(externglib.Take(unsafe.Pointer(_cret)))
+	_colorButton = WrapColorButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _colorButton
 }

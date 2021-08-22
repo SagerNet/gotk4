@@ -90,7 +90,7 @@ type DevicePadder interface {
 
 var _ DevicePadder = (*DevicePad)(nil)
 
-func wrapDevicePad(obj *externglib.Object) *DevicePad {
+func WrapDevicePad(obj *externglib.Object) *DevicePad {
 	return &DevicePad{
 		Device: Device{
 			Object: obj,
@@ -101,7 +101,7 @@ func wrapDevicePad(obj *externglib.Object) *DevicePad {
 func marshalDevicePadder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDevicePad(obj), nil
+	return WrapDevicePad(obj), nil
 }
 
 // FeatureGroup returns the group the given feature and idx belong to, or -1 if

@@ -41,7 +41,7 @@ type ObjectFactory struct {
 	*externglib.Object
 }
 
-func wrapObjectFactory(obj *externglib.Object) *ObjectFactory {
+func WrapObjectFactory(obj *externglib.Object) *ObjectFactory {
 	return &ObjectFactory{
 		Object: obj,
 	}
@@ -50,7 +50,7 @@ func wrapObjectFactory(obj *externglib.Object) *ObjectFactory {
 func marshalObjectFactorier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapObjectFactory(obj), nil
+	return WrapObjectFactory(obj), nil
 }
 
 // CreateAccessible provides an Object that implements an accessibility
@@ -69,7 +69,7 @@ func (factory *ObjectFactory) CreateAccessible(obj *externglib.Object) *ObjectCl
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _object
 }

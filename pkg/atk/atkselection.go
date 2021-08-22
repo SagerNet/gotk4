@@ -103,7 +103,7 @@ type Selectioner interface {
 
 var _ Selectioner = (*Selection)(nil)
 
-func wrapSelection(obj *externglib.Object) *Selection {
+func WrapSelection(obj *externglib.Object) *Selection {
 	return &Selection{
 		Object: obj,
 	}
@@ -112,7 +112,7 @@ func wrapSelection(obj *externglib.Object) *Selection {
 func marshalSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSelection(obj), nil
+	return WrapSelection(obj), nil
 }
 
 // AddSelection adds the specified accessible child of the object to the
@@ -225,7 +225,7 @@ func (selection *Selection) RefSelection(i int) *ObjectClass {
 	var _object *ObjectClass // out
 
 	if _cret != nil {
-		_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _object

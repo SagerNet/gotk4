@@ -244,7 +244,7 @@ type Devicer interface {
 
 var _ Devicer = (*Device)(nil)
 
-func wrapDevice(obj *externglib.Object) *Device {
+func WrapDevice(obj *externglib.Object) *Device {
 	return &Device{
 		Object: obj,
 	}
@@ -253,7 +253,7 @@ func wrapDevice(obj *externglib.Object) *Device {
 func marshalDevicer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDevice(obj), nil
+	return WrapDevice(obj), nil
 }
 
 // AssociatedDevice returns the associated device to device, if device is of
@@ -348,7 +348,7 @@ func (device *Device) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }
@@ -513,7 +513,7 @@ func (device *Device) Position() (screen *Screen, x int, y int) {
 	var _y int          // out
 
 	if _arg1 != nil {
-		_screen = wrapScreen(externglib.Take(unsafe.Pointer(_arg1)))
+		_screen = WrapScreen(externglib.Take(unsafe.Pointer(_arg1)))
 	}
 	_x = int(_arg2)
 	_y = int(_arg3)
@@ -541,7 +541,7 @@ func (device *Device) PositionDouble() (screen *Screen, x float64, y float64) {
 	var _y float64      // out
 
 	if _arg1 != nil {
-		_screen = wrapScreen(externglib.Take(unsafe.Pointer(_arg1)))
+		_screen = WrapScreen(externglib.Take(unsafe.Pointer(_arg1)))
 	}
 	_x = float64(_arg2)
 	_y = float64(_arg3)

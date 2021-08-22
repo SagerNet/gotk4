@@ -31,7 +31,7 @@ type EventControllerMotion struct {
 	EventController
 }
 
-func wrapEventControllerMotion(obj *externglib.Object) *EventControllerMotion {
+func WrapEventControllerMotion(obj *externglib.Object) *EventControllerMotion {
 	return &EventControllerMotion{
 		EventController: EventController{
 			Object: obj,
@@ -42,7 +42,7 @@ func wrapEventControllerMotion(obj *externglib.Object) *EventControllerMotion {
 func marshalEventControllerMotioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventControllerMotion(obj), nil
+	return WrapEventControllerMotion(obj), nil
 }
 
 // NewEventControllerMotion creates a new event controller that will handle
@@ -58,7 +58,7 @@ func NewEventControllerMotion(widget Widgetter) *EventControllerMotion {
 
 	var _eventControllerMotion *EventControllerMotion // out
 
-	_eventControllerMotion = wrapEventControllerMotion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_eventControllerMotion = WrapEventControllerMotion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _eventControllerMotion
 }

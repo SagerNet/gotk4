@@ -25,7 +25,7 @@ type X11Screen struct {
 	*externglib.Object
 }
 
-func wrapX11Screen(obj *externglib.Object) *X11Screen {
+func WrapX11Screen(obj *externglib.Object) *X11Screen {
 	return &X11Screen{
 		Object: obj,
 	}
@@ -34,7 +34,7 @@ func wrapX11Screen(obj *externglib.Object) *X11Screen {
 func marshalX11Screener(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Screen(obj), nil
+	return WrapX11Screen(obj), nil
 }
 
 // CurrentDesktop returns the current workspace for screen when running under a

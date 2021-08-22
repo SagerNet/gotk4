@@ -25,7 +25,7 @@ type X11Visual struct {
 	gdk.Visual
 }
 
-func wrapX11Visual(obj *externglib.Object) *X11Visual {
+func WrapX11Visual(obj *externglib.Object) *X11Visual {
 	return &X11Visual{
 		Visual: gdk.Visual{
 			Object: obj,
@@ -36,7 +36,7 @@ func wrapX11Visual(obj *externglib.Object) *X11Visual {
 func marshalX11Visualer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Visual(obj), nil
+	return WrapX11Visual(obj), nil
 }
 
 func (*X11Visual) privateX11Visual() {}

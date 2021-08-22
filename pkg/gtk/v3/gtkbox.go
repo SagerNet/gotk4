@@ -76,7 +76,7 @@ type Box struct {
 	*externglib.Object
 }
 
-func wrapBox(obj *externglib.Object) *Box {
+func WrapBox(obj *externglib.Object) *Box {
 	return &Box{
 		Container: Container{
 			Widget: Widget{
@@ -102,7 +102,7 @@ func wrapBox(obj *externglib.Object) *Box {
 func marshalBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBox(obj), nil
+	return WrapBox(obj), nil
 }
 
 // NewBox creates a new Box.
@@ -120,7 +120,7 @@ func NewBox(orientation Orientation, spacing int) *Box {
 
 	var _box *Box // out
 
-	_box = wrapBox(externglib.Take(unsafe.Pointer(_cret)))
+	_box = WrapBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _box
 }

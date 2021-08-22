@@ -29,7 +29,7 @@ type GestureZoom struct {
 	Gesture
 }
 
-func wrapGestureZoom(obj *externglib.Object) *GestureZoom {
+func WrapGestureZoom(obj *externglib.Object) *GestureZoom {
 	return &GestureZoom{
 		Gesture: Gesture{
 			EventController: EventController{
@@ -42,7 +42,7 @@ func wrapGestureZoom(obj *externglib.Object) *GestureZoom {
 func marshalGestureZoomer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureZoom(obj), nil
+	return WrapGestureZoom(obj), nil
 }
 
 // NewGestureZoom returns a newly created GtkGesture that recognizes pinch/zoom
@@ -54,7 +54,7 @@ func NewGestureZoom() *GestureZoom {
 
 	var _gestureZoom *GestureZoom // out
 
-	_gestureZoom = wrapGestureZoom(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureZoom = WrapGestureZoom(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureZoom
 }

@@ -35,7 +35,7 @@ type VScale struct {
 	Scale
 }
 
-func wrapVScale(obj *externglib.Object) *VScale {
+func WrapVScale(obj *externglib.Object) *VScale {
 	return &VScale{
 		Scale: Scale{
 			Range: Range{
@@ -63,7 +63,7 @@ func wrapVScale(obj *externglib.Object) *VScale {
 func marshalVScaler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVScale(obj), nil
+	return WrapVScale(obj), nil
 }
 
 // NewVScale creates a new VScale.
@@ -80,7 +80,7 @@ func NewVScale(adjustment *Adjustment) *VScale {
 
 	var _vScale *VScale // out
 
-	_vScale = wrapVScale(externglib.Take(unsafe.Pointer(_cret)))
+	_vScale = WrapVScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vScale
 }
@@ -113,7 +113,7 @@ func NewVScaleWithRange(min float64, max float64, step float64) *VScale {
 
 	var _vScale *VScale // out
 
-	_vScale = wrapVScale(externglib.Take(unsafe.Pointer(_cret)))
+	_vScale = WrapVScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vScale
 }

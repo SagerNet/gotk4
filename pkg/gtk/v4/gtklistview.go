@@ -120,7 +120,7 @@ type ListView struct {
 	ListBase
 }
 
-func wrapListView(obj *externglib.Object) *ListView {
+func WrapListView(obj *externglib.Object) *ListView {
 	return &ListView{
 		ListBase: ListBase{
 			Widget: Widget{
@@ -152,7 +152,7 @@ func wrapListView(obj *externglib.Object) *ListView {
 func marshalListViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListView(obj), nil
+	return WrapListView(obj), nil
 }
 
 // NewListView creates a new GtkListView that uses the given factory for mapping
@@ -182,7 +182,7 @@ func NewListView(model SelectionModeller, factory *ListItemFactory) *ListView {
 
 	var _listView *ListView // out
 
-	_listView = wrapListView(externglib.Take(unsafe.Pointer(_cret)))
+	_listView = WrapListView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _listView
 }
@@ -220,7 +220,7 @@ func (self *ListView) Factory() *ListItemFactory {
 	var _listItemFactory *ListItemFactory // out
 
 	if _cret != nil {
-		_listItemFactory = wrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
+		_listItemFactory = WrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listItemFactory

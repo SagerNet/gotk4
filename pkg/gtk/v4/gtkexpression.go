@@ -123,7 +123,7 @@ type CClosureExpression struct {
 	Expression
 }
 
-func wrapCClosureExpression(obj *externglib.Object) *CClosureExpression {
+func WrapCClosureExpression(obj *externglib.Object) *CClosureExpression {
 	return &CClosureExpression{
 		Expression: Expression{
 			Object: obj,
@@ -134,7 +134,7 @@ func wrapCClosureExpression(obj *externglib.Object) *CClosureExpression {
 func marshalCClosureExpressioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCClosureExpression(obj), nil
+	return WrapCClosureExpression(obj), nil
 }
 
 func (*CClosureExpression) privateCClosureExpression() {}
@@ -145,7 +145,7 @@ type ClosureExpression struct {
 	Expression
 }
 
-func wrapClosureExpression(obj *externglib.Object) *ClosureExpression {
+func WrapClosureExpression(obj *externglib.Object) *ClosureExpression {
 	return &ClosureExpression{
 		Expression: Expression{
 			Object: obj,
@@ -156,7 +156,7 @@ func wrapClosureExpression(obj *externglib.Object) *ClosureExpression {
 func marshalClosureExpressioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapClosureExpression(obj), nil
+	return WrapClosureExpression(obj), nil
 }
 
 func (*ClosureExpression) privateClosureExpression() {}
@@ -166,7 +166,7 @@ type ConstantExpression struct {
 	Expression
 }
 
-func wrapConstantExpression(obj *externglib.Object) *ConstantExpression {
+func WrapConstantExpression(obj *externglib.Object) *ConstantExpression {
 	return &ConstantExpression{
 		Expression: Expression{
 			Object: obj,
@@ -177,7 +177,7 @@ func wrapConstantExpression(obj *externglib.Object) *ConstantExpression {
 func marshalConstantExpressioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConstantExpression(obj), nil
+	return WrapConstantExpression(obj), nil
 }
 
 // NewConstantExpressionForValue creates an expression that always evaluates to
@@ -193,7 +193,7 @@ func NewConstantExpressionForValue(value *externglib.Value) *ConstantExpression 
 
 	var _constantExpression *ConstantExpression // out
 
-	_constantExpression = wrapConstantExpression(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_constantExpression = WrapConstantExpression(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _constantExpression
 }
@@ -360,7 +360,7 @@ type Expressioner interface {
 
 var _ Expressioner = (*Expression)(nil)
 
-func wrapExpression(obj *externglib.Object) *Expression {
+func WrapExpression(obj *externglib.Object) *Expression {
 	return &Expression{
 		Object: obj,
 	}
@@ -369,7 +369,7 @@ func wrapExpression(obj *externglib.Object) *Expression {
 func marshalExpressioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapExpression(obj), nil
+	return WrapExpression(obj), nil
 }
 
 // Bind target's property named property to self.
@@ -538,7 +538,7 @@ type ObjectExpression struct {
 	Expression
 }
 
-func wrapObjectExpression(obj *externglib.Object) *ObjectExpression {
+func WrapObjectExpression(obj *externglib.Object) *ObjectExpression {
 	return &ObjectExpression{
 		Expression: Expression{
 			Object: obj,
@@ -549,7 +549,7 @@ func wrapObjectExpression(obj *externglib.Object) *ObjectExpression {
 func marshalObjectExpressioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapObjectExpression(obj), nil
+	return WrapObjectExpression(obj), nil
 }
 
 // NewObjectExpression creates an expression evaluating to the given object with
@@ -571,7 +571,7 @@ func NewObjectExpression(object *externglib.Object) *ObjectExpression {
 
 	var _objectExpression *ObjectExpression // out
 
-	_objectExpression = wrapObjectExpression(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_objectExpression = WrapObjectExpression(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _objectExpression
 }
@@ -600,7 +600,7 @@ type PropertyExpression struct {
 	Expression
 }
 
-func wrapPropertyExpression(obj *externglib.Object) *PropertyExpression {
+func WrapPropertyExpression(obj *externglib.Object) *PropertyExpression {
 	return &PropertyExpression{
 		Expression: Expression{
 			Object: obj,
@@ -611,7 +611,7 @@ func wrapPropertyExpression(obj *externglib.Object) *PropertyExpression {
 func marshalPropertyExpressioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPropertyExpression(obj), nil
+	return WrapPropertyExpression(obj), nil
 }
 
 // NewPropertyExpression creates an expression that looks up a property via the
@@ -643,7 +643,7 @@ func NewPropertyExpression(thisType externglib.Type, expression Expressioner, pr
 
 	var _propertyExpression *PropertyExpression // out
 
-	_propertyExpression = wrapPropertyExpression(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_propertyExpression = WrapPropertyExpression(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _propertyExpression
 }

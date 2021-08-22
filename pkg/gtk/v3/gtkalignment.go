@@ -45,7 +45,7 @@ type Alignment struct {
 	Bin
 }
 
-func wrapAlignment(obj *externglib.Object) *Alignment {
+func WrapAlignment(obj *externglib.Object) *Alignment {
 	return &Alignment{
 		Bin: Bin{
 			Container: Container{
@@ -69,7 +69,7 @@ func wrapAlignment(obj *externglib.Object) *Alignment {
 func marshalAlignmenter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAlignment(obj), nil
+	return WrapAlignment(obj), nil
 }
 
 // NewAlignment creates a new Alignment.
@@ -95,7 +95,7 @@ func NewAlignment(xalign float32, yalign float32, xscale float32, yscale float32
 
 	var _alignment *Alignment // out
 
-	_alignment = wrapAlignment(externglib.Take(unsafe.Pointer(_cret)))
+	_alignment = WrapAlignment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _alignment
 }

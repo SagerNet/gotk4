@@ -131,7 +131,7 @@ type TreeDragDester interface {
 
 var _ TreeDragDester = (*TreeDragDest)(nil)
 
-func wrapTreeDragDest(obj *externglib.Object) *TreeDragDest {
+func WrapTreeDragDest(obj *externglib.Object) *TreeDragDest {
 	return &TreeDragDest{
 		Object: obj,
 	}
@@ -140,7 +140,7 @@ func wrapTreeDragDest(obj *externglib.Object) *TreeDragDest {
 func marshalTreeDragDester(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeDragDest(obj), nil
+	return WrapTreeDragDest(obj), nil
 }
 
 // DragDataReceived asks the TreeDragDest to insert a row before the path dest,
@@ -243,7 +243,7 @@ type TreeDragSourcer interface {
 
 var _ TreeDragSourcer = (*TreeDragSource)(nil)
 
-func wrapTreeDragSource(obj *externglib.Object) *TreeDragSource {
+func WrapTreeDragSource(obj *externglib.Object) *TreeDragSource {
 	return &TreeDragSource{
 		Object: obj,
 	}
@@ -252,7 +252,7 @@ func wrapTreeDragSource(obj *externglib.Object) *TreeDragSource {
 func marshalTreeDragSourcer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeDragSource(obj), nil
+	return WrapTreeDragSource(obj), nil
 }
 
 // DragDataDelete asks the TreeDragSource to delete the row at path, because it

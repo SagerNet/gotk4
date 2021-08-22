@@ -250,7 +250,7 @@ type IconFactory struct {
 	Buildable
 }
 
-func wrapIconFactory(obj *externglib.Object) *IconFactory {
+func WrapIconFactory(obj *externglib.Object) *IconFactory {
 	return &IconFactory{
 		Object: obj,
 		Buildable: Buildable{
@@ -262,7 +262,7 @@ func wrapIconFactory(obj *externglib.Object) *IconFactory {
 func marshalIconFactorier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconFactory(obj), nil
+	return WrapIconFactory(obj), nil
 }
 
 // NewIconFactory creates a new IconFactory. An icon factory manages a
@@ -285,7 +285,7 @@ func NewIconFactory() *IconFactory {
 
 	var _iconFactory *IconFactory // out
 
-	_iconFactory = wrapIconFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconFactory = WrapIconFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconFactory
 }

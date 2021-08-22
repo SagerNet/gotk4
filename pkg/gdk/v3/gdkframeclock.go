@@ -168,7 +168,7 @@ type FrameClocker interface {
 
 var _ FrameClocker = (*FrameClock)(nil)
 
-func wrapFrameClock(obj *externglib.Object) *FrameClock {
+func WrapFrameClock(obj *externglib.Object) *FrameClock {
 	return &FrameClock{
 		Object: obj,
 	}
@@ -177,7 +177,7 @@ func wrapFrameClock(obj *externglib.Object) *FrameClock {
 func marshalFrameClocker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFrameClock(obj), nil
+	return WrapFrameClock(obj), nil
 }
 
 // BeginUpdating starts updates for an animation. Until a matching call to

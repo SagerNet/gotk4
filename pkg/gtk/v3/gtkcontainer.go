@@ -340,7 +340,7 @@ type Containerer interface {
 
 var _ Containerer = (*Container)(nil)
 
-func wrapContainer(obj *externglib.Object) *Container {
+func WrapContainer(obj *externglib.Object) *Container {
 	return &Container{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -360,7 +360,7 @@ func wrapContainer(obj *externglib.Object) *Container {
 func marshalContainerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapContainer(obj), nil
+	return WrapContainer(obj), nil
 }
 
 // Add adds widget to container. Typically used for simple containers such as
@@ -634,7 +634,7 @@ func (container *Container) FocusHAdjustment() *Adjustment {
 	var _adjustment *Adjustment // out
 
 	if _cret != nil {
-		_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+		_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _adjustment
@@ -654,7 +654,7 @@ func (container *Container) FocusVAdjustment() *Adjustment {
 	var _adjustment *Adjustment // out
 
 	if _cret != nil {
-		_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+		_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _adjustment

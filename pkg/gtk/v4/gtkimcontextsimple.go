@@ -51,7 +51,7 @@ type IMContextSimple struct {
 	IMContext
 }
 
-func wrapIMContextSimple(obj *externglib.Object) *IMContextSimple {
+func WrapIMContextSimple(obj *externglib.Object) *IMContextSimple {
 	return &IMContextSimple{
 		IMContext: IMContext{
 			Object: obj,
@@ -62,7 +62,7 @@ func wrapIMContextSimple(obj *externglib.Object) *IMContextSimple {
 func marshalIMContextSimpler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIMContextSimple(obj), nil
+	return WrapIMContextSimple(obj), nil
 }
 
 // NewIMContextSimple creates a new IMContextSimple.
@@ -73,7 +73,7 @@ func NewIMContextSimple() *IMContextSimple {
 
 	var _imContextSimple *IMContextSimple // out
 
-	_imContextSimple = wrapIMContextSimple(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_imContextSimple = WrapIMContextSimple(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _imContextSimple
 }

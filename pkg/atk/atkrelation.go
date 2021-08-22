@@ -83,7 +83,7 @@ type Relation struct {
 	*externglib.Object
 }
 
-func wrapRelation(obj *externglib.Object) *Relation {
+func WrapRelation(obj *externglib.Object) *Relation {
 	return &Relation{
 		Object: obj,
 	}
@@ -92,7 +92,7 @@ func wrapRelation(obj *externglib.Object) *Relation {
 func marshalRelationer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRelation(obj), nil
+	return WrapRelation(obj), nil
 }
 
 // NewRelation: create a new relation for the specified key and the specified
@@ -120,7 +120,7 @@ func NewRelation(targets []*ObjectClass, relationship RelationType) *Relation {
 
 	var _relation *Relation // out
 
-	_relation = wrapRelation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_relation = WrapRelation(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _relation
 }

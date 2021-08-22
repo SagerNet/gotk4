@@ -37,7 +37,7 @@ type Plug struct {
 	*externglib.Object
 }
 
-func wrapPlug(obj *externglib.Object) *Plug {
+func WrapPlug(obj *externglib.Object) *Plug {
 	return &Plug{
 		ObjectClass: ObjectClass{
 			Object: obj,
@@ -52,7 +52,7 @@ func wrapPlug(obj *externglib.Object) *Plug {
 func marshalPlugger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPlug(obj), nil
+	return WrapPlug(obj), nil
 }
 
 // NewPlug creates a new Plug instance.
@@ -63,7 +63,7 @@ func NewPlug() *Plug {
 
 	var _plug *Plug // out
 
-	_plug = wrapPlug(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_plug = WrapPlug(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _plug
 }

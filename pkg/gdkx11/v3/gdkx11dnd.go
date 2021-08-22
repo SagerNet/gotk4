@@ -25,7 +25,7 @@ type X11DragContext struct {
 	gdk.DragContext
 }
 
-func wrapX11DragContext(obj *externglib.Object) *X11DragContext {
+func WrapX11DragContext(obj *externglib.Object) *X11DragContext {
 	return &X11DragContext{
 		DragContext: gdk.DragContext{
 			Object: obj,
@@ -36,7 +36,7 @@ func wrapX11DragContext(obj *externglib.Object) *X11DragContext {
 func marshalX11DragContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11DragContext(obj), nil
+	return WrapX11DragContext(obj), nil
 }
 
 func (*X11DragContext) privateX11DragContext() {}

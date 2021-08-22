@@ -29,7 +29,7 @@ type SpinnerAccessible struct {
 	atk.Image
 }
 
-func wrapSpinnerAccessible(obj *externglib.Object) *SpinnerAccessible {
+func WrapSpinnerAccessible(obj *externglib.Object) *SpinnerAccessible {
 	return &SpinnerAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapSpinnerAccessible(obj *externglib.Object) *SpinnerAccessible {
 func marshalSpinnerAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSpinnerAccessible(obj), nil
+	return WrapSpinnerAccessible(obj), nil
 }
 
 func (*SpinnerAccessible) privateSpinnerAccessible() {}

@@ -27,7 +27,7 @@ type ScaleAccessible struct {
 	RangeAccessible
 }
 
-func wrapScaleAccessible(obj *externglib.Object) *ScaleAccessible {
+func WrapScaleAccessible(obj *externglib.Object) *ScaleAccessible {
 	return &ScaleAccessible{
 		RangeAccessible: RangeAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -50,7 +50,7 @@ func wrapScaleAccessible(obj *externglib.Object) *ScaleAccessible {
 func marshalScaleAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScaleAccessible(obj), nil
+	return WrapScaleAccessible(obj), nil
 }
 
 func (*ScaleAccessible) privateScaleAccessible() {}

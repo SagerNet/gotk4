@@ -38,7 +38,7 @@ type ConstraintGuide struct {
 	ConstraintTarget
 }
 
-func wrapConstraintGuide(obj *externglib.Object) *ConstraintGuide {
+func WrapConstraintGuide(obj *externglib.Object) *ConstraintGuide {
 	return &ConstraintGuide{
 		Object: obj,
 		ConstraintTarget: ConstraintTarget{
@@ -50,7 +50,7 @@ func wrapConstraintGuide(obj *externglib.Object) *ConstraintGuide {
 func marshalConstraintGuider(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConstraintGuide(obj), nil
+	return WrapConstraintGuide(obj), nil
 }
 
 // NewConstraintGuide creates a new GtkConstraintGuide object.
@@ -61,7 +61,7 @@ func NewConstraintGuide() *ConstraintGuide {
 
 	var _constraintGuide *ConstraintGuide // out
 
-	_constraintGuide = wrapConstraintGuide(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_constraintGuide = WrapConstraintGuide(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _constraintGuide
 }

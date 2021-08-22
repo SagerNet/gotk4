@@ -110,7 +110,7 @@ type MenuButton struct {
 	ToggleButton
 }
 
-func wrapMenuButton(obj *externglib.Object) *MenuButton {
+func WrapMenuButton(obj *externglib.Object) *MenuButton {
 	return &MenuButton{
 		ToggleButton: ToggleButton{
 			Button: Button{
@@ -156,7 +156,7 @@ func wrapMenuButton(obj *externglib.Object) *MenuButton {
 func marshalMenuButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuButton(obj), nil
+	return WrapMenuButton(obj), nil
 }
 
 // NewMenuButton creates a new MenuButton widget with downwards-pointing arrow
@@ -169,7 +169,7 @@ func NewMenuButton() *MenuButton {
 
 	var _menuButton *MenuButton // out
 
-	_menuButton = wrapMenuButton(externglib.Take(unsafe.Pointer(_cret)))
+	_menuButton = WrapMenuButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuButton
 }
@@ -243,7 +243,7 @@ func (menuButton *MenuButton) Popover() *Popover {
 	var _popover *Popover // out
 
 	if _cret != nil {
-		_popover = wrapPopover(externglib.Take(unsafe.Pointer(_cret)))
+		_popover = WrapPopover(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _popover
@@ -263,7 +263,7 @@ func (menuButton *MenuButton) Popup() *Menu {
 	var _menu *Menu // out
 
 	if _cret != nil {
-		_menu = wrapMenu(externglib.Take(unsafe.Pointer(_cret)))
+		_menu = WrapMenu(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _menu

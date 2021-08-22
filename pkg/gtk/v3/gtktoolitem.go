@@ -53,7 +53,7 @@ type ToolItem struct {
 	*externglib.Object
 }
 
-func wrapToolItem(obj *externglib.Object) *ToolItem {
+func WrapToolItem(obj *externglib.Object) *ToolItem {
 	return &ToolItem{
 		Bin: Bin{
 			Container: Container{
@@ -81,7 +81,7 @@ func wrapToolItem(obj *externglib.Object) *ToolItem {
 func marshalToolItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToolItem(obj), nil
+	return WrapToolItem(obj), nil
 }
 
 // NewToolItem creates a new ToolItem
@@ -92,7 +92,7 @@ func NewToolItem() *ToolItem {
 
 	var _toolItem *ToolItem // out
 
-	_toolItem = wrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
+	_toolItem = WrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolItem
 }
@@ -315,7 +315,7 @@ func (toolItem *ToolItem) TextSizeGroup() *SizeGroup {
 
 	var _sizeGroup *SizeGroup // out
 
-	_sizeGroup = wrapSizeGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_sizeGroup = WrapSizeGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _sizeGroup
 }

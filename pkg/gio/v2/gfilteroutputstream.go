@@ -55,7 +55,7 @@ type FilterOutputStreamer interface {
 
 var _ FilterOutputStreamer = (*FilterOutputStream)(nil)
 
-func wrapFilterOutputStream(obj *externglib.Object) *FilterOutputStream {
+func WrapFilterOutputStream(obj *externglib.Object) *FilterOutputStream {
 	return &FilterOutputStream{
 		OutputStream: OutputStream{
 			Object: obj,
@@ -66,7 +66,7 @@ func wrapFilterOutputStream(obj *externglib.Object) *FilterOutputStream {
 func marshalFilterOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFilterOutputStream(obj), nil
+	return WrapFilterOutputStream(obj), nil
 }
 
 // BaseStream gets the base stream for the filter stream.

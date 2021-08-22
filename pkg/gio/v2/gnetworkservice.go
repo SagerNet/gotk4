@@ -44,7 +44,7 @@ type NetworkService struct {
 	SocketConnectable
 }
 
-func wrapNetworkService(obj *externglib.Object) *NetworkService {
+func WrapNetworkService(obj *externglib.Object) *NetworkService {
 	return &NetworkService{
 		Object: obj,
 		SocketConnectable: SocketConnectable{
@@ -56,7 +56,7 @@ func wrapNetworkService(obj *externglib.Object) *NetworkService {
 func marshalNetworkServicer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNetworkService(obj), nil
+	return WrapNetworkService(obj), nil
 }
 
 // NewNetworkService creates a new Service representing the given service,
@@ -82,7 +82,7 @@ func NewNetworkService(service string, protocol string, domain string) *NetworkS
 
 	var _networkService *NetworkService // out
 
-	_networkService = wrapNetworkService(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_networkService = WrapNetworkService(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _networkService
 }

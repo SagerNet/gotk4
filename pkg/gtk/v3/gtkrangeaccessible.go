@@ -29,7 +29,7 @@ type RangeAccessible struct {
 	atk.Value
 }
 
-func wrapRangeAccessible(obj *externglib.Object) *RangeAccessible {
+func WrapRangeAccessible(obj *externglib.Object) *RangeAccessible {
 	return &RangeAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapRangeAccessible(obj *externglib.Object) *RangeAccessible {
 func marshalRangeAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRangeAccessible(obj), nil
+	return WrapRangeAccessible(obj), nil
 }
 
 func (*RangeAccessible) privateRangeAccessible() {}

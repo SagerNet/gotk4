@@ -35,7 +35,7 @@ type HScrollbar struct {
 	Scrollbar
 }
 
-func wrapHScrollbar(obj *externglib.Object) *HScrollbar {
+func WrapHScrollbar(obj *externglib.Object) *HScrollbar {
 	return &HScrollbar{
 		Scrollbar: Scrollbar{
 			Range: Range{
@@ -63,7 +63,7 @@ func wrapHScrollbar(obj *externglib.Object) *HScrollbar {
 func marshalHScrollbarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHScrollbar(obj), nil
+	return WrapHScrollbar(obj), nil
 }
 
 // NewHScrollbar creates a new horizontal scrollbar.
@@ -82,7 +82,7 @@ func NewHScrollbar(adjustment *Adjustment) *HScrollbar {
 
 	var _hScrollbar *HScrollbar // out
 
-	_hScrollbar = wrapHScrollbar(externglib.Take(unsafe.Pointer(_cret)))
+	_hScrollbar = WrapHScrollbar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hScrollbar
 }

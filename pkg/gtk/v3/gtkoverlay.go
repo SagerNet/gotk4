@@ -64,7 +64,7 @@ type Overlay struct {
 	Bin
 }
 
-func wrapOverlay(obj *externglib.Object) *Overlay {
+func WrapOverlay(obj *externglib.Object) *Overlay {
 	return &Overlay{
 		Bin: Bin{
 			Container: Container{
@@ -88,7 +88,7 @@ func wrapOverlay(obj *externglib.Object) *Overlay {
 func marshalOverlayer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapOverlay(obj), nil
+	return WrapOverlay(obj), nil
 }
 
 // NewOverlay creates a new Overlay.
@@ -99,7 +99,7 @@ func NewOverlay() *Overlay {
 
 	var _overlay *Overlay // out
 
-	_overlay = wrapOverlay(externglib.Take(unsafe.Pointer(_cret)))
+	_overlay = WrapOverlay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _overlay
 }

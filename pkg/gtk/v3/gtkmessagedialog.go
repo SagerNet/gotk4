@@ -114,7 +114,7 @@ type MessageDialog struct {
 	Dialog
 }
 
-func wrapMessageDialog(obj *externglib.Object) *MessageDialog {
+func WrapMessageDialog(obj *externglib.Object) *MessageDialog {
 	return &MessageDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -142,7 +142,7 @@ func wrapMessageDialog(obj *externglib.Object) *MessageDialog {
 func marshalMessageDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMessageDialog(obj), nil
+	return WrapMessageDialog(obj), nil
 }
 
 // Image gets the dialog’s image.

@@ -43,7 +43,7 @@ type Display struct {
 	*externglib.Object
 }
 
-func wrapDisplay(obj *externglib.Object) *Display {
+func WrapDisplay(obj *externglib.Object) *Display {
 	return &Display{
 		Object: obj,
 	}
@@ -52,7 +52,7 @@ func wrapDisplay(obj *externglib.Object) *Display {
 func marshalDisplayer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDisplay(obj), nil
+	return WrapDisplay(obj), nil
 }
 
 // Beep emits a short beep on display
@@ -132,7 +132,7 @@ func (display *Display) AppLaunchContext() *AppLaunchContext {
 
 	var _appLaunchContext *AppLaunchContext // out
 
-	_appLaunchContext = wrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_appLaunchContext = WrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _appLaunchContext
 }
@@ -149,7 +149,7 @@ func (display *Display) Clipboard() *Clipboard {
 
 	var _clipboard *Clipboard // out
 
-	_clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(_cret)))
+	_clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _clipboard
 }
@@ -194,7 +194,7 @@ func (display *Display) MonitorAtSurface(surface Surfacer) *Monitor {
 
 	var _monitor *Monitor // out
 
-	_monitor = wrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
+	_monitor = WrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _monitor
 }
@@ -254,7 +254,7 @@ func (display *Display) PrimaryClipboard() *Clipboard {
 
 	var _clipboard *Clipboard // out
 
-	_clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(_cret)))
+	_clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _clipboard
 }
@@ -637,7 +637,7 @@ func DisplayGetDefault() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display
@@ -657,7 +657,7 @@ func DisplayOpen(displayName string) *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display

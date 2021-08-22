@@ -30,7 +30,7 @@ type TextCellAccessible struct {
 	*externglib.Object
 }
 
-func wrapTextCellAccessible(obj *externglib.Object) *TextCellAccessible {
+func WrapTextCellAccessible(obj *externglib.Object) *TextCellAccessible {
 	return &TextCellAccessible{
 		RendererCellAccessible: RendererCellAccessible{
 			CellAccessible: CellAccessible{
@@ -63,7 +63,7 @@ func wrapTextCellAccessible(obj *externglib.Object) *TextCellAccessible {
 func marshalTextCellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextCellAccessible(obj), nil
+	return WrapTextCellAccessible(obj), nil
 }
 
 func (*TextCellAccessible) privateTextCellAccessible() {}

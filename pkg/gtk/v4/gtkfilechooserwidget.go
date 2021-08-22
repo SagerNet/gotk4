@@ -37,7 +37,7 @@ type FileChooserWidget struct {
 	*externglib.Object
 }
 
-func wrapFileChooserWidget(obj *externglib.Object) *FileChooserWidget {
+func WrapFileChooserWidget(obj *externglib.Object) *FileChooserWidget {
 	return &FileChooserWidget{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -64,7 +64,7 @@ func wrapFileChooserWidget(obj *externglib.Object) *FileChooserWidget {
 func marshalFileChooserWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileChooserWidget(obj), nil
+	return WrapFileChooserWidget(obj), nil
 }
 
 // NewFileChooserWidget creates a new GtkFileChooserWidget.
@@ -82,7 +82,7 @@ func NewFileChooserWidget(action FileChooserAction) *FileChooserWidget {
 
 	var _fileChooserWidget *FileChooserWidget // out
 
-	_fileChooserWidget = wrapFileChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
+	_fileChooserWidget = WrapFileChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fileChooserWidget
 }

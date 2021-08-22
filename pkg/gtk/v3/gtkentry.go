@@ -154,7 +154,7 @@ type Entry struct {
 	*externglib.Object
 }
 
-func wrapEntry(obj *externglib.Object) *Entry {
+func WrapEntry(obj *externglib.Object) *Entry {
 	return &Entry{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -192,7 +192,7 @@ func wrapEntry(obj *externglib.Object) *Entry {
 func marshalEntrier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEntry(obj), nil
+	return WrapEntry(obj), nil
 }
 
 // NewEntry creates a new entry.
@@ -203,7 +203,7 @@ func NewEntry() *Entry {
 
 	var _entry *Entry // out
 
-	_entry = wrapEntry(externglib.Take(unsafe.Pointer(_cret)))
+	_entry = WrapEntry(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _entry
 }
@@ -220,7 +220,7 @@ func NewEntryWithBuffer(buffer *EntryBuffer) *Entry {
 
 	var _entry *Entry // out
 
-	_entry = wrapEntry(externglib.Take(unsafe.Pointer(_cret)))
+	_entry = WrapEntry(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _entry
 }
@@ -301,7 +301,7 @@ func (entry *Entry) Buffer() *EntryBuffer {
 
 	var _entryBuffer *EntryBuffer // out
 
-	_entryBuffer = wrapEntryBuffer(externglib.Take(unsafe.Pointer(_cret)))
+	_entryBuffer = WrapEntryBuffer(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _entryBuffer
 }
@@ -318,7 +318,7 @@ func (entry *Entry) Completion() *EntryCompletion {
 
 	var _entryCompletion *EntryCompletion // out
 
-	_entryCompletion = wrapEntryCompletion(externglib.Take(unsafe.Pointer(_cret)))
+	_entryCompletion = WrapEntryCompletion(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _entryCompletion
 }
@@ -357,7 +357,7 @@ func (entry *Entry) CursorHAdjustment() *Adjustment {
 	var _adjustment *Adjustment // out
 
 	if _cret != nil {
-		_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+		_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _adjustment

@@ -47,7 +47,7 @@ type WidgetPaintable struct {
 	gdk.Paintable
 }
 
-func wrapWidgetPaintable(obj *externglib.Object) *WidgetPaintable {
+func WrapWidgetPaintable(obj *externglib.Object) *WidgetPaintable {
 	return &WidgetPaintable{
 		Object: obj,
 		Paintable: gdk.Paintable{
@@ -59,7 +59,7 @@ func wrapWidgetPaintable(obj *externglib.Object) *WidgetPaintable {
 func marshalWidgetPaintabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWidgetPaintable(obj), nil
+	return WrapWidgetPaintable(obj), nil
 }
 
 // NewWidgetPaintable creates a new widget paintable observing the given widget.
@@ -76,7 +76,7 @@ func NewWidgetPaintable(widget Widgetter) *WidgetPaintable {
 
 	var _widgetPaintable *WidgetPaintable // out
 
-	_widgetPaintable = wrapWidgetPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_widgetPaintable = WrapWidgetPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _widgetPaintable
 }

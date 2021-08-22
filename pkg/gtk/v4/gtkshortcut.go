@@ -41,7 +41,7 @@ type Shortcut struct {
 	*externglib.Object
 }
 
-func wrapShortcut(obj *externglib.Object) *Shortcut {
+func WrapShortcut(obj *externglib.Object) *Shortcut {
 	return &Shortcut{
 		Object: obj,
 	}
@@ -50,7 +50,7 @@ func wrapShortcut(obj *externglib.Object) *Shortcut {
 func marshalShortcutter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcut(obj), nil
+	return WrapShortcut(obj), nil
 }
 
 // NewShortcut creates a new GtkShortcut that is triggered by trigger and then
@@ -75,7 +75,7 @@ func NewShortcut(trigger ShortcutTriggerer, action ShortcutActioner) *Shortcut {
 
 	var _shortcut *Shortcut // out
 
-	_shortcut = wrapShortcut(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_shortcut = WrapShortcut(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _shortcut
 }

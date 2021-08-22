@@ -97,7 +97,7 @@ type Fontsetter interface {
 
 var _ Fontsetter = (*Fontset)(nil)
 
-func wrapFontset(obj *externglib.Object) *Fontset {
+func WrapFontset(obj *externglib.Object) *Fontset {
 	return &Fontset{
 		Object: obj,
 	}
@@ -106,7 +106,7 @@ func wrapFontset(obj *externglib.Object) *Fontset {
 func marshalFontsetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontset(obj), nil
+	return WrapFontset(obj), nil
 }
 
 // Foreach iterates through all the fonts in a fontset, calling func for each
@@ -181,7 +181,7 @@ type FontsetSimple struct {
 	Fontset
 }
 
-func wrapFontsetSimple(obj *externglib.Object) *FontsetSimple {
+func WrapFontsetSimple(obj *externglib.Object) *FontsetSimple {
 	return &FontsetSimple{
 		Fontset: Fontset{
 			Object: obj,
@@ -192,7 +192,7 @@ func wrapFontsetSimple(obj *externglib.Object) *FontsetSimple {
 func marshalFontsetSimpler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontsetSimple(obj), nil
+	return WrapFontsetSimple(obj), nil
 }
 
 // NewFontsetSimple creates a new PangoFontsetSimple for the given language.
@@ -207,7 +207,7 @@ func NewFontsetSimple(language *Language) *FontsetSimple {
 
 	var _fontsetSimple *FontsetSimple // out
 
-	_fontsetSimple = wrapFontsetSimple(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fontsetSimple = WrapFontsetSimple(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fontsetSimple
 }

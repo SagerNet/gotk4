@@ -93,7 +93,7 @@ type FontMapper interface {
 
 var _ FontMapper = (*FontMap)(nil)
 
-func wrapFontMap(obj *externglib.Object) *FontMap {
+func WrapFontMap(obj *externglib.Object) *FontMap {
 	return &FontMap{
 		Object: obj,
 	}
@@ -102,7 +102,7 @@ func wrapFontMap(obj *externglib.Object) *FontMap {
 func marshalFontMapper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontMap(obj), nil
+	return WrapFontMap(obj), nil
 }
 
 // Changed forces a change in the context, which will cause any PangoContext
@@ -139,7 +139,7 @@ func (fontmap *FontMap) CreateContext() *Context {
 
 	var _context *Context // out
 
-	_context = wrapContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_context = WrapContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _context
 }

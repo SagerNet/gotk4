@@ -38,7 +38,7 @@ type AspectFrame struct {
 	Frame
 }
 
-func wrapAspectFrame(obj *externglib.Object) *AspectFrame {
+func WrapAspectFrame(obj *externglib.Object) *AspectFrame {
 	return &AspectFrame{
 		Frame: Frame{
 			Bin: Bin{
@@ -64,7 +64,7 @@ func wrapAspectFrame(obj *externglib.Object) *AspectFrame {
 func marshalAspectFramer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAspectFrame(obj), nil
+	return WrapAspectFrame(obj), nil
 }
 
 // NewAspectFrame: create a new AspectFrame.
@@ -96,7 +96,7 @@ func NewAspectFrame(label string, xalign float32, yalign float32, ratio float32,
 
 	var _aspectFrame *AspectFrame // out
 
-	_aspectFrame = wrapAspectFrame(externglib.Take(unsafe.Pointer(_cret)))
+	_aspectFrame = WrapAspectFrame(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _aspectFrame
 }

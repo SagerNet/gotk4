@@ -27,7 +27,7 @@ type StatusbarAccessible struct {
 	ContainerAccessible
 }
 
-func wrapStatusbarAccessible(obj *externglib.Object) *StatusbarAccessible {
+func WrapStatusbarAccessible(obj *externglib.Object) *StatusbarAccessible {
 	return &StatusbarAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -47,7 +47,7 @@ func wrapStatusbarAccessible(obj *externglib.Object) *StatusbarAccessible {
 func marshalStatusbarAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStatusbarAccessible(obj), nil
+	return WrapStatusbarAccessible(obj), nil
 }
 
 func (*StatusbarAccessible) privateStatusbarAccessible() {}

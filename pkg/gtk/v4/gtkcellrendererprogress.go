@@ -31,7 +31,7 @@ type CellRendererProgress struct {
 	*externglib.Object
 }
 
-func wrapCellRendererProgress(obj *externglib.Object) *CellRendererProgress {
+func WrapCellRendererProgress(obj *externglib.Object) *CellRendererProgress {
 	return &CellRendererProgress{
 		CellRenderer: CellRenderer{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -48,7 +48,7 @@ func wrapCellRendererProgress(obj *externglib.Object) *CellRendererProgress {
 func marshalCellRendererProgresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererProgress(obj), nil
+	return WrapCellRendererProgress(obj), nil
 }
 
 // NewCellRendererProgress creates a new CellRendererProgress.
@@ -59,7 +59,7 @@ func NewCellRendererProgress() *CellRendererProgress {
 
 	var _cellRendererProgress *CellRendererProgress // out
 
-	_cellRendererProgress = wrapCellRendererProgress(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererProgress = WrapCellRendererProgress(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererProgress
 }

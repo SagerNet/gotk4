@@ -58,7 +58,7 @@ type CustomFilter struct {
 	Filter
 }
 
-func wrapCustomFilter(obj *externglib.Object) *CustomFilter {
+func WrapCustomFilter(obj *externglib.Object) *CustomFilter {
 	return &CustomFilter{
 		Filter: Filter{
 			Object: obj,
@@ -69,7 +69,7 @@ func wrapCustomFilter(obj *externglib.Object) *CustomFilter {
 func marshalCustomFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCustomFilter(obj), nil
+	return WrapCustomFilter(obj), nil
 }
 
 // NewCustomFilter creates a new filter using the given match_func to filter
@@ -96,7 +96,7 @@ func NewCustomFilter(matchFunc CustomFilterFunc) *CustomFilter {
 
 	var _customFilter *CustomFilter // out
 
-	_customFilter = wrapCustomFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_customFilter = WrapCustomFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _customFilter
 }

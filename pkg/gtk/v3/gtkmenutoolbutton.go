@@ -55,7 +55,7 @@ type MenuToolButton struct {
 	ToolButton
 }
 
-func wrapMenuToolButton(obj *externglib.Object) *MenuToolButton {
+func WrapMenuToolButton(obj *externglib.Object) *MenuToolButton {
 	return &MenuToolButton{
 		ToolButton: ToolButton{
 			ToolItem: ToolItem{
@@ -102,7 +102,7 @@ func wrapMenuToolButton(obj *externglib.Object) *MenuToolButton {
 func marshalMenuToolButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuToolButton(obj), nil
+	return WrapMenuToolButton(obj), nil
 }
 
 // NewMenuToolButton creates a new MenuToolButton using icon_widget as icon and
@@ -126,7 +126,7 @@ func NewMenuToolButton(iconWidget Widgetter, label string) *MenuToolButton {
 
 	var _menuToolButton *MenuToolButton // out
 
-	_menuToolButton = wrapMenuToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_menuToolButton = WrapMenuToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuToolButton
 }
@@ -148,7 +148,7 @@ func NewMenuToolButtonFromStock(stockId string) *MenuToolButton {
 
 	var _menuToolButton *MenuToolButton // out
 
-	_menuToolButton = wrapMenuToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_menuToolButton = WrapMenuToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuToolButton
 }

@@ -40,7 +40,7 @@ type DBusObjectProxy struct {
 	DBusObject
 }
 
-func wrapDBusObjectProxy(obj *externglib.Object) *DBusObjectProxy {
+func WrapDBusObjectProxy(obj *externglib.Object) *DBusObjectProxy {
 	return &DBusObjectProxy{
 		Object: obj,
 		DBusObject: DBusObject{
@@ -52,7 +52,7 @@ func wrapDBusObjectProxy(obj *externglib.Object) *DBusObjectProxy {
 func marshalDBusObjectProxier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusObjectProxy(obj), nil
+	return WrapDBusObjectProxy(obj), nil
 }
 
 // NewDBusObjectProxy creates a new BusObjectProxy for the given connection and
@@ -72,7 +72,7 @@ func NewDBusObjectProxy(connection *DBusConnection, objectPath string) *DBusObje
 
 	var _dBusObjectProxy *DBusObjectProxy // out
 
-	_dBusObjectProxy = wrapDBusObjectProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectProxy = WrapDBusObjectProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusObjectProxy
 }
@@ -89,7 +89,7 @@ func (proxy *DBusObjectProxy) Connection() *DBusConnection {
 
 	var _dBusConnection *DBusConnection // out
 
-	_dBusConnection = wrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dBusConnection
 }

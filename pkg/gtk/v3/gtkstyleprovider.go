@@ -93,7 +93,7 @@ type StyleProviderer interface {
 
 var _ StyleProviderer = (*StyleProvider)(nil)
 
-func wrapStyleProvider(obj *externglib.Object) *StyleProvider {
+func WrapStyleProvider(obj *externglib.Object) *StyleProvider {
 	return &StyleProvider{
 		Object: obj,
 	}
@@ -102,7 +102,7 @@ func wrapStyleProvider(obj *externglib.Object) *StyleProvider {
 func marshalStyleProviderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStyleProvider(obj), nil
+	return WrapStyleProvider(obj), nil
 }
 
 // IconFactory returns the IconFactory defined to be in use for path, or NULL if
@@ -124,7 +124,7 @@ func (provider *StyleProvider) IconFactory(path *WidgetPath) *IconFactory {
 	var _iconFactory *IconFactory // out
 
 	if _cret != nil {
-		_iconFactory = wrapIconFactory(externglib.Take(unsafe.Pointer(_cret)))
+		_iconFactory = WrapIconFactory(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _iconFactory
@@ -150,7 +150,7 @@ func (provider *StyleProvider) Style(path *WidgetPath) *StyleProperties {
 	var _styleProperties *StyleProperties // out
 
 	if _cret != nil {
-		_styleProperties = wrapStyleProperties(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_styleProperties = WrapStyleProperties(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _styleProperties

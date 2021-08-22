@@ -104,7 +104,7 @@ type PadController struct {
 	EventController
 }
 
-func wrapPadController(obj *externglib.Object) *PadController {
+func WrapPadController(obj *externglib.Object) *PadController {
 	return &PadController{
 		EventController: EventController{
 			Object: obj,
@@ -115,7 +115,7 @@ func wrapPadController(obj *externglib.Object) *PadController {
 func marshalPadControllerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPadController(obj), nil
+	return WrapPadController(obj), nil
 }
 
 // NewPadController creates a new GtkPadController that will associate events
@@ -148,7 +148,7 @@ func NewPadController(group gio.ActionGrouper, pad gdk.Devicer) *PadController {
 
 	var _padController *PadController // out
 
-	_padController = wrapPadController(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_padController = WrapPadController(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _padController
 }

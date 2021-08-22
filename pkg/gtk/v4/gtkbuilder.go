@@ -291,7 +291,7 @@ type Builder struct {
 	*externglib.Object
 }
 
-func wrapBuilder(obj *externglib.Object) *Builder {
+func WrapBuilder(obj *externglib.Object) *Builder {
 	return &Builder{
 		Object: obj,
 	}
@@ -300,7 +300,7 @@ func wrapBuilder(obj *externglib.Object) *Builder {
 func marshalBuilderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBuilder(obj), nil
+	return WrapBuilder(obj), nil
 }
 
 // NewBuilder creates a new empty builder object.
@@ -316,7 +316,7 @@ func NewBuilder() *Builder {
 
 	var _builder *Builder // out
 
-	_builder = wrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builder = WrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builder
 }
@@ -338,7 +338,7 @@ func NewBuilderFromFile(filename string) *Builder {
 
 	var _builder *Builder // out
 
-	_builder = wrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builder = WrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builder
 }
@@ -359,7 +359,7 @@ func NewBuilderFromResource(resourcePath string) *Builder {
 
 	var _builder *Builder // out
 
-	_builder = wrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builder = WrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builder
 }
@@ -387,7 +387,7 @@ func NewBuilderFromString(_string string, length int) *Builder {
 
 	var _builder *Builder // out
 
-	_builder = wrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builder = WrapBuilder(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builder
 }

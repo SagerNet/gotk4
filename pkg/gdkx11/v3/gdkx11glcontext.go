@@ -51,7 +51,7 @@ type X11GLContext struct {
 	gdk.GLContext
 }
 
-func wrapX11GLContext(obj *externglib.Object) *X11GLContext {
+func WrapX11GLContext(obj *externglib.Object) *X11GLContext {
 	return &X11GLContext{
 		GLContext: gdk.GLContext{
 			Object: obj,
@@ -62,7 +62,7 @@ func wrapX11GLContext(obj *externglib.Object) *X11GLContext {
 func marshalX11GLContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11GLContext(obj), nil
+	return WrapX11GLContext(obj), nil
 }
 
 func (*X11GLContext) privateX11GLContext() {}

@@ -37,7 +37,7 @@ type Screen struct {
 	*externglib.Object
 }
 
-func wrapScreen(obj *externglib.Object) *Screen {
+func WrapScreen(obj *externglib.Object) *Screen {
 	return &Screen{
 		Object: obj,
 	}
@@ -46,7 +46,7 @@ func wrapScreen(obj *externglib.Object) *Screen {
 func marshalScreener(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScreen(obj), nil
+	return WrapScreen(obj), nil
 }
 
 // ActiveWindow returns the screen’s currently active window.
@@ -94,7 +94,7 @@ func (screen *Screen) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }
@@ -485,7 +485,7 @@ func (screen *Screen) RGBAVisual() *Visual {
 	var _visual *Visual // out
 
 	if _cret != nil {
-		_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+		_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _visual
@@ -550,7 +550,7 @@ func (screen *Screen) SystemVisual() *Visual {
 
 	var _visual *Visual // out
 
-	_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+	_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _visual
 }
@@ -709,7 +709,7 @@ func (screen *Screen) ListVisuals() []Visual {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GdkVisual)(v)
 		var dst Visual // out
-		dst = *wrapVisual(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapVisual(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 
@@ -781,7 +781,7 @@ func ScreenGetDefault() *Screen {
 	var _screen *Screen // out
 
 	if _cret != nil {
-		_screen = wrapScreen(externglib.Take(unsafe.Pointer(_cret)))
+		_screen = WrapScreen(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _screen

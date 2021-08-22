@@ -29,7 +29,7 @@ type SwitchAccessible struct {
 	atk.Action
 }
 
-func wrapSwitchAccessible(obj *externglib.Object) *SwitchAccessible {
+func WrapSwitchAccessible(obj *externglib.Object) *SwitchAccessible {
 	return &SwitchAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapSwitchAccessible(obj *externglib.Object) *SwitchAccessible {
 func marshalSwitchAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSwitchAccessible(obj), nil
+	return WrapSwitchAccessible(obj), nil
 }
 
 func (*SwitchAccessible) privateSwitchAccessible() {}

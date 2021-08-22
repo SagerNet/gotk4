@@ -72,7 +72,7 @@ type ListItemFactory struct {
 	*externglib.Object
 }
 
-func wrapListItemFactory(obj *externglib.Object) *ListItemFactory {
+func WrapListItemFactory(obj *externglib.Object) *ListItemFactory {
 	return &ListItemFactory{
 		Object: obj,
 	}
@@ -81,7 +81,7 @@ func wrapListItemFactory(obj *externglib.Object) *ListItemFactory {
 func marshalListItemFactorier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListItemFactory(obj), nil
+	return WrapListItemFactory(obj), nil
 }
 
 func (*ListItemFactory) privateListItemFactory() {}

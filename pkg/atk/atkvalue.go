@@ -312,7 +312,7 @@ type Valueer interface {
 
 var _ Valueer = (*Value)(nil)
 
-func wrapValue(obj *externglib.Object) *Value {
+func WrapValue(obj *externglib.Object) *Value {
 	return &Value{
 		Object: obj,
 	}
@@ -321,7 +321,7 @@ func wrapValue(obj *externglib.Object) *Value {
 func marshalValueer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapValue(obj), nil
+	return WrapValue(obj), nil
 }
 
 // CurrentValue gets the value of this object.

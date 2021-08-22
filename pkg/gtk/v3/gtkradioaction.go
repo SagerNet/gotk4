@@ -38,7 +38,7 @@ type RadioAction struct {
 	ToggleAction
 }
 
-func wrapRadioAction(obj *externglib.Object) *RadioAction {
+func WrapRadioAction(obj *externglib.Object) *RadioAction {
 	return &RadioAction{
 		ToggleAction: ToggleAction{
 			Action: Action{
@@ -54,7 +54,7 @@ func wrapRadioAction(obj *externglib.Object) *RadioAction {
 func marshalRadioActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRadioAction(obj), nil
+	return WrapRadioAction(obj), nil
 }
 
 // NewRadioAction creates a new RadioAction object. To add the action to a
@@ -95,7 +95,7 @@ func NewRadioAction(name string, label string, tooltip string, stockId string, v
 
 	var _radioAction *RadioAction // out
 
-	_radioAction = wrapRadioAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_radioAction = WrapRadioAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _radioAction
 }
@@ -152,7 +152,7 @@ func (action *RadioAction) Group() []RadioAction {
 	gextras.MoveSList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkRadioAction)(v)
 		var dst RadioAction // out
-		dst = *wrapRadioAction(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapRadioAction(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 

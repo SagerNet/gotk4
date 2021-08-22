@@ -29,7 +29,7 @@ type GestureRotate struct {
 	Gesture
 }
 
-func wrapGestureRotate(obj *externglib.Object) *GestureRotate {
+func WrapGestureRotate(obj *externglib.Object) *GestureRotate {
 	return &GestureRotate{
 		Gesture: Gesture{
 			EventController: EventController{
@@ -42,7 +42,7 @@ func wrapGestureRotate(obj *externglib.Object) *GestureRotate {
 func marshalGestureRotater(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureRotate(obj), nil
+	return WrapGestureRotate(obj), nil
 }
 
 // NewGestureRotate returns a newly created GtkGesture that recognizes 2-touch
@@ -54,7 +54,7 @@ func NewGestureRotate() *GestureRotate {
 
 	var _gestureRotate *GestureRotate // out
 
-	_gestureRotate = wrapGestureRotate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureRotate = WrapGestureRotate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureRotate
 }

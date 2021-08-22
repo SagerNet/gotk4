@@ -235,7 +235,7 @@ type IMContexter interface {
 
 var _ IMContexter = (*IMContext)(nil)
 
-func wrapIMContext(obj *externglib.Object) *IMContext {
+func WrapIMContext(obj *externglib.Object) *IMContext {
 	return &IMContext{
 		Object: obj,
 	}
@@ -244,7 +244,7 @@ func wrapIMContext(obj *externglib.Object) *IMContext {
 func marshalIMContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIMContext(obj), nil
+	return WrapIMContext(obj), nil
 }
 
 // DeleteSurrounding asks the widget that the input context is attached to

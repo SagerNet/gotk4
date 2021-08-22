@@ -27,7 +27,7 @@ type NoOpObjectFactory struct {
 	ObjectFactory
 }
 
-func wrapNoOpObjectFactory(obj *externglib.Object) *NoOpObjectFactory {
+func WrapNoOpObjectFactory(obj *externglib.Object) *NoOpObjectFactory {
 	return &NoOpObjectFactory{
 		ObjectFactory: ObjectFactory{
 			Object: obj,
@@ -38,7 +38,7 @@ func wrapNoOpObjectFactory(obj *externglib.Object) *NoOpObjectFactory {
 func marshalNoOpObjectFactorier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNoOpObjectFactory(obj), nil
+	return WrapNoOpObjectFactory(obj), nil
 }
 
 // NewNoOpObjectFactory creates an instance of an ObjectFactory which generates
@@ -50,7 +50,7 @@ func NewNoOpObjectFactory() *NoOpObjectFactory {
 
 	var _noOpObjectFactory *NoOpObjectFactory // out
 
-	_noOpObjectFactory = wrapNoOpObjectFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_noOpObjectFactory = WrapNoOpObjectFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _noOpObjectFactory
 }

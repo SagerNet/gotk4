@@ -31,7 +31,7 @@ type IMMulticontext struct {
 	IMContext
 }
 
-func wrapIMMulticontext(obj *externglib.Object) *IMMulticontext {
+func WrapIMMulticontext(obj *externglib.Object) *IMMulticontext {
 	return &IMMulticontext{
 		IMContext: IMContext{
 			Object: obj,
@@ -42,7 +42,7 @@ func wrapIMMulticontext(obj *externglib.Object) *IMMulticontext {
 func marshalIMMulticontexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIMMulticontext(obj), nil
+	return WrapIMMulticontext(obj), nil
 }
 
 // NewIMMulticontext creates a new GtkIMMulticontext.
@@ -53,7 +53,7 @@ func NewIMMulticontext() *IMMulticontext {
 
 	var _imMulticontext *IMMulticontext // out
 
-	_imMulticontext = wrapIMMulticontext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_imMulticontext = WrapIMMulticontext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _imMulticontext
 }

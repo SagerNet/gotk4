@@ -28,7 +28,7 @@ type SocketAccessible struct {
 	ContainerAccessible
 }
 
-func wrapSocketAccessible(obj *externglib.Object) *SocketAccessible {
+func WrapSocketAccessible(obj *externglib.Object) *SocketAccessible {
 	return &SocketAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -48,7 +48,7 @@ func wrapSocketAccessible(obj *externglib.Object) *SocketAccessible {
 func marshalSocketAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketAccessible(obj), nil
+	return WrapSocketAccessible(obj), nil
 }
 
 func (socket *SocketAccessible) Embed(path string) {

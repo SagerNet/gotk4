@@ -60,7 +60,7 @@ type ToolButton struct {
 	*externglib.Object
 }
 
-func wrapToolButton(obj *externglib.Object) *ToolButton {
+func WrapToolButton(obj *externglib.Object) *ToolButton {
 	return &ToolButton{
 		ToolItem: ToolItem{
 			Bin: Bin{
@@ -105,7 +105,7 @@ func wrapToolButton(obj *externglib.Object) *ToolButton {
 func marshalToolButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToolButton(obj), nil
+	return WrapToolButton(obj), nil
 }
 
 // NewToolButton creates a new ToolButton using icon_widget as contents and
@@ -129,7 +129,7 @@ func NewToolButton(iconWidget Widgetter, label string) *ToolButton {
 
 	var _toolButton *ToolButton // out
 
-	_toolButton = wrapToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toolButton = WrapToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolButton
 }
@@ -154,7 +154,7 @@ func NewToolButtonFromStock(stockId string) *ToolButton {
 
 	var _toolButton *ToolButton // out
 
-	_toolButton = wrapToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toolButton = WrapToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolButton
 }

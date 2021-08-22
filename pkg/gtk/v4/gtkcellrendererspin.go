@@ -39,7 +39,7 @@ type CellRendererSpin struct {
 	CellRendererText
 }
 
-func wrapCellRendererSpin(obj *externglib.Object) *CellRendererSpin {
+func WrapCellRendererSpin(obj *externglib.Object) *CellRendererSpin {
 	return &CellRendererSpin{
 		CellRendererText: CellRendererText{
 			CellRenderer: CellRenderer{
@@ -54,7 +54,7 @@ func wrapCellRendererSpin(obj *externglib.Object) *CellRendererSpin {
 func marshalCellRendererSpinner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererSpin(obj), nil
+	return WrapCellRendererSpin(obj), nil
 }
 
 // NewCellRendererSpin creates a new CellRendererSpin.
@@ -65,7 +65,7 @@ func NewCellRendererSpin() *CellRendererSpin {
 
 	var _cellRendererSpin *CellRendererSpin // out
 
-	_cellRendererSpin = wrapCellRendererSpin(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererSpin = WrapCellRendererSpin(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererSpin
 }

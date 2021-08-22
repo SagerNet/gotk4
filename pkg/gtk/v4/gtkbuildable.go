@@ -74,7 +74,7 @@ type Buildabler interface {
 
 var _ Buildabler = (*Buildable)(nil)
 
-func wrapBuildable(obj *externglib.Object) *Buildable {
+func WrapBuildable(obj *externglib.Object) *Buildable {
 	return &Buildable{
 		Object: obj,
 	}
@@ -83,7 +83,7 @@ func wrapBuildable(obj *externglib.Object) *Buildable {
 func marshalBuildabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBuildable(obj), nil
+	return WrapBuildable(obj), nil
 }
 
 // BuildableID gets the ID of the buildable object.

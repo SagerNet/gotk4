@@ -62,7 +62,7 @@ type PasswordEntry struct {
 	*externglib.Object
 }
 
-func wrapPasswordEntry(obj *externglib.Object) *PasswordEntry {
+func WrapPasswordEntry(obj *externglib.Object) *PasswordEntry {
 	return &PasswordEntry{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -103,7 +103,7 @@ func wrapPasswordEntry(obj *externglib.Object) *PasswordEntry {
 func marshalPasswordEntrier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPasswordEntry(obj), nil
+	return WrapPasswordEntry(obj), nil
 }
 
 // NewPasswordEntry creates a GtkPasswordEntry.
@@ -114,7 +114,7 @@ func NewPasswordEntry() *PasswordEntry {
 
 	var _passwordEntry *PasswordEntry // out
 
-	_passwordEntry = wrapPasswordEntry(externglib.Take(unsafe.Pointer(_cret)))
+	_passwordEntry = WrapPasswordEntry(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _passwordEntry
 }

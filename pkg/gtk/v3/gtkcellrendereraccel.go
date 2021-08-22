@@ -72,7 +72,7 @@ type CellRendererAccel struct {
 	CellRendererText
 }
 
-func wrapCellRendererAccel(obj *externglib.Object) *CellRendererAccel {
+func WrapCellRendererAccel(obj *externglib.Object) *CellRendererAccel {
 	return &CellRendererAccel{
 		CellRendererText: CellRendererText{
 			CellRenderer: CellRenderer{
@@ -87,7 +87,7 @@ func wrapCellRendererAccel(obj *externglib.Object) *CellRendererAccel {
 func marshalCellRendererAcceller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererAccel(obj), nil
+	return WrapCellRendererAccel(obj), nil
 }
 
 // NewCellRendererAccel creates a new CellRendererAccel.
@@ -98,7 +98,7 @@ func NewCellRendererAccel() *CellRendererAccel {
 
 	var _cellRendererAccel *CellRendererAccel // out
 
-	_cellRendererAccel = wrapCellRendererAccel(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererAccel = WrapCellRendererAccel(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererAccel
 }

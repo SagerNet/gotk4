@@ -86,7 +86,7 @@ type TreeModelSort struct {
 	TreeSortable
 }
 
-func wrapTreeModelSort(obj *externglib.Object) *TreeModelSort {
+func WrapTreeModelSort(obj *externglib.Object) *TreeModelSort {
 	return &TreeModelSort{
 		Object: obj,
 		TreeDragSource: TreeDragSource{
@@ -103,7 +103,7 @@ func wrapTreeModelSort(obj *externglib.Object) *TreeModelSort {
 func marshalTreeModelSorter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeModelSort(obj), nil
+	return WrapTreeModelSort(obj), nil
 }
 
 // NewTreeModelSortWithModel creates a new TreeModelSort, with child_model as
@@ -119,7 +119,7 @@ func NewTreeModelSortWithModel(childModel TreeModeller) *TreeModelSort {
 
 	var _treeModelSort *TreeModelSort // out
 
-	_treeModelSort = wrapTreeModelSort(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_treeModelSort = WrapTreeModelSort(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _treeModelSort
 }

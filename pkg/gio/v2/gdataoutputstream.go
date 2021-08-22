@@ -42,7 +42,7 @@ type DataOutputStream struct {
 	Seekable
 }
 
-func wrapDataOutputStream(obj *externglib.Object) *DataOutputStream {
+func WrapDataOutputStream(obj *externglib.Object) *DataOutputStream {
 	return &DataOutputStream{
 		FilterOutputStream: FilterOutputStream{
 			OutputStream: OutputStream{
@@ -58,7 +58,7 @@ func wrapDataOutputStream(obj *externglib.Object) *DataOutputStream {
 func marshalDataOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDataOutputStream(obj), nil
+	return WrapDataOutputStream(obj), nil
 }
 
 // NewDataOutputStream creates a new data output stream for base_stream.
@@ -73,7 +73,7 @@ func NewDataOutputStream(baseStream OutputStreamer) *DataOutputStream {
 
 	var _dataOutputStream *DataOutputStream // out
 
-	_dataOutputStream = wrapDataOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dataOutputStream = WrapDataOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dataOutputStream
 }

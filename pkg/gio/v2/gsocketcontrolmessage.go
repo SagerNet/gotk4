@@ -92,7 +92,7 @@ type SocketControlMessager interface {
 
 var _ SocketControlMessager = (*SocketControlMessage)(nil)
 
-func wrapSocketControlMessage(obj *externglib.Object) *SocketControlMessage {
+func WrapSocketControlMessage(obj *externglib.Object) *SocketControlMessage {
 	return &SocketControlMessage{
 		Object: obj,
 	}
@@ -101,7 +101,7 @@ func wrapSocketControlMessage(obj *externglib.Object) *SocketControlMessage {
 func marshalSocketControlMessager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketControlMessage(obj), nil
+	return WrapSocketControlMessage(obj), nil
 }
 
 // Level returns the "level" (i.e. the originating protocol) of the control

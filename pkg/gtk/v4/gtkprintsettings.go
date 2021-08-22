@@ -110,7 +110,7 @@ type PrintSettings struct {
 	*externglib.Object
 }
 
-func wrapPrintSettings(obj *externglib.Object) *PrintSettings {
+func WrapPrintSettings(obj *externglib.Object) *PrintSettings {
 	return &PrintSettings{
 		Object: obj,
 	}
@@ -119,7 +119,7 @@ func wrapPrintSettings(obj *externglib.Object) *PrintSettings {
 func marshalPrintSettingser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPrintSettings(obj), nil
+	return WrapPrintSettings(obj), nil
 }
 
 // NewPrintSettings creates a new GtkPrintSettings object.
@@ -130,7 +130,7 @@ func NewPrintSettings() *PrintSettings {
 
 	var _printSettings *PrintSettings // out
 
-	_printSettings = wrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_printSettings = WrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _printSettings
 }
@@ -156,7 +156,7 @@ func NewPrintSettingsFromFile(fileName string) (*PrintSettings, error) {
 	var _printSettings *PrintSettings // out
 	var _goerr error                  // out
 
-	_printSettings = wrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_printSettings = WrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -179,7 +179,7 @@ func NewPrintSettingsFromGVariant(variant *glib.Variant) *PrintSettings {
 
 	var _printSettings *PrintSettings // out
 
-	_printSettings = wrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_printSettings = WrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _printSettings
 }
@@ -209,7 +209,7 @@ func NewPrintSettingsFromKeyFile(keyFile *glib.KeyFile, groupName string) (*Prin
 	var _printSettings *PrintSettings // out
 	var _goerr error                  // out
 
-	_printSettings = wrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_printSettings = WrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -229,7 +229,7 @@ func (other *PrintSettings) Copy() *PrintSettings {
 
 	var _printSettings *PrintSettings // out
 
-	_printSettings = wrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_printSettings = WrapPrintSettings(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _printSettings
 }

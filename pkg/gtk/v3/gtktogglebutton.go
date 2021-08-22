@@ -97,7 +97,7 @@ type ToggleButton struct {
 	Button
 }
 
-func wrapToggleButton(obj *externglib.Object) *ToggleButton {
+func WrapToggleButton(obj *externglib.Object) *ToggleButton {
 	return &ToggleButton{
 		Button: Button{
 			Bin: Bin{
@@ -141,7 +141,7 @@ func wrapToggleButton(obj *externglib.Object) *ToggleButton {
 func marshalToggleButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToggleButton(obj), nil
+	return WrapToggleButton(obj), nil
 }
 
 // NewToggleButton creates a new toggle button. A widget should be packed into
@@ -153,7 +153,7 @@ func NewToggleButton() *ToggleButton {
 
 	var _toggleButton *ToggleButton // out
 
-	_toggleButton = wrapToggleButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toggleButton = WrapToggleButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toggleButton
 }
@@ -171,7 +171,7 @@ func NewToggleButtonWithLabel(label string) *ToggleButton {
 
 	var _toggleButton *ToggleButton // out
 
-	_toggleButton = wrapToggleButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toggleButton = WrapToggleButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toggleButton
 }
@@ -191,7 +191,7 @@ func NewToggleButtonWithMnemonic(label string) *ToggleButton {
 
 	var _toggleButton *ToggleButton // out
 
-	_toggleButton = wrapToggleButton(externglib.Take(unsafe.Pointer(_cret)))
+	_toggleButton = WrapToggleButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toggleButton
 }

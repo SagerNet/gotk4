@@ -84,7 +84,7 @@ type Socket struct {
 	Container
 }
 
-func wrapSocket(obj *externglib.Object) *Socket {
+func WrapSocket(obj *externglib.Object) *Socket {
 	return &Socket{
 		Container: Container{
 			Widget: Widget{
@@ -106,7 +106,7 @@ func wrapSocket(obj *externglib.Object) *Socket {
 func marshalSocketter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocket(obj), nil
+	return WrapSocket(obj), nil
 }
 
 // NewSocket: create a new empty Socket.
@@ -117,7 +117,7 @@ func NewSocket() *Socket {
 
 	var _socket *Socket // out
 
-	_socket = wrapSocket(externglib.Take(unsafe.Pointer(_cret)))
+	_socket = WrapSocket(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _socket
 }

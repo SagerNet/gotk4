@@ -75,7 +75,7 @@ type ProgressBar struct {
 	*externglib.Object
 }
 
-func wrapProgressBar(obj *externglib.Object) *ProgressBar {
+func WrapProgressBar(obj *externglib.Object) *ProgressBar {
 	return &ProgressBar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -102,7 +102,7 @@ func wrapProgressBar(obj *externglib.Object) *ProgressBar {
 func marshalProgressBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapProgressBar(obj), nil
+	return WrapProgressBar(obj), nil
 }
 
 // NewProgressBar creates a new GtkProgressBar.
@@ -113,7 +113,7 @@ func NewProgressBar() *ProgressBar {
 
 	var _progressBar *ProgressBar // out
 
-	_progressBar = wrapProgressBar(externglib.Take(unsafe.Pointer(_cret)))
+	_progressBar = WrapProgressBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _progressBar
 }

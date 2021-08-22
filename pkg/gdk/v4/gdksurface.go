@@ -100,7 +100,7 @@ type Surfacer interface {
 
 var _ Surfacer = (*Surface)(nil)
 
-func wrapSurface(obj *externglib.Object) *Surface {
+func WrapSurface(obj *externglib.Object) *Surface {
 	return &Surface{
 		Object: obj,
 	}
@@ -109,7 +109,7 @@ func wrapSurface(obj *externglib.Object) *Surface {
 func marshalSurfacer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSurface(obj), nil
+	return WrapSurface(obj), nil
 }
 
 // NewSurfacePopup: create a new popup surface.
@@ -132,7 +132,7 @@ func NewSurfacePopup(parent Surfacer, autohide bool) *Surface {
 
 	var _surface *Surface // out
 
-	_surface = wrapSurface(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_surface = WrapSurface(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _surface
 }
@@ -149,7 +149,7 @@ func NewSurfaceToplevel(display *Display) *Surface {
 
 	var _surface *Surface // out
 
-	_surface = wrapSurface(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_surface = WrapSurface(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _surface
 }
@@ -311,7 +311,7 @@ func (surface *Surface) Cursor() *Cursor {
 	var _cursor *Cursor // out
 
 	if _cret != nil {
-		_cursor = wrapCursor(externglib.Take(unsafe.Pointer(_cret)))
+		_cursor = WrapCursor(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _cursor
@@ -337,7 +337,7 @@ func (surface *Surface) DeviceCursor(device Devicer) *Cursor {
 	var _cursor *Cursor // out
 
 	if _cret != nil {
-		_cursor = wrapCursor(externglib.Take(unsafe.Pointer(_cret)))
+		_cursor = WrapCursor(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _cursor
@@ -389,7 +389,7 @@ func (surface *Surface) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

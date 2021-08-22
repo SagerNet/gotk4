@@ -146,7 +146,7 @@ type Context struct {
 	*externglib.Object
 }
 
-func wrapContext(obj *externglib.Object) *Context {
+func WrapContext(obj *externglib.Object) *Context {
 	return &Context{
 		Object: obj,
 	}
@@ -155,7 +155,7 @@ func wrapContext(obj *externglib.Object) *Context {
 func marshalContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapContext(obj), nil
+	return WrapContext(obj), nil
 }
 
 // NewContext creates a new PangoContext initialized to default values.
@@ -175,7 +175,7 @@ func NewContext() *Context {
 
 	var _context *Context // out
 
-	_context = wrapContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_context = WrapContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _context
 }

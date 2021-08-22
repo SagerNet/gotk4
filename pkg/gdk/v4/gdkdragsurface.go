@@ -36,7 +36,7 @@ type DragSurfacer interface {
 
 var _ DragSurfacer = (*DragSurface)(nil)
 
-func wrapDragSurface(obj *externglib.Object) *DragSurface {
+func WrapDragSurface(obj *externglib.Object) *DragSurface {
 	return &DragSurface{
 		Surface: Surface{
 			Object: obj,
@@ -47,7 +47,7 @@ func wrapDragSurface(obj *externglib.Object) *DragSurface {
 func marshalDragSurfacer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDragSurface(obj), nil
+	return WrapDragSurface(obj), nil
 }
 
 // Present drag_surface.

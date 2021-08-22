@@ -46,7 +46,7 @@ type AppLaunchContext struct {
 	gio.AppLaunchContext
 }
 
-func wrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
+func WrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
 	return &AppLaunchContext{
 		AppLaunchContext: gio.AppLaunchContext{
 			Object: obj,
@@ -57,7 +57,7 @@ func wrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
 func marshalAppLaunchContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppLaunchContext(obj), nil
+	return WrapAppLaunchContext(obj), nil
 }
 
 // Display gets the GdkDisplay that context is for.
@@ -72,7 +72,7 @@ func (context *AppLaunchContext) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

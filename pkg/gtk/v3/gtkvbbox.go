@@ -27,7 +27,7 @@ type VButtonBox struct {
 	ButtonBox
 }
 
-func wrapVButtonBox(obj *externglib.Object) *VButtonBox {
+func WrapVButtonBox(obj *externglib.Object) *VButtonBox {
 	return &VButtonBox{
 		ButtonBox: ButtonBox{
 			Box: Box{
@@ -57,7 +57,7 @@ func wrapVButtonBox(obj *externglib.Object) *VButtonBox {
 func marshalVButtonBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVButtonBox(obj), nil
+	return WrapVButtonBox(obj), nil
 }
 
 // NewVButtonBox creates a new vertical button box.
@@ -70,7 +70,7 @@ func NewVButtonBox() *VButtonBox {
 
 	var _vButtonBox *VButtonBox // out
 
-	_vButtonBox = wrapVButtonBox(externglib.Take(unsafe.Pointer(_cret)))
+	_vButtonBox = WrapVButtonBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vButtonBox
 }

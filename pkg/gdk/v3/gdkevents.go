@@ -1236,7 +1236,7 @@ func (e *EventDND) SendEvent() int8 {
 // Context for the current DND operation.
 func (e *EventDND) Context() *DragContext {
 	var v *DragContext // out
-	v = wrapDragContext(externglib.Take(unsafe.Pointer(e.native.context)))
+	v = WrapDragContext(externglib.Take(unsafe.Pointer(e.native.context)))
 	return v
 }
 

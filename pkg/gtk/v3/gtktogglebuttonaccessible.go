@@ -27,7 +27,7 @@ type ToggleButtonAccessible struct {
 	ButtonAccessible
 }
 
-func wrapToggleButtonAccessible(obj *externglib.Object) *ToggleButtonAccessible {
+func WrapToggleButtonAccessible(obj *externglib.Object) *ToggleButtonAccessible {
 	return &ToggleButtonAccessible{
 		ButtonAccessible: ButtonAccessible{
 			ContainerAccessible: ContainerAccessible{
@@ -56,7 +56,7 @@ func wrapToggleButtonAccessible(obj *externglib.Object) *ToggleButtonAccessible 
 func marshalToggleButtonAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToggleButtonAccessible(obj), nil
+	return WrapToggleButtonAccessible(obj), nil
 }
 
 func (*ToggleButtonAccessible) privateToggleButtonAccessible() {}

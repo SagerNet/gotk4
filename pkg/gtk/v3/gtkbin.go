@@ -45,7 +45,7 @@ type Binner interface {
 
 var _ Binner = (*Bin)(nil)
 
-func wrapBin(obj *externglib.Object) *Bin {
+func WrapBin(obj *externglib.Object) *Bin {
 	return &Bin{
 		Container: Container{
 			Widget: Widget{
@@ -67,7 +67,7 @@ func wrapBin(obj *externglib.Object) *Bin {
 func marshalBinner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBin(obj), nil
+	return WrapBin(obj), nil
 }
 
 // Child gets the child of the Bin, or NULL if the bin contains no child widget.

@@ -44,7 +44,7 @@ type Layout struct {
 	*externglib.Object
 }
 
-func wrapLayout(obj *externglib.Object) *Layout {
+func WrapLayout(obj *externglib.Object) *Layout {
 	return &Layout{
 		Container: Container{
 			Widget: Widget{
@@ -70,7 +70,7 @@ func wrapLayout(obj *externglib.Object) *Layout {
 func marshalLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLayout(obj), nil
+	return WrapLayout(obj), nil
 }
 
 // NewLayout creates a new Layout. Unless you have a specific adjustment you’d
@@ -94,7 +94,7 @@ func NewLayout(hadjustment *Adjustment, vadjustment *Adjustment) *Layout {
 
 	var _layout *Layout // out
 
-	_layout = wrapLayout(externglib.Take(unsafe.Pointer(_cret)))
+	_layout = WrapLayout(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _layout
 }
@@ -135,7 +135,7 @@ func (layout *Layout) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -180,7 +180,7 @@ func (layout *Layout) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

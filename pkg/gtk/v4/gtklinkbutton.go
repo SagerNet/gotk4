@@ -53,7 +53,7 @@ type LinkButton struct {
 	Button
 }
 
-func wrapLinkButton(obj *externglib.Object) *LinkButton {
+func WrapLinkButton(obj *externglib.Object) *LinkButton {
 	return &LinkButton{
 		Button: Button{
 			Widget: Widget{
@@ -96,7 +96,7 @@ func wrapLinkButton(obj *externglib.Object) *LinkButton {
 func marshalLinkButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLinkButton(obj), nil
+	return WrapLinkButton(obj), nil
 }
 
 // NewLinkButton creates a new GtkLinkButton with the URI as its text.
@@ -112,7 +112,7 @@ func NewLinkButton(uri string) *LinkButton {
 
 	var _linkButton *LinkButton // out
 
-	_linkButton = wrapLinkButton(externglib.Take(unsafe.Pointer(_cret)))
+	_linkButton = WrapLinkButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _linkButton
 }
@@ -136,7 +136,7 @@ func NewLinkButtonWithLabel(uri string, label string) *LinkButton {
 
 	var _linkButton *LinkButton // out
 
-	_linkButton = wrapLinkButton(externglib.Take(unsafe.Pointer(_cret)))
+	_linkButton = WrapLinkButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _linkButton
 }

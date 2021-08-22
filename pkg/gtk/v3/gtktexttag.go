@@ -41,7 +41,7 @@ type TextTag struct {
 	*externglib.Object
 }
 
-func wrapTextTag(obj *externglib.Object) *TextTag {
+func WrapTextTag(obj *externglib.Object) *TextTag {
 	return &TextTag{
 		Object: obj,
 	}
@@ -50,7 +50,7 @@ func wrapTextTag(obj *externglib.Object) *TextTag {
 func marshalTextTagger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextTag(obj), nil
+	return WrapTextTag(obj), nil
 }
 
 // NewTextTag creates a TextTag. Configure the tag using object arguments, i.e.
@@ -69,7 +69,7 @@ func NewTextTag(name string) *TextTag {
 
 	var _textTag *TextTag // out
 
-	_textTag = wrapTextTag(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_textTag = WrapTextTag(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _textTag
 }

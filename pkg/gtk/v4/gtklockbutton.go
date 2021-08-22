@@ -61,7 +61,7 @@ type LockButton struct {
 	Button
 }
 
-func wrapLockButton(obj *externglib.Object) *LockButton {
+func WrapLockButton(obj *externglib.Object) *LockButton {
 	return &LockButton{
 		Button: Button{
 			Widget: Widget{
@@ -104,7 +104,7 @@ func wrapLockButton(obj *externglib.Object) *LockButton {
 func marshalLockButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLockButton(obj), nil
+	return WrapLockButton(obj), nil
 }
 
 // NewLockButton creates a new lock button which reflects the permission.
@@ -121,7 +121,7 @@ func NewLockButton(permission gio.Permissioner) *LockButton {
 
 	var _lockButton *LockButton // out
 
-	_lockButton = wrapLockButton(externglib.Take(unsafe.Pointer(_cret)))
+	_lockButton = WrapLockButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _lockButton
 }

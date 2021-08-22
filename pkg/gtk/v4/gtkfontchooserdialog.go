@@ -43,7 +43,7 @@ type FontChooserDialog struct {
 	*externglib.Object
 }
 
-func wrapFontChooserDialog(obj *externglib.Object) *FontChooserDialog {
+func WrapFontChooserDialog(obj *externglib.Object) *FontChooserDialog {
 	return &FontChooserDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -97,7 +97,7 @@ func wrapFontChooserDialog(obj *externglib.Object) *FontChooserDialog {
 func marshalFontChooserDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontChooserDialog(obj), nil
+	return WrapFontChooserDialog(obj), nil
 }
 
 // NewFontChooserDialog creates a new GtkFontChooserDialog.
@@ -120,7 +120,7 @@ func NewFontChooserDialog(title string, parent *Window) *FontChooserDialog {
 
 	var _fontChooserDialog *FontChooserDialog // out
 
-	_fontChooserDialog = wrapFontChooserDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_fontChooserDialog = WrapFontChooserDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fontChooserDialog
 }

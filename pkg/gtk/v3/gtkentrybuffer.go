@@ -68,7 +68,7 @@ type EntryBuffer struct {
 	*externglib.Object
 }
 
-func wrapEntryBuffer(obj *externglib.Object) *EntryBuffer {
+func WrapEntryBuffer(obj *externglib.Object) *EntryBuffer {
 	return &EntryBuffer{
 		Object: obj,
 	}
@@ -77,7 +77,7 @@ func wrapEntryBuffer(obj *externglib.Object) *EntryBuffer {
 func marshalEntryBufferer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEntryBuffer(obj), nil
+	return WrapEntryBuffer(obj), nil
 }
 
 // NewEntryBuffer: create a new GtkEntryBuffer object.
@@ -100,7 +100,7 @@ func NewEntryBuffer(initialChars string, nInitialChars int) *EntryBuffer {
 
 	var _entryBuffer *EntryBuffer // out
 
-	_entryBuffer = wrapEntryBuffer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_entryBuffer = WrapEntryBuffer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _entryBuffer
 }

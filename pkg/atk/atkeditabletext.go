@@ -76,7 +76,7 @@ type EditableTexter interface {
 
 var _ EditableTexter = (*EditableText)(nil)
 
-func wrapEditableText(obj *externglib.Object) *EditableText {
+func WrapEditableText(obj *externglib.Object) *EditableText {
 	return &EditableText{
 		Object: obj,
 	}
@@ -85,7 +85,7 @@ func wrapEditableText(obj *externglib.Object) *EditableText {
 func marshalEditableTexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEditableText(obj), nil
+	return WrapEditableText(obj), nil
 }
 
 // CopyText: copy text from start_pos up to, but not including end_pos to the

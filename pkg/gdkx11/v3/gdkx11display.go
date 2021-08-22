@@ -71,7 +71,7 @@ type X11Display struct {
 	gdk.Display
 }
 
-func wrapX11Display(obj *externglib.Object) *X11Display {
+func WrapX11Display(obj *externglib.Object) *X11Display {
 	return &X11Display{
 		Display: gdk.Display{
 			Object: obj,
@@ -82,7 +82,7 @@ func wrapX11Display(obj *externglib.Object) *X11Display {
 func marshalX11Displayer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Display(obj), nil
+	return WrapX11Display(obj), nil
 }
 
 // ErrorTrapPop pops the error trap pushed by gdk_x11_display_error_trap_push().

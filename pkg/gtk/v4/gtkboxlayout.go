@@ -41,7 +41,7 @@ type BoxLayout struct {
 	*externglib.Object
 }
 
-func wrapBoxLayout(obj *externglib.Object) *BoxLayout {
+func WrapBoxLayout(obj *externglib.Object) *BoxLayout {
 	return &BoxLayout{
 		LayoutManager: LayoutManager{
 			Object: obj,
@@ -56,7 +56,7 @@ func wrapBoxLayout(obj *externglib.Object) *BoxLayout {
 func marshalBoxLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBoxLayout(obj), nil
+	return WrapBoxLayout(obj), nil
 }
 
 // NewBoxLayout creates a new GtkBoxLayout.
@@ -71,7 +71,7 @@ func NewBoxLayout(orientation Orientation) *BoxLayout {
 
 	var _boxLayout *BoxLayout // out
 
-	_boxLayout = wrapBoxLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_boxLayout = WrapBoxLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _boxLayout
 }

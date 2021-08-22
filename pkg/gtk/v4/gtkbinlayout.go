@@ -31,7 +31,7 @@ type BinLayout struct {
 	LayoutManager
 }
 
-func wrapBinLayout(obj *externglib.Object) *BinLayout {
+func WrapBinLayout(obj *externglib.Object) *BinLayout {
 	return &BinLayout{
 		LayoutManager: LayoutManager{
 			Object: obj,
@@ -42,7 +42,7 @@ func wrapBinLayout(obj *externglib.Object) *BinLayout {
 func marshalBinLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBinLayout(obj), nil
+	return WrapBinLayout(obj), nil
 }
 
 // NewBinLayout creates a new GtkBinLayout instance.
@@ -53,7 +53,7 @@ func NewBinLayout() *BinLayout {
 
 	var _binLayout *BinLayout // out
 
-	_binLayout = wrapBinLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_binLayout = WrapBinLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _binLayout
 }

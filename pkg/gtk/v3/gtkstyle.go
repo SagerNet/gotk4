@@ -1039,7 +1039,7 @@ type Style struct {
 	*externglib.Object
 }
 
-func wrapStyle(obj *externglib.Object) *Style {
+func WrapStyle(obj *externglib.Object) *Style {
 	return &Style{
 		Object: obj,
 	}
@@ -1048,7 +1048,7 @@ func wrapStyle(obj *externglib.Object) *Style {
 func marshalStyler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStyle(obj), nil
+	return WrapStyle(obj), nil
 }
 
 // NewStyle creates a new Style.
@@ -1061,7 +1061,7 @@ func NewStyle() *Style {
 
 	var _style *Style // out
 
-	_style = wrapStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_style = WrapStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _style
 }
@@ -1111,7 +1111,7 @@ func (style *Style) Copy() *Style {
 
 	var _ret *Style // out
 
-	_ret = wrapStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_ret = WrapStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _ret
 }
@@ -1319,7 +1319,7 @@ func WidgetGetDefaultStyle() *Style {
 
 	var _style *Style // out
 
-	_style = wrapStyle(externglib.Take(unsafe.Pointer(_cret)))
+	_style = WrapStyle(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _style
 }

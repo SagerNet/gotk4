@@ -70,7 +70,7 @@ type SearchEntry struct {
 	*externglib.Object
 }
 
-func wrapSearchEntry(obj *externglib.Object) *SearchEntry {
+func WrapSearchEntry(obj *externglib.Object) *SearchEntry {
 	return &SearchEntry{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -111,7 +111,7 @@ func wrapSearchEntry(obj *externglib.Object) *SearchEntry {
 func marshalSearchEntrier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSearchEntry(obj), nil
+	return WrapSearchEntry(obj), nil
 }
 
 // NewSearchEntry creates a GtkSearchEntry.
@@ -122,7 +122,7 @@ func NewSearchEntry() *SearchEntry {
 
 	var _searchEntry *SearchEntry // out
 
-	_searchEntry = wrapSearchEntry(externglib.Take(unsafe.Pointer(_cret)))
+	_searchEntry = WrapSearchEntry(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _searchEntry
 }

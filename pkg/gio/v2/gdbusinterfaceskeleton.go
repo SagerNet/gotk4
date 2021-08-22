@@ -100,7 +100,7 @@ type DBusInterfaceSkeletonner interface {
 
 var _ DBusInterfaceSkeletonner = (*DBusInterfaceSkeleton)(nil)
 
-func wrapDBusInterfaceSkeleton(obj *externglib.Object) *DBusInterfaceSkeleton {
+func WrapDBusInterfaceSkeleton(obj *externglib.Object) *DBusInterfaceSkeleton {
 	return &DBusInterfaceSkeleton{
 		Object: obj,
 		DBusInterface: DBusInterface{
@@ -112,7 +112,7 @@ func wrapDBusInterfaceSkeleton(obj *externglib.Object) *DBusInterfaceSkeleton {
 func marshalDBusInterfaceSkeletonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusInterfaceSkeleton(obj), nil
+	return WrapDBusInterfaceSkeleton(obj), nil
 }
 
 // Export exports interface_ at object_path on connection.
@@ -176,7 +176,7 @@ func (interface_ *DBusInterfaceSkeleton) Connection() *DBusConnection {
 	var _dBusConnection *DBusConnection // out
 
 	if _cret != nil {
-		_dBusConnection = wrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
+		_dBusConnection = WrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _dBusConnection
@@ -198,7 +198,7 @@ func (interface_ *DBusInterfaceSkeleton) Connections() []DBusConnection {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GDBusConnection)(v)
 		var dst DBusConnection // out
-		dst = *wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(src)))
+		dst = *WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

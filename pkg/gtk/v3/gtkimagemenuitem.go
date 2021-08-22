@@ -52,7 +52,7 @@ type ImageMenuItem struct {
 	MenuItem
 }
 
-func wrapImageMenuItem(obj *externglib.Object) *ImageMenuItem {
+func WrapImageMenuItem(obj *externglib.Object) *ImageMenuItem {
 	return &ImageMenuItem{
 		MenuItem: MenuItem{
 			Bin: Bin{
@@ -96,7 +96,7 @@ func wrapImageMenuItem(obj *externglib.Object) *ImageMenuItem {
 func marshalImageMenuItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImageMenuItem(obj), nil
+	return WrapImageMenuItem(obj), nil
 }
 
 // NewImageMenuItem creates a new ImageMenuItem with an empty label.
@@ -109,7 +109,7 @@ func NewImageMenuItem() *ImageMenuItem {
 
 	var _imageMenuItem *ImageMenuItem // out
 
-	_imageMenuItem = wrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_imageMenuItem = WrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _imageMenuItem
 }
@@ -142,7 +142,7 @@ func NewImageMenuItemFromStock(stockId string, accelGroup *AccelGroup) *ImageMen
 
 	var _imageMenuItem *ImageMenuItem // out
 
-	_imageMenuItem = wrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_imageMenuItem = WrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _imageMenuItem
 }
@@ -162,7 +162,7 @@ func NewImageMenuItemWithLabel(label string) *ImageMenuItem {
 
 	var _imageMenuItem *ImageMenuItem // out
 
-	_imageMenuItem = wrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_imageMenuItem = WrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _imageMenuItem
 }
@@ -184,7 +184,7 @@ func NewImageMenuItemWithMnemonic(label string) *ImageMenuItem {
 
 	var _imageMenuItem *ImageMenuItem // out
 
-	_imageMenuItem = wrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_imageMenuItem = WrapImageMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _imageMenuItem
 }

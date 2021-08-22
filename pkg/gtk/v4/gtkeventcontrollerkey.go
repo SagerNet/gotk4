@@ -27,7 +27,7 @@ type EventControllerKey struct {
 	EventController
 }
 
-func wrapEventControllerKey(obj *externglib.Object) *EventControllerKey {
+func WrapEventControllerKey(obj *externglib.Object) *EventControllerKey {
 	return &EventControllerKey{
 		EventController: EventController{
 			Object: obj,
@@ -38,7 +38,7 @@ func wrapEventControllerKey(obj *externglib.Object) *EventControllerKey {
 func marshalEventControllerKeyer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventControllerKey(obj), nil
+	return WrapEventControllerKey(obj), nil
 }
 
 // NewEventControllerKey creates a new event controller that will handle key
@@ -50,7 +50,7 @@ func NewEventControllerKey() *EventControllerKey {
 
 	var _eventControllerKey *EventControllerKey // out
 
-	_eventControllerKey = wrapEventControllerKey(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_eventControllerKey = WrapEventControllerKey(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _eventControllerKey
 }

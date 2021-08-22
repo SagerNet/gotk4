@@ -46,7 +46,7 @@ type Clipboard struct {
 	*externglib.Object
 }
 
-func wrapClipboard(obj *externglib.Object) *Clipboard {
+func WrapClipboard(obj *externglib.Object) *Clipboard {
 	return &Clipboard{
 		Object: obj,
 	}
@@ -55,7 +55,7 @@ func wrapClipboard(obj *externglib.Object) *Clipboard {
 func marshalClipboarder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapClipboard(obj), nil
+	return WrapClipboard(obj), nil
 }
 
 // Content returns the GdkContentProvider currently set on clipboard.
@@ -74,7 +74,7 @@ func (clipboard *Clipboard) Content() *ContentProvider {
 	var _contentProvider *ContentProvider // out
 
 	if _cret != nil {
-		_contentProvider = wrapContentProvider(externglib.Take(unsafe.Pointer(_cret)))
+		_contentProvider = WrapContentProvider(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _contentProvider
@@ -92,7 +92,7 @@ func (clipboard *Clipboard) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

@@ -561,7 +561,7 @@ type FileInfo struct {
 	*externglib.Object
 }
 
-func wrapFileInfo(obj *externglib.Object) *FileInfo {
+func WrapFileInfo(obj *externglib.Object) *FileInfo {
 	return &FileInfo{
 		Object: obj,
 	}
@@ -570,7 +570,7 @@ func wrapFileInfo(obj *externglib.Object) *FileInfo {
 func marshalFileInfor(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileInfo(obj), nil
+	return WrapFileInfo(obj), nil
 }
 
 // NewFileInfo creates a new file info structure.
@@ -581,7 +581,7 @@ func NewFileInfo() *FileInfo {
 
 	var _fileInfo *FileInfo // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fileInfo
 }
@@ -623,7 +623,7 @@ func (other *FileInfo) Dup() *FileInfo {
 
 	var _fileInfo *FileInfo // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fileInfo
 }

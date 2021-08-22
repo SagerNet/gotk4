@@ -159,7 +159,7 @@ type Stack struct {
 	Container
 }
 
-func wrapStack(obj *externglib.Object) *Stack {
+func WrapStack(obj *externglib.Object) *Stack {
 	return &Stack{
 		Container: Container{
 			Widget: Widget{
@@ -181,7 +181,7 @@ func wrapStack(obj *externglib.Object) *Stack {
 func marshalStacker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStack(obj), nil
+	return WrapStack(obj), nil
 }
 
 // NewStack creates a new Stack container.
@@ -192,7 +192,7 @@ func NewStack() *Stack {
 
 	var _stack *Stack // out
 
-	_stack = wrapStack(externglib.Take(unsafe.Pointer(_cret)))
+	_stack = WrapStack(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stack
 }

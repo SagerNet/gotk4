@@ -132,7 +132,7 @@ type Devicer interface {
 
 var _ Devicer = (*Device)(nil)
 
-func wrapDevice(obj *externglib.Object) *Device {
+func WrapDevice(obj *externglib.Object) *Device {
 	return &Device{
 		Object: obj,
 	}
@@ -141,7 +141,7 @@ func wrapDevice(obj *externglib.Object) *Device {
 func marshalDevicer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDevice(obj), nil
+	return WrapDevice(obj), nil
 }
 
 // CapsLockState retrieves whether the Caps Lock modifier of the keyboard is
@@ -178,7 +178,7 @@ func (device *Device) DeviceTool() *DeviceTool {
 
 	var _deviceTool *DeviceTool // out
 
-	_deviceTool = wrapDeviceTool(externglib.Take(unsafe.Pointer(_cret)))
+	_deviceTool = WrapDeviceTool(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _deviceTool
 }
@@ -217,7 +217,7 @@ func (device *Device) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

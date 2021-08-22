@@ -96,7 +96,7 @@ type Scrollabler interface {
 
 var _ Scrollabler = (*Scrollable)(nil)
 
-func wrapScrollable(obj *externglib.Object) *Scrollable {
+func WrapScrollable(obj *externglib.Object) *Scrollable {
 	return &Scrollable{
 		Object: obj,
 	}
@@ -105,7 +105,7 @@ func wrapScrollable(obj *externglib.Object) *Scrollable {
 func marshalScrollabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScrollable(obj), nil
+	return WrapScrollable(obj), nil
 }
 
 // Border returns the size of a non-scrolling border around the outside of the
@@ -145,7 +145,7 @@ func (scrollable *Scrollable) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -179,7 +179,7 @@ func (scrollable *Scrollable) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

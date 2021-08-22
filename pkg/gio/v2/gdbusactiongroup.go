@@ -58,7 +58,7 @@ func DBusActionGroupGet(connection *DBusConnection, busName string, objectPath s
 
 	var _dBusActionGroup *DBusActionGroup // out
 
-	_dBusActionGroup = wrapDBusActionGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusActionGroup = WrapDBusActionGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusActionGroup
 }

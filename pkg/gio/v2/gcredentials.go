@@ -67,7 +67,7 @@ type Credentials struct {
 	*externglib.Object
 }
 
-func wrapCredentials(obj *externglib.Object) *Credentials {
+func WrapCredentials(obj *externglib.Object) *Credentials {
 	return &Credentials{
 		Object: obj,
 	}
@@ -76,7 +76,7 @@ func wrapCredentials(obj *externglib.Object) *Credentials {
 func marshalCredentialser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCredentials(obj), nil
+	return WrapCredentials(obj), nil
 }
 
 // NewCredentials creates a new #GCredentials object with credentials matching
@@ -88,7 +88,7 @@ func NewCredentials() *Credentials {
 
 	var _credentials *Credentials // out
 
-	_credentials = wrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_credentials = WrapCredentials(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _credentials
 }

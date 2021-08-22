@@ -76,7 +76,7 @@ type SocketAddresser interface {
 
 var _ SocketAddresser = (*SocketAddress)(nil)
 
-func wrapSocketAddress(obj *externglib.Object) *SocketAddress {
+func WrapSocketAddress(obj *externglib.Object) *SocketAddress {
 	return &SocketAddress{
 		Object: obj,
 		SocketConnectable: SocketConnectable{
@@ -88,7 +88,7 @@ func wrapSocketAddress(obj *externglib.Object) *SocketAddress {
 func marshalSocketAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketAddress(obj), nil
+	return WrapSocketAddress(obj), nil
 }
 
 // NewSocketAddressFromNative creates a Address subclass corresponding to the
@@ -107,7 +107,7 @@ func NewSocketAddressFromNative(native cgo.Handle, len uint) *SocketAddress {
 
 	var _socketAddress *SocketAddress // out
 
-	_socketAddress = wrapSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_socketAddress = WrapSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _socketAddress
 }

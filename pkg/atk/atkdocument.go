@@ -94,7 +94,7 @@ type Documenter interface {
 
 var _ Documenter = (*Document)(nil)
 
-func wrapDocument(obj *externglib.Object) *Document {
+func WrapDocument(obj *externglib.Object) *Document {
 	return &Document{
 		Object: obj,
 	}
@@ -103,7 +103,7 @@ func wrapDocument(obj *externglib.Object) *Document {
 func marshalDocumenter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDocument(obj), nil
+	return WrapDocument(obj), nil
 }
 
 // AttributeValue retrieves the value of the given attribute_name inside

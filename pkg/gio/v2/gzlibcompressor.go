@@ -38,7 +38,7 @@ type ZlibCompressor struct {
 	Converter
 }
 
-func wrapZlibCompressor(obj *externglib.Object) *ZlibCompressor {
+func WrapZlibCompressor(obj *externglib.Object) *ZlibCompressor {
 	return &ZlibCompressor{
 		Object: obj,
 		Converter: Converter{
@@ -50,7 +50,7 @@ func wrapZlibCompressor(obj *externglib.Object) *ZlibCompressor {
 func marshalZlibCompressorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapZlibCompressor(obj), nil
+	return WrapZlibCompressor(obj), nil
 }
 
 // NewZlibCompressor creates a new Compressor.
@@ -68,7 +68,7 @@ func NewZlibCompressor(format ZlibCompressorFormat, level int) *ZlibCompressor {
 
 	var _zlibCompressor *ZlibCompressor // out
 
-	_zlibCompressor = wrapZlibCompressor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_zlibCompressor = WrapZlibCompressor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _zlibCompressor
 }
@@ -86,7 +86,7 @@ func (compressor *ZlibCompressor) FileInfo() *FileInfo {
 	var _fileInfo *FileInfo // out
 
 	if _cret != nil {
-		_fileInfo = wrapFileInfo(externglib.Take(unsafe.Pointer(_cret)))
+		_fileInfo = WrapFileInfo(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _fileInfo

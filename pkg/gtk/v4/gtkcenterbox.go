@@ -62,7 +62,7 @@ type CenterBox struct {
 	*externglib.Object
 }
 
-func wrapCenterBox(obj *externglib.Object) *CenterBox {
+func WrapCenterBox(obj *externglib.Object) *CenterBox {
 	return &CenterBox{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -89,7 +89,7 @@ func wrapCenterBox(obj *externglib.Object) *CenterBox {
 func marshalCenterBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCenterBox(obj), nil
+	return WrapCenterBox(obj), nil
 }
 
 // NewCenterBox creates a new GtkCenterBox.
@@ -100,7 +100,7 @@ func NewCenterBox() *CenterBox {
 
 	var _centerBox *CenterBox // out
 
-	_centerBox = wrapCenterBox(externglib.Take(unsafe.Pointer(_cret)))
+	_centerBox = WrapCenterBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _centerBox
 }

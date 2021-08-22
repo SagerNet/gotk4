@@ -33,7 +33,7 @@ type WaylandDevice struct {
 	gdk.Device
 }
 
-func wrapWaylandDevice(obj *externglib.Object) *WaylandDevice {
+func WrapWaylandDevice(obj *externglib.Object) *WaylandDevice {
 	return &WaylandDevice{
 		Device: gdk.Device{
 			Object: obj,
@@ -44,7 +44,7 @@ func wrapWaylandDevice(obj *externglib.Object) *WaylandDevice {
 func marshalWaylandDevicer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWaylandDevice(obj), nil
+	return WrapWaylandDevice(obj), nil
 }
 
 // NodePath returns the /dev/input/event* path of this device.

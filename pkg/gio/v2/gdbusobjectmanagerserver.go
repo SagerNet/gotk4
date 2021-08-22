@@ -57,7 +57,7 @@ type DBusObjectManagerServer struct {
 	DBusObjectManager
 }
 
-func wrapDBusObjectManagerServer(obj *externglib.Object) *DBusObjectManagerServer {
+func WrapDBusObjectManagerServer(obj *externglib.Object) *DBusObjectManagerServer {
 	return &DBusObjectManagerServer{
 		Object: obj,
 		DBusObjectManager: DBusObjectManager{
@@ -69,7 +69,7 @@ func wrapDBusObjectManagerServer(obj *externglib.Object) *DBusObjectManagerServe
 func marshalDBusObjectManagerServerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusObjectManagerServer(obj), nil
+	return WrapDBusObjectManagerServer(obj), nil
 }
 
 // NewDBusObjectManagerServer creates a new BusObjectManagerServer object.
@@ -91,7 +91,7 @@ func NewDBusObjectManagerServer(objectPath string) *DBusObjectManagerServer {
 
 	var _dBusObjectManagerServer *DBusObjectManagerServer // out
 
-	_dBusObjectManagerServer = wrapDBusObjectManagerServer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectManagerServer = WrapDBusObjectManagerServer(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusObjectManagerServer
 }
@@ -146,7 +146,7 @@ func (manager *DBusObjectManagerServer) Connection() *DBusConnection {
 
 	var _dBusConnection *DBusConnection // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusConnection
 }

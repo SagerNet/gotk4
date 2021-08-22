@@ -1336,7 +1336,7 @@ type Filer interface {
 
 var _ Filer = (*File)(nil)
 
-func wrapFile(obj *externglib.Object) *File {
+func WrapFile(obj *externglib.Object) *File {
 	return &File{
 		Object: obj,
 	}
@@ -1345,7 +1345,7 @@ func wrapFile(obj *externglib.Object) *File {
 func marshalFiler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFile(obj), nil
+	return WrapFile(obj), nil
 }
 
 // AppendTo gets an output stream for appending data to the file. If the file
@@ -1386,7 +1386,7 @@ func (file *File) AppendTo(ctx context.Context, flags FileCreateFlags) (*FileOut
 	var _fileOutputStream *FileOutputStream // out
 	var _goerr error                        // out
 
-	_fileOutputStream = wrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileOutputStream = WrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -1448,7 +1448,7 @@ func (file *File) AppendToFinish(res AsyncResulter) (*FileOutputStream, error) {
 	var _fileOutputStream *FileOutputStream // out
 	var _goerr error                        // out
 
-	_fileOutputStream = wrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileOutputStream = WrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -1675,7 +1675,7 @@ func (file *File) Create(ctx context.Context, flags FileCreateFlags) (*FileOutpu
 	var _fileOutputStream *FileOutputStream // out
 	var _goerr error                        // out
 
-	_fileOutputStream = wrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileOutputStream = WrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -1738,7 +1738,7 @@ func (file *File) CreateFinish(res AsyncResulter) (*FileOutputStream, error) {
 	var _fileOutputStream *FileOutputStream // out
 	var _goerr error                        // out
 
-	_fileOutputStream = wrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileOutputStream = WrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -1789,7 +1789,7 @@ func (file *File) CreateReadwrite(ctx context.Context, flags FileCreateFlags) (*
 	var _fileIOStream *FileIOStream // out
 	var _goerr error                // out
 
-	_fileIOStream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIOStream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -1852,7 +1852,7 @@ func (file *File) CreateReadwriteFinish(res AsyncResulter) (*FileIOStream, error
 	var _fileIOStream *FileIOStream // out
 	var _goerr error                // out
 
-	_fileIOStream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIOStream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -2151,7 +2151,7 @@ func (file *File) EnumerateChildren(ctx context.Context, attributes string, flag
 	var _fileEnumerator *FileEnumerator // out
 	var _goerr error                    // out
 
-	_fileEnumerator = wrapFileEnumerator(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileEnumerator = WrapFileEnumerator(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -2219,7 +2219,7 @@ func (file *File) EnumerateChildrenFinish(res AsyncResulter) (*FileEnumerator, e
 	var _fileEnumerator *FileEnumerator // out
 	var _goerr error                    // out
 
-	_fileEnumerator = wrapFileEnumerator(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileEnumerator = WrapFileEnumerator(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -3567,7 +3567,7 @@ func (file *File) OpenReadwrite(ctx context.Context) (*FileIOStream, error) {
 	var _fileIOStream *FileIOStream // out
 	var _goerr error                // out
 
-	_fileIOStream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIOStream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -3626,7 +3626,7 @@ func (file *File) OpenReadwriteFinish(res AsyncResulter) (*FileIOStream, error) 
 	var _fileIOStream *FileIOStream // out
 	var _goerr error                // out
 
-	_fileIOStream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIOStream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -3927,7 +3927,7 @@ func (file *File) QueryFilesystemInfo(ctx context.Context, attributes string) (*
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -3992,7 +3992,7 @@ func (file *File) QueryFilesystemInfoFinish(res AsyncResulter) (*FileInfo, error
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4053,7 +4053,7 @@ func (file *File) QueryInfo(ctx context.Context, attributes string, flags FileQu
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4121,7 +4121,7 @@ func (file *File) QueryInfoFinish(res AsyncResulter) (*FileInfo, error) {
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4245,7 +4245,7 @@ func (file *File) Read(ctx context.Context) (*FileInputStream, error) {
 	var _fileInputStream *FileInputStream // out
 	var _goerr error                      // out
 
-	_fileInputStream = wrapFileInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInputStream = WrapFileInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4304,7 +4304,7 @@ func (file *File) ReadFinish(res AsyncResulter) (*FileInputStream, error) {
 	var _fileInputStream *FileInputStream // out
 	var _goerr error                      // out
 
-	_fileInputStream = wrapFileInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInputStream = WrapFileInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4383,7 +4383,7 @@ func (file *File) Replace(ctx context.Context, etag string, makeBackup bool, fla
 	var _fileOutputStream *FileOutputStream // out
 	var _goerr error                        // out
 
-	_fileOutputStream = wrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileOutputStream = WrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4665,7 +4665,7 @@ func (file *File) ReplaceFinish(res AsyncResulter) (*FileOutputStream, error) {
 	var _fileOutputStream *FileOutputStream // out
 	var _goerr error                        // out
 
-	_fileOutputStream = wrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileOutputStream = WrapFileOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4717,7 +4717,7 @@ func (file *File) ReplaceReadwrite(ctx context.Context, etag string, makeBackup 
 	var _fileIOStream *FileIOStream // out
 	var _goerr error                // out
 
-	_fileIOStream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIOStream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -4791,7 +4791,7 @@ func (file *File) ReplaceReadwriteFinish(res AsyncResulter) (*FileIOStream, erro
 	var _fileIOStream *FileIOStream // out
 	var _goerr error                // out
 
-	_fileIOStream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIOStream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -5175,7 +5175,7 @@ func (file *File) SetAttributesFinish(result AsyncResulter) (*FileInfo, error) {
 	var _info *FileInfo // out
 	var _goerr error    // out
 
-	_info = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_arg2)))
+	_info = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_arg2)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -5833,7 +5833,7 @@ func NewFileTmp(tmpl string) (*FileIOStream, Filer, error) {
 	var _file Filer             // out
 	var _goerr error            // out
 
-	_iostream = wrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_arg2)))
+	_iostream = WrapFileIOStream(externglib.AssumeOwnership(unsafe.Pointer(_arg2)))
 	_file = (externglib.CastObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))).(Filer)
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))

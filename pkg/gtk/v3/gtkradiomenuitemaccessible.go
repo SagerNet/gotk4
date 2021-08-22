@@ -27,7 +27,7 @@ type RadioMenuItemAccessible struct {
 	CheckMenuItemAccessible
 }
 
-func wrapRadioMenuItemAccessible(obj *externglib.Object) *RadioMenuItemAccessible {
+func WrapRadioMenuItemAccessible(obj *externglib.Object) *RadioMenuItemAccessible {
 	return &RadioMenuItemAccessible{
 		CheckMenuItemAccessible: CheckMenuItemAccessible{
 			MenuItemAccessible: MenuItemAccessible{
@@ -58,7 +58,7 @@ func wrapRadioMenuItemAccessible(obj *externglib.Object) *RadioMenuItemAccessibl
 func marshalRadioMenuItemAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRadioMenuItemAccessible(obj), nil
+	return WrapRadioMenuItemAccessible(obj), nil
 }
 
 func (*RadioMenuItemAccessible) privateRadioMenuItemAccessible() {}

@@ -115,7 +115,7 @@ type Scale struct {
 	Range
 }
 
-func wrapScale(obj *externglib.Object) *Scale {
+func WrapScale(obj *externglib.Object) *Scale {
 	return &Scale{
 		Range: Range{
 			Widget: Widget{
@@ -141,7 +141,7 @@ func wrapScale(obj *externglib.Object) *Scale {
 func marshalScaler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScale(obj), nil
+	return WrapScale(obj), nil
 }
 
 // NewScale creates a new Scale.
@@ -161,7 +161,7 @@ func NewScale(orientation Orientation, adjustment *Adjustment) *Scale {
 
 	var _scale *Scale // out
 
-	_scale = wrapScale(externglib.Take(unsafe.Pointer(_cret)))
+	_scale = WrapScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scale
 }
@@ -194,7 +194,7 @@ func NewScaleWithRange(orientation Orientation, min float64, max float64, step f
 
 	var _scale *Scale // out
 
-	_scale = wrapScale(externglib.Take(unsafe.Pointer(_cret)))
+	_scale = WrapScale(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scale
 }

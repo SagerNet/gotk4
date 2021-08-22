@@ -44,7 +44,7 @@ type SimpleProxyResolver struct {
 	ProxyResolver
 }
 
-func wrapSimpleProxyResolver(obj *externglib.Object) *SimpleProxyResolver {
+func WrapSimpleProxyResolver(obj *externglib.Object) *SimpleProxyResolver {
 	return &SimpleProxyResolver{
 		Object: obj,
 		ProxyResolver: ProxyResolver{
@@ -56,7 +56,7 @@ func wrapSimpleProxyResolver(obj *externglib.Object) *SimpleProxyResolver {
 func marshalSimpleProxyResolverer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSimpleProxyResolver(obj), nil
+	return WrapSimpleProxyResolver(obj), nil
 }
 
 // SetDefaultProxy sets the default proxy on resolver, to be used for any URIs

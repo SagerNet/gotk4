@@ -61,7 +61,7 @@ type SearchEntry struct {
 	Entry
 }
 
-func wrapSearchEntry(obj *externglib.Object) *SearchEntry {
+func WrapSearchEntry(obj *externglib.Object) *SearchEntry {
 	return &SearchEntry{
 		Entry: Entry{
 			Widget: Widget{
@@ -101,7 +101,7 @@ func wrapSearchEntry(obj *externglib.Object) *SearchEntry {
 func marshalSearchEntrier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSearchEntry(obj), nil
+	return WrapSearchEntry(obj), nil
 }
 
 // NewSearchEntry creates a SearchEntry, with a find icon when the search field
@@ -113,7 +113,7 @@ func NewSearchEntry() *SearchEntry {
 
 	var _searchEntry *SearchEntry // out
 
-	_searchEntry = wrapSearchEntry(externglib.Take(unsafe.Pointer(_cret)))
+	_searchEntry = WrapSearchEntry(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _searchEntry
 }

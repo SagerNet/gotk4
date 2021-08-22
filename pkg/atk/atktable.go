@@ -225,7 +225,7 @@ type Tabler interface {
 
 var _ Tabler = (*Table)(nil)
 
-func wrapTable(obj *externglib.Object) *Table {
+func WrapTable(obj *externglib.Object) *Table {
 	return &Table{
 		Object: obj,
 	}
@@ -234,7 +234,7 @@ func wrapTable(obj *externglib.Object) *Table {
 func marshalTabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTable(obj), nil
+	return WrapTable(obj), nil
 }
 
 // AddColumnSelection adds the specified column to the selection.
@@ -294,7 +294,7 @@ func (table *Table) Caption() *ObjectClass {
 	var _object *ObjectClass // out
 
 	if _cret != nil {
-		_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+		_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _object
@@ -384,7 +384,7 @@ func (table *Table) ColumnHeader(column int) *ObjectClass {
 	var _object *ObjectClass // out
 
 	if _cret != nil {
-		_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+		_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _object
@@ -534,7 +534,7 @@ func (table *Table) RowHeader(row int) *ObjectClass {
 	var _object *ObjectClass // out
 
 	if _cret != nil {
-		_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+		_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _object
@@ -595,7 +595,7 @@ func (table *Table) Summary() *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _object
 }
@@ -691,7 +691,7 @@ func (table *Table) RefAt(row int, column int) *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _object
 }

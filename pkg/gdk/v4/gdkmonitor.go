@@ -77,7 +77,7 @@ type Monitor struct {
 	*externglib.Object
 }
 
-func wrapMonitor(obj *externglib.Object) *Monitor {
+func WrapMonitor(obj *externglib.Object) *Monitor {
 	return &Monitor{
 		Object: obj,
 	}
@@ -86,7 +86,7 @@ func wrapMonitor(obj *externglib.Object) *Monitor {
 func marshalMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMonitor(obj), nil
+	return WrapMonitor(obj), nil
 }
 
 // Connector gets the name of the monitor's connector, if available.
@@ -120,7 +120,7 @@ func (monitor *Monitor) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

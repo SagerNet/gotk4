@@ -110,7 +110,7 @@ type Action struct {
 	Buildable
 }
 
-func wrapAction(obj *externglib.Object) *Action {
+func WrapAction(obj *externglib.Object) *Action {
 	return &Action{
 		Object: obj,
 		Buildable: Buildable{
@@ -122,7 +122,7 @@ func wrapAction(obj *externglib.Object) *Action {
 func marshalActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAction(obj), nil
+	return WrapAction(obj), nil
 }
 
 // NewAction creates a new Action object. To add the action to a ActionGroup and
@@ -162,7 +162,7 @@ func NewAction(name string, label string, tooltip string, stockId string) *Actio
 
 	var _action *Action // out
 
-	_action = wrapAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_action = WrapAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _action
 }

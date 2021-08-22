@@ -122,7 +122,7 @@ type Seater interface {
 
 var _ Seater = (*Seat)(nil)
 
-func wrapSeat(obj *externglib.Object) *Seat {
+func WrapSeat(obj *externglib.Object) *Seat {
 	return &Seat{
 		Object: obj,
 	}
@@ -131,7 +131,7 @@ func wrapSeat(obj *externglib.Object) *Seat {
 func marshalSeater(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSeat(obj), nil
+	return WrapSeat(obj), nil
 }
 
 // Capabilities returns the capabilities this GdkSeat currently has.
@@ -189,7 +189,7 @@ func (seat *Seat) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }
@@ -248,7 +248,7 @@ func (seat *Seat) Tools() []DeviceTool {
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GdkDeviceTool)(v)
 		var dst DeviceTool // out
-		dst = *wrapDeviceTool(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapDeviceTool(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

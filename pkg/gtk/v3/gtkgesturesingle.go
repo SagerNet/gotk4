@@ -41,7 +41,7 @@ type GestureSingle struct {
 	Gesture
 }
 
-func wrapGestureSingle(obj *externglib.Object) *GestureSingle {
+func WrapGestureSingle(obj *externglib.Object) *GestureSingle {
 	return &GestureSingle{
 		Gesture: Gesture{
 			EventController: EventController{
@@ -54,7 +54,7 @@ func wrapGestureSingle(obj *externglib.Object) *GestureSingle {
 func marshalGestureSingler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureSingle(obj), nil
+	return WrapGestureSingle(obj), nil
 }
 
 // Button returns the button number gesture listens for, or 0 if gesture reacts

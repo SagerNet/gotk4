@@ -29,7 +29,7 @@ type IconViewAccessible struct {
 	atk.Selection
 }
 
-func wrapIconViewAccessible(obj *externglib.Object) *IconViewAccessible {
+func WrapIconViewAccessible(obj *externglib.Object) *IconViewAccessible {
 	return &IconViewAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -52,7 +52,7 @@ func wrapIconViewAccessible(obj *externglib.Object) *IconViewAccessible {
 func marshalIconViewAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconViewAccessible(obj), nil
+	return WrapIconViewAccessible(obj), nil
 }
 
 func (*IconViewAccessible) privateIconViewAccessible() {}

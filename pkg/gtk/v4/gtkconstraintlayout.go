@@ -190,7 +190,7 @@ type ConstraintLayout struct {
 	*externglib.Object
 }
 
-func wrapConstraintLayout(obj *externglib.Object) *ConstraintLayout {
+func WrapConstraintLayout(obj *externglib.Object) *ConstraintLayout {
 	return &ConstraintLayout{
 		LayoutManager: LayoutManager{
 			Object: obj,
@@ -205,7 +205,7 @@ func wrapConstraintLayout(obj *externglib.Object) *ConstraintLayout {
 func marshalConstraintLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConstraintLayout(obj), nil
+	return WrapConstraintLayout(obj), nil
 }
 
 // NewConstraintLayout creates a new GtkConstraintLayout layout manager.
@@ -216,7 +216,7 @@ func NewConstraintLayout() *ConstraintLayout {
 
 	var _constraintLayout *ConstraintLayout // out
 
-	_constraintLayout = wrapConstraintLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_constraintLayout = WrapConstraintLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _constraintLayout
 }
@@ -370,7 +370,7 @@ func (layout *ConstraintLayout) AddConstraintsFromDescription(lines []string, hs
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkConstraint)(v)
 		var dst Constraint // out
-		dst = *wrapConstraint(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapConstraint(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 	if _cerr != nil {
@@ -493,7 +493,7 @@ type ConstraintLayoutChild struct {
 	LayoutChild
 }
 
-func wrapConstraintLayoutChild(obj *externglib.Object) *ConstraintLayoutChild {
+func WrapConstraintLayoutChild(obj *externglib.Object) *ConstraintLayoutChild {
 	return &ConstraintLayoutChild{
 		LayoutChild: LayoutChild{
 			Object: obj,
@@ -504,7 +504,7 @@ func wrapConstraintLayoutChild(obj *externglib.Object) *ConstraintLayoutChild {
 func marshalConstraintLayoutChilder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConstraintLayoutChild(obj), nil
+	return WrapConstraintLayoutChild(obj), nil
 }
 
 func (*ConstraintLayoutChild) privateConstraintLayoutChild() {}

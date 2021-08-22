@@ -36,7 +36,7 @@ type TreeListRowSorter struct {
 	Sorter
 }
 
-func wrapTreeListRowSorter(obj *externglib.Object) *TreeListRowSorter {
+func WrapTreeListRowSorter(obj *externglib.Object) *TreeListRowSorter {
 	return &TreeListRowSorter{
 		Sorter: Sorter{
 			Object: obj,
@@ -47,7 +47,7 @@ func wrapTreeListRowSorter(obj *externglib.Object) *TreeListRowSorter {
 func marshalTreeListRowSorterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeListRowSorter(obj), nil
+	return WrapTreeListRowSorter(obj), nil
 }
 
 // NewTreeListRowSorter: create a special-purpose sorter that applies the
@@ -69,7 +69,7 @@ func NewTreeListRowSorter(sorter *Sorter) *TreeListRowSorter {
 
 	var _treeListRowSorter *TreeListRowSorter // out
 
-	_treeListRowSorter = wrapTreeListRowSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_treeListRowSorter = WrapTreeListRowSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _treeListRowSorter
 }
@@ -87,7 +87,7 @@ func (self *TreeListRowSorter) GetSorter() *Sorter {
 	var _sorter *Sorter // out
 
 	if _cret != nil {
-		_sorter = wrapSorter(externglib.Take(unsafe.Pointer(_cret)))
+		_sorter = WrapSorter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _sorter

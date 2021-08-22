@@ -42,7 +42,7 @@ type DataInputStream struct {
 	BufferedInputStream
 }
 
-func wrapDataInputStream(obj *externglib.Object) *DataInputStream {
+func WrapDataInputStream(obj *externglib.Object) *DataInputStream {
 	return &DataInputStream{
 		BufferedInputStream: BufferedInputStream{
 			FilterInputStream: FilterInputStream{
@@ -60,7 +60,7 @@ func wrapDataInputStream(obj *externglib.Object) *DataInputStream {
 func marshalDataInputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDataInputStream(obj), nil
+	return WrapDataInputStream(obj), nil
 }
 
 // NewDataInputStream creates a new data input stream for the base_stream.
@@ -75,7 +75,7 @@ func NewDataInputStream(baseStream InputStreamer) *DataInputStream {
 
 	var _dataInputStream *DataInputStream // out
 
-	_dataInputStream = wrapDataInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dataInputStream = WrapDataInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dataInputStream
 }

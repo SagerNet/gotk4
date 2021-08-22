@@ -45,7 +45,7 @@ func _gotk4_gtk3_ClipboardImageReceivedFunc(arg0 *C.GtkClipboard, arg1 *C.GdkPix
 	var clipboard *Clipboard     // out
 	var pixbuf *gdkpixbuf.Pixbuf // out
 
-	clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
+	clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
 	{
 		obj := externglib.Take(unsafe.Pointer(arg1))
 		pixbuf = &gdkpixbuf.Pixbuf{
@@ -76,7 +76,7 @@ func _gotk4_gtk3_ClipboardReceivedFunc(arg0 *C.GtkClipboard, arg1 *C.GtkSelectio
 	var clipboard *Clipboard         // out
 	var selectionData *SelectionData // out
 
-	clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
+	clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
 	selectionData = (*SelectionData)(gextras.NewStructNative(unsafe.Pointer(arg1)))
 	runtime.SetFinalizer(
 		gextras.StructIntern(unsafe.Pointer(selectionData)),
@@ -103,7 +103,7 @@ func _gotk4_gtk3_ClipboardTextReceivedFunc(arg0 *C.GtkClipboard, arg1 *C.gchar, 
 	var clipboard *Clipboard // out
 	var text string          // out
 
-	clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
+	clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
 	if arg1 != nil {
 		text = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 		defer C.free(unsafe.Pointer(arg1))
@@ -127,7 +127,7 @@ func _gotk4_gtk3_ClipboardURIReceivedFunc(arg0 *C.GtkClipboard, arg1 **C.gchar, 
 	var clipboard *Clipboard // out
 	var uris []string        // out
 
-	clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
+	clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(arg0)))
 	defer C.free(unsafe.Pointer(arg1))
 	{
 		var i int
@@ -202,7 +202,7 @@ type Clipboard struct {
 	*externglib.Object
 }
 
-func wrapClipboard(obj *externglib.Object) *Clipboard {
+func WrapClipboard(obj *externglib.Object) *Clipboard {
 	return &Clipboard{
 		Object: obj,
 	}
@@ -211,7 +211,7 @@ func wrapClipboard(obj *externglib.Object) *Clipboard {
 func marshalClipboarder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapClipboard(obj), nil
+	return WrapClipboard(obj), nil
 }
 
 // Clear clears the contents of the clipboard. Generally this should only be
@@ -617,7 +617,7 @@ func ClipboardGetDefault(display *gdk.Display) *Clipboard {
 
 	var _clipboard *Clipboard // out
 
-	_clipboard = wrapClipboard(externglib.Take(unsafe.Pointer(_cret)))
+	_clipboard = WrapClipboard(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _clipboard
 }

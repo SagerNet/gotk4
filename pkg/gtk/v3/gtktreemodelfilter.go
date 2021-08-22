@@ -173,7 +173,7 @@ type TreeModelFilter struct {
 	TreeModel
 }
 
-func wrapTreeModelFilter(obj *externglib.Object) *TreeModelFilter {
+func WrapTreeModelFilter(obj *externglib.Object) *TreeModelFilter {
 	return &TreeModelFilter{
 		Object: obj,
 		TreeDragSource: TreeDragSource{
@@ -188,7 +188,7 @@ func wrapTreeModelFilter(obj *externglib.Object) *TreeModelFilter {
 func marshalTreeModelFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeModelFilter(obj), nil
+	return WrapTreeModelFilter(obj), nil
 }
 
 // ClearCache: this function should almost never be called. It clears the filter

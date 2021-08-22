@@ -65,7 +65,7 @@ type CellAccessibleParenter interface {
 
 var _ CellAccessibleParenter = (*CellAccessibleParent)(nil)
 
-func wrapCellAccessibleParent(obj *externglib.Object) *CellAccessibleParent {
+func WrapCellAccessibleParent(obj *externglib.Object) *CellAccessibleParent {
 	return &CellAccessibleParent{
 		Object: obj,
 	}
@@ -74,7 +74,7 @@ func wrapCellAccessibleParent(obj *externglib.Object) *CellAccessibleParent {
 func marshalCellAccessibleParenter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellAccessibleParent(obj), nil
+	return WrapCellAccessibleParent(obj), nil
 }
 
 func (parent *CellAccessibleParent) Activate(cell *CellAccessible) {

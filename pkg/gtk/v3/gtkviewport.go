@@ -50,7 +50,7 @@ type Viewport struct {
 	*externglib.Object
 }
 
-func wrapViewport(obj *externglib.Object) *Viewport {
+func WrapViewport(obj *externglib.Object) *Viewport {
 	return &Viewport{
 		Bin: Bin{
 			Container: Container{
@@ -78,7 +78,7 @@ func wrapViewport(obj *externglib.Object) *Viewport {
 func marshalViewporter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapViewport(obj), nil
+	return WrapViewport(obj), nil
 }
 
 // NewViewport creates a new Viewport with the given adjustments, or with
@@ -101,7 +101,7 @@ func NewViewport(hadjustment *Adjustment, vadjustment *Adjustment) *Viewport {
 
 	var _viewport *Viewport // out
 
-	_viewport = wrapViewport(externglib.Take(unsafe.Pointer(_cret)))
+	_viewport = WrapViewport(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _viewport
 }
@@ -137,7 +137,7 @@ func (viewport *Viewport) HAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -174,7 +174,7 @@ func (viewport *Viewport) VAdjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

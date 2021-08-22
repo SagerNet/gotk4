@@ -1184,7 +1184,7 @@ type Windower interface {
 
 var _ Windower = (*Window)(nil)
 
-func wrapWindow(obj *externglib.Object) *Window {
+func WrapWindow(obj *externglib.Object) *Window {
 	return &Window{
 		Object: obj,
 	}
@@ -1193,7 +1193,7 @@ func wrapWindow(obj *externglib.Object) *Window {
 func marshalWindower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWindow(obj), nil
+	return WrapWindow(obj), nil
 }
 
 // NewWindow creates a new Window using the attributes from attributes. See
@@ -1218,7 +1218,7 @@ func NewWindow(parent Windower, attributes *WindowAttr, attributesMask WindowAtt
 
 	var _window *Window // out
 
-	_window = wrapWindow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_window = WrapWindow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _window
 }
@@ -1274,7 +1274,7 @@ func (window *Window) BeginDrawFrame(region *cairo.Region) *DrawingContext {
 
 	var _drawingContext *DrawingContext // out
 
-	_drawingContext = wrapDrawingContext(externglib.Take(unsafe.Pointer(_cret)))
+	_drawingContext = WrapDrawingContext(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _drawingContext
 }
@@ -2213,7 +2213,7 @@ func (window *Window) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }
@@ -2714,7 +2714,7 @@ func (window *Window) Screen() *Screen {
 
 	var _screen *Screen // out
 
-	_screen = wrapScreen(externglib.Take(unsafe.Pointer(_cret)))
+	_screen = WrapScreen(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _screen
 }
@@ -2903,7 +2903,7 @@ func (window *Window) Visual() *Visual {
 
 	var _visual *Visual // out
 
-	_visual = wrapVisual(externglib.Take(unsafe.Pointer(_cret)))
+	_visual = WrapVisual(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _visual
 }
@@ -4946,7 +4946,7 @@ func (w *WindowAttr) Wclass() WindowWindowClass {
 // Visual for window
 func (w *WindowAttr) Visual() *Visual {
 	var v *Visual // out
-	v = wrapVisual(externglib.Take(unsafe.Pointer(w.native.visual)))
+	v = WrapVisual(externglib.Take(unsafe.Pointer(w.native.visual)))
 	return v
 }
 

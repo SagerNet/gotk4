@@ -81,7 +81,7 @@ type TLSCertificater interface {
 
 var _ TLSCertificater = (*TLSCertificate)(nil)
 
-func wrapTLSCertificate(obj *externglib.Object) *TLSCertificate {
+func WrapTLSCertificate(obj *externglib.Object) *TLSCertificate {
 	return &TLSCertificate{
 		Object: obj,
 	}
@@ -90,7 +90,7 @@ func wrapTLSCertificate(obj *externglib.Object) *TLSCertificate {
 func marshalTLSCertificater(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSCertificate(obj), nil
+	return WrapTLSCertificate(obj), nil
 }
 
 // NewTLSCertificateFromFile creates a Certificate from the PEM-encoded data in
@@ -118,7 +118,7 @@ func NewTLSCertificateFromFile(file string) (*TLSCertificate, error) {
 	var _tlsCertificate *TLSCertificate // out
 	var _goerr error                    // out
 
-	_tlsCertificate = wrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_tlsCertificate = WrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -155,7 +155,7 @@ func NewTLSCertificateFromFiles(certFile string, keyFile string) (*TLSCertificat
 	var _tlsCertificate *TLSCertificate // out
 	var _goerr error                    // out
 
-	_tlsCertificate = wrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_tlsCertificate = WrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -193,7 +193,7 @@ func NewTLSCertificateFromPem(data string, length int) (*TLSCertificate, error) 
 	var _tlsCertificate *TLSCertificate // out
 	var _goerr error                    // out
 
-	_tlsCertificate = wrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_tlsCertificate = WrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -246,7 +246,7 @@ func NewTLSCertificateFromPKCS11URIs(pkcs11Uri string, privateKeyPkcs11Uri strin
 	var _tlsCertificate *TLSCertificate // out
 	var _goerr error                    // out
 
-	_tlsCertificate = wrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_tlsCertificate = WrapTLSCertificate(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

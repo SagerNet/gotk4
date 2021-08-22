@@ -30,7 +30,7 @@ type MediaControls struct {
 	Widget
 }
 
-func wrapMediaControls(obj *externglib.Object) *MediaControls {
+func WrapMediaControls(obj *externglib.Object) *MediaControls {
 	return &MediaControls{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -53,7 +53,7 @@ func wrapMediaControls(obj *externglib.Object) *MediaControls {
 func marshalMediaControlser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMediaControls(obj), nil
+	return WrapMediaControls(obj), nil
 }
 
 // NewMediaControls creates a new GtkMediaControls managing the stream passed to
@@ -71,7 +71,7 @@ func NewMediaControls(stream MediaStreamer) *MediaControls {
 
 	var _mediaControls *MediaControls // out
 
-	_mediaControls = wrapMediaControls(externglib.Take(unsafe.Pointer(_cret)))
+	_mediaControls = WrapMediaControls(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _mediaControls
 }

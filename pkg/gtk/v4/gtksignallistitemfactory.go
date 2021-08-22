@@ -64,7 +64,7 @@ type SignalListItemFactory struct {
 	ListItemFactory
 }
 
-func wrapSignalListItemFactory(obj *externglib.Object) *SignalListItemFactory {
+func WrapSignalListItemFactory(obj *externglib.Object) *SignalListItemFactory {
 	return &SignalListItemFactory{
 		ListItemFactory: ListItemFactory{
 			Object: obj,
@@ -75,7 +75,7 @@ func wrapSignalListItemFactory(obj *externglib.Object) *SignalListItemFactory {
 func marshalSignalListItemFactorier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSignalListItemFactory(obj), nil
+	return WrapSignalListItemFactory(obj), nil
 }
 
 // NewSignalListItemFactory creates a new GtkSignalListItemFactory.
@@ -88,7 +88,7 @@ func NewSignalListItemFactory() *SignalListItemFactory {
 
 	var _signalListItemFactory *SignalListItemFactory // out
 
-	_signalListItemFactory = wrapSignalListItemFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_signalListItemFactory = WrapSignalListItemFactory(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _signalListItemFactory
 }

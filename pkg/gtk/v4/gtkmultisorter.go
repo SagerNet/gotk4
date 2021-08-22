@@ -34,7 +34,7 @@ type MultiSorter struct {
 	*externglib.Object
 }
 
-func wrapMultiSorter(obj *externglib.Object) *MultiSorter {
+func WrapMultiSorter(obj *externglib.Object) *MultiSorter {
 	return &MultiSorter{
 		Sorter: Sorter{
 			Object: obj,
@@ -52,7 +52,7 @@ func wrapMultiSorter(obj *externglib.Object) *MultiSorter {
 func marshalMultiSorterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMultiSorter(obj), nil
+	return WrapMultiSorter(obj), nil
 }
 
 // NewMultiSorter creates a new multi sorter.
@@ -67,7 +67,7 @@ func NewMultiSorter() *MultiSorter {
 
 	var _multiSorter *MultiSorter // out
 
-	_multiSorter = wrapMultiSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_multiSorter = WrapMultiSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _multiSorter
 }

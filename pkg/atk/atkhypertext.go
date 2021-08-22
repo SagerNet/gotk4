@@ -62,7 +62,7 @@ type Hypertexter interface {
 
 var _ Hypertexter = (*Hypertext)(nil)
 
-func wrapHypertext(obj *externglib.Object) *Hypertext {
+func WrapHypertext(obj *externglib.Object) *Hypertext {
 	return &Hypertext{
 		Object: obj,
 	}
@@ -71,7 +71,7 @@ func wrapHypertext(obj *externglib.Object) *Hypertext {
 func marshalHypertexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHypertext(obj), nil
+	return WrapHypertext(obj), nil
 }
 
 // Link gets the link in this hypertext document at index link_index
@@ -89,7 +89,7 @@ func (hypertext *Hypertext) Link(linkIndex int) *Hyperlink {
 
 	var _hyperlink *Hyperlink // out
 
-	_hyperlink = wrapHyperlink(externglib.Take(unsafe.Pointer(_cret)))
+	_hyperlink = WrapHyperlink(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hyperlink
 }

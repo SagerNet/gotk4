@@ -26,7 +26,7 @@ type PixbufSimpleAnim struct {
 	PixbufAnimation
 }
 
-func wrapPixbufSimpleAnim(obj *externglib.Object) *PixbufSimpleAnim {
+func WrapPixbufSimpleAnim(obj *externglib.Object) *PixbufSimpleAnim {
 	return &PixbufSimpleAnim{
 		PixbufAnimation: PixbufAnimation{
 			Object: obj,
@@ -37,7 +37,7 @@ func wrapPixbufSimpleAnim(obj *externglib.Object) *PixbufSimpleAnim {
 func marshalPixbufSimpleAnimmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPixbufSimpleAnim(obj), nil
+	return WrapPixbufSimpleAnim(obj), nil
 }
 
 // NewPixbufSimpleAnim creates a new, empty animation.
@@ -58,7 +58,7 @@ func NewPixbufSimpleAnim(width int, height int, rate float32) *PixbufSimpleAnim 
 
 	var _pixbufSimpleAnim *PixbufSimpleAnim // out
 
-	_pixbufSimpleAnim = wrapPixbufSimpleAnim(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_pixbufSimpleAnim = WrapPixbufSimpleAnim(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _pixbufSimpleAnim
 }

@@ -68,7 +68,7 @@ type ShortcutsWindow struct {
 	Window
 }
 
-func wrapShortcutsWindow(obj *externglib.Object) *ShortcutsWindow {
+func WrapShortcutsWindow(obj *externglib.Object) *ShortcutsWindow {
 	return &ShortcutsWindow{
 		Window: Window{
 			Widget: Widget{
@@ -116,7 +116,7 @@ func wrapShortcutsWindow(obj *externglib.Object) *ShortcutsWindow {
 func marshalShortcutsWindower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutsWindow(obj), nil
+	return WrapShortcutsWindow(obj), nil
 }
 
 func (*ShortcutsWindow) privateShortcutsWindow() {}

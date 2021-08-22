@@ -29,7 +29,7 @@ type EventControllerLegacy struct {
 	EventController
 }
 
-func wrapEventControllerLegacy(obj *externglib.Object) *EventControllerLegacy {
+func WrapEventControllerLegacy(obj *externglib.Object) *EventControllerLegacy {
 	return &EventControllerLegacy{
 		EventController: EventController{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapEventControllerLegacy(obj *externglib.Object) *EventControllerLegacy {
 func marshalEventControllerLegacier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventControllerLegacy(obj), nil
+	return WrapEventControllerLegacy(obj), nil
 }
 
 // NewEventControllerLegacy creates a new legacy event controller.
@@ -51,7 +51,7 @@ func NewEventControllerLegacy() *EventControllerLegacy {
 
 	var _eventControllerLegacy *EventControllerLegacy // out
 
-	_eventControllerLegacy = wrapEventControllerLegacy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_eventControllerLegacy = WrapEventControllerLegacy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _eventControllerLegacy
 }

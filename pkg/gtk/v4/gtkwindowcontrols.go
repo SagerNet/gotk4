@@ -73,7 +73,7 @@ type WindowControls struct {
 	Widget
 }
 
-func wrapWindowControls(obj *externglib.Object) *WindowControls {
+func WrapWindowControls(obj *externglib.Object) *WindowControls {
 	return &WindowControls{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -96,7 +96,7 @@ func wrapWindowControls(obj *externglib.Object) *WindowControls {
 func marshalWindowControlser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWindowControls(obj), nil
+	return WrapWindowControls(obj), nil
 }
 
 // NewWindowControls creates a new GtkWindowControls.
@@ -111,7 +111,7 @@ func NewWindowControls(side PackType) *WindowControls {
 
 	var _windowControls *WindowControls // out
 
-	_windowControls = wrapWindowControls(externglib.Take(unsafe.Pointer(_cret)))
+	_windowControls = WrapWindowControls(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _windowControls
 }

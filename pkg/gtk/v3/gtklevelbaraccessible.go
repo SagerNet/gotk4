@@ -29,7 +29,7 @@ type LevelBarAccessible struct {
 	atk.Value
 }
 
-func wrapLevelBarAccessible(obj *externglib.Object) *LevelBarAccessible {
+func WrapLevelBarAccessible(obj *externglib.Object) *LevelBarAccessible {
 	return &LevelBarAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapLevelBarAccessible(obj *externglib.Object) *LevelBarAccessible {
 func marshalLevelBarAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLevelBarAccessible(obj), nil
+	return WrapLevelBarAccessible(obj), nil
 }
 
 func (*LevelBarAccessible) privateLevelBarAccessible() {}

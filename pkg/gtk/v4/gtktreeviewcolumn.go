@@ -83,7 +83,7 @@ func _gotk4_gtk4_TreeCellDataFunc(arg0 *C.GtkTreeViewColumn, arg1 *C.GtkCellRend
 	var treeModel TreeModeller     // out
 	var iter *TreeIter             // out
 
-	treeColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg0)))
+	treeColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(arg0)))
 	cell = (externglib.CastObject(externglib.Take(unsafe.Pointer(arg1)))).(CellRendererer)
 	treeModel = (externglib.CastObject(externglib.Take(unsafe.Pointer(arg2)))).(TreeModeller)
 	iter = (*TreeIter)(gextras.NewStructNative(unsafe.Pointer(arg3)))
@@ -117,7 +117,7 @@ type TreeViewColumn struct {
 	*externglib.Object
 }
 
-func wrapTreeViewColumn(obj *externglib.Object) *TreeViewColumn {
+func WrapTreeViewColumn(obj *externglib.Object) *TreeViewColumn {
 	return &TreeViewColumn{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -135,7 +135,7 @@ func wrapTreeViewColumn(obj *externglib.Object) *TreeViewColumn {
 func marshalTreeViewColumner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeViewColumn(obj), nil
+	return WrapTreeViewColumn(obj), nil
 }
 
 // NewTreeViewColumn creates a new TreeViewColumn.
@@ -146,7 +146,7 @@ func NewTreeViewColumn() *TreeViewColumn {
 
 	var _treeViewColumn *TreeViewColumn // out
 
-	_treeViewColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
+	_treeViewColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeViewColumn
 }
@@ -164,7 +164,7 @@ func NewTreeViewColumnWithArea(area CellAreaer) *TreeViewColumn {
 
 	var _treeViewColumn *TreeViewColumn // out
 
-	_treeViewColumn = wrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
+	_treeViewColumn = WrapTreeViewColumn(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeViewColumn
 }

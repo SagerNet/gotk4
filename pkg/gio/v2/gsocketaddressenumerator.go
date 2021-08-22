@@ -100,7 +100,7 @@ type SocketAddressEnumeratorrer interface {
 
 var _ SocketAddressEnumeratorrer = (*SocketAddressEnumerator)(nil)
 
-func wrapSocketAddressEnumerator(obj *externglib.Object) *SocketAddressEnumerator {
+func WrapSocketAddressEnumerator(obj *externglib.Object) *SocketAddressEnumerator {
 	return &SocketAddressEnumerator{
 		Object: obj,
 	}
@@ -109,7 +109,7 @@ func wrapSocketAddressEnumerator(obj *externglib.Object) *SocketAddressEnumerato
 func marshalSocketAddressEnumeratorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketAddressEnumerator(obj), nil
+	return WrapSocketAddressEnumerator(obj), nil
 }
 
 // Next retrieves the next Address from enumerator. Note that this may block for

@@ -109,7 +109,7 @@ type Seekabler interface {
 
 var _ Seekabler = (*Seekable)(nil)
 
-func wrapSeekable(obj *externglib.Object) *Seekable {
+func WrapSeekable(obj *externglib.Object) *Seekable {
 	return &Seekable{
 		Object: obj,
 	}
@@ -118,7 +118,7 @@ func wrapSeekable(obj *externglib.Object) *Seekable {
 func marshalSeekabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSeekable(obj), nil
+	return WrapSeekable(obj), nil
 }
 
 // CanSeek tests if the stream supports the Iface.

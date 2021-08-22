@@ -97,7 +97,7 @@ type RadioButton struct {
 	CheckButton
 }
 
-func wrapRadioButton(obj *externglib.Object) *RadioButton {
+func WrapRadioButton(obj *externglib.Object) *RadioButton {
 	return &RadioButton{
 		CheckButton: CheckButton{
 			ToggleButton: ToggleButton{
@@ -145,7 +145,7 @@ func wrapRadioButton(obj *externglib.Object) *RadioButton {
 func marshalRadioButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRadioButton(obj), nil
+	return WrapRadioButton(obj), nil
 }
 
 // NewRadioButton creates a new RadioButton. To be of any practical value, a
@@ -169,7 +169,7 @@ func NewRadioButton(group []RadioButton) *RadioButton {
 
 	var _radioButton *RadioButton // out
 
-	_radioButton = wrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioButton = WrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioButton
 }
@@ -190,7 +190,7 @@ func NewRadioButtonFromWidget(radioGroupMember *RadioButton) *RadioButton {
 
 	var _radioButton *RadioButton // out
 
-	_radioButton = wrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioButton = WrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioButton
 }
@@ -219,7 +219,7 @@ func NewRadioButtonWithLabel(group []RadioButton, label string) *RadioButton {
 
 	var _radioButton *RadioButton // out
 
-	_radioButton = wrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioButton = WrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioButton
 }
@@ -243,7 +243,7 @@ func NewRadioButtonWithLabelFromWidget(radioGroupMember *RadioButton, label stri
 
 	var _radioButton *RadioButton // out
 
-	_radioButton = wrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioButton = WrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioButton
 }
@@ -275,7 +275,7 @@ func NewRadioButtonWithMnemonic(group []RadioButton, label string) *RadioButton 
 
 	var _radioButton *RadioButton // out
 
-	_radioButton = wrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioButton = WrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioButton
 }
@@ -300,7 +300,7 @@ func NewRadioButtonWithMnemonicFromWidget(radioGroupMember *RadioButton, label s
 
 	var _radioButton *RadioButton // out
 
-	_radioButton = wrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioButton = WrapRadioButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioButton
 }
@@ -321,7 +321,7 @@ func (radioButton *RadioButton) Group() []RadioButton {
 	gextras.MoveSList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkRadioButton)(v)
 		var dst RadioButton // out
-		dst = *wrapRadioButton(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapRadioButton(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 

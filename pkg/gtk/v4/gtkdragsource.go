@@ -96,7 +96,7 @@ type DragSource struct {
 	GestureSingle
 }
 
-func wrapDragSource(obj *externglib.Object) *DragSource {
+func WrapDragSource(obj *externglib.Object) *DragSource {
 	return &DragSource{
 		GestureSingle: GestureSingle{
 			Gesture: Gesture{
@@ -111,7 +111,7 @@ func wrapDragSource(obj *externglib.Object) *DragSource {
 func marshalDragSourcer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDragSource(obj), nil
+	return WrapDragSource(obj), nil
 }
 
 // NewDragSource creates a new GtkDragSource object.
@@ -122,7 +122,7 @@ func NewDragSource() *DragSource {
 
 	var _dragSource *DragSource // out
 
-	_dragSource = wrapDragSource(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dragSource = WrapDragSource(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dragSource
 }

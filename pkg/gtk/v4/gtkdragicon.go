@@ -40,7 +40,7 @@ type DragIcon struct {
 	*externglib.Object
 }
 
-func wrapDragIcon(obj *externglib.Object) *DragIcon {
+func WrapDragIcon(obj *externglib.Object) *DragIcon {
 	return &DragIcon{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -83,7 +83,7 @@ func wrapDragIcon(obj *externglib.Object) *DragIcon {
 func marshalDragIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDragIcon(obj), nil
+	return WrapDragIcon(obj), nil
 }
 
 // Child gets the widget currently used as drag icon.

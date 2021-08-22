@@ -90,7 +90,7 @@ type DBusProxy struct {
 	Initable
 }
 
-func wrapDBusProxy(obj *externglib.Object) *DBusProxy {
+func WrapDBusProxy(obj *externglib.Object) *DBusProxy {
 	return &DBusProxy{
 		Object: obj,
 		AsyncInitable: AsyncInitable{
@@ -108,7 +108,7 @@ func wrapDBusProxy(obj *externglib.Object) *DBusProxy {
 func marshalDBusProxier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusProxy(obj), nil
+	return WrapDBusProxy(obj), nil
 }
 
 // NewDBusProxyFinish finishes creating a BusProxy.
@@ -125,7 +125,7 @@ func NewDBusProxyFinish(res AsyncResulter) (*DBusProxy, error) {
 	var _dBusProxy *DBusProxy // out
 	var _goerr error          // out
 
-	_dBusProxy = wrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusProxy = WrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -147,7 +147,7 @@ func NewDBusProxyForBusFinish(res AsyncResulter) (*DBusProxy, error) {
 	var _dBusProxy *DBusProxy // out
 	var _goerr error          // out
 
-	_dBusProxy = wrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusProxy = WrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -199,7 +199,7 @@ func NewDBusProxyForBusSync(ctx context.Context, busType BusType, flags DBusProx
 	var _dBusProxy *DBusProxy // out
 	var _goerr error          // out
 
-	_dBusProxy = wrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusProxy = WrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -271,7 +271,7 @@ func NewDBusProxySync(ctx context.Context, connection *DBusConnection, flags DBu
 	var _dBusProxy *DBusProxy // out
 	var _goerr error          // out
 
-	_dBusProxy = wrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusProxy = WrapDBusProxy(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -534,7 +534,7 @@ func (proxy *DBusProxy) CallWithUnixFdListFinish(res AsyncResulter) (*UnixFDList
 	var _goerr error           // out
 
 	if _arg1 != nil {
-		_outFdList = wrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg1)))
+		_outFdList = WrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg1)))
 	}
 	_variant = (*glib.Variant)(gextras.NewStructNative(unsafe.Pointer(_cret)))
 	runtime.SetFinalizer(
@@ -597,7 +597,7 @@ func (proxy *DBusProxy) CallWithUnixFdListSync(ctx context.Context, methodName s
 	var _goerr error           // out
 
 	if _arg6 != nil {
-		_outFdList = wrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg6)))
+		_outFdList = WrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_arg6)))
 	}
 	_variant = (*glib.Variant)(gextras.NewStructNative(unsafe.Pointer(_cret)))
 	runtime.SetFinalizer(
@@ -692,7 +692,7 @@ func (proxy *DBusProxy) Connection() *DBusConnection {
 
 	var _dBusConnection *DBusConnection // out
 
-	_dBusConnection = wrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dBusConnection
 }

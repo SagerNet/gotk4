@@ -61,7 +61,7 @@ type AccelLabel struct {
 	Label
 }
 
-func wrapAccelLabel(obj *externglib.Object) *AccelLabel {
+func WrapAccelLabel(obj *externglib.Object) *AccelLabel {
 	return &AccelLabel{
 		Label: Label{
 			Misc: Misc{
@@ -85,7 +85,7 @@ func wrapAccelLabel(obj *externglib.Object) *AccelLabel {
 func marshalAccelLabeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAccelLabel(obj), nil
+	return WrapAccelLabel(obj), nil
 }
 
 // NewAccelLabel creates a new AccelLabel.
@@ -101,7 +101,7 @@ func NewAccelLabel(_string string) *AccelLabel {
 
 	var _accelLabel *AccelLabel // out
 
-	_accelLabel = wrapAccelLabel(externglib.Take(unsafe.Pointer(_cret)))
+	_accelLabel = WrapAccelLabel(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _accelLabel
 }

@@ -89,7 +89,7 @@ type VolumeMonitor struct {
 	*externglib.Object
 }
 
-func wrapVolumeMonitor(obj *externglib.Object) *VolumeMonitor {
+func WrapVolumeMonitor(obj *externglib.Object) *VolumeMonitor {
 	return &VolumeMonitor{
 		Object: obj,
 	}
@@ -98,7 +98,7 @@ func wrapVolumeMonitor(obj *externglib.Object) *VolumeMonitor {
 func marshalVolumeMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVolumeMonitor(obj), nil
+	return WrapVolumeMonitor(obj), nil
 }
 
 // ConnectedDrives gets a list of drives connected to the system.
@@ -282,7 +282,7 @@ func VolumeMonitorGet() *VolumeMonitor {
 
 	var _volumeMonitor *VolumeMonitor // out
 
-	_volumeMonitor = wrapVolumeMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_volumeMonitor = WrapVolumeMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _volumeMonitor
 }

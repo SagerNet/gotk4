@@ -119,7 +119,7 @@ type MenuSheller interface {
 
 var _ MenuSheller = (*MenuShell)(nil)
 
-func wrapMenuShell(obj *externglib.Object) *MenuShell {
+func WrapMenuShell(obj *externglib.Object) *MenuShell {
 	return &MenuShell{
 		Container: Container{
 			Widget: Widget{
@@ -141,7 +141,7 @@ func wrapMenuShell(obj *externglib.Object) *MenuShell {
 func marshalMenuSheller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuShell(obj), nil
+	return WrapMenuShell(obj), nil
 }
 
 // ActivateItem activates the menu item within the menu shell.

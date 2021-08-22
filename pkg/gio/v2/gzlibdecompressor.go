@@ -38,7 +38,7 @@ type ZlibDecompressor struct {
 	Converter
 }
 
-func wrapZlibDecompressor(obj *externglib.Object) *ZlibDecompressor {
+func WrapZlibDecompressor(obj *externglib.Object) *ZlibDecompressor {
 	return &ZlibDecompressor{
 		Object: obj,
 		Converter: Converter{
@@ -50,7 +50,7 @@ func wrapZlibDecompressor(obj *externglib.Object) *ZlibDecompressor {
 func marshalZlibDecompressorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapZlibDecompressor(obj), nil
+	return WrapZlibDecompressor(obj), nil
 }
 
 // NewZlibDecompressor creates a new Decompressor.
@@ -65,7 +65,7 @@ func NewZlibDecompressor(format ZlibCompressorFormat) *ZlibDecompressor {
 
 	var _zlibDecompressor *ZlibDecompressor // out
 
-	_zlibDecompressor = wrapZlibDecompressor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_zlibDecompressor = WrapZlibDecompressor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _zlibDecompressor
 }
@@ -87,7 +87,7 @@ func (decompressor *ZlibDecompressor) FileInfo() *FileInfo {
 	var _fileInfo *FileInfo // out
 
 	if _cret != nil {
-		_fileInfo = wrapFileInfo(externglib.Take(unsafe.Pointer(_cret)))
+		_fileInfo = WrapFileInfo(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _fileInfo

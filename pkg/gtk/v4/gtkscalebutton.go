@@ -47,7 +47,7 @@ type ScaleButton struct {
 	*externglib.Object
 }
 
-func wrapScaleButton(obj *externglib.Object) *ScaleButton {
+func WrapScaleButton(obj *externglib.Object) *ScaleButton {
 	return &ScaleButton{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -74,7 +74,7 @@ func wrapScaleButton(obj *externglib.Object) *ScaleButton {
 func marshalScaleButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScaleButton(obj), nil
+	return WrapScaleButton(obj), nil
 }
 
 // NewScaleButton creates a GtkScaleButton.
@@ -113,7 +113,7 @@ func NewScaleButton(min float64, max float64, step float64, icons []string) *Sca
 
 	var _scaleButton *ScaleButton // out
 
-	_scaleButton = wrapScaleButton(externglib.Take(unsafe.Pointer(_cret)))
+	_scaleButton = WrapScaleButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _scaleButton
 }
@@ -132,7 +132,7 @@ func (button *ScaleButton) Adjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }
@@ -149,7 +149,7 @@ func (button *ScaleButton) MinusButton() *Button {
 
 	var _ret *Button // out
 
-	_ret = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_ret = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _ret
 }
@@ -166,7 +166,7 @@ func (button *ScaleButton) PlusButton() *Button {
 
 	var _ret *Button // out
 
-	_ret = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_ret = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _ret
 }

@@ -40,7 +40,7 @@ type StackSidebar struct {
 	Widget
 }
 
-func wrapStackSidebar(obj *externglib.Object) *StackSidebar {
+func WrapStackSidebar(obj *externglib.Object) *StackSidebar {
 	return &StackSidebar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -63,7 +63,7 @@ func wrapStackSidebar(obj *externglib.Object) *StackSidebar {
 func marshalStackSidebarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStackSidebar(obj), nil
+	return WrapStackSidebar(obj), nil
 }
 
 // NewStackSidebar creates a new GtkStackSidebar.
@@ -74,7 +74,7 @@ func NewStackSidebar() *StackSidebar {
 
 	var _stackSidebar *StackSidebar // out
 
-	_stackSidebar = wrapStackSidebar(externglib.Take(unsafe.Pointer(_cret)))
+	_stackSidebar = WrapStackSidebar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stackSidebar
 }
@@ -92,7 +92,7 @@ func (self *StackSidebar) Stack() *Stack {
 	var _stack *Stack // out
 
 	if _cret != nil {
-		_stack = wrapStack(externglib.Take(unsafe.Pointer(_cret)))
+		_stack = WrapStack(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _stack

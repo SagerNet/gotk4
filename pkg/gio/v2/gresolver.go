@@ -278,7 +278,7 @@ type Resolverer interface {
 
 var _ Resolverer = (*Resolver)(nil)
 
-func wrapResolver(obj *externglib.Object) *Resolver {
+func WrapResolver(obj *externglib.Object) *Resolver {
 	return &Resolver{
 		Object: obj,
 	}
@@ -287,7 +287,7 @@ func wrapResolver(obj *externglib.Object) *Resolver {
 func marshalResolverer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapResolver(obj), nil
+	return WrapResolver(obj), nil
 }
 
 // LookupByAddress: synchronously reverse-resolves address to determine its
@@ -438,7 +438,7 @@ func (resolver *Resolver) LookupByName(ctx context.Context, hostname string) ([]
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GInetAddress)(v)
 		var dst InetAddress // out
-		dst = *wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
+		dst = *WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 	if _cerr != nil {
@@ -505,7 +505,7 @@ func (resolver *Resolver) LookupByNameFinish(result AsyncResulter) ([]InetAddres
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GInetAddress)(v)
 		var dst InetAddress // out
-		dst = *wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
+		dst = *WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 	if _cerr != nil {
@@ -549,7 +549,7 @@ func (resolver *Resolver) LookupByNameWithFlags(ctx context.Context, hostname st
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GInetAddress)(v)
 		var dst InetAddress // out
-		dst = *wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
+		dst = *WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 	if _cerr != nil {
@@ -619,7 +619,7 @@ func (resolver *Resolver) LookupByNameWithFlagsFinish(result AsyncResulter) ([]I
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GInetAddress)(v)
 		var dst InetAddress // out
-		dst = *wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
+		dst = *WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 	if _cerr != nil {

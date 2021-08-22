@@ -45,7 +45,7 @@ type UnixFDList struct {
 	*externglib.Object
 }
 
-func wrapUnixFDList(obj *externglib.Object) *UnixFDList {
+func WrapUnixFDList(obj *externglib.Object) *UnixFDList {
 	return &UnixFDList{
 		Object: obj,
 	}
@@ -54,7 +54,7 @@ func wrapUnixFDList(obj *externglib.Object) *UnixFDList {
 func marshalUnixFDLister(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixFDList(obj), nil
+	return WrapUnixFDList(obj), nil
 }
 
 // NewUnixFDList creates a new FDList containing no file descriptors.
@@ -65,7 +65,7 @@ func NewUnixFDList() *UnixFDList {
 
 	var _unixFDList *UnixFDList // out
 
-	_unixFDList = wrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixFDList = WrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixFDList
 }
@@ -92,7 +92,7 @@ func NewUnixFDListFromArray(fds []int) *UnixFDList {
 
 	var _unixFDList *UnixFDList // out
 
-	_unixFDList = wrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixFDList = WrapUnixFDList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixFDList
 }

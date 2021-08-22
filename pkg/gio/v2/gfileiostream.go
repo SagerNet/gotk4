@@ -104,7 +104,7 @@ type FileIOStream struct {
 	*externglib.Object
 }
 
-func wrapFileIOStream(obj *externglib.Object) *FileIOStream {
+func WrapFileIOStream(obj *externglib.Object) *FileIOStream {
 	return &FileIOStream{
 		IOStream: IOStream{
 			Object: obj,
@@ -119,7 +119,7 @@ func wrapFileIOStream(obj *externglib.Object) *FileIOStream {
 func marshalFileIOStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileIOStream(obj), nil
+	return WrapFileIOStream(obj), nil
 }
 
 // ETag gets the entity tag for the file when it has been written. This must be
@@ -183,7 +183,7 @@ func (stream *FileIOStream) QueryInfo(ctx context.Context, attributes string) (*
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -245,7 +245,7 @@ func (stream *FileIOStream) QueryInfoFinish(result AsyncResulter) (*FileInfo, er
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

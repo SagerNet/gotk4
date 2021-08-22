@@ -563,7 +563,7 @@ func (typ *Resolved) WrapName(needsNamespace bool) string {
 	name := typ.Extern.Name()
 	name = strcases.PascalToGo(name)
 
-	wrapName := "wrap" + name
+	wrapName := "Wrap" + name
 	if needsNamespace {
 		// The wrapper is all exported, so it's probably public. In reality it
 		// doesn't matter, since all extern types will have the same imports.

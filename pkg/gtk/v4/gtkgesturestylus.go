@@ -30,7 +30,7 @@ type GestureStylus struct {
 	GestureSingle
 }
 
-func wrapGestureStylus(obj *externglib.Object) *GestureStylus {
+func WrapGestureStylus(obj *externglib.Object) *GestureStylus {
 	return &GestureStylus{
 		GestureSingle: GestureSingle{
 			Gesture: Gesture{
@@ -45,7 +45,7 @@ func wrapGestureStylus(obj *externglib.Object) *GestureStylus {
 func marshalGestureStylusser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureStylus(obj), nil
+	return WrapGestureStylus(obj), nil
 }
 
 // NewGestureStylus creates a new GtkGestureStylus.
@@ -56,7 +56,7 @@ func NewGestureStylus() *GestureStylus {
 
 	var _gestureStylus *GestureStylus // out
 
-	_gestureStylus = wrapGestureStylus(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureStylus = WrapGestureStylus(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureStylus
 }

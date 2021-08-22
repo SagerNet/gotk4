@@ -39,7 +39,7 @@ type ConstraintTargetter interface {
 
 var _ ConstraintTargetter = (*ConstraintTarget)(nil)
 
-func wrapConstraintTarget(obj *externglib.Object) *ConstraintTarget {
+func WrapConstraintTarget(obj *externglib.Object) *ConstraintTarget {
 	return &ConstraintTarget{
 		Object: obj,
 	}
@@ -48,7 +48,7 @@ func wrapConstraintTarget(obj *externglib.Object) *ConstraintTarget {
 func marshalConstraintTargetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConstraintTarget(obj), nil
+	return WrapConstraintTarget(obj), nil
 }
 
 func (*ConstraintTarget) privateConstraintTarget() {}
@@ -71,7 +71,7 @@ type Constraint struct {
 	*externglib.Object
 }
 
-func wrapConstraint(obj *externglib.Object) *Constraint {
+func WrapConstraint(obj *externglib.Object) *Constraint {
 	return &Constraint{
 		Object: obj,
 	}
@@ -80,7 +80,7 @@ func wrapConstraint(obj *externglib.Object) *Constraint {
 func marshalConstrainter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConstraint(obj), nil
+	return WrapConstraint(obj), nil
 }
 
 // NewConstraint creates a new constraint representing a relation between a
@@ -121,7 +121,7 @@ func NewConstraint(target ConstraintTargetter, targetAttribute ConstraintAttribu
 
 	var _constraint *Constraint // out
 
-	_constraint = wrapConstraint(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_constraint = WrapConstraint(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _constraint
 }
@@ -153,7 +153,7 @@ func NewConstraintConstant(target ConstraintTargetter, targetAttribute Constrain
 
 	var _constraint *Constraint // out
 
-	_constraint = wrapConstraint(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_constraint = WrapConstraint(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _constraint
 }

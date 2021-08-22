@@ -107,7 +107,7 @@ type Actionabler interface {
 
 var _ Actionabler = (*Actionable)(nil)
 
-func wrapActionable(obj *externglib.Object) *Actionable {
+func WrapActionable(obj *externglib.Object) *Actionable {
 	return &Actionable{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -127,7 +127,7 @@ func wrapActionable(obj *externglib.Object) *Actionable {
 func marshalActionabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActionable(obj), nil
+	return WrapActionable(obj), nil
 }
 
 // ActionName gets the action name for actionable.

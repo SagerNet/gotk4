@@ -71,7 +71,7 @@ type StringFilter struct {
 	Filter
 }
 
-func wrapStringFilter(obj *externglib.Object) *StringFilter {
+func WrapStringFilter(obj *externglib.Object) *StringFilter {
 	return &StringFilter{
 		Filter: Filter{
 			Object: obj,
@@ -82,7 +82,7 @@ func wrapStringFilter(obj *externglib.Object) *StringFilter {
 func marshalStringFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStringFilter(obj), nil
+	return WrapStringFilter(obj), nil
 }
 
 // NewStringFilter creates a new string filter.
@@ -103,7 +103,7 @@ func NewStringFilter(expression Expressioner) *StringFilter {
 
 	var _stringFilter *StringFilter // out
 
-	_stringFilter = wrapStringFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_stringFilter = WrapStringFilter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _stringFilter
 }

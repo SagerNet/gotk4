@@ -27,7 +27,7 @@ type X11Monitor struct {
 	gdk.Monitor
 }
 
-func wrapX11Monitor(obj *externglib.Object) *X11Monitor {
+func WrapX11Monitor(obj *externglib.Object) *X11Monitor {
 	return &X11Monitor{
 		Monitor: gdk.Monitor{
 			Object: obj,
@@ -38,7 +38,7 @@ func wrapX11Monitor(obj *externglib.Object) *X11Monitor {
 func marshalX11Monitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Monitor(obj), nil
+	return WrapX11Monitor(obj), nil
 }
 
 // Workarea retrieves the size and position of the “work area” on a monitor

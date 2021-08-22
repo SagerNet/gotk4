@@ -51,7 +51,7 @@ type DirectoryList struct {
 	gio.ListModel
 }
 
-func wrapDirectoryList(obj *externglib.Object) *DirectoryList {
+func WrapDirectoryList(obj *externglib.Object) *DirectoryList {
 	return &DirectoryList{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -63,7 +63,7 @@ func wrapDirectoryList(obj *externglib.Object) *DirectoryList {
 func marshalDirectoryLister(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDirectoryList(obj), nil
+	return WrapDirectoryList(obj), nil
 }
 
 // NewDirectoryList creates a new GtkDirectoryList.
@@ -88,7 +88,7 @@ func NewDirectoryList(attributes string, file gio.Filer) *DirectoryList {
 
 	var _directoryList *DirectoryList // out
 
-	_directoryList = wrapDirectoryList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_directoryList = WrapDirectoryList(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _directoryList
 }

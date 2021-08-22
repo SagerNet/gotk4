@@ -52,7 +52,7 @@ type ColorChooserWidget struct {
 	*externglib.Object
 }
 
-func wrapColorChooserWidget(obj *externglib.Object) *ColorChooserWidget {
+func WrapColorChooserWidget(obj *externglib.Object) *ColorChooserWidget {
 	return &ColorChooserWidget{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -79,7 +79,7 @@ func wrapColorChooserWidget(obj *externglib.Object) *ColorChooserWidget {
 func marshalColorChooserWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapColorChooserWidget(obj), nil
+	return WrapColorChooserWidget(obj), nil
 }
 
 // NewColorChooserWidget creates a new GtkColorChooserWidget.
@@ -90,7 +90,7 @@ func NewColorChooserWidget() *ColorChooserWidget {
 
 	var _colorChooserWidget *ColorChooserWidget // out
 
-	_colorChooserWidget = wrapColorChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
+	_colorChooserWidget = WrapColorChooserWidget(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _colorChooserWidget
 }

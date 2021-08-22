@@ -171,7 +171,7 @@ type SpinButton struct {
 	*externglib.Object
 }
 
-func wrapSpinButton(obj *externglib.Object) *SpinButton {
+func WrapSpinButton(obj *externglib.Object) *SpinButton {
 	return &SpinButton{
 		Entry: Entry{
 			Widget: Widget{
@@ -215,7 +215,7 @@ func wrapSpinButton(obj *externglib.Object) *SpinButton {
 func marshalSpinButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSpinButton(obj), nil
+	return WrapSpinButton(obj), nil
 }
 
 // NewSpinButton creates a new SpinButton.
@@ -238,7 +238,7 @@ func NewSpinButton(adjustment *Adjustment, climbRate float64, digits uint) *Spin
 
 	var _spinButton *SpinButton // out
 
-	_spinButton = wrapSpinButton(externglib.Take(unsafe.Pointer(_cret)))
+	_spinButton = WrapSpinButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _spinButton
 }
@@ -269,7 +269,7 @@ func NewSpinButtonWithRange(min float64, max float64, step float64) *SpinButton 
 
 	var _spinButton *SpinButton // out
 
-	_spinButton = wrapSpinButton(externglib.Take(unsafe.Pointer(_cret)))
+	_spinButton = WrapSpinButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _spinButton
 }
@@ -308,7 +308,7 @@ func (spinButton *SpinButton) Adjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

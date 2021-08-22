@@ -59,7 +59,7 @@ type DropTargetAsync struct {
 	EventController
 }
 
-func wrapDropTargetAsync(obj *externglib.Object) *DropTargetAsync {
+func WrapDropTargetAsync(obj *externglib.Object) *DropTargetAsync {
 	return &DropTargetAsync{
 		EventController: EventController{
 			Object: obj,
@@ -70,7 +70,7 @@ func wrapDropTargetAsync(obj *externglib.Object) *DropTargetAsync {
 func marshalDropTargetAsyncer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDropTargetAsync(obj), nil
+	return WrapDropTargetAsync(obj), nil
 }
 
 // NewDropTargetAsync creates a new GtkDropTargetAsync object.
@@ -90,7 +90,7 @@ func NewDropTargetAsync(formats *gdk.ContentFormats, actions gdk.DragAction) *Dr
 
 	var _dropTargetAsync *DropTargetAsync // out
 
-	_dropTargetAsync = wrapDropTargetAsync(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dropTargetAsync = WrapDropTargetAsync(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dropTargetAsync
 }

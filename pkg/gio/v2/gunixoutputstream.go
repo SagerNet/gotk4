@@ -47,7 +47,7 @@ type UnixOutputStream struct {
 	*externglib.Object
 }
 
-func wrapUnixOutputStream(obj *externglib.Object) *UnixOutputStream {
+func WrapUnixOutputStream(obj *externglib.Object) *UnixOutputStream {
 	return &UnixOutputStream{
 		OutputStream: OutputStream{
 			Object: obj,
@@ -67,7 +67,7 @@ func wrapUnixOutputStream(obj *externglib.Object) *UnixOutputStream {
 func marshalUnixOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixOutputStream(obj), nil
+	return WrapUnixOutputStream(obj), nil
 }
 
 // NewUnixOutputStream creates a new OutputStream for the given fd.
@@ -90,7 +90,7 @@ func NewUnixOutputStream(fd int, closeFd bool) *UnixOutputStream {
 
 	var _unixOutputStream *UnixOutputStream // out
 
-	_unixOutputStream = wrapUnixOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixOutputStream = WrapUnixOutputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixOutputStream
 }

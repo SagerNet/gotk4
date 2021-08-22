@@ -184,7 +184,7 @@ type Gesturer interface {
 
 var _ Gesturer = (*Gesture)(nil)
 
-func wrapGesture(obj *externglib.Object) *Gesture {
+func WrapGesture(obj *externglib.Object) *Gesture {
 	return &Gesture{
 		EventController: EventController{
 			Object: obj,
@@ -195,7 +195,7 @@ func wrapGesture(obj *externglib.Object) *Gesture {
 func marshalGesturer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGesture(obj), nil
+	return WrapGesture(obj), nil
 }
 
 // BoundingBox: if there are touch sequences being currently handled by gesture,

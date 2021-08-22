@@ -29,7 +29,7 @@ type ShortcutLabel struct {
 	Widget
 }
 
-func wrapShortcutLabel(obj *externglib.Object) *ShortcutLabel {
+func WrapShortcutLabel(obj *externglib.Object) *ShortcutLabel {
 	return &ShortcutLabel{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -52,7 +52,7 @@ func wrapShortcutLabel(obj *externglib.Object) *ShortcutLabel {
 func marshalShortcutLabeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutLabel(obj), nil
+	return WrapShortcutLabel(obj), nil
 }
 
 // NewShortcutLabel creates a new GtkShortcutLabel with accelerator set.
@@ -68,7 +68,7 @@ func NewShortcutLabel(accelerator string) *ShortcutLabel {
 
 	var _shortcutLabel *ShortcutLabel // out
 
-	_shortcutLabel = wrapShortcutLabel(externglib.Take(unsafe.Pointer(_cret)))
+	_shortcutLabel = WrapShortcutLabel(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _shortcutLabel
 }

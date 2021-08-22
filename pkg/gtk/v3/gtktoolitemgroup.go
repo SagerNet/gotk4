@@ -39,7 +39,7 @@ type ToolItemGroup struct {
 	*externglib.Object
 }
 
-func wrapToolItemGroup(obj *externglib.Object) *ToolItemGroup {
+func WrapToolItemGroup(obj *externglib.Object) *ToolItemGroup {
 	return &ToolItemGroup{
 		Container: Container{
 			Widget: Widget{
@@ -76,7 +76,7 @@ func wrapToolItemGroup(obj *externglib.Object) *ToolItemGroup {
 func marshalToolItemGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToolItemGroup(obj), nil
+	return WrapToolItemGroup(obj), nil
 }
 
 // NewToolItemGroup creates a new tool item group with label label.
@@ -92,7 +92,7 @@ func NewToolItemGroup(label string) *ToolItemGroup {
 
 	var _toolItemGroup *ToolItemGroup // out
 
-	_toolItemGroup = wrapToolItemGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_toolItemGroup = WrapToolItemGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolItemGroup
 }
@@ -134,7 +134,7 @@ func (group *ToolItemGroup) DropItem(x int, y int) *ToolItem {
 
 	var _toolItem *ToolItem // out
 
-	_toolItem = wrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
+	_toolItem = WrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolItem
 }
@@ -260,7 +260,7 @@ func (group *ToolItemGroup) NthItem(index uint) *ToolItem {
 
 	var _toolItem *ToolItem // out
 
-	_toolItem = wrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
+	_toolItem = WrapToolItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _toolItem
 }

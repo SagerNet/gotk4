@@ -36,7 +36,7 @@ type ProxyAddress struct {
 	InetSocketAddress
 }
 
-func wrapProxyAddress(obj *externglib.Object) *ProxyAddress {
+func WrapProxyAddress(obj *externglib.Object) *ProxyAddress {
 	return &ProxyAddress{
 		InetSocketAddress: InetSocketAddress{
 			SocketAddress: SocketAddress{
@@ -52,7 +52,7 @@ func wrapProxyAddress(obj *externglib.Object) *ProxyAddress {
 func marshalProxyAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapProxyAddress(obj), nil
+	return WrapProxyAddress(obj), nil
 }
 
 // NewProxyAddress creates a new Address for inetaddr with protocol that should
@@ -98,7 +98,7 @@ func NewProxyAddress(inetaddr *InetAddress, port uint16, protocol string, destHo
 
 	var _proxyAddress *ProxyAddress // out
 
-	_proxyAddress = wrapProxyAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_proxyAddress = WrapProxyAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _proxyAddress
 }

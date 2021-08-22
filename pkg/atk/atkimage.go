@@ -81,7 +81,7 @@ type Imager interface {
 
 var _ Imager = (*Image)(nil)
 
-func wrapImage(obj *externglib.Object) *Image {
+func WrapImage(obj *externglib.Object) *Image {
 	return &Image{
 		Object: obj,
 	}
@@ -90,7 +90,7 @@ func wrapImage(obj *externglib.Object) *Image {
 func marshalImager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImage(obj), nil
+	return WrapImage(obj), nil
 }
 
 // ImageDescription: get a textual description of this image.

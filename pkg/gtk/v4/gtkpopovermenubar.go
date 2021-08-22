@@ -53,7 +53,7 @@ type PopoverMenuBar struct {
 	Widget
 }
 
-func wrapPopoverMenuBar(obj *externglib.Object) *PopoverMenuBar {
+func WrapPopoverMenuBar(obj *externglib.Object) *PopoverMenuBar {
 	return &PopoverMenuBar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -76,7 +76,7 @@ func wrapPopoverMenuBar(obj *externglib.Object) *PopoverMenuBar {
 func marshalPopoverMenuBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPopoverMenuBar(obj), nil
+	return WrapPopoverMenuBar(obj), nil
 }
 
 // NewPopoverMenuBarFromModel creates a GtkPopoverMenuBar from a GMenuModel.
@@ -93,7 +93,7 @@ func NewPopoverMenuBarFromModel(model gio.MenuModeller) *PopoverMenuBar {
 
 	var _popoverMenuBar *PopoverMenuBar // out
 
-	_popoverMenuBar = wrapPopoverMenuBar(externglib.Take(unsafe.Pointer(_cret)))
+	_popoverMenuBar = WrapPopoverMenuBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _popoverMenuBar
 }

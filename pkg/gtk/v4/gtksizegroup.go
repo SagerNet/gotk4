@@ -91,7 +91,7 @@ type SizeGroup struct {
 	Buildable
 }
 
-func wrapSizeGroup(obj *externglib.Object) *SizeGroup {
+func WrapSizeGroup(obj *externglib.Object) *SizeGroup {
 	return &SizeGroup{
 		Object: obj,
 		Buildable: Buildable{
@@ -103,7 +103,7 @@ func wrapSizeGroup(obj *externglib.Object) *SizeGroup {
 func marshalSizeGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSizeGroup(obj), nil
+	return WrapSizeGroup(obj), nil
 }
 
 // NewSizeGroup: create a new GtkSizeGroup.
@@ -118,7 +118,7 @@ func NewSizeGroup(mode SizeGroupMode) *SizeGroup {
 
 	var _sizeGroup *SizeGroup // out
 
-	_sizeGroup = wrapSizeGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_sizeGroup = WrapSizeGroup(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _sizeGroup
 }

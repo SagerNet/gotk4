@@ -27,7 +27,7 @@ type PopoverAccessible struct {
 	ContainerAccessible
 }
 
-func wrapPopoverAccessible(obj *externglib.Object) *PopoverAccessible {
+func WrapPopoverAccessible(obj *externglib.Object) *PopoverAccessible {
 	return &PopoverAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -47,7 +47,7 @@ func wrapPopoverAccessible(obj *externglib.Object) *PopoverAccessible {
 func marshalPopoverAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPopoverAccessible(obj), nil
+	return WrapPopoverAccessible(obj), nil
 }
 
 func (*PopoverAccessible) privatePopoverAccessible() {}

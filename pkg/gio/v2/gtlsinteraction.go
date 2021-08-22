@@ -150,7 +150,7 @@ type TLSInteraction struct {
 	*externglib.Object
 }
 
-func wrapTLSInteraction(obj *externglib.Object) *TLSInteraction {
+func WrapTLSInteraction(obj *externglib.Object) *TLSInteraction {
 	return &TLSInteraction{
 		Object: obj,
 	}
@@ -159,7 +159,7 @@ func wrapTLSInteraction(obj *externglib.Object) *TLSInteraction {
 func marshalTLSInteractioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSInteraction(obj), nil
+	return WrapTLSInteraction(obj), nil
 }
 
 // AskPassword: run synchronous interaction to ask the user for a password. In

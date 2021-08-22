@@ -113,7 +113,7 @@ type Popover struct {
 	*externglib.Object
 }
 
-func wrapPopover(obj *externglib.Object) *Popover {
+func WrapPopover(obj *externglib.Object) *Popover {
 	return &Popover{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -157,7 +157,7 @@ func wrapPopover(obj *externglib.Object) *Popover {
 func marshalPopoverer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPopover(obj), nil
+	return WrapPopover(obj), nil
 }
 
 // NewPopover creates a new GtkPopover.
@@ -168,7 +168,7 @@ func NewPopover() *Popover {
 
 	var _popover *Popover // out
 
-	_popover = wrapPopover(externglib.Take(unsafe.Pointer(_cret)))
+	_popover = WrapPopover(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _popover
 }

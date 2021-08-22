@@ -35,7 +35,7 @@ type SeparatorMenuItem struct {
 	MenuItem
 }
 
-func wrapSeparatorMenuItem(obj *externglib.Object) *SeparatorMenuItem {
+func WrapSeparatorMenuItem(obj *externglib.Object) *SeparatorMenuItem {
 	return &SeparatorMenuItem{
 		MenuItem: MenuItem{
 			Bin: Bin{
@@ -79,7 +79,7 @@ func wrapSeparatorMenuItem(obj *externglib.Object) *SeparatorMenuItem {
 func marshalSeparatorMenuItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSeparatorMenuItem(obj), nil
+	return WrapSeparatorMenuItem(obj), nil
 }
 
 // NewSeparatorMenuItem creates a new SeparatorMenuItem.
@@ -90,7 +90,7 @@ func NewSeparatorMenuItem() *SeparatorMenuItem {
 
 	var _separatorMenuItem *SeparatorMenuItem // out
 
-	_separatorMenuItem = wrapSeparatorMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_separatorMenuItem = WrapSeparatorMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _separatorMenuItem
 }

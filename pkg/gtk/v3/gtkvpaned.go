@@ -32,7 +32,7 @@ type VPaned struct {
 	Paned
 }
 
-func wrapVPaned(obj *externglib.Object) *VPaned {
+func WrapVPaned(obj *externglib.Object) *VPaned {
 	return &VPaned{
 		Paned: Paned{
 			Container: Container{
@@ -60,7 +60,7 @@ func wrapVPaned(obj *externglib.Object) *VPaned {
 func marshalVPanedder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVPaned(obj), nil
+	return WrapVPaned(obj), nil
 }
 
 // NewVPaned: create a new VPaned
@@ -73,7 +73,7 @@ func NewVPaned() *VPaned {
 
 	var _vPaned *VPaned // out
 
-	_vPaned = wrapVPaned(externglib.Take(unsafe.Pointer(_cret)))
+	_vPaned = WrapVPaned(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vPaned
 }

@@ -57,7 +57,7 @@ type Texturer interface {
 
 var _ Texturer = (*Texture)(nil)
 
-func wrapTexture(obj *externglib.Object) *Texture {
+func WrapTexture(obj *externglib.Object) *Texture {
 	return &Texture{
 		Object: obj,
 		Paintable: Paintable{
@@ -69,7 +69,7 @@ func wrapTexture(obj *externglib.Object) *Texture {
 func marshalTexturer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTexture(obj), nil
+	return WrapTexture(obj), nil
 }
 
 // NewTextureForPixbuf creates a new texture object representing the GdkPixbuf.
@@ -84,7 +84,7 @@ func NewTextureForPixbuf(pixbuf *gdkpixbuf.Pixbuf) *Texture {
 
 	var _texture *Texture // out
 
-	_texture = wrapTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_texture = WrapTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _texture
 }
@@ -108,7 +108,7 @@ func NewTextureFromFile(file gio.Filer) (*Texture, error) {
 	var _texture *Texture // out
 	var _goerr error      // out
 
-	_texture = wrapTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_texture = WrapTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -137,7 +137,7 @@ func NewTextureFromResource(resourcePath string) *Texture {
 
 	var _texture *Texture // out
 
-	_texture = wrapTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_texture = WrapTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _texture
 }

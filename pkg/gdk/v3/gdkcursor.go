@@ -392,7 +392,7 @@ type Cursorrer interface {
 
 var _ Cursorrer = (*Cursor)(nil)
 
-func wrapCursor(obj *externglib.Object) *Cursor {
+func WrapCursor(obj *externglib.Object) *Cursor {
 	return &Cursor{
 		Object: obj,
 	}
@@ -401,7 +401,7 @@ func wrapCursor(obj *externglib.Object) *Cursor {
 func marshalCursorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCursor(obj), nil
+	return WrapCursor(obj), nil
 }
 
 // NewCursor creates a new cursor from the set of builtin cursors for the
@@ -421,7 +421,7 @@ func NewCursor(cursorType CursorType) *Cursor {
 
 	var _cursor *Cursor // out
 
-	_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cursor
 }
@@ -442,7 +442,7 @@ func NewCursorForDisplay(display *Display, cursorType CursorType) *Cursor {
 	var _cursor *Cursor // out
 
 	if _cret != nil {
-		_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _cursor
@@ -539,7 +539,7 @@ func NewCursorFromName(display *Display, name string) *Cursor {
 	var _cursor *Cursor // out
 
 	if _cret != nil {
-		_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _cursor
@@ -580,7 +580,7 @@ func NewCursorFromPixbuf(display *Display, pixbuf *gdkpixbuf.Pixbuf, x int, y in
 
 	var _cursor *Cursor // out
 
-	_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cursor
 }
@@ -616,7 +616,7 @@ func NewCursorFromSurface(display *Display, surface *cairo.Surface, x float64, y
 
 	var _cursor *Cursor // out
 
-	_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cursor
 }
@@ -650,7 +650,7 @@ func (cursor *Cursor) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

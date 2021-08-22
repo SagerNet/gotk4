@@ -54,7 +54,7 @@ type Rooter interface {
 
 var _ Rooter = (*Root)(nil)
 
-func wrapRoot(obj *externglib.Object) *Root {
+func WrapRoot(obj *externglib.Object) *Root {
 	return &Root{
 		NativeSurface: NativeSurface{
 			Widget: Widget{
@@ -79,7 +79,7 @@ func wrapRoot(obj *externglib.Object) *Root {
 func marshalRooter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRoot(obj), nil
+	return WrapRoot(obj), nil
 }
 
 // Display returns the display that this GtkRoot is on.

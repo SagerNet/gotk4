@@ -136,7 +136,7 @@ type LevelBar struct {
 	*externglib.Object
 }
 
-func wrapLevelBar(obj *externglib.Object) *LevelBar {
+func WrapLevelBar(obj *externglib.Object) *LevelBar {
 	return &LevelBar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -163,7 +163,7 @@ func wrapLevelBar(obj *externglib.Object) *LevelBar {
 func marshalLevelBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLevelBar(obj), nil
+	return WrapLevelBar(obj), nil
 }
 
 // NewLevelBar creates a new GtkLevelBar.
@@ -174,7 +174,7 @@ func NewLevelBar() *LevelBar {
 
 	var _levelBar *LevelBar // out
 
-	_levelBar = wrapLevelBar(externglib.Take(unsafe.Pointer(_cret)))
+	_levelBar = WrapLevelBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _levelBar
 }
@@ -194,7 +194,7 @@ func NewLevelBarForInterval(minValue float64, maxValue float64) *LevelBar {
 
 	var _levelBar *LevelBar // out
 
-	_levelBar = wrapLevelBar(externglib.Take(unsafe.Pointer(_cret)))
+	_levelBar = WrapLevelBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _levelBar
 }

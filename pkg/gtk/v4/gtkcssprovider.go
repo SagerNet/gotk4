@@ -55,7 +55,7 @@ type CSSProvider struct {
 	StyleProvider
 }
 
-func wrapCSSProvider(obj *externglib.Object) *CSSProvider {
+func WrapCSSProvider(obj *externglib.Object) *CSSProvider {
 	return &CSSProvider{
 		Object: obj,
 		StyleProvider: StyleProvider{
@@ -67,7 +67,7 @@ func wrapCSSProvider(obj *externglib.Object) *CSSProvider {
 func marshalCSSProviderer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCSSProvider(obj), nil
+	return WrapCSSProvider(obj), nil
 }
 
 // NewCSSProvider returns a newly created GtkCssProvider.
@@ -78,7 +78,7 @@ func NewCSSProvider() *CSSProvider {
 
 	var _cssProvider *CSSProvider // out
 
-	_cssProvider = wrapCSSProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cssProvider = WrapCSSProvider(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cssProvider
 }

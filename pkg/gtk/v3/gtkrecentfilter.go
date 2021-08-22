@@ -181,7 +181,7 @@ type RecentFilter struct {
 	*externglib.Object
 }
 
-func wrapRecentFilter(obj *externglib.Object) *RecentFilter {
+func WrapRecentFilter(obj *externglib.Object) *RecentFilter {
 	return &RecentFilter{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -196,7 +196,7 @@ func wrapRecentFilter(obj *externglib.Object) *RecentFilter {
 func marshalRecentFilterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentFilter(obj), nil
+	return WrapRecentFilter(obj), nil
 }
 
 // NewRecentFilter creates a new RecentFilter with no rules added to it. Such
@@ -215,7 +215,7 @@ func NewRecentFilter() *RecentFilter {
 
 	var _recentFilter *RecentFilter // out
 
-	_recentFilter = wrapRecentFilter(externglib.Take(unsafe.Pointer(_cret)))
+	_recentFilter = WrapRecentFilter(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentFilter
 }

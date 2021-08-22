@@ -42,7 +42,7 @@ type SeparatorToolItem struct {
 	ToolItem
 }
 
-func wrapSeparatorToolItem(obj *externglib.Object) *SeparatorToolItem {
+func WrapSeparatorToolItem(obj *externglib.Object) *SeparatorToolItem {
 	return &SeparatorToolItem{
 		ToolItem: ToolItem{
 			Bin: Bin{
@@ -72,7 +72,7 @@ func wrapSeparatorToolItem(obj *externglib.Object) *SeparatorToolItem {
 func marshalSeparatorToolItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSeparatorToolItem(obj), nil
+	return WrapSeparatorToolItem(obj), nil
 }
 
 // NewSeparatorToolItem: create a new SeparatorToolItem
@@ -83,7 +83,7 @@ func NewSeparatorToolItem() *SeparatorToolItem {
 
 	var _separatorToolItem *SeparatorToolItem // out
 
-	_separatorToolItem = wrapSeparatorToolItem(externglib.Take(unsafe.Pointer(_cret)))
+	_separatorToolItem = WrapSeparatorToolItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _separatorToolItem
 }

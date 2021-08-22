@@ -121,7 +121,7 @@ type Notebook struct {
 	Container
 }
 
-func wrapNotebook(obj *externglib.Object) *Notebook {
+func WrapNotebook(obj *externglib.Object) *Notebook {
 	return &Notebook{
 		Container: Container{
 			Widget: Widget{
@@ -143,7 +143,7 @@ func wrapNotebook(obj *externglib.Object) *Notebook {
 func marshalNotebooker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNotebook(obj), nil
+	return WrapNotebook(obj), nil
 }
 
 // NewNotebook creates a new Notebook widget with no pages.
@@ -154,7 +154,7 @@ func NewNotebook() *Notebook {
 
 	var _notebook *Notebook // out
 
-	_notebook = wrapNotebook(externglib.Take(unsafe.Pointer(_cret)))
+	_notebook = WrapNotebook(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _notebook
 }

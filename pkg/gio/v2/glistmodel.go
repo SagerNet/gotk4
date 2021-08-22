@@ -118,7 +118,7 @@ type ListModeller interface {
 
 var _ ListModeller = (*ListModel)(nil)
 
-func wrapListModel(obj *externglib.Object) *ListModel {
+func WrapListModel(obj *externglib.Object) *ListModel {
 	return &ListModel{
 		Object: obj,
 	}
@@ -127,7 +127,7 @@ func wrapListModel(obj *externglib.Object) *ListModel {
 func marshalListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListModel(obj), nil
+	return WrapListModel(obj), nil
 }
 
 // ItemType gets the type of the items in list. All items returned from

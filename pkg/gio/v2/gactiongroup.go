@@ -291,7 +291,7 @@ type ActionGrouper interface {
 
 var _ ActionGrouper = (*ActionGroup)(nil)
 
-func wrapActionGroup(obj *externglib.Object) *ActionGroup {
+func WrapActionGroup(obj *externglib.Object) *ActionGroup {
 	return &ActionGroup{
 		Object: obj,
 	}
@@ -300,7 +300,7 @@ func wrapActionGroup(obj *externglib.Object) *ActionGroup {
 func marshalActionGrouper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActionGroup(obj), nil
+	return WrapActionGroup(obj), nil
 }
 
 // ActionAdded emits the Group::action-added signal on action_group.

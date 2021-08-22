@@ -39,7 +39,7 @@ type TCPWrapperConnection struct {
 	TCPConnection
 }
 
-func wrapTCPWrapperConnection(obj *externglib.Object) *TCPWrapperConnection {
+func WrapTCPWrapperConnection(obj *externglib.Object) *TCPWrapperConnection {
 	return &TCPWrapperConnection{
 		TCPConnection: TCPConnection{
 			SocketConnection: SocketConnection{
@@ -54,7 +54,7 @@ func wrapTCPWrapperConnection(obj *externglib.Object) *TCPWrapperConnection {
 func marshalTCPWrapperConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTCPWrapperConnection(obj), nil
+	return WrapTCPWrapperConnection(obj), nil
 }
 
 // NewTCPWrapperConnection wraps base_io_stream and socket together as a
@@ -73,7 +73,7 @@ func NewTCPWrapperConnection(baseIoStream IOStreamer, socket *Socket) *TCPWrappe
 
 	var _tcpWrapperConnection *TCPWrapperConnection // out
 
-	_tcpWrapperConnection = wrapTCPWrapperConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_tcpWrapperConnection = WrapTCPWrapperConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _tcpWrapperConnection
 }

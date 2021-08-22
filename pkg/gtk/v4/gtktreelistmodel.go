@@ -64,7 +64,7 @@ type TreeListModel struct {
 	gio.ListModel
 }
 
-func wrapTreeListModel(obj *externglib.Object) *TreeListModel {
+func WrapTreeListModel(obj *externglib.Object) *TreeListModel {
 	return &TreeListModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -76,7 +76,7 @@ func wrapTreeListModel(obj *externglib.Object) *TreeListModel {
 func marshalTreeListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeListModel(obj), nil
+	return WrapTreeListModel(obj), nil
 }
 
 // NewTreeListModel creates a new empty GtkTreeListModel displaying root with
@@ -110,7 +110,7 @@ func NewTreeListModel(root gio.ListModeller, passthrough bool, autoexpand bool, 
 
 	var _treeListModel *TreeListModel // out
 
-	_treeListModel = wrapTreeListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_treeListModel = WrapTreeListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _treeListModel
 }
@@ -160,7 +160,7 @@ func (self *TreeListModel) ChildRow(position uint) *TreeListRow {
 	var _treeListRow *TreeListRow // out
 
 	if _cret != nil {
-		_treeListRow = wrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_treeListRow = WrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _treeListRow
@@ -239,7 +239,7 @@ func (self *TreeListModel) Row(position uint) *TreeListRow {
 	var _treeListRow *TreeListRow // out
 
 	if _cret != nil {
-		_treeListRow = wrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_treeListRow = WrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _treeListRow
@@ -279,7 +279,7 @@ type TreeListRow struct {
 	*externglib.Object
 }
 
-func wrapTreeListRow(obj *externglib.Object) *TreeListRow {
+func WrapTreeListRow(obj *externglib.Object) *TreeListRow {
 	return &TreeListRow{
 		Object: obj,
 	}
@@ -288,7 +288,7 @@ func wrapTreeListRow(obj *externglib.Object) *TreeListRow {
 func marshalTreeListRower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeListRow(obj), nil
+	return WrapTreeListRow(obj), nil
 }
 
 // ChildRow: if self is not expanded or position is greater than the number of
@@ -308,7 +308,7 @@ func (self *TreeListRow) ChildRow(position uint) *TreeListRow {
 	var _treeListRow *TreeListRow // out
 
 	if _cret != nil {
-		_treeListRow = wrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_treeListRow = WrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _treeListRow
@@ -418,7 +418,7 @@ func (self *TreeListRow) Parent() *TreeListRow {
 	var _treeListRow *TreeListRow // out
 
 	if _cret != nil {
-		_treeListRow = wrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_treeListRow = WrapTreeListRow(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _treeListRow

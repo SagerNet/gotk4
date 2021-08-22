@@ -26,7 +26,7 @@ type X11AppLaunchContext struct {
 	gdk.AppLaunchContext
 }
 
-func wrapX11AppLaunchContext(obj *externglib.Object) *X11AppLaunchContext {
+func WrapX11AppLaunchContext(obj *externglib.Object) *X11AppLaunchContext {
 	return &X11AppLaunchContext{
 		AppLaunchContext: gdk.AppLaunchContext{
 			AppLaunchContext: gio.AppLaunchContext{
@@ -39,7 +39,7 @@ func wrapX11AppLaunchContext(obj *externglib.Object) *X11AppLaunchContext {
 func marshalX11AppLaunchContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11AppLaunchContext(obj), nil
+	return WrapX11AppLaunchContext(obj), nil
 }
 
 func (*X11AppLaunchContext) privateX11AppLaunchContext() {}

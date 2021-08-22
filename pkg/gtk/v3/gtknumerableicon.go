@@ -35,7 +35,7 @@ type NumerableIcon struct {
 	gio.EmblemedIcon
 }
 
-func wrapNumerableIcon(obj *externglib.Object) *NumerableIcon {
+func WrapNumerableIcon(obj *externglib.Object) *NumerableIcon {
 	return &NumerableIcon{
 		EmblemedIcon: gio.EmblemedIcon{
 			Object: obj,
@@ -49,7 +49,7 @@ func wrapNumerableIcon(obj *externglib.Object) *NumerableIcon {
 func marshalNumerableIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNumerableIcon(obj), nil
+	return WrapNumerableIcon(obj), nil
 }
 
 // BackgroundGIcon returns the #GIcon that was set as the base background image,
@@ -153,7 +153,7 @@ func (self *NumerableIcon) StyleContext() *StyleContext {
 	var _styleContext *StyleContext // out
 
 	if _cret != nil {
-		_styleContext = wrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
+		_styleContext = WrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _styleContext

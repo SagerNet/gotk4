@@ -152,7 +152,7 @@ type Editabler interface {
 
 var _ Editabler = (*Editable)(nil)
 
-func wrapEditable(obj *externglib.Object) *Editable {
+func WrapEditable(obj *externglib.Object) *Editable {
 	return &Editable{
 		Object: obj,
 	}
@@ -161,7 +161,7 @@ func wrapEditable(obj *externglib.Object) *Editable {
 func marshalEditabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEditable(obj), nil
+	return WrapEditable(obj), nil
 }
 
 // CopyClipboard copies the contents of the currently selected content in the

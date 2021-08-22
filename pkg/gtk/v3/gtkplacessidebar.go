@@ -146,7 +146,7 @@ type PlacesSidebar struct {
 	ScrolledWindow
 }
 
-func wrapPlacesSidebar(obj *externglib.Object) *PlacesSidebar {
+func WrapPlacesSidebar(obj *externglib.Object) *PlacesSidebar {
 	return &PlacesSidebar{
 		ScrolledWindow: ScrolledWindow{
 			Bin: Bin{
@@ -172,7 +172,7 @@ func wrapPlacesSidebar(obj *externglib.Object) *PlacesSidebar {
 func marshalPlacesSidebarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPlacesSidebar(obj), nil
+	return WrapPlacesSidebar(obj), nil
 }
 
 // NewPlacesSidebar creates a new PlacesSidebar widget.
@@ -186,7 +186,7 @@ func NewPlacesSidebar() *PlacesSidebar {
 
 	var _placesSidebar *PlacesSidebar // out
 
-	_placesSidebar = wrapPlacesSidebar(externglib.Take(unsafe.Pointer(_cret)))
+	_placesSidebar = WrapPlacesSidebar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _placesSidebar
 }

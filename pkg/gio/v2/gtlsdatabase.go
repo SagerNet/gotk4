@@ -233,7 +233,7 @@ type TLSDatabaser interface {
 
 var _ TLSDatabaser = (*TLSDatabase)(nil)
 
-func wrapTLSDatabase(obj *externglib.Object) *TLSDatabase {
+func WrapTLSDatabase(obj *externglib.Object) *TLSDatabase {
 	return &TLSDatabase{
 		Object: obj,
 	}
@@ -242,7 +242,7 @@ func wrapTLSDatabase(obj *externglib.Object) *TLSDatabase {
 func marshalTLSDatabaser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSDatabase(obj), nil
+	return WrapTLSDatabase(obj), nil
 }
 
 // CreateCertificateHandle: create a handle string for the certificate. The

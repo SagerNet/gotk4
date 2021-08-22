@@ -62,7 +62,7 @@ type ThemingEngine struct {
 	*externglib.Object
 }
 
-func wrapThemingEngine(obj *externglib.Object) *ThemingEngine {
+func WrapThemingEngine(obj *externglib.Object) *ThemingEngine {
 	return &ThemingEngine{
 		Object: obj,
 	}
@@ -71,7 +71,7 @@ func wrapThemingEngine(obj *externglib.Object) *ThemingEngine {
 func marshalThemingEnginer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapThemingEngine(obj), nil
+	return WrapThemingEngine(obj), nil
 }
 
 // BackgroundColor gets the background color for a given state.
@@ -526,7 +526,7 @@ func ThemingEngineLoad(name string) *ThemingEngine {
 	var _themingEngine *ThemingEngine // out
 
 	if _cret != nil {
-		_themingEngine = wrapThemingEngine(externglib.Take(unsafe.Pointer(_cret)))
+		_themingEngine = WrapThemingEngine(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _themingEngine

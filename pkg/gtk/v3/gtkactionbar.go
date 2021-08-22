@@ -40,7 +40,7 @@ type ActionBar struct {
 	Bin
 }
 
-func wrapActionBar(obj *externglib.Object) *ActionBar {
+func WrapActionBar(obj *externglib.Object) *ActionBar {
 	return &ActionBar{
 		Bin: Bin{
 			Container: Container{
@@ -64,7 +64,7 @@ func wrapActionBar(obj *externglib.Object) *ActionBar {
 func marshalActionBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActionBar(obj), nil
+	return WrapActionBar(obj), nil
 }
 
 // NewActionBar creates a new ActionBar widget.
@@ -75,7 +75,7 @@ func NewActionBar() *ActionBar {
 
 	var _actionBar *ActionBar // out
 
-	_actionBar = wrapActionBar(externglib.Take(unsafe.Pointer(_cret)))
+	_actionBar = WrapActionBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _actionBar
 }

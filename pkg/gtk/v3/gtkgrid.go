@@ -48,7 +48,7 @@ type Grid struct {
 	*externglib.Object
 }
 
-func wrapGrid(obj *externglib.Object) *Grid {
+func WrapGrid(obj *externglib.Object) *Grid {
 	return &Grid{
 		Container: Container{
 			Widget: Widget{
@@ -74,7 +74,7 @@ func wrapGrid(obj *externglib.Object) *Grid {
 func marshalGridder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGrid(obj), nil
+	return WrapGrid(obj), nil
 }
 
 // NewGrid creates a new grid widget.
@@ -85,7 +85,7 @@ func NewGrid() *Grid {
 
 	var _grid *Grid // out
 
-	_grid = wrapGrid(externglib.Take(unsafe.Pointer(_cret)))
+	_grid = WrapGrid(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _grid
 }

@@ -29,7 +29,7 @@ type MenuShellAccessible struct {
 	atk.Selection
 }
 
-func wrapMenuShellAccessible(obj *externglib.Object) *MenuShellAccessible {
+func WrapMenuShellAccessible(obj *externglib.Object) *MenuShellAccessible {
 	return &MenuShellAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -52,7 +52,7 @@ func wrapMenuShellAccessible(obj *externglib.Object) *MenuShellAccessible {
 func marshalMenuShellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuShellAccessible(obj), nil
+	return WrapMenuShellAccessible(obj), nil
 }
 
 func (*MenuShellAccessible) privateMenuShellAccessible() {}

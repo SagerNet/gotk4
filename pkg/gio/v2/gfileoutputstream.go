@@ -98,7 +98,7 @@ type FileOutputStream struct {
 	*externglib.Object
 }
 
-func wrapFileOutputStream(obj *externglib.Object) *FileOutputStream {
+func WrapFileOutputStream(obj *externglib.Object) *FileOutputStream {
 	return &FileOutputStream{
 		OutputStream: OutputStream{
 			Object: obj,
@@ -113,7 +113,7 @@ func wrapFileOutputStream(obj *externglib.Object) *FileOutputStream {
 func marshalFileOutputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileOutputStream(obj), nil
+	return WrapFileOutputStream(obj), nil
 }
 
 // ETag gets the entity tag for the file when it has been written. This must be
@@ -177,7 +177,7 @@ func (stream *FileOutputStream) QueryInfo(ctx context.Context, attributes string
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -239,7 +239,7 @@ func (stream *FileOutputStream) QueryInfoFinish(result AsyncResulter) (*FileInfo
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

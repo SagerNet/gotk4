@@ -27,7 +27,7 @@ type RadioButtonAccessible struct {
 	ToggleButtonAccessible
 }
 
-func wrapRadioButtonAccessible(obj *externglib.Object) *RadioButtonAccessible {
+func WrapRadioButtonAccessible(obj *externglib.Object) *RadioButtonAccessible {
 	return &RadioButtonAccessible{
 		ToggleButtonAccessible: ToggleButtonAccessible{
 			ButtonAccessible: ButtonAccessible{
@@ -58,7 +58,7 @@ func wrapRadioButtonAccessible(obj *externglib.Object) *RadioButtonAccessible {
 func marshalRadioButtonAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRadioButtonAccessible(obj), nil
+	return WrapRadioButtonAccessible(obj), nil
 }
 
 func (*RadioButtonAccessible) privateRadioButtonAccessible() {}

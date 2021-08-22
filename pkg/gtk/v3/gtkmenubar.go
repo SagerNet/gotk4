@@ -36,7 +36,7 @@ type MenuBar struct {
 	MenuShell
 }
 
-func wrapMenuBar(obj *externglib.Object) *MenuBar {
+func WrapMenuBar(obj *externglib.Object) *MenuBar {
 	return &MenuBar{
 		MenuShell: MenuShell{
 			Container: Container{
@@ -60,7 +60,7 @@ func wrapMenuBar(obj *externglib.Object) *MenuBar {
 func marshalMenuBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuBar(obj), nil
+	return WrapMenuBar(obj), nil
 }
 
 // NewMenuBar creates a new MenuBar
@@ -71,7 +71,7 @@ func NewMenuBar() *MenuBar {
 
 	var _menuBar *MenuBar // out
 
-	_menuBar = wrapMenuBar(externglib.Take(unsafe.Pointer(_cret)))
+	_menuBar = WrapMenuBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuBar
 }
@@ -93,7 +93,7 @@ func NewMenuBarFromModel(model gio.MenuModeller) *MenuBar {
 
 	var _menuBar *MenuBar // out
 
-	_menuBar = wrapMenuBar(externglib.Take(unsafe.Pointer(_cret)))
+	_menuBar = WrapMenuBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuBar
 }

@@ -29,7 +29,7 @@ type WaylandSeat struct {
 	gdk.Seat
 }
 
-func wrapWaylandSeat(obj *externglib.Object) *WaylandSeat {
+func WrapWaylandSeat(obj *externglib.Object) *WaylandSeat {
 	return &WaylandSeat{
 		Seat: gdk.Seat{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapWaylandSeat(obj *externglib.Object) *WaylandSeat {
 func marshalWaylandSeater(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWaylandSeat(obj), nil
+	return WrapWaylandSeat(obj), nil
 }
 
 func (*WaylandSeat) privateWaylandSeat() {}

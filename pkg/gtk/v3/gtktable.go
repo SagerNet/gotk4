@@ -107,7 +107,7 @@ type Table struct {
 	Container
 }
 
-func wrapTable(obj *externglib.Object) *Table {
+func WrapTable(obj *externglib.Object) *Table {
 	return &Table{
 		Container: Container{
 			Widget: Widget{
@@ -129,7 +129,7 @@ func wrapTable(obj *externglib.Object) *Table {
 func marshalTabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTable(obj), nil
+	return WrapTable(obj), nil
 }
 
 // NewTable: used to create a new table widget. An initial size must be given by
@@ -158,7 +158,7 @@ func NewTable(rows uint, columns uint, homogeneous bool) *Table {
 
 	var _table *Table // out
 
-	_table = wrapTable(externglib.Take(unsafe.Pointer(_cret)))
+	_table = WrapTable(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _table
 }

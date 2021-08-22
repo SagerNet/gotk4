@@ -50,7 +50,7 @@ type RecentChooserMenu struct {
 	*externglib.Object
 }
 
-func wrapRecentChooserMenu(obj *externglib.Object) *RecentChooserMenu {
+func WrapRecentChooserMenu(obj *externglib.Object) *RecentChooserMenu {
 	return &RecentChooserMenu{
 		Menu: Menu{
 			MenuShell: MenuShell{
@@ -83,7 +83,7 @@ func wrapRecentChooserMenu(obj *externglib.Object) *RecentChooserMenu {
 func marshalRecentChooserMenuer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentChooserMenu(obj), nil
+	return WrapRecentChooserMenu(obj), nil
 }
 
 // NewRecentChooserMenu creates a new RecentChooserMenu widget.
@@ -104,7 +104,7 @@ func NewRecentChooserMenu() *RecentChooserMenu {
 
 	var _recentChooserMenu *RecentChooserMenu // out
 
-	_recentChooserMenu = wrapRecentChooserMenu(externglib.Take(unsafe.Pointer(_cret)))
+	_recentChooserMenu = WrapRecentChooserMenu(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentChooserMenu
 }
@@ -126,7 +126,7 @@ func NewRecentChooserMenuForManager(manager *RecentManager) *RecentChooserMenu {
 
 	var _recentChooserMenu *RecentChooserMenu // out
 
-	_recentChooserMenu = wrapRecentChooserMenu(externglib.Take(unsafe.Pointer(_cret)))
+	_recentChooserMenu = WrapRecentChooserMenu(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentChooserMenu
 }

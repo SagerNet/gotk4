@@ -197,7 +197,7 @@ type Stack struct {
 	Widget
 }
 
-func wrapStack(obj *externglib.Object) *Stack {
+func WrapStack(obj *externglib.Object) *Stack {
 	return &Stack{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -220,7 +220,7 @@ func wrapStack(obj *externglib.Object) *Stack {
 func marshalStacker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStack(obj), nil
+	return WrapStack(obj), nil
 }
 
 // NewStack creates a new GtkStack.
@@ -231,7 +231,7 @@ func NewStack() *Stack {
 
 	var _stack *Stack // out
 
-	_stack = wrapStack(externglib.Take(unsafe.Pointer(_cret)))
+	_stack = WrapStack(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stack
 }
@@ -251,7 +251,7 @@ func (stack *Stack) AddChild(child Widgetter) *StackPage {
 
 	var _stackPage *StackPage // out
 
-	_stackPage = wrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
+	_stackPage = WrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stackPage
 }
@@ -279,7 +279,7 @@ func (stack *Stack) AddNamed(child Widgetter, name string) *StackPage {
 
 	var _stackPage *StackPage // out
 
-	_stackPage = wrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
+	_stackPage = WrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stackPage
 }
@@ -312,7 +312,7 @@ func (stack *Stack) AddTitled(child Widgetter, name string, title string) *Stack
 
 	var _stackPage *StackPage // out
 
-	_stackPage = wrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
+	_stackPage = WrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stackPage
 }
@@ -396,7 +396,7 @@ func (stack *Stack) Page(child Widgetter) *StackPage {
 
 	var _stackPage *StackPage // out
 
-	_stackPage = wrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
+	_stackPage = WrapStackPage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _stackPage
 }
@@ -709,7 +709,7 @@ type StackPage struct {
 	Accessible
 }
 
-func wrapStackPage(obj *externglib.Object) *StackPage {
+func WrapStackPage(obj *externglib.Object) *StackPage {
 	return &StackPage{
 		Object: obj,
 		Accessible: Accessible{
@@ -721,7 +721,7 @@ func wrapStackPage(obj *externglib.Object) *StackPage {
 func marshalStackPager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStackPage(obj), nil
+	return WrapStackPage(obj), nil
 }
 
 // Child returns the stack child to which self belongs.

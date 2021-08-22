@@ -231,7 +231,7 @@ type FontChooserer interface {
 
 var _ FontChooserer = (*FontChooser)(nil)
 
-func wrapFontChooser(obj *externglib.Object) *FontChooser {
+func WrapFontChooser(obj *externglib.Object) *FontChooser {
 	return &FontChooser{
 		Object: obj,
 	}
@@ -240,7 +240,7 @@ func wrapFontChooser(obj *externglib.Object) *FontChooser {
 func marshalFontChooserer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontChooser(obj), nil
+	return WrapFontChooser(obj), nil
 }
 
 // Font gets the currently-selected font name.

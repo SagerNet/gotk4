@@ -55,7 +55,7 @@ type SocketConnection struct {
 	IOStream
 }
 
-func wrapSocketConnection(obj *externglib.Object) *SocketConnection {
+func WrapSocketConnection(obj *externglib.Object) *SocketConnection {
 	return &SocketConnection{
 		IOStream: IOStream{
 			Object: obj,
@@ -66,7 +66,7 @@ func wrapSocketConnection(obj *externglib.Object) *SocketConnection {
 func marshalSocketConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSocketConnection(obj), nil
+	return WrapSocketConnection(obj), nil
 }
 
 // ConnectSocketConnection: connect connection to the specified remote address.
@@ -217,7 +217,7 @@ func (connection *SocketConnection) Socket() *Socket {
 
 	var _socket *Socket // out
 
-	_socket = wrapSocket(externglib.Take(unsafe.Pointer(_cret)))
+	_socket = WrapSocket(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _socket
 }

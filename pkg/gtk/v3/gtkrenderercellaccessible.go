@@ -28,7 +28,7 @@ type RendererCellAccessible struct {
 	CellAccessible
 }
 
-func wrapRendererCellAccessible(obj *externglib.Object) *RendererCellAccessible {
+func WrapRendererCellAccessible(obj *externglib.Object) *RendererCellAccessible {
 	return &RendererCellAccessible{
 		CellAccessible: CellAccessible{
 			Accessible: Accessible{
@@ -55,7 +55,7 @@ func wrapRendererCellAccessible(obj *externglib.Object) *RendererCellAccessible 
 func marshalRendererCellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRendererCellAccessible(obj), nil
+	return WrapRendererCellAccessible(obj), nil
 }
 
 func NewRendererCellAccessible(renderer CellRendererer) *RendererCellAccessible {
@@ -69,7 +69,7 @@ func NewRendererCellAccessible(renderer CellRendererer) *RendererCellAccessible 
 
 	var _rendererCellAccessible *RendererCellAccessible // out
 
-	_rendererCellAccessible = wrapRendererCellAccessible(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_rendererCellAccessible = WrapRendererCellAccessible(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _rendererCellAccessible
 }

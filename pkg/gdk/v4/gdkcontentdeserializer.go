@@ -108,7 +108,7 @@ type ContentDeserializer struct {
 	gio.AsyncResult
 }
 
-func wrapContentDeserializer(obj *externglib.Object) *ContentDeserializer {
+func WrapContentDeserializer(obj *externglib.Object) *ContentDeserializer {
 	return &ContentDeserializer{
 		Object: obj,
 		AsyncResult: gio.AsyncResult{
@@ -120,7 +120,7 @@ func wrapContentDeserializer(obj *externglib.Object) *ContentDeserializer {
 func marshalContentDeserializerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapContentDeserializer(obj), nil
+	return WrapContentDeserializer(obj), nil
 }
 
 // Cancellable gets the cancellable for the current operation.

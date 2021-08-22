@@ -43,7 +43,7 @@ type HSV struct {
 	Widget
 }
 
-func wrapHSV(obj *externglib.Object) *HSV {
+func WrapHSV(obj *externglib.Object) *HSV {
 	return &HSV{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -63,7 +63,7 @@ func wrapHSV(obj *externglib.Object) *HSV {
 func marshalHSVer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHSV(obj), nil
+	return WrapHSV(obj), nil
 }
 
 // NewHSV creates a new HSV color selector.
@@ -74,7 +74,7 @@ func NewHSV() *HSV {
 
 	var _hsV *HSV // out
 
-	_hsV = wrapHSV(externglib.Take(unsafe.Pointer(_cret)))
+	_hsV = WrapHSV(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hsV
 }

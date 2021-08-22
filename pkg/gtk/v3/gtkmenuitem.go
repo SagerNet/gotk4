@@ -73,7 +73,7 @@ type MenuItem struct {
 	*externglib.Object
 }
 
-func wrapMenuItem(obj *externglib.Object) *MenuItem {
+func WrapMenuItem(obj *externglib.Object) *MenuItem {
 	return &MenuItem{
 		Bin: Bin{
 			Container: Container{
@@ -115,7 +115,7 @@ func wrapMenuItem(obj *externglib.Object) *MenuItem {
 func marshalMenuItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuItem(obj), nil
+	return WrapMenuItem(obj), nil
 }
 
 // NewMenuItem creates a new MenuItem.
@@ -126,7 +126,7 @@ func NewMenuItem() *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }
@@ -144,7 +144,7 @@ func NewMenuItemWithLabel(label string) *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }
@@ -165,7 +165,7 @@ func NewMenuItemWithMnemonic(label string) *MenuItem {
 
 	var _menuItem *MenuItem // out
 
-	_menuItem = wrapMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_menuItem = WrapMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuItem
 }

@@ -79,7 +79,7 @@ type DeviceTool struct {
 	*externglib.Object
 }
 
-func wrapDeviceTool(obj *externglib.Object) *DeviceTool {
+func WrapDeviceTool(obj *externglib.Object) *DeviceTool {
 	return &DeviceTool{
 		Object: obj,
 	}
@@ -88,7 +88,7 @@ func wrapDeviceTool(obj *externglib.Object) *DeviceTool {
 func marshalDeviceTooler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDeviceTool(obj), nil
+	return WrapDeviceTool(obj), nil
 }
 
 // Axes gets the axes of the tool.

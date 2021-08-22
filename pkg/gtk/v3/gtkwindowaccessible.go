@@ -29,7 +29,7 @@ type WindowAccessible struct {
 	atk.Window
 }
 
-func wrapWindowAccessible(obj *externglib.Object) *WindowAccessible {
+func WrapWindowAccessible(obj *externglib.Object) *WindowAccessible {
 	return &WindowAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -54,7 +54,7 @@ func wrapWindowAccessible(obj *externglib.Object) *WindowAccessible {
 func marshalWindowAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWindowAccessible(obj), nil
+	return WrapWindowAccessible(obj), nil
 }
 
 func (*WindowAccessible) privateWindowAccessible() {}

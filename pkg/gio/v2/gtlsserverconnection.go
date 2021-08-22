@@ -47,7 +47,7 @@ type TLSServerConnectioner interface {
 
 var _ TLSServerConnectioner = (*TLSServerConnection)(nil)
 
-func wrapTLSServerConnection(obj *externglib.Object) *TLSServerConnection {
+func WrapTLSServerConnection(obj *externglib.Object) *TLSServerConnection {
 	return &TLSServerConnection{
 		TLSConnection: TLSConnection{
 			IOStream: IOStream{
@@ -60,7 +60,7 @@ func wrapTLSServerConnection(obj *externglib.Object) *TLSServerConnection {
 func marshalTLSServerConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSServerConnection(obj), nil
+	return WrapTLSServerConnection(obj), nil
 }
 
 func (*TLSServerConnection) privateTLSServerConnection() {}

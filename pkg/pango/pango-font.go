@@ -364,7 +364,7 @@ type Fonter interface {
 
 var _ Fonter = (*Font)(nil)
 
-func wrapFont(obj *externglib.Object) *Font {
+func WrapFont(obj *externglib.Object) *Font {
 	return &Font{
 		Object: obj,
 	}
@@ -373,7 +373,7 @@ func wrapFont(obj *externglib.Object) *Font {
 func marshalFonter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFont(obj), nil
+	return WrapFont(obj), nil
 }
 
 // Describe returns a description of the font, with font size set in points.
@@ -443,7 +443,7 @@ func (font *Font) Coverage(language *Language) *Coverage {
 
 	var _coverage *Coverage // out
 
-	_coverage = wrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_coverage = WrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _coverage
 }
@@ -647,7 +647,7 @@ type FontFacer interface {
 
 var _ FontFacer = (*FontFace)(nil)
 
-func wrapFontFace(obj *externglib.Object) *FontFace {
+func WrapFontFace(obj *externglib.Object) *FontFace {
 	return &FontFace{
 		Object: obj,
 	}
@@ -656,7 +656,7 @@ func wrapFontFace(obj *externglib.Object) *FontFace {
 func marshalFontFacer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontFace(obj), nil
+	return WrapFontFace(obj), nil
 }
 
 // Describe returns the family, style, variant, weight and stretch of a
@@ -833,7 +833,7 @@ type FontFamilier interface {
 
 var _ FontFamilier = (*FontFamily)(nil)
 
-func wrapFontFamily(obj *externglib.Object) *FontFamily {
+func WrapFontFamily(obj *externglib.Object) *FontFamily {
 	return &FontFamily{
 		Object: obj,
 	}
@@ -842,7 +842,7 @@ func wrapFontFamily(obj *externglib.Object) *FontFamily {
 func marshalFontFamilier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFontFamily(obj), nil
+	return WrapFontFamily(obj), nil
 }
 
 // Face gets the PangoFontFace of family with the given name.

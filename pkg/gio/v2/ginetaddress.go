@@ -51,7 +51,7 @@ type InetAddress struct {
 	*externglib.Object
 }
 
-func wrapInetAddress(obj *externglib.Object) *InetAddress {
+func WrapInetAddress(obj *externglib.Object) *InetAddress {
 	return &InetAddress{
 		Object: obj,
 	}
@@ -60,7 +60,7 @@ func wrapInetAddress(obj *externglib.Object) *InetAddress {
 func marshalInetAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInetAddress(obj), nil
+	return WrapInetAddress(obj), nil
 }
 
 // NewInetAddressAny creates a Address for the "any" address (unassigned/"don't
@@ -76,7 +76,7 @@ func NewInetAddressAny(family SocketFamily) *InetAddress {
 
 	var _inetAddress *InetAddress // out
 
-	_inetAddress = wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_inetAddress = WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _inetAddress
 }
@@ -96,7 +96,7 @@ func NewInetAddressFromString(_string string) *InetAddress {
 	var _inetAddress *InetAddress // out
 
 	if _cret != nil {
-		_inetAddress = wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_inetAddress = WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _inetAddress
@@ -114,7 +114,7 @@ func NewInetAddressLoopback(family SocketFamily) *InetAddress {
 
 	var _inetAddress *InetAddress // out
 
-	_inetAddress = wrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_inetAddress = WrapInetAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _inetAddress
 }

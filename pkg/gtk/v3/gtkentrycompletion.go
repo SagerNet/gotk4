@@ -46,7 +46,7 @@ func _gotk4_gtk3_EntryCompletionMatchFunc(arg0 *C.GtkEntryCompletion, arg1 *C.gc
 	var key string                  // out
 	var iter *TreeIter              // out
 
-	completion = wrapEntryCompletion(externglib.Take(unsafe.Pointer(arg0)))
+	completion = WrapEntryCompletion(externglib.Take(unsafe.Pointer(arg0)))
 	key = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	iter = (*TreeIter)(gextras.NewStructNative(unsafe.Pointer(arg2)))
@@ -124,7 +124,7 @@ type EntryCompletion struct {
 	CellLayout
 }
 
-func wrapEntryCompletion(obj *externglib.Object) *EntryCompletion {
+func WrapEntryCompletion(obj *externglib.Object) *EntryCompletion {
 	return &EntryCompletion{
 		Object: obj,
 		Buildable: Buildable{
@@ -139,7 +139,7 @@ func wrapEntryCompletion(obj *externglib.Object) *EntryCompletion {
 func marshalEntryCompletioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEntryCompletion(obj), nil
+	return WrapEntryCompletion(obj), nil
 }
 
 // NewEntryCompletion creates a new EntryCompletion object.
@@ -150,7 +150,7 @@ func NewEntryCompletion() *EntryCompletion {
 
 	var _entryCompletion *EntryCompletion // out
 
-	_entryCompletion = wrapEntryCompletion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_entryCompletion = WrapEntryCompletion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _entryCompletion
 }
@@ -169,7 +169,7 @@ func NewEntryCompletionWithArea(area CellAreaer) *EntryCompletion {
 
 	var _entryCompletion *EntryCompletion // out
 
-	_entryCompletion = wrapEntryCompletion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_entryCompletion = WrapEntryCompletion(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _entryCompletion
 }

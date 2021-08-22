@@ -48,7 +48,7 @@ type TLSFileDatabaser interface {
 
 var _ TLSFileDatabaser = (*TLSFileDatabase)(nil)
 
-func wrapTLSFileDatabase(obj *externglib.Object) *TLSFileDatabase {
+func WrapTLSFileDatabase(obj *externglib.Object) *TLSFileDatabase {
 	return &TLSFileDatabase{
 		TLSDatabase: TLSDatabase{
 			Object: obj,
@@ -59,7 +59,7 @@ func wrapTLSFileDatabase(obj *externglib.Object) *TLSFileDatabase {
 func marshalTLSFileDatabaser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSFileDatabase(obj), nil
+	return WrapTLSFileDatabase(obj), nil
 }
 
 func (*TLSFileDatabase) privateTLSFileDatabase() {}

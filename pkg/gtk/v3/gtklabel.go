@@ -56,7 +56,7 @@ type Label struct {
 	Misc
 }
 
-func wrapLabel(obj *externglib.Object) *Label {
+func WrapLabel(obj *externglib.Object) *Label {
 	return &Label{
 		Misc: Misc{
 			Widget: Widget{
@@ -78,7 +78,7 @@ func wrapLabel(obj *externglib.Object) *Label {
 func marshalLabeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLabel(obj), nil
+	return WrapLabel(obj), nil
 }
 
 // NewLabel creates a new label with the given text inside it. You can pass NULL
@@ -97,7 +97,7 @@ func NewLabel(str string) *Label {
 
 	var _label *Label // out
 
-	_label = wrapLabel(externglib.Take(unsafe.Pointer(_cret)))
+	_label = WrapLabel(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _label
 }
@@ -129,7 +129,7 @@ func NewLabelWithMnemonic(str string) *Label {
 
 	var _label *Label // out
 
-	_label = wrapLabel(externglib.Take(unsafe.Pointer(_cret)))
+	_label = WrapLabel(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _label
 }

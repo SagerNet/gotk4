@@ -106,7 +106,7 @@ type MemoryMonitorrer interface {
 
 var _ MemoryMonitorrer = (*MemoryMonitor)(nil)
 
-func wrapMemoryMonitor(obj *externglib.Object) *MemoryMonitor {
+func WrapMemoryMonitor(obj *externglib.Object) *MemoryMonitor {
 	return &MemoryMonitor{
 		Initable: Initable{
 			Object: obj,
@@ -117,7 +117,7 @@ func wrapMemoryMonitor(obj *externglib.Object) *MemoryMonitor {
 func marshalMemoryMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMemoryMonitor(obj), nil
+	return WrapMemoryMonitor(obj), nil
 }
 
 func (*MemoryMonitor) privateMemoryMonitor() {}

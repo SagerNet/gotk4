@@ -118,7 +118,7 @@ type LayoutManagerer interface {
 
 var _ LayoutManagerer = (*LayoutManager)(nil)
 
-func wrapLayoutManager(obj *externglib.Object) *LayoutManager {
+func WrapLayoutManager(obj *externglib.Object) *LayoutManager {
 	return &LayoutManager{
 		Object: obj,
 	}
@@ -127,7 +127,7 @@ func wrapLayoutManager(obj *externglib.Object) *LayoutManager {
 func marshalLayoutManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLayoutManager(obj), nil
+	return WrapLayoutManager(obj), nil
 }
 
 // Allocate assigns the given width, height, and baseline to a widget, and

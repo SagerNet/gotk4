@@ -83,7 +83,7 @@ type FileInputStream struct {
 	*externglib.Object
 }
 
-func wrapFileInputStream(obj *externglib.Object) *FileInputStream {
+func WrapFileInputStream(obj *externglib.Object) *FileInputStream {
 	return &FileInputStream{
 		InputStream: InputStream{
 			Object: obj,
@@ -98,7 +98,7 @@ func wrapFileInputStream(obj *externglib.Object) *FileInputStream {
 func marshalFileInputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileInputStream(obj), nil
+	return WrapFileInputStream(obj), nil
 }
 
 // QueryInfo queries a file input stream the given attributes. This function
@@ -130,7 +130,7 @@ func (stream *FileInputStream) QueryInfo(ctx context.Context, attributes string)
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -195,7 +195,7 @@ func (stream *FileInputStream) QueryInfoFinish(result AsyncResulter) (*FileInfo,
 	var _fileInfo *FileInfo // out
 	var _goerr error        // out
 
-	_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

@@ -69,7 +69,7 @@ type CellEditabler interface {
 
 var _ CellEditabler = (*CellEditable)(nil)
 
-func wrapCellEditable(obj *externglib.Object) *CellEditable {
+func WrapCellEditable(obj *externglib.Object) *CellEditable {
 	return &CellEditable{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -92,7 +92,7 @@ func wrapCellEditable(obj *externglib.Object) *CellEditable {
 func marshalCellEditabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellEditable(obj), nil
+	return WrapCellEditable(obj), nil
 }
 
 // EditingDone emits the CellEditable::editing-done signal.

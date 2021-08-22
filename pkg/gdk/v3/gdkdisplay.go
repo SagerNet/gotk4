@@ -42,7 +42,7 @@ type Display struct {
 	*externglib.Object
 }
 
-func wrapDisplay(obj *externglib.Object) *Display {
+func WrapDisplay(obj *externglib.Object) *Display {
 	return &Display{
 		Object: obj,
 	}
@@ -51,7 +51,7 @@ func wrapDisplay(obj *externglib.Object) *Display {
 func marshalDisplayer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDisplay(obj), nil
+	return WrapDisplay(obj), nil
 }
 
 // Beep emits a short beep on display
@@ -129,7 +129,7 @@ func (display *Display) AppLaunchContext() *AppLaunchContext {
 
 	var _appLaunchContext *AppLaunchContext // out
 
-	_appLaunchContext = wrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_appLaunchContext = WrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _appLaunchContext
 }
@@ -182,7 +182,7 @@ func (display *Display) DefaultScreen() *Screen {
 
 	var _screen *Screen // out
 
-	_screen = wrapScreen(externglib.Take(unsafe.Pointer(_cret)))
+	_screen = WrapScreen(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _screen
 }
@@ -261,7 +261,7 @@ func (display *Display) Monitor(monitorNum int) *Monitor {
 	var _monitor *Monitor // out
 
 	if _cret != nil {
-		_monitor = wrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
+		_monitor = WrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _monitor
@@ -286,7 +286,7 @@ func (display *Display) MonitorAtPoint(x int, y int) *Monitor {
 
 	var _monitor *Monitor // out
 
-	_monitor = wrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
+	_monitor = WrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _monitor
 }
@@ -307,7 +307,7 @@ func (display *Display) MonitorAtWindow(window Windower) *Monitor {
 
 	var _monitor *Monitor // out
 
-	_monitor = wrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
+	_monitor = WrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _monitor
 }
@@ -390,7 +390,7 @@ func (display *Display) Pointer() (screen *Screen, x int, y int, mask ModifierTy
 	var _mask ModifierType // out
 
 	if _arg1 != nil {
-		_screen = wrapScreen(externglib.Take(unsafe.Pointer(_arg1)))
+		_screen = WrapScreen(externglib.Take(unsafe.Pointer(_arg1)))
 	}
 	_x = int(_arg2)
 	_y = int(_arg3)
@@ -417,7 +417,7 @@ func (display *Display) PrimaryMonitor() *Monitor {
 	var _monitor *Monitor // out
 
 	if _cret != nil {
-		_monitor = wrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
+		_monitor = WrapMonitor(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _monitor
@@ -441,7 +441,7 @@ func (display *Display) Screen(screenNum int) *Screen {
 
 	var _screen *Screen // out
 
-	_screen = wrapScreen(externglib.Take(unsafe.Pointer(_cret)))
+	_screen = WrapScreen(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _screen
 }
@@ -868,7 +868,7 @@ func DisplayGetDefault() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display
@@ -888,7 +888,7 @@ func DisplayOpen(displayName string) *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display
@@ -909,7 +909,7 @@ func DisplayOpenDefaultLibgtkOnly() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display

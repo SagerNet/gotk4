@@ -109,7 +109,7 @@ type Revealer struct {
 	Widget
 }
 
-func wrapRevealer(obj *externglib.Object) *Revealer {
+func WrapRevealer(obj *externglib.Object) *Revealer {
 	return &Revealer{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -132,7 +132,7 @@ func wrapRevealer(obj *externglib.Object) *Revealer {
 func marshalRevealerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRevealer(obj), nil
+	return WrapRevealer(obj), nil
 }
 
 // NewRevealer creates a new GtkRevealer.
@@ -143,7 +143,7 @@ func NewRevealer() *Revealer {
 
 	var _revealer *Revealer // out
 
-	_revealer = wrapRevealer(externglib.Take(unsafe.Pointer(_cret)))
+	_revealer = WrapRevealer(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _revealer
 }

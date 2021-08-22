@@ -46,7 +46,7 @@ type Arrow struct {
 	Misc
 }
 
-func wrapArrow(obj *externglib.Object) *Arrow {
+func WrapArrow(obj *externglib.Object) *Arrow {
 	return &Arrow{
 		Misc: Misc{
 			Widget: Widget{
@@ -68,7 +68,7 @@ func wrapArrow(obj *externglib.Object) *Arrow {
 func marshalArrower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapArrow(obj), nil
+	return WrapArrow(obj), nil
 }
 
 // NewArrow creates a new Arrow widget.
@@ -88,7 +88,7 @@ func NewArrow(arrowType ArrowType, shadowType ShadowType) *Arrow {
 
 	var _arrow *Arrow // out
 
-	_arrow = wrapArrow(externglib.Take(unsafe.Pointer(_cret)))
+	_arrow = WrapArrow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _arrow
 }

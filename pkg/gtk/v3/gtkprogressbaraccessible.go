@@ -29,7 +29,7 @@ type ProgressBarAccessible struct {
 	atk.Value
 }
 
-func wrapProgressBarAccessible(obj *externglib.Object) *ProgressBarAccessible {
+func WrapProgressBarAccessible(obj *externglib.Object) *ProgressBarAccessible {
 	return &ProgressBarAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapProgressBarAccessible(obj *externglib.Object) *ProgressBarAccessible {
 func marshalProgressBarAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapProgressBarAccessible(obj), nil
+	return WrapProgressBarAccessible(obj), nil
 }
 
 func (*ProgressBarAccessible) privateProgressBarAccessible() {}

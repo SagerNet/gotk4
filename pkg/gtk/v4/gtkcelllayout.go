@@ -227,7 +227,7 @@ type CellLayouter interface {
 
 var _ CellLayouter = (*CellLayout)(nil)
 
-func wrapCellLayout(obj *externglib.Object) *CellLayout {
+func WrapCellLayout(obj *externglib.Object) *CellLayout {
 	return &CellLayout{
 		Object: obj,
 	}
@@ -236,7 +236,7 @@ func wrapCellLayout(obj *externglib.Object) *CellLayout {
 func marshalCellLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellLayout(obj), nil
+	return WrapCellLayout(obj), nil
 }
 
 // AddAttribute adds an attribute mapping to the list in cell_layout.

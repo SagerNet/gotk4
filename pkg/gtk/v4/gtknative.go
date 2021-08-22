@@ -61,7 +61,7 @@ type NativeSurfacer interface {
 
 var _ NativeSurfacer = (*NativeSurface)(nil)
 
-func wrapNativeSurface(obj *externglib.Object) *NativeSurface {
+func WrapNativeSurface(obj *externglib.Object) *NativeSurface {
 	return &NativeSurface{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -84,7 +84,7 @@ func wrapNativeSurface(obj *externglib.Object) *NativeSurface {
 func marshalNativeSurfacer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNativeSurface(obj), nil
+	return WrapNativeSurface(obj), nil
 }
 
 // Renderer returns the renderer that is used for this GtkNative.

@@ -227,7 +227,7 @@ type FileChooserer interface {
 
 var _ FileChooserer = (*FileChooser)(nil)
 
-func wrapFileChooser(obj *externglib.Object) *FileChooser {
+func WrapFileChooser(obj *externglib.Object) *FileChooser {
 	return &FileChooser{
 		Object: obj,
 	}
@@ -236,7 +236,7 @@ func wrapFileChooser(obj *externglib.Object) *FileChooser {
 func marshalFileChooserer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileChooser(obj), nil
+	return WrapFileChooser(obj), nil
 }
 
 // AddChoice adds a 'choice' to the file chooser.
@@ -484,7 +484,7 @@ func (chooser *FileChooser) Filter() *FileFilter {
 	var _fileFilter *FileFilter // out
 
 	if _cret != nil {
-		_fileFilter = wrapFileFilter(externglib.Take(unsafe.Pointer(_cret)))
+		_fileFilter = WrapFileFilter(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _fileFilter

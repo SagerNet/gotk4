@@ -30,7 +30,7 @@ func X11DeviceManagerLookup(deviceManager *X11DeviceManagerXI2, deviceId int) *X
 	var _x11DeviceXI2 *X11DeviceXI2 // out
 
 	if _cret != nil {
-		_x11DeviceXI2 = wrapX11DeviceXI2(externglib.Take(unsafe.Pointer(_cret)))
+		_x11DeviceXI2 = WrapX11DeviceXI2(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _x11DeviceXI2

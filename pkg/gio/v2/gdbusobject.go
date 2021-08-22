@@ -70,7 +70,7 @@ type DBusObjector interface {
 
 var _ DBusObjector = (*DBusObject)(nil)
 
-func wrapDBusObject(obj *externglib.Object) *DBusObject {
+func WrapDBusObject(obj *externglib.Object) *DBusObject {
 	return &DBusObject{
 		Object: obj,
 	}
@@ -79,7 +79,7 @@ func wrapDBusObject(obj *externglib.Object) *DBusObject {
 func marshalDBusObjector(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusObject(obj), nil
+	return WrapDBusObject(obj), nil
 }
 
 // Interface gets the D-Bus interface with name interface_name associated with

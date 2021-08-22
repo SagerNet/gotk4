@@ -126,7 +126,7 @@ type FileEnumerator struct {
 	*externglib.Object
 }
 
-func wrapFileEnumerator(obj *externglib.Object) *FileEnumerator {
+func WrapFileEnumerator(obj *externglib.Object) *FileEnumerator {
 	return &FileEnumerator{
 		Object: obj,
 	}
@@ -135,7 +135,7 @@ func wrapFileEnumerator(obj *externglib.Object) *FileEnumerator {
 func marshalFileEnumeratorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileEnumerator(obj), nil
+	return WrapFileEnumerator(obj), nil
 }
 
 // Close releases all resources used by this enumerator, making the enumerator
@@ -372,7 +372,7 @@ func (direnum *FileEnumerator) Iterate(ctx context.Context) (*FileInfo, Filer, e
 	var _goerr error       // out
 
 	if _arg1 != nil {
-		_outInfo = wrapFileInfo(externglib.Take(unsafe.Pointer(_arg1)))
+		_outInfo = WrapFileInfo(externglib.Take(unsafe.Pointer(_arg1)))
 	}
 	if _arg2 != nil {
 		_outChild = (externglib.CastObject(externglib.Take(unsafe.Pointer(_arg2)))).(Filer)
@@ -415,7 +415,7 @@ func (enumerator *FileEnumerator) NextFile(ctx context.Context) (*FileInfo, erro
 	var _goerr error        // out
 
 	if _cret != nil {
-		_fileInfo = wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_fileInfo = WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
@@ -494,7 +494,7 @@ func (enumerator *FileEnumerator) NextFilesFinish(result AsyncResulter) ([]FileI
 	gextras.MoveList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GFileInfo)(v)
 		var dst FileInfo // out
-		dst = *wrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(src)))
+		dst = *WrapFileInfo(externglib.AssumeOwnership(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 	if _cerr != nil {

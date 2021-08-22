@@ -51,7 +51,7 @@ type VBox struct {
 	Box
 }
 
-func wrapVBox(obj *externglib.Object) *VBox {
+func WrapVBox(obj *externglib.Object) *VBox {
 	return &VBox{
 		Box: Box{
 			Container: Container{
@@ -79,7 +79,7 @@ func wrapVBox(obj *externglib.Object) *VBox {
 func marshalVBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVBox(obj), nil
+	return WrapVBox(obj), nil
 }
 
 // NewVBox creates a new VBox.
@@ -104,7 +104,7 @@ func NewVBox(homogeneous bool, spacing int) *VBox {
 
 	var _vBox *VBox // out
 
-	_vBox = wrapVBox(externglib.Take(unsafe.Pointer(_cret)))
+	_vBox = WrapVBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vBox
 }

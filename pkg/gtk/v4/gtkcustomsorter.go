@@ -31,7 +31,7 @@ type CustomSorter struct {
 	Sorter
 }
 
-func wrapCustomSorter(obj *externglib.Object) *CustomSorter {
+func WrapCustomSorter(obj *externglib.Object) *CustomSorter {
 	return &CustomSorter{
 		Sorter: Sorter{
 			Object: obj,
@@ -42,7 +42,7 @@ func wrapCustomSorter(obj *externglib.Object) *CustomSorter {
 func marshalCustomSorterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCustomSorter(obj), nil
+	return WrapCustomSorter(obj), nil
 }
 
 // NewCustomSorter creates a new GtkSorter that works by calling sort_func to
@@ -66,7 +66,7 @@ func NewCustomSorter(sortFunc glib.CompareDataFunc) *CustomSorter {
 
 	var _customSorter *CustomSorter // out
 
-	_customSorter = wrapCustomSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_customSorter = WrapCustomSorter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _customSorter
 }

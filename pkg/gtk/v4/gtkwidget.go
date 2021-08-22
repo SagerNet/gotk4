@@ -942,7 +942,7 @@ type Widgetter interface {
 
 var _ Widgetter = (*Widget)(nil)
 
-func wrapWidget(obj *externglib.Object) *Widget {
+func WrapWidget(obj *externglib.Object) *Widget {
 	return &Widget{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -963,7 +963,7 @@ func wrapWidget(obj *externglib.Object) *Widget {
 func marshalWidgetter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWidget(obj), nil
+	return WrapWidget(obj), nil
 }
 
 // ActionSetEnabled: enable or disable an action installed with
@@ -2622,7 +2622,7 @@ func (widget *Widget) Settings() *Settings {
 
 	var _settings *Settings // out
 
-	_settings = wrapSettings(externglib.Take(unsafe.Pointer(_cret)))
+	_settings = WrapSettings(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _settings
 }
@@ -2720,7 +2720,7 @@ func (widget *Widget) StyleContext() *StyleContext {
 
 	var _styleContext *StyleContext // out
 
-	_styleContext = wrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
+	_styleContext = WrapStyleContext(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _styleContext
 }

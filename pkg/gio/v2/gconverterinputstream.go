@@ -42,7 +42,7 @@ type ConverterInputStream struct {
 	*externglib.Object
 }
 
-func wrapConverterInputStream(obj *externglib.Object) *ConverterInputStream {
+func WrapConverterInputStream(obj *externglib.Object) *ConverterInputStream {
 	return &ConverterInputStream{
 		FilterInputStream: FilterInputStream{
 			InputStream: InputStream{
@@ -61,7 +61,7 @@ func wrapConverterInputStream(obj *externglib.Object) *ConverterInputStream {
 func marshalConverterInputStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapConverterInputStream(obj), nil
+	return WrapConverterInputStream(obj), nil
 }
 
 // NewConverterInputStream creates a new converter input stream for the
@@ -80,7 +80,7 @@ func NewConverterInputStream(baseStream InputStreamer, converter Converterer) *C
 
 	var _converterInputStream *ConverterInputStream // out
 
-	_converterInputStream = wrapConverterInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_converterInputStream = WrapConverterInputStream(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _converterInputStream
 }

@@ -32,7 +32,7 @@ type GestureDrag struct {
 	GestureSingle
 }
 
-func wrapGestureDrag(obj *externglib.Object) *GestureDrag {
+func WrapGestureDrag(obj *externglib.Object) *GestureDrag {
 	return &GestureDrag{
 		GestureSingle: GestureSingle{
 			Gesture: Gesture{
@@ -47,7 +47,7 @@ func wrapGestureDrag(obj *externglib.Object) *GestureDrag {
 func marshalGestureDragger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureDrag(obj), nil
+	return WrapGestureDrag(obj), nil
 }
 
 // NewGestureDrag returns a newly created Gesture that recognizes drags.
@@ -62,7 +62,7 @@ func NewGestureDrag(widget Widgetter) *GestureDrag {
 
 	var _gestureDrag *GestureDrag // out
 
-	_gestureDrag = wrapGestureDrag(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureDrag = WrapGestureDrag(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureDrag
 }

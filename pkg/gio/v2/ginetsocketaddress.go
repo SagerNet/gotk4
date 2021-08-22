@@ -37,7 +37,7 @@ type InetSocketAddress struct {
 	SocketAddress
 }
 
-func wrapInetSocketAddress(obj *externglib.Object) *InetSocketAddress {
+func WrapInetSocketAddress(obj *externglib.Object) *InetSocketAddress {
 	return &InetSocketAddress{
 		SocketAddress: SocketAddress{
 			Object: obj,
@@ -51,7 +51,7 @@ func wrapInetSocketAddress(obj *externglib.Object) *InetSocketAddress {
 func marshalInetSocketAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInetSocketAddress(obj), nil
+	return WrapInetSocketAddress(obj), nil
 }
 
 // NewInetSocketAddress creates a new SocketAddress for address and port.
@@ -69,7 +69,7 @@ func NewInetSocketAddress(address *InetAddress, port uint16) *InetSocketAddress 
 
 	var _inetSocketAddress *InetSocketAddress // out
 
-	_inetSocketAddress = wrapInetSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_inetSocketAddress = WrapInetSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _inetSocketAddress
 }
@@ -95,7 +95,7 @@ func NewInetSocketAddressFromString(address string, port uint) *InetSocketAddres
 	var _inetSocketAddress *InetSocketAddress // out
 
 	if _cret != nil {
-		_inetSocketAddress = wrapInetSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_inetSocketAddress = WrapInetSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _inetSocketAddress
@@ -113,7 +113,7 @@ func (address *InetSocketAddress) Address() *InetAddress {
 
 	var _inetAddress *InetAddress // out
 
-	_inetAddress = wrapInetAddress(externglib.Take(unsafe.Pointer(_cret)))
+	_inetAddress = WrapInetAddress(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _inetAddress
 }

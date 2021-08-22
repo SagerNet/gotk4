@@ -87,7 +87,7 @@ type CellAreaContext struct {
 	*externglib.Object
 }
 
-func wrapCellAreaContext(obj *externglib.Object) *CellAreaContext {
+func WrapCellAreaContext(obj *externglib.Object) *CellAreaContext {
 	return &CellAreaContext{
 		Object: obj,
 	}
@@ -96,7 +96,7 @@ func wrapCellAreaContext(obj *externglib.Object) *CellAreaContext {
 func marshalCellAreaContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellAreaContext(obj), nil
+	return WrapCellAreaContext(obj), nil
 }
 
 // Allocate allocates a width and/or a height for all rows which are to be

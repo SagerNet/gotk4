@@ -41,7 +41,7 @@ type RadioToolButton struct {
 	ToggleToolButton
 }
 
-func wrapRadioToolButton(obj *externglib.Object) *RadioToolButton {
+func WrapRadioToolButton(obj *externglib.Object) *RadioToolButton {
 	return &RadioToolButton{
 		ToggleToolButton: ToggleToolButton{
 			ToolButton: ToolButton{
@@ -90,7 +90,7 @@ func wrapRadioToolButton(obj *externglib.Object) *RadioToolButton {
 func marshalRadioToolButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRadioToolButton(obj), nil
+	return WrapRadioToolButton(obj), nil
 }
 
 // NewRadioToolButton creates a new RadioToolButton, adding it to group.
@@ -113,7 +113,7 @@ func NewRadioToolButton(group []RadioButton) *RadioToolButton {
 
 	var _radioToolButton *RadioToolButton // out
 
-	_radioToolButton = wrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioToolButton = WrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioToolButton
 }
@@ -146,7 +146,7 @@ func NewRadioToolButtonFromStock(group []RadioButton, stockId string) *RadioTool
 
 	var _radioToolButton *RadioToolButton // out
 
-	_radioToolButton = wrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioToolButton = WrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioToolButton
 }
@@ -166,7 +166,7 @@ func NewRadioToolButtonFromWidget(group *RadioToolButton) *RadioToolButton {
 
 	var _radioToolButton *RadioToolButton // out
 
-	_radioToolButton = wrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioToolButton = WrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioToolButton
 }
@@ -193,7 +193,7 @@ func NewRadioToolButtonWithStockFromWidget(group *RadioToolButton, stockId strin
 
 	var _radioToolButton *RadioToolButton // out
 
-	_radioToolButton = wrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
+	_radioToolButton = WrapRadioToolButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _radioToolButton
 }
@@ -214,7 +214,7 @@ func (button *RadioToolButton) Group() []RadioButton {
 	gextras.MoveSList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkRadioButton)(v)
 		var dst RadioButton // out
-		dst = *wrapRadioButton(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapRadioButton(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 

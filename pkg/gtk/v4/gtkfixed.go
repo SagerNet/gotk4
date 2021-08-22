@@ -62,7 +62,7 @@ type Fixed struct {
 	Widget
 }
 
-func wrapFixed(obj *externglib.Object) *Fixed {
+func WrapFixed(obj *externglib.Object) *Fixed {
 	return &Fixed{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -85,7 +85,7 @@ func wrapFixed(obj *externglib.Object) *Fixed {
 func marshalFixedder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFixed(obj), nil
+	return WrapFixed(obj), nil
 }
 
 // NewFixed creates a new GtkFixed.
@@ -96,7 +96,7 @@ func NewFixed() *Fixed {
 
 	var _fixed *Fixed // out
 
-	_fixed = wrapFixed(externglib.Take(unsafe.Pointer(_cret)))
+	_fixed = WrapFixed(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fixed
 }

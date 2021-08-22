@@ -186,7 +186,7 @@ type FileChooserNative struct {
 	*externglib.Object
 }
 
-func wrapFileChooserNative(obj *externglib.Object) *FileChooserNative {
+func WrapFileChooserNative(obj *externglib.Object) *FileChooserNative {
 	return &FileChooserNative{
 		NativeDialog: NativeDialog{
 			Object: obj,
@@ -201,7 +201,7 @@ func wrapFileChooserNative(obj *externglib.Object) *FileChooserNative {
 func marshalFileChooserNativer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileChooserNative(obj), nil
+	return WrapFileChooserNative(obj), nil
 }
 
 // NewFileChooserNative creates a new FileChooserNative.
@@ -239,7 +239,7 @@ func NewFileChooserNative(title string, parent *Window, action FileChooserAction
 
 	var _fileChooserNative *FileChooserNative // out
 
-	_fileChooserNative = wrapFileChooserNative(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileChooserNative = WrapFileChooserNative(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fileChooserNative
 }

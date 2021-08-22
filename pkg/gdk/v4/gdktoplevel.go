@@ -271,7 +271,7 @@ type Topleveller interface {
 
 var _ Topleveller = (*Toplevel)(nil)
 
-func wrapToplevel(obj *externglib.Object) *Toplevel {
+func WrapToplevel(obj *externglib.Object) *Toplevel {
 	return &Toplevel{
 		Surface: Surface{
 			Object: obj,
@@ -282,7 +282,7 @@ func wrapToplevel(obj *externglib.Object) *Toplevel {
 func marshalTopleveller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToplevel(obj), nil
+	return WrapToplevel(obj), nil
 }
 
 // BeginMove begins an interactive move operation.

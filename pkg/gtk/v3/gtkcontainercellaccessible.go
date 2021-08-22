@@ -29,7 +29,7 @@ type ContainerCellAccessible struct {
 	CellAccessible
 }
 
-func wrapContainerCellAccessible(obj *externglib.Object) *ContainerCellAccessible {
+func WrapContainerCellAccessible(obj *externglib.Object) *ContainerCellAccessible {
 	return &ContainerCellAccessible{
 		CellAccessible: CellAccessible{
 			Accessible: Accessible{
@@ -56,7 +56,7 @@ func wrapContainerCellAccessible(obj *externglib.Object) *ContainerCellAccessibl
 func marshalContainerCellAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapContainerCellAccessible(obj), nil
+	return WrapContainerCellAccessible(obj), nil
 }
 
 func NewContainerCellAccessible() *ContainerCellAccessible {
@@ -66,7 +66,7 @@ func NewContainerCellAccessible() *ContainerCellAccessible {
 
 	var _containerCellAccessible *ContainerCellAccessible // out
 
-	_containerCellAccessible = wrapContainerCellAccessible(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_containerCellAccessible = WrapContainerCellAccessible(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _containerCellAccessible
 }
@@ -99,7 +99,7 @@ func (container *ContainerCellAccessible) Children() []CellAccessible {
 	gextras.MoveList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkCellAccessible)(v)
 		var dst CellAccessible // out
-		dst = *wrapCellAccessible(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapCellAccessible(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

@@ -26,7 +26,7 @@ type X11Keymap struct {
 	gdk.Keymap
 }
 
-func wrapX11Keymap(obj *externglib.Object) *X11Keymap {
+func WrapX11Keymap(obj *externglib.Object) *X11Keymap {
 	return &X11Keymap{
 		Keymap: gdk.Keymap{
 			Object: obj,
@@ -37,7 +37,7 @@ func wrapX11Keymap(obj *externglib.Object) *X11Keymap {
 func marshalX11Keymapper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Keymap(obj), nil
+	return WrapX11Keymap(obj), nil
 }
 
 // GroupForState extracts the group from the state field sent in an X Key event.

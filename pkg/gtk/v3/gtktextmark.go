@@ -54,7 +54,7 @@ type TextMark struct {
 	*externglib.Object
 }
 
-func wrapTextMark(obj *externglib.Object) *TextMark {
+func WrapTextMark(obj *externglib.Object) *TextMark {
 	return &TextMark{
 		Object: obj,
 	}
@@ -63,7 +63,7 @@ func wrapTextMark(obj *externglib.Object) *TextMark {
 func marshalTextMarker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextMark(obj), nil
+	return WrapTextMark(obj), nil
 }
 
 // NewTextMark creates a text mark. Add it to a buffer using
@@ -94,7 +94,7 @@ func NewTextMark(name string, leftGravity bool) *TextMark {
 
 	var _textMark *TextMark // out
 
-	_textMark = wrapTextMark(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_textMark = WrapTextMark(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _textMark
 }
@@ -112,7 +112,7 @@ func (mark *TextMark) Buffer() *TextBuffer {
 
 	var _textBuffer *TextBuffer // out
 
-	_textBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(_cret)))
+	_textBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _textBuffer
 }

@@ -134,7 +134,7 @@ type Ranger interface {
 
 var _ Ranger = (*Range)(nil)
 
-func wrapRange(obj *externglib.Object) *Range {
+func WrapRange(obj *externglib.Object) *Range {
 	return &Range{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -158,7 +158,7 @@ func wrapRange(obj *externglib.Object) *Range {
 func marshalRanger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRange(obj), nil
+	return WrapRange(obj), nil
 }
 
 // Adjustment: get the Adjustment which is the “model” object for Range. See
@@ -175,7 +175,7 @@ func (_range *Range) Adjustment() *Adjustment {
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

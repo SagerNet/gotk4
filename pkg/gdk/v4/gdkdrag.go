@@ -121,7 +121,7 @@ type Dragger interface {
 
 var _ Dragger = (*Drag)(nil)
 
-func wrapDrag(obj *externglib.Object) *Drag {
+func WrapDrag(obj *externglib.Object) *Drag {
 	return &Drag{
 		Object: obj,
 	}
@@ -130,7 +130,7 @@ func wrapDrag(obj *externglib.Object) *Drag {
 func marshalDragger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDrag(obj), nil
+	return WrapDrag(obj), nil
 }
 
 // DropDone informs GDK that the drop ended.
@@ -186,7 +186,7 @@ func (drag *Drag) Content() *ContentProvider {
 
 	var _contentProvider *ContentProvider // out
 
-	_contentProvider = wrapContentProvider(externglib.Take(unsafe.Pointer(_cret)))
+	_contentProvider = WrapContentProvider(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _contentProvider
 }
@@ -220,7 +220,7 @@ func (drag *Drag) Display() *Display {
 
 	var _display *Display // out
 
-	_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+	_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _display
 }

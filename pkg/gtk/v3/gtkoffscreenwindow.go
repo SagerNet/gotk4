@@ -46,7 +46,7 @@ type OffscreenWindow struct {
 	Window
 }
 
-func wrapOffscreenWindow(obj *externglib.Object) *OffscreenWindow {
+func WrapOffscreenWindow(obj *externglib.Object) *OffscreenWindow {
 	return &OffscreenWindow{
 		Window: Window{
 			Bin: Bin{
@@ -72,7 +72,7 @@ func wrapOffscreenWindow(obj *externglib.Object) *OffscreenWindow {
 func marshalOffscreenWindower(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapOffscreenWindow(obj), nil
+	return WrapOffscreenWindow(obj), nil
 }
 
 // NewOffscreenWindow creates a toplevel container widget that is used to
@@ -84,7 +84,7 @@ func NewOffscreenWindow() *OffscreenWindow {
 
 	var _offscreenWindow *OffscreenWindow // out
 
-	_offscreenWindow = wrapOffscreenWindow(externglib.Take(unsafe.Pointer(_cret)))
+	_offscreenWindow = WrapOffscreenWindow(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _offscreenWindow
 }

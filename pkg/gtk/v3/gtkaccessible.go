@@ -51,7 +51,7 @@ type Accessible struct {
 	atk.ObjectClass
 }
 
-func wrapAccessible(obj *externglib.Object) *Accessible {
+func WrapAccessible(obj *externglib.Object) *Accessible {
 	return &Accessible{
 		ObjectClass: atk.ObjectClass{
 			Object: obj,
@@ -62,7 +62,7 @@ func wrapAccessible(obj *externglib.Object) *Accessible {
 func marshalAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAccessible(obj), nil
+	return WrapAccessible(obj), nil
 }
 
 // ConnectWidgetDestroyed: this function specifies the callback function to be

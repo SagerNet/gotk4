@@ -37,7 +37,7 @@ type NativeSocketAddress struct {
 	SocketAddress
 }
 
-func wrapNativeSocketAddress(obj *externglib.Object) *NativeSocketAddress {
+func WrapNativeSocketAddress(obj *externglib.Object) *NativeSocketAddress {
 	return &NativeSocketAddress{
 		SocketAddress: SocketAddress{
 			Object: obj,
@@ -51,7 +51,7 @@ func wrapNativeSocketAddress(obj *externglib.Object) *NativeSocketAddress {
 func marshalNativeSocketAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNativeSocketAddress(obj), nil
+	return WrapNativeSocketAddress(obj), nil
 }
 
 // NewNativeSocketAddress creates a new SocketAddress for native and len.
@@ -69,7 +69,7 @@ func NewNativeSocketAddress(native cgo.Handle, len uint) *NativeSocketAddress {
 
 	var _nativeSocketAddress *NativeSocketAddress // out
 
-	_nativeSocketAddress = wrapNativeSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_nativeSocketAddress = WrapNativeSocketAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _nativeSocketAddress
 }

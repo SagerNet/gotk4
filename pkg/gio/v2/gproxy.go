@@ -93,7 +93,7 @@ type Proxier interface {
 
 var _ Proxier = (*Proxy)(nil)
 
-func wrapProxy(obj *externglib.Object) *Proxy {
+func WrapProxy(obj *externglib.Object) *Proxy {
 	return &Proxy{
 		Object: obj,
 	}
@@ -102,7 +102,7 @@ func wrapProxy(obj *externglib.Object) *Proxy {
 func marshalProxier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapProxy(obj), nil
+	return WrapProxy(obj), nil
 }
 
 // ConnectProxy: given connection to communicate with a proxy (eg, a Connection

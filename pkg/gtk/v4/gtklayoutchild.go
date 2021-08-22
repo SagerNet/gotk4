@@ -47,7 +47,7 @@ type LayoutChilder interface {
 
 var _ LayoutChilder = (*LayoutChild)(nil)
 
-func wrapLayoutChild(obj *externglib.Object) *LayoutChild {
+func WrapLayoutChild(obj *externglib.Object) *LayoutChild {
 	return &LayoutChild{
 		Object: obj,
 	}
@@ -56,7 +56,7 @@ func wrapLayoutChild(obj *externglib.Object) *LayoutChild {
 func marshalLayoutChilder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLayoutChild(obj), nil
+	return WrapLayoutChild(obj), nil
 }
 
 // ChildWidget retrieves the GtkWidget associated to the given layout_child.

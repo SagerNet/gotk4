@@ -97,7 +97,7 @@ type Popover struct {
 	Bin
 }
 
-func wrapPopover(obj *externglib.Object) *Popover {
+func WrapPopover(obj *externglib.Object) *Popover {
 	return &Popover{
 		Bin: Bin{
 			Container: Container{
@@ -121,7 +121,7 @@ func wrapPopover(obj *externglib.Object) *Popover {
 func marshalPopoverer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPopover(obj), nil
+	return WrapPopover(obj), nil
 }
 
 // NewPopover creates a new popover to point to relative_to
@@ -138,7 +138,7 @@ func NewPopover(relativeTo Widgetter) *Popover {
 
 	var _popover *Popover // out
 
-	_popover = wrapPopover(externglib.Take(unsafe.Pointer(_cret)))
+	_popover = WrapPopover(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _popover
 }
@@ -168,7 +168,7 @@ func NewPopoverFromModel(relativeTo Widgetter, model gio.MenuModeller) *Popover 
 
 	var _popover *Popover // out
 
-	_popover = wrapPopover(externglib.Take(unsafe.Pointer(_cret)))
+	_popover = WrapPopover(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _popover
 }

@@ -110,7 +110,7 @@ type Image struct {
 	Widget
 }
 
-func wrapImage(obj *externglib.Object) *Image {
+func WrapImage(obj *externglib.Object) *Image {
 	return &Image{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -133,7 +133,7 @@ func wrapImage(obj *externglib.Object) *Image {
 func marshalImager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapImage(obj), nil
+	return WrapImage(obj), nil
 }
 
 // NewImage creates a new empty GtkImage widget.
@@ -144,7 +144,7 @@ func NewImage() *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -172,7 +172,7 @@ func NewImageFromFile(filename string) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -194,7 +194,7 @@ func NewImageFromGIcon(icon gio.Iconner) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -219,7 +219,7 @@ func NewImageFromIconName(iconName string) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -245,7 +245,7 @@ func NewImageFromPaintable(paintable gdk.Paintabler) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -275,7 +275,7 @@ func NewImageFromPixbuf(pixbuf *gdkpixbuf.Pixbuf) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }
@@ -305,7 +305,7 @@ func NewImageFromResource(resourcePath string) *Image {
 
 	var _image *Image // out
 
-	_image = wrapImage(externglib.Take(unsafe.Pointer(_cret)))
+	_image = WrapImage(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _image
 }

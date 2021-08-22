@@ -59,7 +59,7 @@ type Miscer interface {
 
 var _ Miscer = (*Misc)(nil)
 
-func wrapMisc(obj *externglib.Object) *Misc {
+func WrapMisc(obj *externglib.Object) *Misc {
 	return &Misc{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -79,7 +79,7 @@ func wrapMisc(obj *externglib.Object) *Misc {
 func marshalMiscer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMisc(obj), nil
+	return WrapMisc(obj), nil
 }
 
 // Alignment gets the X and Y alignment of the widget within its allocation. See

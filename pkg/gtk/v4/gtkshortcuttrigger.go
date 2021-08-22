@@ -35,7 +35,7 @@ type AlternativeTrigger struct {
 	ShortcutTrigger
 }
 
-func wrapAlternativeTrigger(obj *externglib.Object) *AlternativeTrigger {
+func WrapAlternativeTrigger(obj *externglib.Object) *AlternativeTrigger {
 	return &AlternativeTrigger{
 		ShortcutTrigger: ShortcutTrigger{
 			Object: obj,
@@ -46,7 +46,7 @@ func wrapAlternativeTrigger(obj *externglib.Object) *AlternativeTrigger {
 func marshalAlternativeTriggerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAlternativeTrigger(obj), nil
+	return WrapAlternativeTrigger(obj), nil
 }
 
 // NewAlternativeTrigger creates a GtkShortcutTrigger that will trigger whenever
@@ -70,7 +70,7 @@ func NewAlternativeTrigger(first ShortcutTriggerer, second ShortcutTriggerer) *A
 
 	var _alternativeTrigger *AlternativeTrigger // out
 
-	_alternativeTrigger = wrapAlternativeTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_alternativeTrigger = WrapAlternativeTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _alternativeTrigger
 }
@@ -119,7 +119,7 @@ type KeyvalTrigger struct {
 	ShortcutTrigger
 }
 
-func wrapKeyvalTrigger(obj *externglib.Object) *KeyvalTrigger {
+func WrapKeyvalTrigger(obj *externglib.Object) *KeyvalTrigger {
 	return &KeyvalTrigger{
 		ShortcutTrigger: ShortcutTrigger{
 			Object: obj,
@@ -130,7 +130,7 @@ func wrapKeyvalTrigger(obj *externglib.Object) *KeyvalTrigger {
 func marshalKeyvalTriggerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapKeyvalTrigger(obj), nil
+	return WrapKeyvalTrigger(obj), nil
 }
 
 // NewKeyvalTrigger creates a GtkShortcutTrigger that will trigger whenever the
@@ -149,7 +149,7 @@ func NewKeyvalTrigger(keyval uint, modifiers gdk.ModifierType) *KeyvalTrigger {
 
 	var _keyvalTrigger *KeyvalTrigger // out
 
-	_keyvalTrigger = wrapKeyvalTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_keyvalTrigger = WrapKeyvalTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _keyvalTrigger
 }
@@ -197,7 +197,7 @@ type MnemonicTrigger struct {
 	ShortcutTrigger
 }
 
-func wrapMnemonicTrigger(obj *externglib.Object) *MnemonicTrigger {
+func WrapMnemonicTrigger(obj *externglib.Object) *MnemonicTrigger {
 	return &MnemonicTrigger{
 		ShortcutTrigger: ShortcutTrigger{
 			Object: obj,
@@ -208,7 +208,7 @@ func wrapMnemonicTrigger(obj *externglib.Object) *MnemonicTrigger {
 func marshalMnemonicTriggerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMnemonicTrigger(obj), nil
+	return WrapMnemonicTrigger(obj), nil
 }
 
 // NewMnemonicTrigger creates a GtkShortcutTrigger that will trigger whenever
@@ -227,7 +227,7 @@ func NewMnemonicTrigger(keyval uint) *MnemonicTrigger {
 
 	var _mnemonicTrigger *MnemonicTrigger // out
 
-	_mnemonicTrigger = wrapMnemonicTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_mnemonicTrigger = WrapMnemonicTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _mnemonicTrigger
 }
@@ -254,7 +254,7 @@ type NeverTrigger struct {
 	ShortcutTrigger
 }
 
-func wrapNeverTrigger(obj *externglib.Object) *NeverTrigger {
+func WrapNeverTrigger(obj *externglib.Object) *NeverTrigger {
 	return &NeverTrigger{
 		ShortcutTrigger: ShortcutTrigger{
 			Object: obj,
@@ -265,7 +265,7 @@ func wrapNeverTrigger(obj *externglib.Object) *NeverTrigger {
 func marshalNeverTriggerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNeverTrigger(obj), nil
+	return WrapNeverTrigger(obj), nil
 }
 
 func (*NeverTrigger) privateNeverTrigger() {}
@@ -281,7 +281,7 @@ func NeverTriggerGet() *NeverTrigger {
 
 	var _neverTrigger *NeverTrigger // out
 
-	_neverTrigger = wrapNeverTrigger(externglib.Take(unsafe.Pointer(_cret)))
+	_neverTrigger = WrapNeverTrigger(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _neverTrigger
 }
@@ -323,7 +323,7 @@ type ShortcutTriggerer interface {
 
 var _ ShortcutTriggerer = (*ShortcutTrigger)(nil)
 
-func wrapShortcutTrigger(obj *externglib.Object) *ShortcutTrigger {
+func WrapShortcutTrigger(obj *externglib.Object) *ShortcutTrigger {
 	return &ShortcutTrigger{
 		Object: obj,
 	}
@@ -332,7 +332,7 @@ func wrapShortcutTrigger(obj *externglib.Object) *ShortcutTrigger {
 func marshalShortcutTriggerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutTrigger(obj), nil
+	return WrapShortcutTrigger(obj), nil
 }
 
 // NewShortcutTriggerParseString tries to parse the given string into a trigger.
@@ -364,7 +364,7 @@ func NewShortcutTriggerParseString(_string string) *ShortcutTrigger {
 	var _shortcutTrigger *ShortcutTrigger // out
 
 	if _cret != nil {
-		_shortcutTrigger = wrapShortcutTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_shortcutTrigger = WrapShortcutTrigger(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _shortcutTrigger

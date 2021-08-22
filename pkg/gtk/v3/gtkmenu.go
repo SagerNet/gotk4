@@ -90,7 +90,7 @@ type Menu struct {
 	MenuShell
 }
 
-func wrapMenu(obj *externglib.Object) *Menu {
+func WrapMenu(obj *externglib.Object) *Menu {
 	return &Menu{
 		MenuShell: MenuShell{
 			Container: Container{
@@ -114,7 +114,7 @@ func wrapMenu(obj *externglib.Object) *Menu {
 func marshalMenuer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenu(obj), nil
+	return WrapMenu(obj), nil
 }
 
 // NewMenu creates a new Menu
@@ -125,7 +125,7 @@ func NewMenu() *Menu {
 
 	var _menu *Menu // out
 
-	_menu = wrapMenu(externglib.Take(unsafe.Pointer(_cret)))
+	_menu = WrapMenu(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menu
 }
@@ -151,7 +151,7 @@ func NewMenuFromModel(model gio.MenuModeller) *Menu {
 
 	var _menu *Menu // out
 
-	_menu = wrapMenu(externglib.Take(unsafe.Pointer(_cret)))
+	_menu = WrapMenu(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menu
 }
@@ -212,7 +212,7 @@ func (menu *Menu) AccelGroup() *AccelGroup {
 
 	var _accelGroup *AccelGroup // out
 
-	_accelGroup = wrapAccelGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_accelGroup = WrapAccelGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _accelGroup
 }

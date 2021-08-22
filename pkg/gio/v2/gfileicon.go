@@ -38,7 +38,7 @@ type FileIcon struct {
 	LoadableIcon
 }
 
-func wrapFileIcon(obj *externglib.Object) *FileIcon {
+func WrapFileIcon(obj *externglib.Object) *FileIcon {
 	return &FileIcon{
 		Object: obj,
 		LoadableIcon: LoadableIcon{
@@ -52,7 +52,7 @@ func wrapFileIcon(obj *externglib.Object) *FileIcon {
 func marshalFileIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileIcon(obj), nil
+	return WrapFileIcon(obj), nil
 }
 
 // NewFileIcon creates a new icon for a file.
@@ -67,7 +67,7 @@ func NewFileIcon(file Filer) *FileIcon {
 
 	var _fileIcon *FileIcon // out
 
-	_fileIcon = wrapFileIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fileIcon = WrapFileIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fileIcon
 }

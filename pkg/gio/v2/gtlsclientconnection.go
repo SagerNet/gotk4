@@ -100,7 +100,7 @@ type TLSClientConnectioner interface {
 
 var _ TLSClientConnectioner = (*TLSClientConnection)(nil)
 
-func wrapTLSClientConnection(obj *externglib.Object) *TLSClientConnection {
+func WrapTLSClientConnection(obj *externglib.Object) *TLSClientConnection {
 	return &TLSClientConnection{
 		TLSConnection: TLSConnection{
 			IOStream: IOStream{
@@ -113,7 +113,7 @@ func wrapTLSClientConnection(obj *externglib.Object) *TLSClientConnection {
 func marshalTLSClientConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTLSClientConnection(obj), nil
+	return WrapTLSClientConnection(obj), nil
 }
 
 // CopySessionState: possibly copies session state from one connection to

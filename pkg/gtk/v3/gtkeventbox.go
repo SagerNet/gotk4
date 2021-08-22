@@ -31,7 +31,7 @@ type EventBox struct {
 	Bin
 }
 
-func wrapEventBox(obj *externglib.Object) *EventBox {
+func WrapEventBox(obj *externglib.Object) *EventBox {
 	return &EventBox{
 		Bin: Bin{
 			Container: Container{
@@ -55,7 +55,7 @@ func wrapEventBox(obj *externglib.Object) *EventBox {
 func marshalEventBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEventBox(obj), nil
+	return WrapEventBox(obj), nil
 }
 
 // NewEventBox creates a new EventBox.
@@ -66,7 +66,7 @@ func NewEventBox() *EventBox {
 
 	var _eventBox *EventBox // out
 
-	_eventBox = wrapEventBox(externglib.Take(unsafe.Pointer(_cret)))
+	_eventBox = WrapEventBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _eventBox
 }

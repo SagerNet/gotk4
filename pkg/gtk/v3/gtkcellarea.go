@@ -444,7 +444,7 @@ type CellAreaer interface {
 
 var _ CellAreaer = (*CellArea)(nil)
 
-func wrapCellArea(obj *externglib.Object) *CellArea {
+func WrapCellArea(obj *externglib.Object) *CellArea {
 	return &CellArea{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -462,7 +462,7 @@ func wrapCellArea(obj *externglib.Object) *CellArea {
 func marshalCellAreaer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellArea(obj), nil
+	return WrapCellArea(obj), nil
 }
 
 // Activate activates area, usually by activating the currently focused cell,
@@ -691,7 +691,7 @@ func (area *CellArea) CopyContext(context *CellAreaContext) *CellAreaContext {
 
 	var _cellAreaContext *CellAreaContext // out
 
-	_cellAreaContext = wrapCellAreaContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cellAreaContext = WrapCellAreaContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cellAreaContext
 }
@@ -712,7 +712,7 @@ func (area *CellArea) CreateContext() *CellAreaContext {
 
 	var _cellAreaContext *CellAreaContext // out
 
-	_cellAreaContext = wrapCellAreaContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cellAreaContext = WrapCellAreaContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cellAreaContext
 }

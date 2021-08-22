@@ -118,7 +118,7 @@ type DBusObjectManagerClient struct {
 	Initable
 }
 
-func wrapDBusObjectManagerClient(obj *externglib.Object) *DBusObjectManagerClient {
+func WrapDBusObjectManagerClient(obj *externglib.Object) *DBusObjectManagerClient {
 	return &DBusObjectManagerClient{
 		Object: obj,
 		AsyncInitable: AsyncInitable{
@@ -136,7 +136,7 @@ func wrapDBusObjectManagerClient(obj *externglib.Object) *DBusObjectManagerClien
 func marshalDBusObjectManagerClienter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusObjectManagerClient(obj), nil
+	return WrapDBusObjectManagerClient(obj), nil
 }
 
 // NewDBusObjectManagerClientFinish finishes an operation started with
@@ -154,7 +154,7 @@ func NewDBusObjectManagerClientFinish(res AsyncResulter) (*DBusObjectManagerClie
 	var _dBusObjectManagerClient *DBusObjectManagerClient // out
 	var _goerr error                                      // out
 
-	_dBusObjectManagerClient = wrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectManagerClient = WrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -177,7 +177,7 @@ func NewDBusObjectManagerClientForBusFinish(res AsyncResulter) (*DBusObjectManag
 	var _dBusObjectManagerClient *DBusObjectManagerClient // out
 	var _goerr error                                      // out
 
-	_dBusObjectManagerClient = wrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectManagerClient = WrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -232,7 +232,7 @@ func NewDBusObjectManagerClientForBusSync(ctx context.Context, busType BusType, 
 	var _dBusObjectManagerClient *DBusObjectManagerClient // out
 	var _goerr error                                      // out
 
-	_dBusObjectManagerClient = wrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectManagerClient = WrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -287,7 +287,7 @@ func NewDBusObjectManagerClientSync(ctx context.Context, connection *DBusConnect
 	var _dBusObjectManagerClient *DBusObjectManagerClient // out
 	var _goerr error                                      // out
 
-	_dBusObjectManagerClient = wrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectManagerClient = WrapDBusObjectManagerClient(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -307,7 +307,7 @@ func (manager *DBusObjectManagerClient) Connection() *DBusConnection {
 
 	var _dBusConnection *DBusConnection // out
 
-	_dBusConnection = wrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _dBusConnection
 }

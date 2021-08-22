@@ -32,7 +32,7 @@ type VSeparator struct {
 	Separator
 }
 
-func wrapVSeparator(obj *externglib.Object) *VSeparator {
+func WrapVSeparator(obj *externglib.Object) *VSeparator {
 	return &VSeparator{
 		Separator: Separator{
 			Widget: Widget{
@@ -58,7 +58,7 @@ func wrapVSeparator(obj *externglib.Object) *VSeparator {
 func marshalVSeparatorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVSeparator(obj), nil
+	return WrapVSeparator(obj), nil
 }
 
 // NewVSeparator creates a new VSeparator.
@@ -71,7 +71,7 @@ func NewVSeparator() *VSeparator {
 
 	var _vSeparator *VSeparator // out
 
-	_vSeparator = wrapVSeparator(externglib.Take(unsafe.Pointer(_cret)))
+	_vSeparator = WrapVSeparator(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vSeparator
 }

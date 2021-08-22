@@ -57,7 +57,7 @@ type Cursor struct {
 	*externglib.Object
 }
 
-func wrapCursor(obj *externglib.Object) *Cursor {
+func WrapCursor(obj *externglib.Object) *Cursor {
 	return &Cursor{
 		Object: obj,
 	}
@@ -66,7 +66,7 @@ func wrapCursor(obj *externglib.Object) *Cursor {
 func marshalCursorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCursor(obj), nil
+	return WrapCursor(obj), nil
 }
 
 // NewCursorFromName creates a new cursor by looking up name in the current
@@ -112,7 +112,7 @@ func NewCursorFromName(name string, fallback *Cursor) *Cursor {
 	var _cursor *Cursor // out
 
 	if _cret != nil {
-		_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _cursor
@@ -141,7 +141,7 @@ func NewCursorFromTexture(texture Texturer, hotspotX int, hotspotY int, fallback
 
 	var _cursor *Cursor // out
 
-	_cursor = wrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_cursor = WrapCursor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _cursor
 }
@@ -165,7 +165,7 @@ func (cursor *Cursor) Fallback() *Cursor {
 	var _ret *Cursor // out
 
 	if _cret != nil {
-		_ret = wrapCursor(externglib.Take(unsafe.Pointer(_cret)))
+		_ret = WrapCursor(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _ret

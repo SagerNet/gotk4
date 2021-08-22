@@ -52,7 +52,7 @@ type Misc struct {
 	*externglib.Object
 }
 
-func wrapMisc(obj *externglib.Object) *Misc {
+func WrapMisc(obj *externglib.Object) *Misc {
 	return &Misc{
 		Object: obj,
 	}
@@ -61,7 +61,7 @@ func wrapMisc(obj *externglib.Object) *Misc {
 func marshalMiscer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMisc(obj), nil
+	return WrapMisc(obj), nil
 }
 
 // ThreadsEnter: take the thread mutex for the GUI toolkit, if one exists. (This
@@ -108,7 +108,7 @@ func MiscGetInstance() *Misc {
 
 	var _misc *Misc // out
 
-	_misc = wrapMisc(externglib.Take(unsafe.Pointer(_cret)))
+	_misc = WrapMisc(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _misc
 }

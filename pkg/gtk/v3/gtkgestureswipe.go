@@ -37,7 +37,7 @@ type GestureSwipe struct {
 	GestureSingle
 }
 
-func wrapGestureSwipe(obj *externglib.Object) *GestureSwipe {
+func WrapGestureSwipe(obj *externglib.Object) *GestureSwipe {
 	return &GestureSwipe{
 		GestureSingle: GestureSingle{
 			Gesture: Gesture{
@@ -52,7 +52,7 @@ func wrapGestureSwipe(obj *externglib.Object) *GestureSwipe {
 func marshalGestureSwiper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureSwipe(obj), nil
+	return WrapGestureSwipe(obj), nil
 }
 
 // NewGestureSwipe returns a newly created Gesture that recognizes swipes.
@@ -67,7 +67,7 @@ func NewGestureSwipe(widget Widgetter) *GestureSwipe {
 
 	var _gestureSwipe *GestureSwipe // out
 
-	_gestureSwipe = wrapGestureSwipe(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureSwipe = WrapGestureSwipe(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureSwipe
 }

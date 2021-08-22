@@ -103,7 +103,7 @@ type ToolSheller interface {
 
 var _ ToolSheller = (*ToolShell)(nil)
 
-func wrapToolShell(obj *externglib.Object) *ToolShell {
+func WrapToolShell(obj *externglib.Object) *ToolShell {
 	return &ToolShell{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -123,7 +123,7 @@ func wrapToolShell(obj *externglib.Object) *ToolShell {
 func marshalToolSheller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToolShell(obj), nil
+	return WrapToolShell(obj), nil
 }
 
 // EllipsizeMode retrieves the current ellipsize mode for the tool shell. Tool
@@ -272,7 +272,7 @@ func (shell *ToolShell) TextSizeGroup() *SizeGroup {
 
 	var _sizeGroup *SizeGroup // out
 
-	_sizeGroup = wrapSizeGroup(externglib.Take(unsafe.Pointer(_cret)))
+	_sizeGroup = WrapSizeGroup(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _sizeGroup
 }

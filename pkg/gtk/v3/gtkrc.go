@@ -513,7 +513,7 @@ func RCGetStyle(widget Widgetter) *Style {
 
 	var _style *Style // out
 
-	_style = wrapStyle(externglib.Take(unsafe.Pointer(_cret)))
+	_style = WrapStyle(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _style
 }
@@ -560,7 +560,7 @@ func RCGetStyleByPaths(settings *Settings, widgetPath string, classPath string, 
 	var _style *Style // out
 
 	if _cret != nil {
-		_style = wrapStyle(externglib.Take(unsafe.Pointer(_cret)))
+		_style = WrapStyle(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _style
@@ -792,7 +792,7 @@ type RCStyle struct {
 	*externglib.Object
 }
 
-func wrapRCStyle(obj *externglib.Object) *RCStyle {
+func WrapRCStyle(obj *externglib.Object) *RCStyle {
 	return &RCStyle{
 		Object: obj,
 	}
@@ -801,7 +801,7 @@ func wrapRCStyle(obj *externglib.Object) *RCStyle {
 func marshalRCStyler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRCStyle(obj), nil
+	return WrapRCStyle(obj), nil
 }
 
 // NewRCStyle creates a new RcStyle with no fields set and a reference count of
@@ -815,7 +815,7 @@ func NewRCStyle() *RCStyle {
 
 	var _rcStyle *RCStyle // out
 
-	_rcStyle = wrapRCStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_rcStyle = WrapRCStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _rcStyle
 }
@@ -835,7 +835,7 @@ func (orig *RCStyle) Copy() *RCStyle {
 
 	var _rcStyle *RCStyle // out
 
-	_rcStyle = wrapRCStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_rcStyle = WrapRCStyle(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _rcStyle
 }

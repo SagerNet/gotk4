@@ -75,7 +75,7 @@ type Frame struct {
 	Bin
 }
 
-func wrapFrame(obj *externglib.Object) *Frame {
+func WrapFrame(obj *externglib.Object) *Frame {
 	return &Frame{
 		Bin: Bin{
 			Container: Container{
@@ -99,7 +99,7 @@ func wrapFrame(obj *externglib.Object) *Frame {
 func marshalFramer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFrame(obj), nil
+	return WrapFrame(obj), nil
 }
 
 // NewFrame creates a new Frame, with optional label label. If label is NULL,
@@ -118,7 +118,7 @@ func NewFrame(label string) *Frame {
 
 	var _frame *Frame // out
 
-	_frame = wrapFrame(externglib.Take(unsafe.Pointer(_cret)))
+	_frame = WrapFrame(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _frame
 }

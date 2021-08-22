@@ -101,7 +101,7 @@ type RenderNoder interface {
 
 var _ RenderNoder = (*RenderNode)(nil)
 
-func wrapRenderNode(obj *externglib.Object) *RenderNode {
+func WrapRenderNode(obj *externglib.Object) *RenderNode {
 	return &RenderNode{
 		Object: obj,
 	}
@@ -110,7 +110,7 @@ func wrapRenderNode(obj *externglib.Object) *RenderNode {
 func marshalRenderNoder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRenderNode(obj), nil
+	return WrapRenderNode(obj), nil
 }
 
 // Draw the contents of node to the given cairo context.

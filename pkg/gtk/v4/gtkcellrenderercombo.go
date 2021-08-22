@@ -36,7 +36,7 @@ type CellRendererCombo struct {
 	CellRendererText
 }
 
-func wrapCellRendererCombo(obj *externglib.Object) *CellRendererCombo {
+func WrapCellRendererCombo(obj *externglib.Object) *CellRendererCombo {
 	return &CellRendererCombo{
 		CellRendererText: CellRendererText{
 			CellRenderer: CellRenderer{
@@ -51,7 +51,7 @@ func wrapCellRendererCombo(obj *externglib.Object) *CellRendererCombo {
 func marshalCellRendererCombor(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererCombo(obj), nil
+	return WrapCellRendererCombo(obj), nil
 }
 
 // NewCellRendererCombo creates a new CellRendererCombo. Adjust how text is
@@ -67,7 +67,7 @@ func NewCellRendererCombo() *CellRendererCombo {
 
 	var _cellRendererCombo *CellRendererCombo // out
 
-	_cellRendererCombo = wrapCellRendererCombo(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererCombo = WrapCellRendererCombo(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererCombo
 }

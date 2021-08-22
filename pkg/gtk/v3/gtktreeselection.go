@@ -82,7 +82,7 @@ func _gotk4_gtk3_TreeSelectionFunc(arg0 *C.GtkTreeSelection, arg1 *C.GtkTreeMode
 	var path *TreePath             // out
 	var pathCurrentlySelected bool // out
 
-	selection = wrapTreeSelection(externglib.Take(unsafe.Pointer(arg0)))
+	selection = WrapTreeSelection(externglib.Take(unsafe.Pointer(arg0)))
 	model = (externglib.CastObject(externglib.Take(unsafe.Pointer(arg1)))).(TreeModeller)
 	path = (*TreePath)(gextras.NewStructNative(unsafe.Pointer(arg2)))
 	runtime.SetFinalizer(
@@ -138,7 +138,7 @@ type TreeSelection struct {
 	*externglib.Object
 }
 
-func wrapTreeSelection(obj *externglib.Object) *TreeSelection {
+func WrapTreeSelection(obj *externglib.Object) *TreeSelection {
 	return &TreeSelection{
 		Object: obj,
 	}
@@ -147,7 +147,7 @@ func wrapTreeSelection(obj *externglib.Object) *TreeSelection {
 func marshalTreeSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeSelection(obj), nil
+	return WrapTreeSelection(obj), nil
 }
 
 // CountSelectedRows returns the number of rows that have been selected in tree.
@@ -269,7 +269,7 @@ func (selection *TreeSelection) TreeView() *TreeView {
 
 	var _treeView *TreeView // out
 
-	_treeView = wrapTreeView(externglib.Take(unsafe.Pointer(_cret)))
+	_treeView = WrapTreeView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _treeView
 }

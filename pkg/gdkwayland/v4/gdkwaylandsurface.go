@@ -33,7 +33,7 @@ func _gotk4_gdkwayland4_WaylandToplevelExported(arg0 *C.GdkToplevel, arg1 *C.cha
 	var toplevel *WaylandToplevel // out
 	var handle string             // out
 
-	toplevel = wrapWaylandToplevel(externglib.Take(unsafe.Pointer(arg0)))
+	toplevel = WrapWaylandToplevel(externglib.Take(unsafe.Pointer(arg0)))
 	handle = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 

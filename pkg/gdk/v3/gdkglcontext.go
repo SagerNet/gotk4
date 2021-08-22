@@ -116,7 +116,7 @@ type GLContexter interface {
 
 var _ GLContexter = (*GLContext)(nil)
 
-func wrapGLContext(obj *externglib.Object) *GLContext {
+func WrapGLContext(obj *externglib.Object) *GLContext {
 	return &GLContext{
 		Object: obj,
 	}
@@ -125,7 +125,7 @@ func wrapGLContext(obj *externglib.Object) *GLContext {
 func marshalGLContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGLContext(obj), nil
+	return WrapGLContext(obj), nil
 }
 
 // DebugEnabled retrieves the value set using
@@ -161,7 +161,7 @@ func (context *GLContext) Display() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display

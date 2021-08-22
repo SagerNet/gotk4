@@ -81,7 +81,7 @@ type Button struct {
 	*externglib.Object
 }
 
-func wrapButton(obj *externglib.Object) *Button {
+func WrapButton(obj *externglib.Object) *Button {
 	return &Button{
 		Bin: Bin{
 			Container: Container{
@@ -123,7 +123,7 @@ func wrapButton(obj *externglib.Object) *Button {
 func marshalButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapButton(obj), nil
+	return WrapButton(obj), nil
 }
 
 // NewButton creates a new Button widget. To add a child widget to the button,
@@ -135,7 +135,7 @@ func NewButton() *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }
@@ -166,7 +166,7 @@ func NewButtonFromIconName(iconName string, size int) *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }
@@ -192,7 +192,7 @@ func NewButtonFromStock(stockId string) *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }
@@ -211,7 +211,7 @@ func NewButtonWithLabel(label string) *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }
@@ -233,7 +233,7 @@ func NewButtonWithMnemonic(label string) *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }

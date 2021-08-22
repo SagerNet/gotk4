@@ -27,7 +27,7 @@ type ScrolledWindowAccessible struct {
 	ContainerAccessible
 }
 
-func wrapScrolledWindowAccessible(obj *externglib.Object) *ScrolledWindowAccessible {
+func WrapScrolledWindowAccessible(obj *externglib.Object) *ScrolledWindowAccessible {
 	return &ScrolledWindowAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -47,7 +47,7 @@ func wrapScrolledWindowAccessible(obj *externglib.Object) *ScrolledWindowAccessi
 func marshalScrolledWindowAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScrolledWindowAccessible(obj), nil
+	return WrapScrolledWindowAccessible(obj), nil
 }
 
 func (*ScrolledWindowAccessible) privateScrolledWindowAccessible() {}

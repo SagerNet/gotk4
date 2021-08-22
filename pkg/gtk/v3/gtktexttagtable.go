@@ -36,7 +36,7 @@ func _gotk4_gtk3_TextTagTableForeach(arg0 *C.GtkTextTag, arg1 C.gpointer) {
 
 	var tag *TextTag // out
 
-	tag = wrapTextTag(externglib.Take(unsafe.Pointer(arg0)))
+	tag = WrapTextTag(externglib.Take(unsafe.Pointer(arg0)))
 
 	fn := v.(TextTagTableForeach)
 	fn(tag)
@@ -75,7 +75,7 @@ type TextTagTable struct {
 	Buildable
 }
 
-func wrapTextTagTable(obj *externglib.Object) *TextTagTable {
+func WrapTextTagTable(obj *externglib.Object) *TextTagTable {
 	return &TextTagTable{
 		Object: obj,
 		Buildable: Buildable{
@@ -87,7 +87,7 @@ func wrapTextTagTable(obj *externglib.Object) *TextTagTable {
 func marshalTextTagTabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTextTagTable(obj), nil
+	return WrapTextTagTable(obj), nil
 }
 
 // NewTextTagTable creates a new TextTagTable. The table contains no tags by
@@ -99,7 +99,7 @@ func NewTextTagTable() *TextTagTable {
 
 	var _textTagTable *TextTagTable // out
 
-	_textTagTable = wrapTextTagTable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_textTagTable = WrapTextTagTable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _textTagTable
 }
@@ -182,7 +182,7 @@ func (table *TextTagTable) Lookup(name string) *TextTag {
 	var _textTag *TextTag // out
 
 	if _cret != nil {
-		_textTag = wrapTextTag(externglib.Take(unsafe.Pointer(_cret)))
+		_textTag = WrapTextTag(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _textTag

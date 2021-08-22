@@ -37,7 +37,7 @@ type ShortcutsSection struct {
 	Box
 }
 
-func wrapShortcutsSection(obj *externglib.Object) *ShortcutsSection {
+func WrapShortcutsSection(obj *externglib.Object) *ShortcutsSection {
 	return &ShortcutsSection{
 		Box: Box{
 			Container: Container{
@@ -65,7 +65,7 @@ func wrapShortcutsSection(obj *externglib.Object) *ShortcutsSection {
 func marshalShortcutsSectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutsSection(obj), nil
+	return WrapShortcutsSection(obj), nil
 }
 
 func (*ShortcutsSection) privateShortcutsSection() {}

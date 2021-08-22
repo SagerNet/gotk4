@@ -157,7 +157,7 @@ type IconInfo struct {
 	*externglib.Object
 }
 
-func wrapIconInfo(obj *externglib.Object) *IconInfo {
+func WrapIconInfo(obj *externglib.Object) *IconInfo {
 	return &IconInfo{
 		Object: obj,
 	}
@@ -166,7 +166,7 @@ func wrapIconInfo(obj *externglib.Object) *IconInfo {
 func marshalIconInfor(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconInfo(obj), nil
+	return WrapIconInfo(obj), nil
 }
 
 // NewIconInfoForPixbuf creates a IconInfo for a Pixbuf.
@@ -184,7 +184,7 @@ func NewIconInfoForPixbuf(iconTheme *IconTheme, pixbuf *gdkpixbuf.Pixbuf) *IconI
 
 	var _iconInfo *IconInfo // out
 
-	_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconInfo
 }
@@ -960,7 +960,7 @@ type IconTheme struct {
 	*externglib.Object
 }
 
-func wrapIconTheme(obj *externglib.Object) *IconTheme {
+func WrapIconTheme(obj *externglib.Object) *IconTheme {
 	return &IconTheme{
 		Object: obj,
 	}
@@ -969,7 +969,7 @@ func wrapIconTheme(obj *externglib.Object) *IconTheme {
 func marshalIconThemer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconTheme(obj), nil
+	return WrapIconTheme(obj), nil
 }
 
 // NewIconTheme creates a new icon theme object. Icon theme objects are used to
@@ -983,7 +983,7 @@ func NewIconTheme() *IconTheme {
 
 	var _iconTheme *IconTheme // out
 
-	_iconTheme = wrapIconTheme(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconTheme = WrapIconTheme(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconTheme
 }
@@ -1066,7 +1066,7 @@ func (iconTheme *IconTheme) ChooseIcon(iconNames []string, size int, flags IconL
 	var _iconInfo *IconInfo // out
 
 	if _cret != nil {
-		_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _iconInfo
@@ -1116,7 +1116,7 @@ func (iconTheme *IconTheme) ChooseIconForScale(iconNames []string, size int, sca
 	var _iconInfo *IconInfo // out
 
 	if _cret != nil {
-		_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _iconInfo
@@ -1487,7 +1487,7 @@ func (iconTheme *IconTheme) LookupByGIcon(icon gio.Iconner, size int, flags Icon
 	var _iconInfo *IconInfo // out
 
 	if _cret != nil {
-		_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _iconInfo
@@ -1520,7 +1520,7 @@ func (iconTheme *IconTheme) LookupByGIconForScale(icon gio.Iconner, size int, sc
 	var _iconInfo *IconInfo // out
 
 	if _cret != nil {
-		_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _iconInfo
@@ -1558,7 +1558,7 @@ func (iconTheme *IconTheme) LookupIcon(iconName string, size int, flags IconLook
 	var _iconInfo *IconInfo // out
 
 	if _cret != nil {
-		_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _iconInfo
@@ -1594,7 +1594,7 @@ func (iconTheme *IconTheme) LookupIconForScale(iconName string, size int, scale 
 	var _iconInfo *IconInfo // out
 
 	if _cret != nil {
-		_iconInfo = wrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_iconInfo = WrapIconInfo(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _iconInfo
@@ -1743,7 +1743,7 @@ func IconThemeGetDefault() *IconTheme {
 
 	var _iconTheme *IconTheme // out
 
-	_iconTheme = wrapIconTheme(externglib.Take(unsafe.Pointer(_cret)))
+	_iconTheme = WrapIconTheme(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _iconTheme
 }
@@ -1766,7 +1766,7 @@ func IconThemeGetForScreen(screen *gdk.Screen) *IconTheme {
 
 	var _iconTheme *IconTheme // out
 
-	_iconTheme = wrapIconTheme(externglib.Take(unsafe.Pointer(_cret)))
+	_iconTheme = WrapIconTheme(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _iconTheme
 }

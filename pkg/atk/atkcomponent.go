@@ -213,7 +213,7 @@ type Componenter interface {
 
 var _ Componenter = (*Component)(nil)
 
-func wrapComponent(obj *externglib.Object) *Component {
+func WrapComponent(obj *externglib.Object) *Component {
 	return &Component{
 		Object: obj,
 	}
@@ -222,7 +222,7 @@ func wrapComponent(obj *externglib.Object) *Component {
 func marshalComponenter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapComponent(obj), nil
+	return WrapComponent(obj), nil
 }
 
 // Contains checks whether the specified point is within the extent of the
@@ -439,7 +439,7 @@ func (component *Component) RefAccessibleAtPoint(x int, y int, coordType CoordTy
 	var _object *ObjectClass // out
 
 	if _cret != nil {
-		_object = wrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_object = WrapObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _object

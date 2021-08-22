@@ -49,7 +49,7 @@ func _gotk4_gio2_DBusInterfaceGetPropertyFunc(arg0 *C.GDBusConnection, arg1 *C.g
 	var interfaceName string       // out
 	var propertyName string        // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	sender = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -87,7 +87,7 @@ func _gotk4_gio2_DBusInterfaceMethodCallFunc(arg0 *C.GDBusConnection, arg1 *C.gc
 	var parameters *glib.Variant         // out
 	var invocation *DBusMethodInvocation // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	sender = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -103,7 +103,7 @@ func _gotk4_gio2_DBusInterfaceMethodCallFunc(arg0 *C.GDBusConnection, arg1 *C.gc
 			C.g_variant_unref((*C.GVariant)(intern.C))
 		},
 	)
-	invocation = wrapDBusMethodInvocation(externglib.AssumeOwnership(unsafe.Pointer(arg6)))
+	invocation = WrapDBusMethodInvocation(externglib.AssumeOwnership(unsafe.Pointer(arg6)))
 
 	fn := v.(DBusInterfaceMethodCallFunc)
 	fn(connection, sender, objectPath, interfaceName, methodName, parameters, invocation)
@@ -127,7 +127,7 @@ func _gotk4_gio2_DBusInterfaceSetPropertyFunc(arg0 *C.GDBusConnection, arg1 *C.g
 	var propertyName string        // out
 	var value *glib.Variant        // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	sender = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -227,8 +227,8 @@ func _gotk4_gio2_DBusMessageFilterFunction(arg0 *C.GDBusConnection, arg1 *C.GDBu
 	var message *DBusMessage       // out
 	var incoming bool              // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
-	message = wrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(arg1)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	message = WrapDBusMessage(externglib.AssumeOwnership(unsafe.Pointer(arg1)))
 	if arg2 != 0 {
 		incoming = true
 	}
@@ -261,7 +261,7 @@ func _gotk4_gio2_DBusSignalCallback(arg0 *C.GDBusConnection, arg1 *C.gchar, arg2
 	var signalName string          // out
 	var parameters *glib.Variant   // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	if arg1 != nil {
 		senderName = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 		defer C.free(unsafe.Pointer(arg1))
@@ -303,7 +303,7 @@ func _gotk4_gio2_DBusSubtreeDispatchFunc(arg0 *C.GDBusConnection, arg1 *C.gchar,
 	var interfaceName string       // out
 	var node string                // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	sender = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -349,7 +349,7 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(arg0 *C.GDBusConnection, arg1 *C.gchar
 	var sender string              // out
 	var objectPath string          // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	sender = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -407,7 +407,7 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(arg0 *C.GDBusConnection, arg1 *C.gcha
 	var objectPath string          // out
 	var node string                // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	sender = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	objectPath = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -488,7 +488,7 @@ func BusGetFinish(res AsyncResulter) (*DBusConnection, error) {
 	var _dBusConnection *DBusConnection // out
 	var _goerr error                    // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -531,7 +531,7 @@ func BusGetSync(ctx context.Context, busType BusType) (*DBusConnection, error) {
 	var _dBusConnection *DBusConnection // out
 	var _goerr error                    // out
 
-	_dBusConnection = wrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusConnection = WrapDBusConnection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

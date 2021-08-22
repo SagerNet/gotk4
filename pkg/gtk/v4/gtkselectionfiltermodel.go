@@ -30,7 +30,7 @@ type SelectionFilterModel struct {
 	gio.ListModel
 }
 
-func wrapSelectionFilterModel(obj *externglib.Object) *SelectionFilterModel {
+func WrapSelectionFilterModel(obj *externglib.Object) *SelectionFilterModel {
 	return &SelectionFilterModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -42,7 +42,7 @@ func wrapSelectionFilterModel(obj *externglib.Object) *SelectionFilterModel {
 func marshalSelectionFilterModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSelectionFilterModel(obj), nil
+	return WrapSelectionFilterModel(obj), nil
 }
 
 // NewSelectionFilterModel creates a new GtkSelectionFilterModel that will
@@ -60,7 +60,7 @@ func NewSelectionFilterModel(model SelectionModeller) *SelectionFilterModel {
 
 	var _selectionFilterModel *SelectionFilterModel // out
 
-	_selectionFilterModel = wrapSelectionFilterModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_selectionFilterModel = WrapSelectionFilterModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _selectionFilterModel
 }

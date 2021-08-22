@@ -285,7 +285,7 @@ type AppInfor interface {
 
 var _ AppInfor = (*AppInfo)(nil)
 
-func wrapAppInfo(obj *externglib.Object) *AppInfo {
+func WrapAppInfo(obj *externglib.Object) *AppInfo {
 	return &AppInfo{
 		Object: obj,
 	}
@@ -294,7 +294,7 @@ func wrapAppInfo(obj *externglib.Object) *AppInfo {
 func marshalAppInfor(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppInfo(obj), nil
+	return WrapAppInfo(obj), nil
 }
 
 // AddSupportsType adds a content type to the application information to
@@ -1234,7 +1234,7 @@ func AppInfoMonitorGet() *AppInfoMonitor {
 
 	var _appInfoMonitor *AppInfoMonitor // out
 
-	_appInfoMonitor = wrapAppInfoMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_appInfoMonitor = WrapAppInfoMonitor(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _appInfoMonitor
 }
@@ -1269,7 +1269,7 @@ type AppLaunchContext struct {
 	*externglib.Object
 }
 
-func wrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
+func WrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
 	return &AppLaunchContext{
 		Object: obj,
 	}
@@ -1278,7 +1278,7 @@ func wrapAppLaunchContext(obj *externglib.Object) *AppLaunchContext {
 func marshalAppLaunchContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAppLaunchContext(obj), nil
+	return WrapAppLaunchContext(obj), nil
 }
 
 // NewAppLaunchContext creates a new application launch context. This is not
@@ -1291,7 +1291,7 @@ func NewAppLaunchContext() *AppLaunchContext {
 
 	var _appLaunchContext *AppLaunchContext // out
 
-	_appLaunchContext = wrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_appLaunchContext = WrapAppLaunchContext(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _appLaunchContext
 }

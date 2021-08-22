@@ -46,7 +46,7 @@ type FilenameCompleter struct {
 	*externglib.Object
 }
 
-func wrapFilenameCompleter(obj *externglib.Object) *FilenameCompleter {
+func WrapFilenameCompleter(obj *externglib.Object) *FilenameCompleter {
 	return &FilenameCompleter{
 		Object: obj,
 	}
@@ -55,7 +55,7 @@ func wrapFilenameCompleter(obj *externglib.Object) *FilenameCompleter {
 func marshalFilenameCompleterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFilenameCompleter(obj), nil
+	return WrapFilenameCompleter(obj), nil
 }
 
 // NewFilenameCompleter creates a new filename completer.
@@ -66,7 +66,7 @@ func NewFilenameCompleter() *FilenameCompleter {
 
 	var _filenameCompleter *FilenameCompleter // out
 
-	_filenameCompleter = wrapFilenameCompleter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_filenameCompleter = WrapFilenameCompleter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _filenameCompleter
 }

@@ -44,7 +44,7 @@ type UnixCredentialsMessage struct {
 	SocketControlMessage
 }
 
-func wrapUnixCredentialsMessage(obj *externglib.Object) *UnixCredentialsMessage {
+func WrapUnixCredentialsMessage(obj *externglib.Object) *UnixCredentialsMessage {
 	return &UnixCredentialsMessage{
 		SocketControlMessage: SocketControlMessage{
 			Object: obj,
@@ -55,7 +55,7 @@ func wrapUnixCredentialsMessage(obj *externglib.Object) *UnixCredentialsMessage 
 func marshalUnixCredentialsMessager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUnixCredentialsMessage(obj), nil
+	return WrapUnixCredentialsMessage(obj), nil
 }
 
 // NewUnixCredentialsMessage creates a new CredentialsMessage with credentials
@@ -67,7 +67,7 @@ func NewUnixCredentialsMessage() *UnixCredentialsMessage {
 
 	var _unixCredentialsMessage *UnixCredentialsMessage // out
 
-	_unixCredentialsMessage = wrapUnixCredentialsMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixCredentialsMessage = WrapUnixCredentialsMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixCredentialsMessage
 }
@@ -85,7 +85,7 @@ func NewUnixCredentialsMessageWithCredentials(credentials *Credentials) *UnixCre
 
 	var _unixCredentialsMessage *UnixCredentialsMessage // out
 
-	_unixCredentialsMessage = wrapUnixCredentialsMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_unixCredentialsMessage = WrapUnixCredentialsMessage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _unixCredentialsMessage
 }
@@ -102,7 +102,7 @@ func (message *UnixCredentialsMessage) Credentials() *Credentials {
 
 	var _credentials *Credentials // out
 
-	_credentials = wrapCredentials(externglib.Take(unsafe.Pointer(_cret)))
+	_credentials = WrapCredentials(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _credentials
 }

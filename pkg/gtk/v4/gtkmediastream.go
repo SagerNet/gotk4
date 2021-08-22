@@ -159,7 +159,7 @@ type MediaStreamer interface {
 
 var _ MediaStreamer = (*MediaStream)(nil)
 
-func wrapMediaStream(obj *externglib.Object) *MediaStream {
+func WrapMediaStream(obj *externglib.Object) *MediaStream {
 	return &MediaStream{
 		Object: obj,
 		Paintable: gdk.Paintable{
@@ -171,7 +171,7 @@ func wrapMediaStream(obj *externglib.Object) *MediaStream {
 func marshalMediaStreamer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMediaStream(obj), nil
+	return WrapMediaStream(obj), nil
 }
 
 // Ended pauses the media stream and marks it as ended.

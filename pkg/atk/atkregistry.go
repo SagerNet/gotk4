@@ -34,7 +34,7 @@ func GetDefaultRegistry() *Registry {
 
 	var _registry *Registry // out
 
-	_registry = wrapRegistry(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_registry = WrapRegistry(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _registry
 }
@@ -48,7 +48,7 @@ type Registry struct {
 	*externglib.Object
 }
 
-func wrapRegistry(obj *externglib.Object) *Registry {
+func WrapRegistry(obj *externglib.Object) *Registry {
 	return &Registry{
 		Object: obj,
 	}
@@ -57,7 +57,7 @@ func wrapRegistry(obj *externglib.Object) *Registry {
 func marshalRegistrier(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRegistry(obj), nil
+	return WrapRegistry(obj), nil
 }
 
 // Factory gets an ObjectFactory appropriate for creating Objects appropriate
@@ -76,7 +76,7 @@ func (registry *Registry) Factory(typ externglib.Type) *ObjectFactory {
 
 	var _objectFactory *ObjectFactory // out
 
-	_objectFactory = wrapObjectFactory(externglib.Take(unsafe.Pointer(_cret)))
+	_objectFactory = WrapObjectFactory(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _objectFactory
 }

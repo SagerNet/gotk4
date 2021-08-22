@@ -37,7 +37,7 @@ type RecentAction struct {
 	*externglib.Object
 }
 
-func wrapRecentAction(obj *externglib.Object) *RecentAction {
+func WrapRecentAction(obj *externglib.Object) *RecentAction {
 	return &RecentAction{
 		Action: Action{
 			Object: obj,
@@ -55,7 +55,7 @@ func wrapRecentAction(obj *externglib.Object) *RecentAction {
 func marshalRecentActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentAction(obj), nil
+	return WrapRecentAction(obj), nil
 }
 
 // NewRecentAction creates a new RecentAction object. To add the action to a
@@ -93,7 +93,7 @@ func NewRecentAction(name string, label string, tooltip string, stockId string) 
 
 	var _recentAction *RecentAction // out
 
-	_recentAction = wrapRecentAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_recentAction = WrapRecentAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _recentAction
 }
@@ -138,7 +138,7 @@ func NewRecentActionForManager(name string, label string, tooltip string, stockI
 
 	var _recentAction *RecentAction // out
 
-	_recentAction = wrapRecentAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_recentAction = WrapRecentAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _recentAction
 }

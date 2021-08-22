@@ -121,7 +121,7 @@ type ActivateAction struct {
 	ShortcutAction
 }
 
-func wrapActivateAction(obj *externglib.Object) *ActivateAction {
+func WrapActivateAction(obj *externglib.Object) *ActivateAction {
 	return &ActivateAction{
 		ShortcutAction: ShortcutAction{
 			Object: obj,
@@ -132,7 +132,7 @@ func wrapActivateAction(obj *externglib.Object) *ActivateAction {
 func marshalActivateActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapActivateAction(obj), nil
+	return WrapActivateAction(obj), nil
 }
 
 func (*ActivateAction) privateActivateAction() {}
@@ -148,7 +148,7 @@ func ActivateActionGet() *ActivateAction {
 
 	var _activateAction *ActivateAction // out
 
-	_activateAction = wrapActivateAction(externglib.Take(unsafe.Pointer(_cret)))
+	_activateAction = WrapActivateAction(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _activateAction
 }
@@ -158,7 +158,7 @@ type CallbackAction struct {
 	ShortcutAction
 }
 
-func wrapCallbackAction(obj *externglib.Object) *CallbackAction {
+func WrapCallbackAction(obj *externglib.Object) *CallbackAction {
 	return &CallbackAction{
 		ShortcutAction: ShortcutAction{
 			Object: obj,
@@ -169,7 +169,7 @@ func wrapCallbackAction(obj *externglib.Object) *CallbackAction {
 func marshalCallbackActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCallbackAction(obj), nil
+	return WrapCallbackAction(obj), nil
 }
 
 // NewCallbackAction: create a custom action that calls the given callback when
@@ -191,7 +191,7 @@ func NewCallbackAction(callback ShortcutFunc) *CallbackAction {
 
 	var _callbackAction *CallbackAction // out
 
-	_callbackAction = wrapCallbackAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_callbackAction = WrapCallbackAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _callbackAction
 }
@@ -203,7 +203,7 @@ type MnemonicAction struct {
 	ShortcutAction
 }
 
-func wrapMnemonicAction(obj *externglib.Object) *MnemonicAction {
+func WrapMnemonicAction(obj *externglib.Object) *MnemonicAction {
 	return &MnemonicAction{
 		ShortcutAction: ShortcutAction{
 			Object: obj,
@@ -214,7 +214,7 @@ func wrapMnemonicAction(obj *externglib.Object) *MnemonicAction {
 func marshalMnemonicActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMnemonicAction(obj), nil
+	return WrapMnemonicAction(obj), nil
 }
 
 func (*MnemonicAction) privateMnemonicAction() {}
@@ -230,7 +230,7 @@ func MnemonicActionGet() *MnemonicAction {
 
 	var _mnemonicAction *MnemonicAction // out
 
-	_mnemonicAction = wrapMnemonicAction(externglib.Take(unsafe.Pointer(_cret)))
+	_mnemonicAction = WrapMnemonicAction(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _mnemonicAction
 }
@@ -240,7 +240,7 @@ type NamedAction struct {
 	ShortcutAction
 }
 
-func wrapNamedAction(obj *externglib.Object) *NamedAction {
+func WrapNamedAction(obj *externglib.Object) *NamedAction {
 	return &NamedAction{
 		ShortcutAction: ShortcutAction{
 			Object: obj,
@@ -251,7 +251,7 @@ func wrapNamedAction(obj *externglib.Object) *NamedAction {
 func marshalNamedActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNamedAction(obj), nil
+	return WrapNamedAction(obj), nil
 }
 
 // NewNamedAction creates an action that when activated, activates the named
@@ -272,7 +272,7 @@ func NewNamedAction(name string) *NamedAction {
 
 	var _namedAction *NamedAction // out
 
-	_namedAction = wrapNamedAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_namedAction = WrapNamedAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _namedAction
 }
@@ -299,7 +299,7 @@ type NothingAction struct {
 	ShortcutAction
 }
 
-func wrapNothingAction(obj *externglib.Object) *NothingAction {
+func WrapNothingAction(obj *externglib.Object) *NothingAction {
 	return &NothingAction{
 		ShortcutAction: ShortcutAction{
 			Object: obj,
@@ -310,7 +310,7 @@ func wrapNothingAction(obj *externglib.Object) *NothingAction {
 func marshalNothingActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNothingAction(obj), nil
+	return WrapNothingAction(obj), nil
 }
 
 func (*NothingAction) privateNothingAction() {}
@@ -325,7 +325,7 @@ func NothingActionGet() *NothingAction {
 
 	var _nothingAction *NothingAction // out
 
-	_nothingAction = wrapNothingAction(externglib.Take(unsafe.Pointer(_cret)))
+	_nothingAction = WrapNothingAction(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _nothingAction
 }
@@ -373,7 +373,7 @@ type ShortcutActioner interface {
 
 var _ ShortcutActioner = (*ShortcutAction)(nil)
 
-func wrapShortcutAction(obj *externglib.Object) *ShortcutAction {
+func WrapShortcutAction(obj *externglib.Object) *ShortcutAction {
 	return &ShortcutAction{
 		Object: obj,
 	}
@@ -382,7 +382,7 @@ func wrapShortcutAction(obj *externglib.Object) *ShortcutAction {
 func marshalShortcutActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutAction(obj), nil
+	return WrapShortcutAction(obj), nil
 }
 
 // NewShortcutActionParseString tries to parse the given string into an action.
@@ -414,7 +414,7 @@ func NewShortcutActionParseString(_string string) *ShortcutAction {
 	var _shortcutAction *ShortcutAction // out
 
 	if _cret != nil {
-		_shortcutAction = wrapShortcutAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_shortcutAction = WrapShortcutAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _shortcutAction
@@ -485,7 +485,7 @@ type SignalAction struct {
 	ShortcutAction
 }
 
-func wrapSignalAction(obj *externglib.Object) *SignalAction {
+func WrapSignalAction(obj *externglib.Object) *SignalAction {
 	return &SignalAction{
 		ShortcutAction: ShortcutAction{
 			Object: obj,
@@ -496,7 +496,7 @@ func wrapSignalAction(obj *externglib.Object) *SignalAction {
 func marshalSignalActioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSignalAction(obj), nil
+	return WrapSignalAction(obj), nil
 }
 
 // NewSignalAction creates an action that when activated, emits the given action
@@ -515,7 +515,7 @@ func NewSignalAction(signalName string) *SignalAction {
 
 	var _signalAction *SignalAction // out
 
-	_signalAction = wrapSignalAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_signalAction = WrapSignalAction(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _signalAction
 }

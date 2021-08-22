@@ -110,7 +110,7 @@ type BuilderScoper interface {
 
 var _ BuilderScoper = (*BuilderScope)(nil)
 
-func wrapBuilderScope(obj *externglib.Object) *BuilderScope {
+func WrapBuilderScope(obj *externglib.Object) *BuilderScope {
 	return &BuilderScope{
 		Object: obj,
 	}
@@ -119,7 +119,7 @@ func wrapBuilderScope(obj *externglib.Object) *BuilderScope {
 func marshalBuilderScoper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBuilderScope(obj), nil
+	return WrapBuilderScope(obj), nil
 }
 
 func (*BuilderScope) privateBuilderScope() {}
@@ -144,7 +144,7 @@ type BuilderCScope struct {
 	BuilderScope
 }
 
-func wrapBuilderCScope(obj *externglib.Object) *BuilderCScope {
+func WrapBuilderCScope(obj *externglib.Object) *BuilderCScope {
 	return &BuilderCScope{
 		Object: obj,
 		BuilderScope: BuilderScope{
@@ -156,7 +156,7 @@ func wrapBuilderCScope(obj *externglib.Object) *BuilderCScope {
 func marshalBuilderCScoper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapBuilderCScope(obj), nil
+	return WrapBuilderCScope(obj), nil
 }
 
 // NewBuilderCScope creates a new GtkBuilderCScope object to use with future
@@ -171,7 +171,7 @@ func NewBuilderCScope() *BuilderCScope {
 
 	var _builderCScope *BuilderCScope // out
 
-	_builderCScope = wrapBuilderCScope(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_builderCScope = WrapBuilderCScope(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _builderCScope
 }

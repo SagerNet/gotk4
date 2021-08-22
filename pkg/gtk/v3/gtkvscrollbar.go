@@ -35,7 +35,7 @@ type VScrollbar struct {
 	Scrollbar
 }
 
-func wrapVScrollbar(obj *externglib.Object) *VScrollbar {
+func WrapVScrollbar(obj *externglib.Object) *VScrollbar {
 	return &VScrollbar{
 		Scrollbar: Scrollbar{
 			Range: Range{
@@ -63,7 +63,7 @@ func wrapVScrollbar(obj *externglib.Object) *VScrollbar {
 func marshalVScrollbarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVScrollbar(obj), nil
+	return WrapVScrollbar(obj), nil
 }
 
 // NewVScrollbar creates a new vertical scrollbar.
@@ -82,7 +82,7 @@ func NewVScrollbar(adjustment *Adjustment) *VScrollbar {
 
 	var _vScrollbar *VScrollbar // out
 
-	_vScrollbar = wrapVScrollbar(externglib.Take(unsafe.Pointer(_cret)))
+	_vScrollbar = WrapVScrollbar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vScrollbar
 }

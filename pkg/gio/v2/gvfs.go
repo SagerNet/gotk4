@@ -57,7 +57,7 @@ func _gotk4_gio2_VFSFileLookupFunc(arg0 *C.GVfs, arg1 *C.char, arg2 C.gpointer) 
 	var vfs *VFS          // out
 	var identifier string // out
 
-	vfs = wrapVFS(externglib.Take(unsafe.Pointer(arg0)))
+	vfs = WrapVFS(externglib.Take(unsafe.Pointer(arg0)))
 	identifier = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 
@@ -101,7 +101,7 @@ type VFS struct {
 	*externglib.Object
 }
 
-func wrapVFS(obj *externglib.Object) *VFS {
+func WrapVFS(obj *externglib.Object) *VFS {
 	return &VFS{
 		Object: obj,
 	}
@@ -110,7 +110,7 @@ func wrapVFS(obj *externglib.Object) *VFS {
 func marshalVFSer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapVFS(obj), nil
+	return WrapVFS(obj), nil
 }
 
 // FileForPath gets a #GFile for path.
@@ -321,7 +321,7 @@ func VFSGetDefault() *VFS {
 
 	var _vfs *VFS // out
 
-	_vfs = wrapVFS(externglib.Take(unsafe.Pointer(_cret)))
+	_vfs = WrapVFS(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vfs
 }
@@ -334,7 +334,7 @@ func VFSGetLocal() *VFS {
 
 	var _vfs *VFS // out
 
-	_vfs = wrapVFS(externglib.Take(unsafe.Pointer(_cret)))
+	_vfs = WrapVFS(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _vfs
 }

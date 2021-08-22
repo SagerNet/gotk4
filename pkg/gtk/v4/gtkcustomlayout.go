@@ -29,7 +29,7 @@ type CustomLayout struct {
 	LayoutManager
 }
 
-func wrapCustomLayout(obj *externglib.Object) *CustomLayout {
+func WrapCustomLayout(obj *externglib.Object) *CustomLayout {
 	return &CustomLayout{
 		LayoutManager: LayoutManager{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapCustomLayout(obj *externglib.Object) *CustomLayout {
 func marshalCustomLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCustomLayout(obj), nil
+	return WrapCustomLayout(obj), nil
 }
 
 func (*CustomLayout) privateCustomLayout() {}

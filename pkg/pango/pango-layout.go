@@ -165,7 +165,7 @@ type Layout struct {
 	*externglib.Object
 }
 
-func wrapLayout(obj *externglib.Object) *Layout {
+func WrapLayout(obj *externglib.Object) *Layout {
 	return &Layout{
 		Object: obj,
 	}
@@ -174,7 +174,7 @@ func wrapLayout(obj *externglib.Object) *Layout {
 func marshalLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapLayout(obj), nil
+	return WrapLayout(obj), nil
 }
 
 // NewLayout: create a new PangoLayout object with attributes initialized to
@@ -190,7 +190,7 @@ func NewLayout(context *Context) *Layout {
 
 	var _layout *Layout // out
 
-	_layout = wrapLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_layout = WrapLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _layout
 }
@@ -224,7 +224,7 @@ func (src *Layout) Copy() *Layout {
 
 	var _layout *Layout // out
 
-	_layout = wrapLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_layout = WrapLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _layout
 }
@@ -342,7 +342,7 @@ func (layout *Layout) Context() *Context {
 
 	var _context *Context // out
 
-	_context = wrapContext(externglib.Take(unsafe.Pointer(_cret)))
+	_context = WrapContext(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _context
 }
@@ -1736,7 +1736,7 @@ func (iter *LayoutIter) Layout() *Layout {
 
 	var _layout *Layout // out
 
-	_layout = wrapLayout(externglib.Take(unsafe.Pointer(_cret)))
+	_layout = WrapLayout(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _layout
 }
@@ -2044,7 +2044,7 @@ func marshalLayoutLine(p uintptr) (interface{}, error) {
 // Layout: layout this line belongs to, might be NULL
 func (l *LayoutLine) Layout() *Layout {
 	var v *Layout // out
-	v = wrapLayout(externglib.Take(unsafe.Pointer(l.native.layout)))
+	v = WrapLayout(externglib.Take(unsafe.Pointer(l.native.layout)))
 	return v
 }
 

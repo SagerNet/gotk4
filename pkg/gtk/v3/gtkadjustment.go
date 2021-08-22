@@ -55,7 +55,7 @@ type Adjustment struct {
 	externglib.InitiallyUnowned
 }
 
-func wrapAdjustment(obj *externglib.Object) *Adjustment {
+func WrapAdjustment(obj *externglib.Object) *Adjustment {
 	return &Adjustment{
 		InitiallyUnowned: externglib.InitiallyUnowned{
 			Object: obj,
@@ -66,7 +66,7 @@ func wrapAdjustment(obj *externglib.Object) *Adjustment {
 func marshalAdjustmenter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAdjustment(obj), nil
+	return WrapAdjustment(obj), nil
 }
 
 // NewAdjustment creates a new Adjustment.
@@ -96,7 +96,7 @@ func NewAdjustment(value float64, lower float64, upper float64, stepIncrement fl
 
 	var _adjustment *Adjustment // out
 
-	_adjustment = wrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
+	_adjustment = WrapAdjustment(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _adjustment
 }

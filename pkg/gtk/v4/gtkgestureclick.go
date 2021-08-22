@@ -30,7 +30,7 @@ type GestureClick struct {
 	GestureSingle
 }
 
-func wrapGestureClick(obj *externglib.Object) *GestureClick {
+func WrapGestureClick(obj *externglib.Object) *GestureClick {
 	return &GestureClick{
 		GestureSingle: GestureSingle{
 			Gesture: Gesture{
@@ -45,7 +45,7 @@ func wrapGestureClick(obj *externglib.Object) *GestureClick {
 func marshalGestureClicker(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGestureClick(obj), nil
+	return WrapGestureClick(obj), nil
 }
 
 // NewGestureClick returns a newly created GtkGesture that recognizes single and
@@ -57,7 +57,7 @@ func NewGestureClick() *GestureClick {
 
 	var _gestureClick *GestureClick // out
 
-	_gestureClick = wrapGestureClick(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gestureClick = WrapGestureClick(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gestureClick
 }

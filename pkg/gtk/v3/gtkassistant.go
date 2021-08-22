@@ -156,7 +156,7 @@ type Assistant struct {
 	Window
 }
 
-func wrapAssistant(obj *externglib.Object) *Assistant {
+func WrapAssistant(obj *externglib.Object) *Assistant {
 	return &Assistant{
 		Window: Window{
 			Bin: Bin{
@@ -182,7 +182,7 @@ func wrapAssistant(obj *externglib.Object) *Assistant {
 func marshalAssistanter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAssistant(obj), nil
+	return WrapAssistant(obj), nil
 }
 
 // NewAssistant creates a new Assistant.
@@ -193,7 +193,7 @@ func NewAssistant() *Assistant {
 
 	var _assistant *Assistant // out
 
-	_assistant = wrapAssistant(externglib.Take(unsafe.Pointer(_cret)))
+	_assistant = WrapAssistant(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _assistant
 }

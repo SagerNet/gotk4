@@ -33,7 +33,7 @@ type FlattenListModel struct {
 	gio.ListModel
 }
 
-func wrapFlattenListModel(obj *externglib.Object) *FlattenListModel {
+func WrapFlattenListModel(obj *externglib.Object) *FlattenListModel {
 	return &FlattenListModel{
 		Object: obj,
 		ListModel: gio.ListModel{
@@ -45,7 +45,7 @@ func wrapFlattenListModel(obj *externglib.Object) *FlattenListModel {
 func marshalFlattenListModeller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFlattenListModel(obj), nil
+	return WrapFlattenListModel(obj), nil
 }
 
 // NewFlattenListModel creates a new GtkFlattenListModel that flattens list.
@@ -63,7 +63,7 @@ func NewFlattenListModel(model gio.ListModeller) *FlattenListModel {
 
 	var _flattenListModel *FlattenListModel // out
 
-	_flattenListModel = wrapFlattenListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_flattenListModel = WrapFlattenListModel(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _flattenListModel
 }

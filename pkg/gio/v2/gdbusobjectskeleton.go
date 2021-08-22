@@ -50,7 +50,7 @@ type DBusObjectSkeleton struct {
 	DBusObject
 }
 
-func wrapDBusObjectSkeleton(obj *externglib.Object) *DBusObjectSkeleton {
+func WrapDBusObjectSkeleton(obj *externglib.Object) *DBusObjectSkeleton {
 	return &DBusObjectSkeleton{
 		Object: obj,
 		DBusObject: DBusObject{
@@ -62,7 +62,7 @@ func wrapDBusObjectSkeleton(obj *externglib.Object) *DBusObjectSkeleton {
 func marshalDBusObjectSkeletonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDBusObjectSkeleton(obj), nil
+	return WrapDBusObjectSkeleton(obj), nil
 }
 
 // NewDBusObjectSkeleton creates a new BusObjectSkeleton.
@@ -78,7 +78,7 @@ func NewDBusObjectSkeleton(objectPath string) *DBusObjectSkeleton {
 
 	var _dBusObjectSkeleton *DBusObjectSkeleton // out
 
-	_dBusObjectSkeleton = wrapDBusObjectSkeleton(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_dBusObjectSkeleton = WrapDBusObjectSkeleton(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _dBusObjectSkeleton
 }

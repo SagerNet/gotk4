@@ -35,7 +35,7 @@ type SingleSelection struct {
 	SelectionModel
 }
 
-func wrapSingleSelection(obj *externglib.Object) *SingleSelection {
+func WrapSingleSelection(obj *externglib.Object) *SingleSelection {
 	return &SingleSelection{
 		Object: obj,
 		SelectionModel: SelectionModel{
@@ -49,7 +49,7 @@ func wrapSingleSelection(obj *externglib.Object) *SingleSelection {
 func marshalSingleSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSingleSelection(obj), nil
+	return WrapSingleSelection(obj), nil
 }
 
 // NewSingleSelection creates a new selection to handle model.
@@ -67,7 +67,7 @@ func NewSingleSelection(model gio.ListModeller) *SingleSelection {
 
 	var _singleSelection *SingleSelection // out
 
-	_singleSelection = wrapSingleSelection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_singleSelection = WrapSingleSelection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _singleSelection
 }

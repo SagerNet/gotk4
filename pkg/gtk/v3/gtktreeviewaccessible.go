@@ -32,7 +32,7 @@ type TreeViewAccessible struct {
 	*externglib.Object
 }
 
-func wrapTreeViewAccessible(obj *externglib.Object) *TreeViewAccessible {
+func WrapTreeViewAccessible(obj *externglib.Object) *TreeViewAccessible {
 	return &TreeViewAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -62,7 +62,7 @@ func wrapTreeViewAccessible(obj *externglib.Object) *TreeViewAccessible {
 func marshalTreeViewAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTreeViewAccessible(obj), nil
+	return WrapTreeViewAccessible(obj), nil
 }
 
 func (*TreeViewAccessible) privateTreeViewAccessible() {}

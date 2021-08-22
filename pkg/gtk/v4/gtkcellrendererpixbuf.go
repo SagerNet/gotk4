@@ -37,7 +37,7 @@ type CellRendererPixbuf struct {
 	CellRenderer
 }
 
-func wrapCellRendererPixbuf(obj *externglib.Object) *CellRendererPixbuf {
+func WrapCellRendererPixbuf(obj *externglib.Object) *CellRendererPixbuf {
 	return &CellRendererPixbuf{
 		CellRenderer: CellRenderer{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -50,7 +50,7 @@ func wrapCellRendererPixbuf(obj *externglib.Object) *CellRendererPixbuf {
 func marshalCellRendererPixbuffer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellRendererPixbuf(obj), nil
+	return WrapCellRendererPixbuf(obj), nil
 }
 
 // NewCellRendererPixbuf creates a new CellRendererPixbuf. Adjust rendering
@@ -66,7 +66,7 @@ func NewCellRendererPixbuf() *CellRendererPixbuf {
 
 	var _cellRendererPixbuf *CellRendererPixbuf // out
 
-	_cellRendererPixbuf = wrapCellRendererPixbuf(externglib.Take(unsafe.Pointer(_cret)))
+	_cellRendererPixbuf = WrapCellRendererPixbuf(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellRendererPixbuf
 }

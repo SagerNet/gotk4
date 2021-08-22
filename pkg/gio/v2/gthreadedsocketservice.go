@@ -56,7 +56,7 @@ type ThreadedSocketService struct {
 	SocketService
 }
 
-func wrapThreadedSocketService(obj *externglib.Object) *ThreadedSocketService {
+func WrapThreadedSocketService(obj *externglib.Object) *ThreadedSocketService {
 	return &ThreadedSocketService{
 		SocketService: SocketService{
 			SocketListener: SocketListener{
@@ -69,7 +69,7 @@ func wrapThreadedSocketService(obj *externglib.Object) *ThreadedSocketService {
 func marshalThreadedSocketServicer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapThreadedSocketService(obj), nil
+	return WrapThreadedSocketService(obj), nil
 }
 
 // NewThreadedSocketService creates a new SocketService with no listeners.
@@ -85,7 +85,7 @@ func NewThreadedSocketService(maxThreads int) *ThreadedSocketService {
 
 	var _threadedSocketService *ThreadedSocketService // out
 
-	_threadedSocketService = wrapThreadedSocketService(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_threadedSocketService = WrapThreadedSocketService(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _threadedSocketService
 }

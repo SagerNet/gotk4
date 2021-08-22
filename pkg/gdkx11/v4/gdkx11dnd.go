@@ -25,7 +25,7 @@ type X11Drag struct {
 	gdk.Drag
 }
 
-func wrapX11Drag(obj *externglib.Object) *X11Drag {
+func WrapX11Drag(obj *externglib.Object) *X11Drag {
 	return &X11Drag{
 		Drag: gdk.Drag{
 			Object: obj,
@@ -36,7 +36,7 @@ func wrapX11Drag(obj *externglib.Object) *X11Drag {
 func marshalX11Dragger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11Drag(obj), nil
+	return WrapX11Drag(obj), nil
 }
 
 func (*X11Drag) privateX11Drag() {}

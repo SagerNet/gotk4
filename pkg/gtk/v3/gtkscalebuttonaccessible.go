@@ -30,7 +30,7 @@ type ScaleButtonAccessible struct {
 	*externglib.Object
 }
 
-func wrapScaleButtonAccessible(obj *externglib.Object) *ScaleButtonAccessible {
+func WrapScaleButtonAccessible(obj *externglib.Object) *ScaleButtonAccessible {
 	return &ScaleButtonAccessible{
 		ButtonAccessible: ButtonAccessible{
 			ContainerAccessible: ContainerAccessible{
@@ -63,7 +63,7 @@ func wrapScaleButtonAccessible(obj *externglib.Object) *ScaleButtonAccessible {
 func marshalScaleButtonAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScaleButtonAccessible(obj), nil
+	return WrapScaleButtonAccessible(obj), nil
 }
 
 func (*ScaleButtonAccessible) privateScaleButtonAccessible() {}

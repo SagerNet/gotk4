@@ -54,7 +54,7 @@ type Popupper interface {
 
 var _ Popupper = (*Popup)(nil)
 
-func wrapPopup(obj *externglib.Object) *Popup {
+func WrapPopup(obj *externglib.Object) *Popup {
 	return &Popup{
 		Surface: Surface{
 			Object: obj,
@@ -65,7 +65,7 @@ func wrapPopup(obj *externglib.Object) *Popup {
 func marshalPopupper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPopup(obj), nil
+	return WrapPopup(obj), nil
 }
 
 // Autohide returns whether this popup is set to hide on outside clicks.

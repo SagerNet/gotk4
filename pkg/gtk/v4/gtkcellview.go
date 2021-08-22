@@ -50,7 +50,7 @@ type CellView struct {
 	*externglib.Object
 }
 
-func wrapCellView(obj *externglib.Object) *CellView {
+func WrapCellView(obj *externglib.Object) *CellView {
 	return &CellView{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -80,7 +80,7 @@ func wrapCellView(obj *externglib.Object) *CellView {
 func marshalCellViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellView(obj), nil
+	return WrapCellView(obj), nil
 }
 
 // NewCellView creates a new CellView widget.
@@ -91,7 +91,7 @@ func NewCellView() *CellView {
 
 	var _cellView *CellView // out
 
-	_cellView = wrapCellView(externglib.Take(unsafe.Pointer(_cret)))
+	_cellView = WrapCellView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellView
 }
@@ -116,7 +116,7 @@ func NewCellViewWithContext(area CellAreaer, context *CellAreaContext) *CellView
 
 	var _cellView *CellView // out
 
-	_cellView = wrapCellView(externglib.Take(unsafe.Pointer(_cret)))
+	_cellView = WrapCellView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellView
 }
@@ -136,7 +136,7 @@ func NewCellViewWithMarkup(markup string) *CellView {
 
 	var _cellView *CellView // out
 
-	_cellView = wrapCellView(externglib.Take(unsafe.Pointer(_cret)))
+	_cellView = WrapCellView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellView
 }
@@ -155,7 +155,7 @@ func NewCellViewWithText(text string) *CellView {
 
 	var _cellView *CellView // out
 
-	_cellView = wrapCellView(externglib.Take(unsafe.Pointer(_cret)))
+	_cellView = WrapCellView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellView
 }
@@ -173,7 +173,7 @@ func NewCellViewWithTexture(texture gdk.Texturer) *CellView {
 
 	var _cellView *CellView // out
 
-	_cellView = wrapCellView(externglib.Take(unsafe.Pointer(_cret)))
+	_cellView = WrapCellView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellView
 }

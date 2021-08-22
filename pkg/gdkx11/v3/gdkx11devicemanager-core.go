@@ -25,7 +25,7 @@ type X11DeviceManagerCore struct {
 	gdk.DeviceManager
 }
 
-func wrapX11DeviceManagerCore(obj *externglib.Object) *X11DeviceManagerCore {
+func WrapX11DeviceManagerCore(obj *externglib.Object) *X11DeviceManagerCore {
 	return &X11DeviceManagerCore{
 		DeviceManager: gdk.DeviceManager{
 			Object: obj,
@@ -36,7 +36,7 @@ func wrapX11DeviceManagerCore(obj *externglib.Object) *X11DeviceManagerCore {
 func marshalX11DeviceManagerCorer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapX11DeviceManagerCore(obj), nil
+	return WrapX11DeviceManagerCore(obj), nil
 }
 
 func (*X11DeviceManagerCore) privateX11DeviceManagerCore() {}

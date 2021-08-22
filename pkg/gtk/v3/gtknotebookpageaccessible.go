@@ -31,7 +31,7 @@ type NotebookPageAccessible struct {
 	*externglib.Object
 }
 
-func wrapNotebookPageAccessible(obj *externglib.Object) *NotebookPageAccessible {
+func WrapNotebookPageAccessible(obj *externglib.Object) *NotebookPageAccessible {
 	return &NotebookPageAccessible{
 		ObjectClass: atk.ObjectClass{
 			Object: obj,
@@ -46,7 +46,7 @@ func wrapNotebookPageAccessible(obj *externglib.Object) *NotebookPageAccessible 
 func marshalNotebookPageAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNotebookPageAccessible(obj), nil
+	return WrapNotebookPageAccessible(obj), nil
 }
 
 func NewNotebookPageAccessible(notebook *NotebookAccessible, child Widgetter) *NotebookPageAccessible {
@@ -63,7 +63,7 @@ func NewNotebookPageAccessible(notebook *NotebookAccessible, child Widgetter) *N
 
 	var _notebookPageAccessible *NotebookPageAccessible // out
 
-	_notebookPageAccessible = wrapNotebookPageAccessible(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_notebookPageAccessible = WrapNotebookPageAccessible(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _notebookPageAccessible
 }

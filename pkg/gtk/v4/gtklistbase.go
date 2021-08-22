@@ -38,7 +38,7 @@ type ListBaser interface {
 
 var _ ListBaser = (*ListBase)(nil)
 
-func wrapListBase(obj *externglib.Object) *ListBase {
+func WrapListBase(obj *externglib.Object) *ListBase {
 	return &ListBase{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -68,7 +68,7 @@ func wrapListBase(obj *externglib.Object) *ListBase {
 func marshalListBaser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListBase(obj), nil
+	return WrapListBase(obj), nil
 }
 
 func (*ListBase) privateListBase() {}

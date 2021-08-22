@@ -40,7 +40,7 @@ func _gotk4_gio2_BusNameAppearedCallback(arg0 *C.GDBusConnection, arg1 *C.gchar,
 	var name string                // out
 	var nameOwner string           // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 	nameOwner = C.GoString((*C.gchar)(unsafe.Pointer(arg2)))
@@ -67,7 +67,7 @@ func _gotk4_gio2_BusNameVanishedCallback(arg0 *C.GDBusConnection, arg1 *C.gchar,
 	var connection *DBusConnection // out
 	var name string                // out
 
-	connection = wrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
+	connection = WrapDBusConnection(externglib.Take(unsafe.Pointer(arg0)))
 	name = C.GoString((*C.gchar)(unsafe.Pointer(arg1)))
 	defer C.free(unsafe.Pointer(arg1))
 

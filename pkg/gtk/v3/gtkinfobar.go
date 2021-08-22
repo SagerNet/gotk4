@@ -108,7 +108,7 @@ type InfoBar struct {
 	Box
 }
 
-func wrapInfoBar(obj *externglib.Object) *InfoBar {
+func WrapInfoBar(obj *externglib.Object) *InfoBar {
 	return &InfoBar{
 		Box: Box{
 			Container: Container{
@@ -136,7 +136,7 @@ func wrapInfoBar(obj *externglib.Object) *InfoBar {
 func marshalInfoBarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapInfoBar(obj), nil
+	return WrapInfoBar(obj), nil
 }
 
 // NewInfoBar creates a new InfoBar object.
@@ -147,7 +147,7 @@ func NewInfoBar() *InfoBar {
 
 	var _infoBar *InfoBar // out
 
-	_infoBar = wrapInfoBar(externglib.Take(unsafe.Pointer(_cret)))
+	_infoBar = WrapInfoBar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _infoBar
 }
@@ -193,7 +193,7 @@ func (infoBar *InfoBar) AddButton(buttonText string, responseId int) *Button {
 
 	var _button *Button // out
 
-	_button = wrapButton(externglib.Take(unsafe.Pointer(_cret)))
+	_button = WrapButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _button
 }
@@ -210,7 +210,7 @@ func (infoBar *InfoBar) ActionArea() *Box {
 
 	var _box *Box // out
 
-	_box = wrapBox(externglib.Take(unsafe.Pointer(_cret)))
+	_box = WrapBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _box
 }
@@ -227,7 +227,7 @@ func (infoBar *InfoBar) ContentArea() *Box {
 
 	var _box *Box // out
 
-	_box = wrapBox(externglib.Take(unsafe.Pointer(_cret)))
+	_box = WrapBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _box
 }

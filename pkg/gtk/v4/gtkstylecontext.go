@@ -137,7 +137,7 @@ type StyleContext struct {
 	*externglib.Object
 }
 
-func wrapStyleContext(obj *externglib.Object) *StyleContext {
+func WrapStyleContext(obj *externglib.Object) *StyleContext {
 	return &StyleContext{
 		Object: obj,
 	}
@@ -146,7 +146,7 @@ func wrapStyleContext(obj *externglib.Object) *StyleContext {
 func marshalStyleContexter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapStyleContext(obj), nil
+	return WrapStyleContext(obj), nil
 }
 
 // AddClass adds a style class to context, so later uses of the style context

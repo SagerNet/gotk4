@@ -51,7 +51,7 @@ type Tooltip struct {
 	*externglib.Object
 }
 
-func wrapTooltip(obj *externglib.Object) *Tooltip {
+func WrapTooltip(obj *externglib.Object) *Tooltip {
 	return &Tooltip{
 		Object: obj,
 	}
@@ -60,7 +60,7 @@ func wrapTooltip(obj *externglib.Object) *Tooltip {
 func marshalTooltipper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTooltip(obj), nil
+	return WrapTooltip(obj), nil
 }
 
 // SetCustom replaces the widget packed into the tooltip with custom_widget.

@@ -30,7 +30,7 @@ type SpinButtonAccessible struct {
 	*externglib.Object
 }
 
-func wrapSpinButtonAccessible(obj *externglib.Object) *SpinButtonAccessible {
+func WrapSpinButtonAccessible(obj *externglib.Object) *SpinButtonAccessible {
 	return &SpinButtonAccessible{
 		EntryAccessible: EntryAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -64,7 +64,7 @@ func wrapSpinButtonAccessible(obj *externglib.Object) *SpinButtonAccessible {
 func marshalSpinButtonAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSpinButtonAccessible(obj), nil
+	return WrapSpinButtonAccessible(obj), nil
 }
 
 func (*SpinButtonAccessible) privateSpinButtonAccessible() {}

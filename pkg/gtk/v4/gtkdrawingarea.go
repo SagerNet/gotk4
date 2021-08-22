@@ -44,7 +44,7 @@ func _gotk4_gtk4_DrawingAreaDrawFunc(arg0 *C.GtkDrawingArea, arg1 *C.cairo_t, ar
 	var width int                // out
 	var height int               // out
 
-	drawingArea = wrapDrawingArea(externglib.Take(unsafe.Pointer(arg0)))
+	drawingArea = WrapDrawingArea(externglib.Take(unsafe.Pointer(arg0)))
 	cr = cairo.WrapContext(uintptr(unsafe.Pointer(arg1)))
 	runtime.SetFinalizer(cr, func(v *cairo.Context) {
 		C.cairo_destroy((*C.cairo_t)(unsafe.Pointer(v.Native())))
@@ -145,7 +145,7 @@ type DrawingArea struct {
 	Widget
 }
 
-func wrapDrawingArea(obj *externglib.Object) *DrawingArea {
+func WrapDrawingArea(obj *externglib.Object) *DrawingArea {
 	return &DrawingArea{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -168,7 +168,7 @@ func wrapDrawingArea(obj *externglib.Object) *DrawingArea {
 func marshalDrawingAreaer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDrawingArea(obj), nil
+	return WrapDrawingArea(obj), nil
 }
 
 // NewDrawingArea creates a new drawing area.
@@ -179,7 +179,7 @@ func NewDrawingArea() *DrawingArea {
 
 	var _drawingArea *DrawingArea // out
 
-	_drawingArea = wrapDrawingArea(externglib.Take(unsafe.Pointer(_cret)))
+	_drawingArea = WrapDrawingArea(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _drawingArea
 }

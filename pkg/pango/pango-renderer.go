@@ -192,7 +192,7 @@ type Rendererer interface {
 
 var _ Rendererer = (*Renderer)(nil)
 
-func wrapRenderer(obj *externglib.Object) *Renderer {
+func WrapRenderer(obj *externglib.Object) *Renderer {
 	return &Renderer{
 		Object: obj,
 	}
@@ -201,7 +201,7 @@ func wrapRenderer(obj *externglib.Object) *Renderer {
 func marshalRendererer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRenderer(obj), nil
+	return WrapRenderer(obj), nil
 }
 
 // Activate does initial setup before rendering operations on renderer.
@@ -500,7 +500,7 @@ func (renderer *Renderer) Layout() *Layout {
 	var _layout *Layout // out
 
 	if _cret != nil {
-		_layout = wrapLayout(externglib.Take(unsafe.Pointer(_cret)))
+		_layout = WrapLayout(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _layout

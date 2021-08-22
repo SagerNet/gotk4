@@ -38,7 +38,7 @@ type GesturePan struct {
 	GestureDrag
 }
 
-func wrapGesturePan(obj *externglib.Object) *GesturePan {
+func WrapGesturePan(obj *externglib.Object) *GesturePan {
 	return &GesturePan{
 		GestureDrag: GestureDrag{
 			GestureSingle: GestureSingle{
@@ -55,7 +55,7 @@ func wrapGesturePan(obj *externglib.Object) *GesturePan {
 func marshalGesturePanner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGesturePan(obj), nil
+	return WrapGesturePan(obj), nil
 }
 
 // NewGesturePan returns a newly created GtkGesture that recognizes pan
@@ -71,7 +71,7 @@ func NewGesturePan(orientation Orientation) *GesturePan {
 
 	var _gesturePan *GesturePan // out
 
-	_gesturePan = wrapGesturePan(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_gesturePan = WrapGesturePan(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _gesturePan
 }

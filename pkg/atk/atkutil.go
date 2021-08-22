@@ -145,7 +145,7 @@ func GetFocusObject() *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _object
 }
@@ -158,7 +158,7 @@ func GetRoot() *ObjectClass {
 
 	var _object *ObjectClass // out
 
-	_object = wrapObject(externglib.Take(unsafe.Pointer(_cret)))
+	_object = WrapObject(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _object
 }
@@ -260,7 +260,7 @@ type Util struct {
 	*externglib.Object
 }
 
-func wrapUtil(obj *externglib.Object) *Util {
+func WrapUtil(obj *externglib.Object) *Util {
 	return &Util{
 		Object: obj,
 	}
@@ -269,7 +269,7 @@ func wrapUtil(obj *externglib.Object) *Util {
 func marshalUtiller(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapUtil(obj), nil
+	return WrapUtil(obj), nil
 }
 
 func (*Util) privateUtil() {}

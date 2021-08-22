@@ -204,7 +204,7 @@ type Keymap struct {
 	*externglib.Object
 }
 
-func wrapKeymap(obj *externglib.Object) *Keymap {
+func WrapKeymap(obj *externglib.Object) *Keymap {
 	return &Keymap{
 		Object: obj,
 	}
@@ -213,7 +213,7 @@ func wrapKeymap(obj *externglib.Object) *Keymap {
 func marshalKeymapper(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapKeymap(obj), nil
+	return WrapKeymap(obj), nil
 }
 
 // CapsLockState returns whether the Caps Lock modifer is locked.
@@ -530,7 +530,7 @@ func KeymapGetDefault() *Keymap {
 
 	var _keymap *Keymap // out
 
-	_keymap = wrapKeymap(externglib.Take(unsafe.Pointer(_cret)))
+	_keymap = WrapKeymap(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _keymap
 }
@@ -547,7 +547,7 @@ func KeymapGetForDisplay(display *Display) *Keymap {
 
 	var _keymap *Keymap // out
 
-	_keymap = wrapKeymap(externglib.Take(unsafe.Pointer(_cret)))
+	_keymap = WrapKeymap(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _keymap
 }

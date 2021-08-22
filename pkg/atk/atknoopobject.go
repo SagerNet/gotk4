@@ -42,7 +42,7 @@ type NoOpObject struct {
 	*externglib.Object
 }
 
-func wrapNoOpObject(obj *externglib.Object) *NoOpObject {
+func WrapNoOpObject(obj *externglib.Object) *NoOpObject {
 	return &NoOpObject{
 		ObjectClass: ObjectClass{
 			Object: obj,
@@ -94,7 +94,7 @@ func wrapNoOpObject(obj *externglib.Object) *NoOpObject {
 func marshalNoOpObjector(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNoOpObject(obj), nil
+	return WrapNoOpObject(obj), nil
 }
 
 // NewNoOpObject provides a default (non-functioning stub) Object. Application
@@ -110,7 +110,7 @@ func NewNoOpObject(obj *externglib.Object) *NoOpObject {
 
 	var _noOpObject *NoOpObject // out
 
-	_noOpObject = wrapNoOpObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_noOpObject = WrapNoOpObject(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _noOpObject
 }

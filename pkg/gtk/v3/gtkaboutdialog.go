@@ -173,7 +173,7 @@ type AboutDialog struct {
 	Dialog
 }
 
-func wrapAboutDialog(obj *externglib.Object) *AboutDialog {
+func WrapAboutDialog(obj *externglib.Object) *AboutDialog {
 	return &AboutDialog{
 		Dialog: Dialog{
 			Window: Window{
@@ -201,7 +201,7 @@ func wrapAboutDialog(obj *externglib.Object) *AboutDialog {
 func marshalAboutDialogger(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapAboutDialog(obj), nil
+	return WrapAboutDialog(obj), nil
 }
 
 // NewAboutDialog creates a new AboutDialog.
@@ -212,7 +212,7 @@ func NewAboutDialog() *AboutDialog {
 
 	var _aboutDialog *AboutDialog // out
 
-	_aboutDialog = wrapAboutDialog(externglib.Take(unsafe.Pointer(_cret)))
+	_aboutDialog = WrapAboutDialog(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _aboutDialog
 }

@@ -42,7 +42,7 @@ func _gotk4_gtk4_MenuButtonCreatePopupFunc(arg0 *C.GtkMenuButton, arg1 C.gpointe
 
 	var menuButton *MenuButton // out
 
-	menuButton = wrapMenuButton(externglib.Take(unsafe.Pointer(arg0)))
+	menuButton = WrapMenuButton(externglib.Take(unsafe.Pointer(arg0)))
 
 	fn := v.(MenuButtonCreatePopupFunc)
 	fn(menuButton)
@@ -108,7 +108,7 @@ type MenuButton struct {
 	Widget
 }
 
-func wrapMenuButton(obj *externglib.Object) *MenuButton {
+func WrapMenuButton(obj *externglib.Object) *MenuButton {
 	return &MenuButton{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -131,7 +131,7 @@ func wrapMenuButton(obj *externglib.Object) *MenuButton {
 func marshalMenuButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMenuButton(obj), nil
+	return WrapMenuButton(obj), nil
 }
 
 // NewMenuButton creates a new GtkMenuButton widget with downwards-pointing
@@ -145,7 +145,7 @@ func NewMenuButton() *MenuButton {
 
 	var _menuButton *MenuButton // out
 
-	_menuButton = wrapMenuButton(externglib.Take(unsafe.Pointer(_cret)))
+	_menuButton = WrapMenuButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _menuButton
 }
@@ -254,7 +254,7 @@ func (menuButton *MenuButton) Popover() *Popover {
 	var _popover *Popover // out
 
 	if _cret != nil {
-		_popover = wrapPopover(externglib.Take(unsafe.Pointer(_cret)))
+		_popover = WrapPopover(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _popover

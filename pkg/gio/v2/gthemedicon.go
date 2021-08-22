@@ -43,7 +43,7 @@ type ThemedIcon struct {
 	Icon
 }
 
-func wrapThemedIcon(obj *externglib.Object) *ThemedIcon {
+func WrapThemedIcon(obj *externglib.Object) *ThemedIcon {
 	return &ThemedIcon{
 		Object: obj,
 		Icon: Icon{
@@ -55,7 +55,7 @@ func wrapThemedIcon(obj *externglib.Object) *ThemedIcon {
 func marshalThemedIconner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapThemedIcon(obj), nil
+	return WrapThemedIcon(obj), nil
 }
 
 // NewThemedIcon creates a new themed icon for iconname.
@@ -71,7 +71,7 @@ func NewThemedIcon(iconname string) *ThemedIcon {
 
 	var _themedIcon *ThemedIcon // out
 
-	_themedIcon = wrapThemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_themedIcon = WrapThemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _themedIcon
 }
@@ -98,7 +98,7 @@ func NewThemedIconFromNames(iconnames []string) *ThemedIcon {
 
 	var _themedIcon *ThemedIcon // out
 
-	_themedIcon = wrapThemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_themedIcon = WrapThemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _themedIcon
 }
@@ -129,7 +129,7 @@ func NewThemedIconWithDefaultFallbacks(iconname string) *ThemedIcon {
 
 	var _themedIcon *ThemedIcon // out
 
-	_themedIcon = wrapThemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_themedIcon = WrapThemedIcon(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _themedIcon
 }

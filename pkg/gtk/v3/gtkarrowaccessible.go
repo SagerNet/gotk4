@@ -29,7 +29,7 @@ type ArrowAccessible struct {
 	atk.Image
 }
 
-func wrapArrowAccessible(obj *externglib.Object) *ArrowAccessible {
+func WrapArrowAccessible(obj *externglib.Object) *ArrowAccessible {
 	return &ArrowAccessible{
 		WidgetAccessible: WidgetAccessible{
 			Accessible: Accessible{
@@ -50,7 +50,7 @@ func wrapArrowAccessible(obj *externglib.Object) *ArrowAccessible {
 func marshalArrowAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapArrowAccessible(obj), nil
+	return WrapArrowAccessible(obj), nil
 }
 
 func (*ArrowAccessible) privateArrowAccessible() {}

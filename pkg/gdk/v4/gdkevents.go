@@ -536,7 +536,7 @@ type ButtonEvent struct {
 	Event
 }
 
-func wrapButtonEvent(obj *externglib.Object) *ButtonEvent {
+func WrapButtonEvent(obj *externglib.Object) *ButtonEvent {
 	return &ButtonEvent{
 		Event: Event{
 			Object: obj,
@@ -547,7 +547,7 @@ func wrapButtonEvent(obj *externglib.Object) *ButtonEvent {
 func marshalButtonEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapButtonEvent(obj), nil
+	return WrapButtonEvent(obj), nil
 }
 
 // Button: extract the button number from a button event.
@@ -572,7 +572,7 @@ type CrossingEvent struct {
 	Event
 }
 
-func wrapCrossingEvent(obj *externglib.Object) *CrossingEvent {
+func WrapCrossingEvent(obj *externglib.Object) *CrossingEvent {
 	return &CrossingEvent{
 		Event: Event{
 			Object: obj,
@@ -583,7 +583,7 @@ func wrapCrossingEvent(obj *externglib.Object) *CrossingEvent {
 func marshalCrossingEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCrossingEvent(obj), nil
+	return WrapCrossingEvent(obj), nil
 }
 
 // Detail extracts the notify detail from a crossing event.
@@ -644,7 +644,7 @@ type DNDEvent struct {
 	Event
 }
 
-func wrapDNDEvent(obj *externglib.Object) *DNDEvent {
+func WrapDNDEvent(obj *externglib.Object) *DNDEvent {
 	return &DNDEvent{
 		Event: Event{
 			Object: obj,
@@ -655,7 +655,7 @@ func wrapDNDEvent(obj *externglib.Object) *DNDEvent {
 func marshalDNDEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDNDEvent(obj), nil
+	return WrapDNDEvent(obj), nil
 }
 
 // Drop gets the GdkDrop object from a DND event.
@@ -682,7 +682,7 @@ type DeleteEvent struct {
 	Event
 }
 
-func wrapDeleteEvent(obj *externglib.Object) *DeleteEvent {
+func WrapDeleteEvent(obj *externglib.Object) *DeleteEvent {
 	return &DeleteEvent{
 		Event: Event{
 			Object: obj,
@@ -693,7 +693,7 @@ func wrapDeleteEvent(obj *externglib.Object) *DeleteEvent {
 func marshalDeleteEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDeleteEvent(obj), nil
+	return WrapDeleteEvent(obj), nil
 }
 
 func (*DeleteEvent) privateDeleteEvent() {}
@@ -752,7 +752,7 @@ type Eventer interface {
 
 var _ Eventer = (*Event)(nil)
 
-func wrapEvent(obj *externglib.Object) *Event {
+func WrapEvent(obj *externglib.Object) *Event {
 	return &Event{
 		Object: obj,
 	}
@@ -761,7 +761,7 @@ func wrapEvent(obj *externglib.Object) *Event {
 func marshalEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEvent(obj), nil
+	return WrapEvent(obj), nil
 }
 
 // Axes extracts all axis values from an event.
@@ -854,7 +854,7 @@ func (event *Event) DeviceTool() *DeviceTool {
 	var _deviceTool *DeviceTool // out
 
 	if _cret != nil {
-		_deviceTool = wrapDeviceTool(externglib.Take(unsafe.Pointer(_cret)))
+		_deviceTool = WrapDeviceTool(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _deviceTool
@@ -873,7 +873,7 @@ func (event *Event) Display() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display
@@ -1099,7 +1099,7 @@ type FocusEvent struct {
 	Event
 }
 
-func wrapFocusEvent(obj *externglib.Object) *FocusEvent {
+func WrapFocusEvent(obj *externglib.Object) *FocusEvent {
 	return &FocusEvent{
 		Event: Event{
 			Object: obj,
@@ -1110,7 +1110,7 @@ func wrapFocusEvent(obj *externglib.Object) *FocusEvent {
 func marshalFocusEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFocusEvent(obj), nil
+	return WrapFocusEvent(obj), nil
 }
 
 // In extracts whether this event is about focus entering or leaving the
@@ -1138,7 +1138,7 @@ type GrabBrokenEvent struct {
 	Event
 }
 
-func wrapGrabBrokenEvent(obj *externglib.Object) *GrabBrokenEvent {
+func WrapGrabBrokenEvent(obj *externglib.Object) *GrabBrokenEvent {
 	return &GrabBrokenEvent{
 		Event: Event{
 			Object: obj,
@@ -1149,7 +1149,7 @@ func wrapGrabBrokenEvent(obj *externglib.Object) *GrabBrokenEvent {
 func marshalGrabBrokenEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGrabBrokenEvent(obj), nil
+	return WrapGrabBrokenEvent(obj), nil
 }
 
 // GrabSurface extracts the grab surface from a grab broken event.
@@ -1193,7 +1193,7 @@ type KeyEvent struct {
 	Event
 }
 
-func wrapKeyEvent(obj *externglib.Object) *KeyEvent {
+func WrapKeyEvent(obj *externglib.Object) *KeyEvent {
 	return &KeyEvent{
 		Event: Event{
 			Object: obj,
@@ -1204,7 +1204,7 @@ func wrapKeyEvent(obj *externglib.Object) *KeyEvent {
 func marshalKeyEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapKeyEvent(obj), nil
+	return WrapKeyEvent(obj), nil
 }
 
 // ConsumedModifiers extracts the consumed modifiers from a key event.
@@ -1373,7 +1373,7 @@ type MotionEvent struct {
 	Event
 }
 
-func wrapMotionEvent(obj *externglib.Object) *MotionEvent {
+func WrapMotionEvent(obj *externglib.Object) *MotionEvent {
 	return &MotionEvent{
 		Event: Event{
 			Object: obj,
@@ -1384,7 +1384,7 @@ func wrapMotionEvent(obj *externglib.Object) *MotionEvent {
 func marshalMotionEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMotionEvent(obj), nil
+	return WrapMotionEvent(obj), nil
 }
 
 func (*MotionEvent) privateMotionEvent() {}
@@ -1394,7 +1394,7 @@ type PadEvent struct {
 	Event
 }
 
-func wrapPadEvent(obj *externglib.Object) *PadEvent {
+func WrapPadEvent(obj *externglib.Object) *PadEvent {
 	return &PadEvent{
 		Event: Event{
 			Object: obj,
@@ -1405,7 +1405,7 @@ func wrapPadEvent(obj *externglib.Object) *PadEvent {
 func marshalPadEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPadEvent(obj), nil
+	return WrapPadEvent(obj), nil
 }
 
 // AxisValue extracts the information from a pad strip or ring event.
@@ -1470,7 +1470,7 @@ type ProximityEvent struct {
 	Event
 }
 
-func wrapProximityEvent(obj *externglib.Object) *ProximityEvent {
+func WrapProximityEvent(obj *externglib.Object) *ProximityEvent {
 	return &ProximityEvent{
 		Event: Event{
 			Object: obj,
@@ -1481,7 +1481,7 @@ func wrapProximityEvent(obj *externglib.Object) *ProximityEvent {
 func marshalProximityEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapProximityEvent(obj), nil
+	return WrapProximityEvent(obj), nil
 }
 
 func (*ProximityEvent) privateProximityEvent() {}
@@ -1491,7 +1491,7 @@ type ScrollEvent struct {
 	Event
 }
 
-func wrapScrollEvent(obj *externglib.Object) *ScrollEvent {
+func WrapScrollEvent(obj *externglib.Object) *ScrollEvent {
 	return &ScrollEvent{
 		Event: Event{
 			Object: obj,
@@ -1502,7 +1502,7 @@ func wrapScrollEvent(obj *externglib.Object) *ScrollEvent {
 func marshalScrollEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapScrollEvent(obj), nil
+	return WrapScrollEvent(obj), nil
 }
 
 // Deltas extracts the scroll deltas of a scroll event.
@@ -1575,7 +1575,7 @@ type TouchEvent struct {
 	Event
 }
 
-func wrapTouchEvent(obj *externglib.Object) *TouchEvent {
+func WrapTouchEvent(obj *externglib.Object) *TouchEvent {
 	return &TouchEvent{
 		Event: Event{
 			Object: obj,
@@ -1586,7 +1586,7 @@ func wrapTouchEvent(obj *externglib.Object) *TouchEvent {
 func marshalTouchEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTouchEvent(obj), nil
+	return WrapTouchEvent(obj), nil
 }
 
 // EmulatingPointer extracts whether a touch event is emulating a pointer event.
@@ -1618,7 +1618,7 @@ type TouchpadEvent struct {
 	Event
 }
 
-func wrapTouchpadEvent(obj *externglib.Object) *TouchpadEvent {
+func WrapTouchpadEvent(obj *externglib.Object) *TouchpadEvent {
 	return &TouchpadEvent{
 		Event: Event{
 			Object: obj,
@@ -1629,7 +1629,7 @@ func wrapTouchpadEvent(obj *externglib.Object) *TouchpadEvent {
 func marshalTouchpadEventer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTouchpadEvent(obj), nil
+	return WrapTouchpadEvent(obj), nil
 }
 
 // Deltas extracts delta information from a touchpad event.

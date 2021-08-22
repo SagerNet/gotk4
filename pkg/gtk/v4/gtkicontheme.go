@@ -118,7 +118,7 @@ type IconPaintable struct {
 	gdk.Paintable
 }
 
-func wrapIconPaintable(obj *externglib.Object) *IconPaintable {
+func WrapIconPaintable(obj *externglib.Object) *IconPaintable {
 	return &IconPaintable{
 		Object: obj,
 		Paintable: gdk.Paintable{
@@ -130,7 +130,7 @@ func wrapIconPaintable(obj *externglib.Object) *IconPaintable {
 func marshalIconPaintabler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconPaintable(obj), nil
+	return WrapIconPaintable(obj), nil
 }
 
 // NewIconPaintableForFile creates a GtkIconPaintable for a file with a given
@@ -154,7 +154,7 @@ func NewIconPaintableForFile(file gio.Filer, size int, scale int) *IconPaintable
 
 	var _iconPaintable *IconPaintable // out
 
-	_iconPaintable = wrapIconPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconPaintable = WrapIconPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconPaintable
 }
@@ -266,7 +266,7 @@ type IconTheme struct {
 	*externglib.Object
 }
 
-func wrapIconTheme(obj *externglib.Object) *IconTheme {
+func WrapIconTheme(obj *externglib.Object) *IconTheme {
 	return &IconTheme{
 		Object: obj,
 	}
@@ -275,7 +275,7 @@ func wrapIconTheme(obj *externglib.Object) *IconTheme {
 func marshalIconThemer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapIconTheme(obj), nil
+	return WrapIconTheme(obj), nil
 }
 
 // NewIconTheme creates a new icon theme object.
@@ -290,7 +290,7 @@ func NewIconTheme() *IconTheme {
 
 	var _iconTheme *IconTheme // out
 
-	_iconTheme = wrapIconTheme(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconTheme = WrapIconTheme(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconTheme
 }
@@ -590,7 +590,7 @@ func (self *IconTheme) LookupByGIcon(icon gio.Iconner, size int, scale int, dire
 
 	var _iconPaintable *IconPaintable // out
 
-	_iconPaintable = wrapIconPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconPaintable = WrapIconPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconPaintable
 }
@@ -653,7 +653,7 @@ func (self *IconTheme) LookupIcon(iconName string, fallbacks []string, size int,
 
 	var _iconPaintable *IconPaintable // out
 
-	_iconPaintable = wrapIconPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_iconPaintable = WrapIconPaintable(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _iconPaintable
 }
@@ -735,7 +735,7 @@ func IconThemeGetForDisplay(display *gdk.Display) *IconTheme {
 
 	var _iconTheme *IconTheme // out
 
-	_iconTheme = wrapIconTheme(externglib.Take(unsafe.Pointer(_cret)))
+	_iconTheme = WrapIconTheme(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _iconTheme
 }

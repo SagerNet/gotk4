@@ -40,7 +40,7 @@ type Spinner struct {
 	Widget
 }
 
-func wrapSpinner(obj *externglib.Object) *Spinner {
+func WrapSpinner(obj *externglib.Object) *Spinner {
 	return &Spinner{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -60,7 +60,7 @@ func wrapSpinner(obj *externglib.Object) *Spinner {
 func marshalSpinnerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSpinner(obj), nil
+	return WrapSpinner(obj), nil
 }
 
 // NewSpinner returns a new spinner widget. Not yet started.
@@ -71,7 +71,7 @@ func NewSpinner() *Spinner {
 
 	var _spinner *Spinner // out
 
-	_spinner = wrapSpinner(externglib.Take(unsafe.Pointer(_cret)))
+	_spinner = WrapSpinner(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _spinner
 }

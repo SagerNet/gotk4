@@ -103,7 +103,7 @@ type MemoryTexture struct {
 	Texture
 }
 
-func wrapMemoryTexture(obj *externglib.Object) *MemoryTexture {
+func WrapMemoryTexture(obj *externglib.Object) *MemoryTexture {
 	return &MemoryTexture{
 		Texture: Texture{
 			Object: obj,
@@ -117,7 +117,7 @@ func wrapMemoryTexture(obj *externglib.Object) *MemoryTexture {
 func marshalMemoryTexturer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMemoryTexture(obj), nil
+	return WrapMemoryTexture(obj), nil
 }
 
 // NewMemoryTexture creates a new texture for a blob of image data.
@@ -146,7 +146,7 @@ func NewMemoryTexture(width int, height int, format MemoryFormat, bytes *glib.By
 
 	var _memoryTexture *MemoryTexture // out
 
-	_memoryTexture = wrapMemoryTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_memoryTexture = WrapMemoryTexture(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _memoryTexture
 }

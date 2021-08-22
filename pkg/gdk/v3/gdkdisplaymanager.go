@@ -61,7 +61,7 @@ type DisplayManager struct {
 	*externglib.Object
 }
 
-func wrapDisplayManager(obj *externglib.Object) *DisplayManager {
+func WrapDisplayManager(obj *externglib.Object) *DisplayManager {
 	return &DisplayManager{
 		Object: obj,
 	}
@@ -70,7 +70,7 @@ func wrapDisplayManager(obj *externglib.Object) *DisplayManager {
 func marshalDisplayManagerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDisplayManager(obj), nil
+	return WrapDisplayManager(obj), nil
 }
 
 // DefaultDisplay gets the default Display.
@@ -86,7 +86,7 @@ func (manager *DisplayManager) DefaultDisplay() *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display
@@ -108,7 +108,7 @@ func (manager *DisplayManager) ListDisplays() []Display {
 	gextras.MoveSList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GdkDisplay)(v)
 		var dst Display // out
-		dst = *wrapDisplay(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapDisplay(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 
@@ -132,7 +132,7 @@ func (manager *DisplayManager) OpenDisplay(name string) *Display {
 	var _display *Display // out
 
 	if _cret != nil {
-		_display = wrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
+		_display = WrapDisplay(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _display
@@ -164,7 +164,7 @@ func DisplayManagerGet() *DisplayManager {
 
 	var _displayManager *DisplayManager // out
 
-	_displayManager = wrapDisplayManager(externglib.Take(unsafe.Pointer(_cret)))
+	_displayManager = WrapDisplayManager(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _displayManager
 }

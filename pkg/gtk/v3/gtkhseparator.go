@@ -37,7 +37,7 @@ type HSeparator struct {
 	Separator
 }
 
-func wrapHSeparator(obj *externglib.Object) *HSeparator {
+func WrapHSeparator(obj *externglib.Object) *HSeparator {
 	return &HSeparator{
 		Separator: Separator{
 			Widget: Widget{
@@ -63,7 +63,7 @@ func wrapHSeparator(obj *externglib.Object) *HSeparator {
 func marshalHSeparatorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHSeparator(obj), nil
+	return WrapHSeparator(obj), nil
 }
 
 // NewHSeparator creates a new HSeparator.
@@ -76,7 +76,7 @@ func NewHSeparator() *HSeparator {
 
 	var _hSeparator *HSeparator // out
 
-	_hSeparator = wrapHSeparator(externglib.Take(unsafe.Pointer(_cret)))
+	_hSeparator = WrapHSeparator(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hSeparator
 }

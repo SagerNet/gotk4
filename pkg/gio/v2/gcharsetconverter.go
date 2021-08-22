@@ -40,7 +40,7 @@ type CharsetConverter struct {
 	Initable
 }
 
-func wrapCharsetConverter(obj *externglib.Object) *CharsetConverter {
+func WrapCharsetConverter(obj *externglib.Object) *CharsetConverter {
 	return &CharsetConverter{
 		Object: obj,
 		Converter: Converter{
@@ -55,7 +55,7 @@ func wrapCharsetConverter(obj *externglib.Object) *CharsetConverter {
 func marshalCharsetConverterer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCharsetConverter(obj), nil
+	return WrapCharsetConverter(obj), nil
 }
 
 // NewCharsetConverter creates a new Converter.
@@ -77,7 +77,7 @@ func NewCharsetConverter(toCharset string, fromCharset string) (*CharsetConverte
 	var _charsetConverter *CharsetConverter // out
 	var _goerr error                        // out
 
-	_charsetConverter = wrapCharsetConverter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_charsetConverter = WrapCharsetConverter(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}

@@ -236,7 +236,7 @@ type Driver interface {
 
 var _ Driver = (*Drive)(nil)
 
-func wrapDrive(obj *externglib.Object) *Drive {
+func WrapDrive(obj *externglib.Object) *Drive {
 	return &Drive{
 		Object: obj,
 	}
@@ -245,7 +245,7 @@ func wrapDrive(obj *externglib.Object) *Drive {
 func marshalDriver(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDrive(obj), nil
+	return WrapDrive(obj), nil
 }
 
 // CanEject checks if a drive can be ejected.

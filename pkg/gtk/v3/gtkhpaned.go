@@ -32,7 +32,7 @@ type HPaned struct {
 	Paned
 }
 
-func wrapHPaned(obj *externglib.Object) *HPaned {
+func WrapHPaned(obj *externglib.Object) *HPaned {
 	return &HPaned{
 		Paned: Paned{
 			Container: Container{
@@ -60,7 +60,7 @@ func wrapHPaned(obj *externglib.Object) *HPaned {
 func marshalHPanedder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHPaned(obj), nil
+	return WrapHPaned(obj), nil
 }
 
 // NewHPaned: create a new HPaned
@@ -73,7 +73,7 @@ func NewHPaned() *HPaned {
 
 	var _hPaned *HPaned // out
 
-	_hPaned = wrapHPaned(externglib.Take(unsafe.Pointer(_cret)))
+	_hPaned = WrapHPaned(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hPaned
 }

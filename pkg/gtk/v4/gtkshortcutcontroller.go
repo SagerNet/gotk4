@@ -72,7 +72,7 @@ type ShortcutController struct {
 	*externglib.Object
 }
 
-func wrapShortcutController(obj *externglib.Object) *ShortcutController {
+func WrapShortcutController(obj *externglib.Object) *ShortcutController {
 	return &ShortcutController{
 		EventController: EventController{
 			Object: obj,
@@ -90,7 +90,7 @@ func wrapShortcutController(obj *externglib.Object) *ShortcutController {
 func marshalShortcutControllerer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapShortcutController(obj), nil
+	return WrapShortcutController(obj), nil
 }
 
 // NewShortcutController creates a new shortcut controller.
@@ -101,7 +101,7 @@ func NewShortcutController() *ShortcutController {
 
 	var _shortcutController *ShortcutController // out
 
-	_shortcutController = wrapShortcutController(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_shortcutController = WrapShortcutController(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _shortcutController
 }
@@ -123,7 +123,7 @@ func NewShortcutControllerForModel(model gio.ListModeller) *ShortcutController {
 
 	var _shortcutController *ShortcutController // out
 
-	_shortcutController = wrapShortcutController(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_shortcutController = WrapShortcutController(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _shortcutController
 }

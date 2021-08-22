@@ -61,7 +61,7 @@ type Settings struct {
 	StyleProvider
 }
 
-func wrapSettings(obj *externglib.Object) *Settings {
+func WrapSettings(obj *externglib.Object) *Settings {
 	return &Settings{
 		Object: obj,
 		StyleProvider: StyleProvider{
@@ -73,7 +73,7 @@ func wrapSettings(obj *externglib.Object) *Settings {
 func marshalSettingser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapSettings(obj), nil
+	return WrapSettings(obj), nil
 }
 
 // ResetProperty undoes the effect of calling g_object_set() to install an
@@ -183,7 +183,7 @@ func SettingsGetDefault() *Settings {
 	var _settings *Settings // out
 
 	if _cret != nil {
-		_settings = wrapSettings(externglib.Take(unsafe.Pointer(_cret)))
+		_settings = WrapSettings(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _settings
@@ -202,7 +202,7 @@ func SettingsGetForScreen(screen *gdk.Screen) *Settings {
 
 	var _settings *Settings // out
 
-	_settings = wrapSettings(externglib.Take(unsafe.Pointer(_cret)))
+	_settings = WrapSettings(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _settings
 }

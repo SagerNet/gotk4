@@ -41,7 +41,7 @@ type TearoffMenuItem struct {
 	MenuItem
 }
 
-func wrapTearoffMenuItem(obj *externglib.Object) *TearoffMenuItem {
+func WrapTearoffMenuItem(obj *externglib.Object) *TearoffMenuItem {
 	return &TearoffMenuItem{
 		MenuItem: MenuItem{
 			Bin: Bin{
@@ -85,7 +85,7 @@ func wrapTearoffMenuItem(obj *externglib.Object) *TearoffMenuItem {
 func marshalTearoffMenuItemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapTearoffMenuItem(obj), nil
+	return WrapTearoffMenuItem(obj), nil
 }
 
 // NewTearoffMenuItem creates a new TearoffMenuItem.
@@ -99,7 +99,7 @@ func NewTearoffMenuItem() *TearoffMenuItem {
 
 	var _tearoffMenuItem *TearoffMenuItem // out
 
-	_tearoffMenuItem = wrapTearoffMenuItem(externglib.Take(unsafe.Pointer(_cret)))
+	_tearoffMenuItem = WrapTearoffMenuItem(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _tearoffMenuItem
 }

@@ -280,7 +280,7 @@ type RecentChooserer interface {
 
 var _ RecentChooserer = (*RecentChooser)(nil)
 
-func wrapRecentChooser(obj *externglib.Object) *RecentChooser {
+func WrapRecentChooser(obj *externglib.Object) *RecentChooser {
 	return &RecentChooser{
 		Object: obj,
 	}
@@ -289,7 +289,7 @@ func wrapRecentChooser(obj *externglib.Object) *RecentChooser {
 func marshalRecentChooserer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapRecentChooser(obj), nil
+	return WrapRecentChooser(obj), nil
 }
 
 // AddFilter adds filter to the list of RecentFilter objects held by chooser.
@@ -362,7 +362,7 @@ func (chooser *RecentChooser) Filter() *RecentFilter {
 
 	var _recentFilter *RecentFilter // out
 
-	_recentFilter = wrapRecentFilter(externglib.Take(unsafe.Pointer(_cret)))
+	_recentFilter = WrapRecentFilter(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _recentFilter
 }
@@ -599,7 +599,7 @@ func (chooser *RecentChooser) ListFilters() []RecentFilter {
 	gextras.MoveSList(unsafe.Pointer(_cret), true, func(v unsafe.Pointer) {
 		src := (*C.GtkRecentFilter)(v)
 		var dst RecentFilter // out
-		dst = *wrapRecentFilter(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapRecentFilter(externglib.Take(unsafe.Pointer(src)))
 		_sList = append(_sList, dst)
 	})
 

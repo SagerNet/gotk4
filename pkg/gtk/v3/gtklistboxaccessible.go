@@ -29,7 +29,7 @@ type ListBoxAccessible struct {
 	atk.Selection
 }
 
-func wrapListBoxAccessible(obj *externglib.Object) *ListBoxAccessible {
+func WrapListBoxAccessible(obj *externglib.Object) *ListBoxAccessible {
 	return &ListBoxAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -52,7 +52,7 @@ func wrapListBoxAccessible(obj *externglib.Object) *ListBoxAccessible {
 func marshalListBoxAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapListBoxAccessible(obj), nil
+	return WrapListBoxAccessible(obj), nil
 }
 
 func (*ListBoxAccessible) privateListBoxAccessible() {}

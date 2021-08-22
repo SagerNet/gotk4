@@ -30,7 +30,7 @@ type MultiSelection struct {
 	SelectionModel
 }
 
-func wrapMultiSelection(obj *externglib.Object) *MultiSelection {
+func WrapMultiSelection(obj *externglib.Object) *MultiSelection {
 	return &MultiSelection{
 		Object: obj,
 		SelectionModel: SelectionModel{
@@ -44,7 +44,7 @@ func wrapMultiSelection(obj *externglib.Object) *MultiSelection {
 func marshalMultiSelectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapMultiSelection(obj), nil
+	return WrapMultiSelection(obj), nil
 }
 
 // NewMultiSelection creates a new selection to handle model.
@@ -62,7 +62,7 @@ func NewMultiSelection(model gio.ListModeller) *MultiSelection {
 
 	var _multiSelection *MultiSelection // out
 
-	_multiSelection = wrapMultiSelection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_multiSelection = WrapMultiSelection(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _multiSelection
 }

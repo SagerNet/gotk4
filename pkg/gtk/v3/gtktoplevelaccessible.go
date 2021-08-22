@@ -29,7 +29,7 @@ type ToplevelAccessible struct {
 	atk.ObjectClass
 }
 
-func wrapToplevelAccessible(obj *externglib.Object) *ToplevelAccessible {
+func WrapToplevelAccessible(obj *externglib.Object) *ToplevelAccessible {
 	return &ToplevelAccessible{
 		ObjectClass: atk.ObjectClass{
 			Object: obj,
@@ -40,7 +40,7 @@ func wrapToplevelAccessible(obj *externglib.Object) *ToplevelAccessible {
 func marshalToplevelAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapToplevelAccessible(obj), nil
+	return WrapToplevelAccessible(obj), nil
 }
 
 func (accessible *ToplevelAccessible) Children() []Window {
@@ -58,7 +58,7 @@ func (accessible *ToplevelAccessible) Children() []Window {
 	gextras.MoveList(unsafe.Pointer(_cret), false, func(v unsafe.Pointer) {
 		src := (*C.GtkWindow)(v)
 		var dst Window // out
-		dst = *wrapWindow(externglib.Take(unsafe.Pointer(src)))
+		dst = *WrapWindow(externglib.Take(unsafe.Pointer(src)))
 		_list = append(_list, dst)
 	})
 

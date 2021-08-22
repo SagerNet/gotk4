@@ -42,7 +42,7 @@ type Emblem struct {
 	Icon
 }
 
-func wrapEmblem(obj *externglib.Object) *Emblem {
+func WrapEmblem(obj *externglib.Object) *Emblem {
 	return &Emblem{
 		Object: obj,
 		Icon: Icon{
@@ -54,7 +54,7 @@ func wrapEmblem(obj *externglib.Object) *Emblem {
 func marshalEmblemmer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapEmblem(obj), nil
+	return WrapEmblem(obj), nil
 }
 
 // NewEmblem creates a new emblem for icon.
@@ -69,7 +69,7 @@ func NewEmblem(icon Iconner) *Emblem {
 
 	var _emblem *Emblem // out
 
-	_emblem = wrapEmblem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_emblem = WrapEmblem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _emblem
 }
@@ -89,7 +89,7 @@ func NewEmblemWithOrigin(icon Iconner, origin EmblemOrigin) *Emblem {
 
 	var _emblem *Emblem // out
 
-	_emblem = wrapEmblem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_emblem = WrapEmblem(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _emblem
 }

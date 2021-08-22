@@ -45,7 +45,7 @@ type CellAreaBox struct {
 	*externglib.Object
 }
 
-func wrapCellAreaBox(obj *externglib.Object) *CellAreaBox {
+func WrapCellAreaBox(obj *externglib.Object) *CellAreaBox {
 	return &CellAreaBox{
 		CellArea: CellArea{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -69,7 +69,7 @@ func wrapCellAreaBox(obj *externglib.Object) *CellAreaBox {
 func marshalCellAreaBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCellAreaBox(obj), nil
+	return WrapCellAreaBox(obj), nil
 }
 
 // NewCellAreaBox creates a new CellAreaBox.
@@ -80,7 +80,7 @@ func NewCellAreaBox() *CellAreaBox {
 
 	var _cellAreaBox *CellAreaBox // out
 
-	_cellAreaBox = wrapCellAreaBox(externglib.Take(unsafe.Pointer(_cret)))
+	_cellAreaBox = WrapCellAreaBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _cellAreaBox
 }

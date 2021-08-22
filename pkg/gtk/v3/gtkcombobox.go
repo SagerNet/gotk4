@@ -83,7 +83,7 @@ type ComboBox struct {
 	*externglib.Object
 }
 
-func wrapComboBox(obj *externglib.Object) *ComboBox {
+func WrapComboBox(obj *externglib.Object) *ComboBox {
 	return &ComboBox{
 		Bin: Bin{
 			Container: Container{
@@ -125,7 +125,7 @@ func wrapComboBox(obj *externglib.Object) *ComboBox {
 func marshalComboBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapComboBox(obj), nil
+	return WrapComboBox(obj), nil
 }
 
 // NewComboBox creates a new empty ComboBox.
@@ -136,7 +136,7 @@ func NewComboBox() *ComboBox {
 
 	var _comboBox *ComboBox // out
 
-	_comboBox = wrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBox = WrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBox
 }
@@ -153,7 +153,7 @@ func NewComboBoxWithArea(area CellAreaer) *ComboBox {
 
 	var _comboBox *ComboBox // out
 
-	_comboBox = wrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBox = WrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBox
 }
@@ -172,7 +172,7 @@ func NewComboBoxWithAreaAndEntry(area CellAreaer) *ComboBox {
 
 	var _comboBox *ComboBox // out
 
-	_comboBox = wrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBox = WrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBox
 }
@@ -185,7 +185,7 @@ func NewComboBoxWithEntry() *ComboBox {
 
 	var _comboBox *ComboBox // out
 
-	_comboBox = wrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBox = WrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBox
 }
@@ -203,7 +203,7 @@ func NewComboBoxWithModel(model TreeModeller) *ComboBox {
 
 	var _comboBox *ComboBox // out
 
-	_comboBox = wrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBox = WrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBox
 }
@@ -221,7 +221,7 @@ func NewComboBoxWithModelAndEntry(model TreeModeller) *ComboBox {
 
 	var _comboBox *ComboBox // out
 
-	_comboBox = wrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
+	_comboBox = WrapComboBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _comboBox
 }

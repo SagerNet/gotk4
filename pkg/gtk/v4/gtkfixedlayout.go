@@ -57,7 +57,7 @@ type FixedLayout struct {
 	LayoutManager
 }
 
-func wrapFixedLayout(obj *externglib.Object) *FixedLayout {
+func WrapFixedLayout(obj *externglib.Object) *FixedLayout {
 	return &FixedLayout{
 		LayoutManager: LayoutManager{
 			Object: obj,
@@ -68,7 +68,7 @@ func wrapFixedLayout(obj *externglib.Object) *FixedLayout {
 func marshalFixedLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFixedLayout(obj), nil
+	return WrapFixedLayout(obj), nil
 }
 
 // NewFixedLayout creates a new GtkFixedLayout.
@@ -79,7 +79,7 @@ func NewFixedLayout() *FixedLayout {
 
 	var _fixedLayout *FixedLayout // out
 
-	_fixedLayout = wrapFixedLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_fixedLayout = WrapFixedLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _fixedLayout
 }
@@ -91,7 +91,7 @@ type FixedLayoutChild struct {
 	LayoutChild
 }
 
-func wrapFixedLayoutChild(obj *externglib.Object) *FixedLayoutChild {
+func WrapFixedLayoutChild(obj *externglib.Object) *FixedLayoutChild {
 	return &FixedLayoutChild{
 		LayoutChild: LayoutChild{
 			Object: obj,
@@ -102,7 +102,7 @@ func wrapFixedLayoutChild(obj *externglib.Object) *FixedLayoutChild {
 func marshalFixedLayoutChilder(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFixedLayoutChild(obj), nil
+	return WrapFixedLayoutChild(obj), nil
 }
 
 // Transform retrieves the transformation of the child.

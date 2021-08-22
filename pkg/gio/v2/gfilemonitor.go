@@ -73,7 +73,7 @@ type FileMonitorrer interface {
 
 var _ FileMonitorrer = (*FileMonitor)(nil)
 
-func wrapFileMonitor(obj *externglib.Object) *FileMonitor {
+func WrapFileMonitor(obj *externglib.Object) *FileMonitor {
 	return &FileMonitor{
 		Object: obj,
 	}
@@ -82,7 +82,7 @@ func wrapFileMonitor(obj *externglib.Object) *FileMonitor {
 func marshalFileMonitorrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileMonitor(obj), nil
+	return WrapFileMonitor(obj), nil
 }
 
 // Cancel cancels a file monitor.

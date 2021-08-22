@@ -29,7 +29,7 @@ type WidgetAccessible struct {
 	atk.Component
 }
 
-func wrapWidgetAccessible(obj *externglib.Object) *WidgetAccessible {
+func WrapWidgetAccessible(obj *externglib.Object) *WidgetAccessible {
 	return &WidgetAccessible{
 		Accessible: Accessible{
 			ObjectClass: atk.ObjectClass{
@@ -45,7 +45,7 @@ func wrapWidgetAccessible(obj *externglib.Object) *WidgetAccessible {
 func marshalWidgetAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapWidgetAccessible(obj), nil
+	return WrapWidgetAccessible(obj), nil
 }
 
 func (*WidgetAccessible) privateWidgetAccessible() {}

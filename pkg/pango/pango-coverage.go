@@ -76,7 +76,7 @@ type Coverage struct {
 	*externglib.Object
 }
 
-func wrapCoverage(obj *externglib.Object) *Coverage {
+func WrapCoverage(obj *externglib.Object) *Coverage {
 	return &Coverage{
 		Object: obj,
 	}
@@ -85,7 +85,7 @@ func wrapCoverage(obj *externglib.Object) *Coverage {
 func marshalCoverager(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCoverage(obj), nil
+	return WrapCoverage(obj), nil
 }
 
 // NewCoverage: create a new PangoCoverage
@@ -96,7 +96,7 @@ func NewCoverage() *Coverage {
 
 	var _coverage *Coverage // out
 
-	_coverage = wrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_coverage = WrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _coverage
 }
@@ -113,7 +113,7 @@ func (coverage *Coverage) Copy() *Coverage {
 
 	var _ret *Coverage // out
 
-	_ret = wrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_ret = WrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _ret
 }
@@ -213,7 +213,7 @@ func CoverageFromBytes(bytes []byte) *Coverage {
 	var _coverage *Coverage // out
 
 	if _cret != nil {
-		_coverage = wrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+		_coverage = WrapCoverage(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	}
 
 	return _coverage

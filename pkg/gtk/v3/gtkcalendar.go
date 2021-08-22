@@ -112,7 +112,7 @@ func _gotk4_gtk3_CalendarDetailFunc(arg0 *C.GtkCalendar, arg1 C.guint, arg2 C.gu
 	var month uint         // out
 	var day uint           // out
 
-	calendar = wrapCalendar(externglib.Take(unsafe.Pointer(arg0)))
+	calendar = WrapCalendar(externglib.Take(unsafe.Pointer(arg0)))
 	year = uint(arg1)
 	month = uint(arg2)
 	day = uint(arg3)
@@ -166,7 +166,7 @@ type Calendar struct {
 	Widget
 }
 
-func wrapCalendar(obj *externglib.Object) *Calendar {
+func WrapCalendar(obj *externglib.Object) *Calendar {
 	return &Calendar{
 		Widget: Widget{
 			InitiallyUnowned: externglib.InitiallyUnowned{
@@ -186,7 +186,7 @@ func wrapCalendar(obj *externglib.Object) *Calendar {
 func marshalCalendarrer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCalendar(obj), nil
+	return WrapCalendar(obj), nil
 }
 
 // NewCalendar creates a new calendar, with the current date being selected.
@@ -197,7 +197,7 @@ func NewCalendar() *Calendar {
 
 	var _calendar *Calendar // out
 
-	_calendar = wrapCalendar(externglib.Take(unsafe.Pointer(_cret)))
+	_calendar = WrapCalendar(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _calendar
 }

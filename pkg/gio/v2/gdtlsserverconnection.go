@@ -47,7 +47,7 @@ type DTLSServerConnectioner interface {
 
 var _ DTLSServerConnectioner = (*DTLSServerConnection)(nil)
 
-func wrapDTLSServerConnection(obj *externglib.Object) *DTLSServerConnection {
+func WrapDTLSServerConnection(obj *externglib.Object) *DTLSServerConnection {
 	return &DTLSServerConnection{
 		DTLSConnection: DTLSConnection{
 			DatagramBased: DatagramBased{
@@ -60,7 +60,7 @@ func wrapDTLSServerConnection(obj *externglib.Object) *DTLSServerConnection {
 func marshalDTLSServerConnectioner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapDTLSServerConnection(obj), nil
+	return WrapDTLSServerConnection(obj), nil
 }
 
 func (*DTLSServerConnection) privateDTLSServerConnection() {}

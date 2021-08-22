@@ -36,8 +36,8 @@ func _gotk4_gtk3_TextBufferDeserializeFunc(arg0 *C.GtkTextBuffer, arg1 *C.GtkTex
 	var data []byte                // out
 	var createTags bool            // out
 
-	registerBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(arg0)))
-	contentBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(arg1)))
+	registerBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(arg0)))
+	contentBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(arg1)))
 	iter = (*TextIter)(gextras.NewStructNative(unsafe.Pointer(arg2)))
 	runtime.SetFinalizer(
 		gextras.StructIntern(unsafe.Pointer(iter)),
@@ -78,8 +78,8 @@ func _gotk4_gtk3_TextBufferSerializeFunc(arg0 *C.GtkTextBuffer, arg1 *C.GtkTextB
 	var start *TextIter            // out
 	var end *TextIter              // out
 
-	registerBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(arg0)))
-	contentBuffer = wrapTextBuffer(externglib.Take(unsafe.Pointer(arg1)))
+	registerBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(arg0)))
+	contentBuffer = WrapTextBuffer(externglib.Take(unsafe.Pointer(arg1)))
 	start = (*TextIter)(gextras.NewStructNative(unsafe.Pointer(arg2)))
 	runtime.SetFinalizer(
 		gextras.StructIntern(unsafe.Pointer(start)),

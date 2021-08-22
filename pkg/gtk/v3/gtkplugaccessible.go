@@ -28,7 +28,7 @@ type PlugAccessible struct {
 	WindowAccessible
 }
 
-func wrapPlugAccessible(obj *externglib.Object) *PlugAccessible {
+func WrapPlugAccessible(obj *externglib.Object) *PlugAccessible {
 	return &PlugAccessible{
 		WindowAccessible: WindowAccessible{
 			ContainerAccessible: ContainerAccessible{
@@ -55,7 +55,7 @@ func wrapPlugAccessible(obj *externglib.Object) *PlugAccessible {
 func marshalPlugAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapPlugAccessible(obj), nil
+	return WrapPlugAccessible(obj), nil
 }
 
 func (plug *PlugAccessible) ID() string {

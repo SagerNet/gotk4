@@ -33,7 +33,7 @@ type CenterLayout struct {
 	LayoutManager
 }
 
-func wrapCenterLayout(obj *externglib.Object) *CenterLayout {
+func WrapCenterLayout(obj *externglib.Object) *CenterLayout {
 	return &CenterLayout{
 		LayoutManager: LayoutManager{
 			Object: obj,
@@ -44,7 +44,7 @@ func wrapCenterLayout(obj *externglib.Object) *CenterLayout {
 func marshalCenterLayouter(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapCenterLayout(obj), nil
+	return WrapCenterLayout(obj), nil
 }
 
 // NewCenterLayout creates a new GtkCenterLayout.
@@ -55,7 +55,7 @@ func NewCenterLayout() *CenterLayout {
 
 	var _centerLayout *CenterLayout // out
 
-	_centerLayout = wrapCenterLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_centerLayout = WrapCenterLayout(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _centerLayout
 }

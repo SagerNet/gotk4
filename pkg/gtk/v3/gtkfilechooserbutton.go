@@ -70,7 +70,7 @@ type FileChooserButton struct {
 	*externglib.Object
 }
 
-func wrapFileChooserButton(obj *externglib.Object) *FileChooserButton {
+func WrapFileChooserButton(obj *externglib.Object) *FileChooserButton {
 	return &FileChooserButton{
 		Box: Box{
 			Container: Container{
@@ -102,7 +102,7 @@ func wrapFileChooserButton(obj *externglib.Object) *FileChooserButton {
 func marshalFileChooserButtonner(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFileChooserButton(obj), nil
+	return WrapFileChooserButton(obj), nil
 }
 
 // NewFileChooserButton creates a new file-selecting button widget.
@@ -121,7 +121,7 @@ func NewFileChooserButton(title string, action FileChooserAction) *FileChooserBu
 
 	var _fileChooserButton *FileChooserButton // out
 
-	_fileChooserButton = wrapFileChooserButton(externglib.Take(unsafe.Pointer(_cret)))
+	_fileChooserButton = WrapFileChooserButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fileChooserButton
 }
@@ -146,7 +146,7 @@ func NewFileChooserButtonWithDialog(dialog *Dialog) *FileChooserButton {
 
 	var _fileChooserButton *FileChooserButton // out
 
-	_fileChooserButton = wrapFileChooserButton(externglib.Take(unsafe.Pointer(_cret)))
+	_fileChooserButton = WrapFileChooserButton(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _fileChooserButton
 }

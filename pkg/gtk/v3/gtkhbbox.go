@@ -27,7 +27,7 @@ type HButtonBox struct {
 	ButtonBox
 }
 
-func wrapHButtonBox(obj *externglib.Object) *HButtonBox {
+func WrapHButtonBox(obj *externglib.Object) *HButtonBox {
 	return &HButtonBox{
 		ButtonBox: ButtonBox{
 			Box: Box{
@@ -57,7 +57,7 @@ func wrapHButtonBox(obj *externglib.Object) *HButtonBox {
 func marshalHButtonBoxer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapHButtonBox(obj), nil
+	return WrapHButtonBox(obj), nil
 }
 
 // NewHButtonBox creates a new horizontal button box.
@@ -70,7 +70,7 @@ func NewHButtonBox() *HButtonBox {
 
 	var _hButtonBox *HButtonBox // out
 
-	_hButtonBox = wrapHButtonBox(externglib.Take(unsafe.Pointer(_cret)))
+	_hButtonBox = WrapHButtonBox(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _hButtonBox
 }

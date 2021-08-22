@@ -29,7 +29,7 @@ type FlowBoxAccessible struct {
 	atk.Selection
 }
 
-func wrapFlowBoxAccessible(obj *externglib.Object) *FlowBoxAccessible {
+func WrapFlowBoxAccessible(obj *externglib.Object) *FlowBoxAccessible {
 	return &FlowBoxAccessible{
 		ContainerAccessible: ContainerAccessible{
 			WidgetAccessible: WidgetAccessible{
@@ -52,7 +52,7 @@ func wrapFlowBoxAccessible(obj *externglib.Object) *FlowBoxAccessible {
 func marshalFlowBoxAccessibler(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapFlowBoxAccessible(obj), nil
+	return WrapFlowBoxAccessible(obj), nil
 }
 
 func (*FlowBoxAccessible) privateFlowBoxAccessible() {}

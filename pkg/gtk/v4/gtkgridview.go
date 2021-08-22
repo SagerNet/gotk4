@@ -59,7 +59,7 @@ type GridView struct {
 	ListBase
 }
 
-func wrapGridView(obj *externglib.Object) *GridView {
+func WrapGridView(obj *externglib.Object) *GridView {
 	return &GridView{
 		ListBase: ListBase{
 			Widget: Widget{
@@ -91,7 +91,7 @@ func wrapGridView(obj *externglib.Object) *GridView {
 func marshalGridViewer(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapGridView(obj), nil
+	return WrapGridView(obj), nil
 }
 
 // NewGridView creates a new GtkGridView that uses the given factory for mapping
@@ -121,7 +121,7 @@ func NewGridView(model SelectionModeller, factory *ListItemFactory) *GridView {
 
 	var _gridView *GridView // out
 
-	_gridView = wrapGridView(externglib.Take(unsafe.Pointer(_cret)))
+	_gridView = WrapGridView(externglib.Take(unsafe.Pointer(_cret)))
 
 	return _gridView
 }
@@ -159,7 +159,7 @@ func (self *GridView) Factory() *ListItemFactory {
 	var _listItemFactory *ListItemFactory // out
 
 	if _cret != nil {
-		_listItemFactory = wrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
+		_listItemFactory = WrapListItemFactory(externglib.Take(unsafe.Pointer(_cret)))
 	}
 
 	return _listItemFactory

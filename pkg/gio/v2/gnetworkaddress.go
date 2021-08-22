@@ -46,7 +46,7 @@ type NetworkAddress struct {
 	SocketConnectable
 }
 
-func wrapNetworkAddress(obj *externglib.Object) *NetworkAddress {
+func WrapNetworkAddress(obj *externglib.Object) *NetworkAddress {
 	return &NetworkAddress{
 		Object: obj,
 		SocketConnectable: SocketConnectable{
@@ -58,7 +58,7 @@ func wrapNetworkAddress(obj *externglib.Object) *NetworkAddress {
 func marshalNetworkAddresser(p uintptr) (interface{}, error) {
 	val := C.g_value_get_object((*C.GValue)(unsafe.Pointer(p)))
 	obj := externglib.Take(unsafe.Pointer(val))
-	return wrapNetworkAddress(obj), nil
+	return WrapNetworkAddress(obj), nil
 }
 
 // NewNetworkAddress creates a new Connectable for connecting to the given
@@ -83,7 +83,7 @@ func NewNetworkAddress(hostname string, port uint16) *NetworkAddress {
 
 	var _networkAddress *NetworkAddress // out
 
-	_networkAddress = wrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_networkAddress = WrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _networkAddress
 }
@@ -110,7 +110,7 @@ func NewNetworkAddressLoopback(port uint16) *NetworkAddress {
 
 	var _networkAddress *NetworkAddress // out
 
-	_networkAddress = wrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_networkAddress = WrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 
 	return _networkAddress
 }
@@ -206,7 +206,7 @@ func NetworkAddressParse(hostAndPort string, defaultPort uint16) (*NetworkAddres
 	var _networkAddress *NetworkAddress // out
 	var _goerr error                    // out
 
-	_networkAddress = wrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_networkAddress = WrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
@@ -236,7 +236,7 @@ func NetworkAddressParseURI(uri string, defaultPort uint16) (*NetworkAddress, er
 	var _networkAddress *NetworkAddress // out
 	var _goerr error                    // out
 
-	_networkAddress = wrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
+	_networkAddress = WrapNetworkAddress(externglib.AssumeOwnership(unsafe.Pointer(_cret)))
 	if _cerr != nil {
 		_goerr = gerror.Take(unsafe.Pointer(_cerr))
 	}
